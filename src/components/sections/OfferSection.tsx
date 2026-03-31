@@ -28,7 +28,7 @@ function fmt(n: number) {
   return n.toFixed(2).replace('.', ',')
 }
 
-export function OfferSection() {
+export function OfferSection({ onContact }: { onContact: () => void }) {
   const section = useScrollReveal(0.1)
 
   return (
@@ -103,7 +103,7 @@ export function OfferSection() {
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                  <span>Voller Zugang zu allen Geräten und Kursen</span>
+                  <span>Voller Zugang zu allen Geräten und Trainingsbereichen</span>
                 </li>
                 {plan.recommended && (
                   <li className="flex items-start gap-2">
@@ -113,10 +113,10 @@ export function OfferSection() {
                 )}
               </ul>
 
-              <a href="#kontakt" className={`inline-flex items-center gap-2 w-full justify-center ${plan.recommended ? 'btn-cta' : 'btn-outline'}`}>
+              <button onClick={onContact} className={`inline-flex items-center gap-2 w-full justify-center ${plan.recommended ? 'btn-cta' : 'btn-outline'}`}>
                 Jetzt Mitglied werden
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           ))}
         </div>

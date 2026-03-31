@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Trophy, Heart, Dumbbell, MapPin } from 'lucide-react'
+import { Trophy, Heart, Dumbbell, MapPin, ArrowRight } from 'lucide-react'
 import { useScrollReveal, useCountUp } from '@/hooks/useScrollReveal'
 
 const HIGHLIGHTS = [
@@ -11,12 +11,12 @@ const HIGHLIGHTS = [
   { icon: MapPin, label: 'Trier-Feyen', color: 'text-primary' },
 ]
 
-export function StudioSection() {
+export function StudioSection({ onContact }: { onContact: () => void }) {
   const section = useScrollReveal(0.1)
   const years = useCountUp(30, 1500, section.isVisible)
 
   return (
-    <section id="studio" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#f0f7f0' }}>
+    <section id="studio" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#edf4f6' }}>
       <div className="glow-orb glow-orb--green w-[400px] h-[400px] -top-32 -right-48" />
 
       <div
@@ -43,7 +43,7 @@ export function StudioSection() {
               Rabatt für alle, die jetzt den ersten Schritt machen wollen.
             </p>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mb-8">
               {HIGHLIGHTS.map(({ icon: Icon, label, color }) => (
                 <div key={label} className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-lg bg-secondary flex items-center justify-center ${color}`}>
@@ -53,6 +53,11 @@ export function StudioSection() {
                 </div>
               ))}
             </div>
+
+            <button onClick={onContact} className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
+              Jubiläums-Angebot sichern
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
 
           {/* Images */}

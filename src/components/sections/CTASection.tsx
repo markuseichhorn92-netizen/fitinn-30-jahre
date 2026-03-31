@@ -1,9 +1,9 @@
 'use client'
 
-import { Phone, MessageCircle, MapPin, Clock } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, Clock, Mail } from 'lucide-react'
 import { CountdownTimer } from '@/components/CountdownTimer'
 
-export function CTASection() {
+export function CTASection({ onContact }: { onContact: () => void }) {
   return (
     <section id="kontakt" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#faf6ee' }}>
       <div className="glow-orb glow-orb--gold w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -17,12 +17,21 @@ export function CTASection() {
         </p>
 
         {/* Contact buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+          <button
+            onClick={onContact}
+            className="btn-cta inline-flex items-center gap-3 text-base md:text-lg px-6 md:px-8 py-3.5 md:py-4 w-full sm:w-auto justify-center"
+          >
+            <Mail className="w-5 h-5" />
+            Kontaktformular öffnen
+          </button>
+        </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           <a
             href="tel:+49651308524"
-            className="btn-cta inline-flex items-center gap-3 text-base md:text-lg px-6 md:px-8 py-3.5 md:py-4 w-full sm:w-auto justify-center"
+            className="btn-outline w-full sm:w-auto justify-center"
           >
-            <Phone className="w-5 h-5" />
+            <Phone className="w-4 h-4" />
             0651 308524
           </a>
           <a
@@ -50,9 +59,9 @@ export function CTASection() {
             <div>
               <p className="font-semibold">Öffnungszeiten</p>
               <p className="text-muted-foreground">
-                Mo–Fr: 06:00–22:00<br />
-                Sa: 09:00–18:00<br />
-                So: 09:00–14:00
+                Mo–Fr: 09:00–13:00 | 15:00–21:30<br />
+                Sa: 13:00–18:00<br />
+                So: 09:00–15:00
               </p>
             </div>
           </div>

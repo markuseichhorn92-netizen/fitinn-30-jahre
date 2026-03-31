@@ -38,14 +38,14 @@ export function CountdownTimer({ compact }: { compact?: boolean }) {
   }
 
   return (
-    <div className="flex items-center justify-center gap-3 md:gap-5">
+    <div className="flex items-center justify-center gap-2 md:gap-5">
       <Unit value={time.days} label="Tage" />
-      <span className="text-2xl font-bold text-muted-foreground/40 -mt-4">:</span>
-      <Unit value={time.hours} label="Stunden" />
-      <span className="text-2xl font-bold text-muted-foreground/40 -mt-4">:</span>
-      <Unit value={time.minutes} label="Minuten" />
-      <span className="text-2xl font-bold text-muted-foreground/40 -mt-4">:</span>
-      <Unit value={time.seconds} label="Sekunden" />
+      <span className="text-lg md:text-2xl font-bold text-muted-foreground/40 -mt-3 md:-mt-4">:</span>
+      <Unit value={time.hours} label="Std" />
+      <span className="text-lg md:text-2xl font-bold text-muted-foreground/40 -mt-3 md:-mt-4">:</span>
+      <Unit value={time.minutes} label="Min" />
+      <span className="text-lg md:text-2xl font-bold text-muted-foreground/40 -mt-3 md:-mt-4">:</span>
+      <Unit value={time.seconds} label="Sek" />
     </div>
   )
 }

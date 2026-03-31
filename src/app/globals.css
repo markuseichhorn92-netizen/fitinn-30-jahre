@@ -28,7 +28,7 @@
 
 /* ═══════════════════════════════════════════════
    Design Tokens — Clean Light Theme
-   Grün (Primary) + Gold (Accent)
+   Petrol (Primary) + Gold (Accent)
    ═══════════════════════════════════════════════ */
 :root {
   --background: #fafafa;
@@ -37,7 +37,7 @@
   --card-foreground: #0a0a0f;
   --popover: #ffffff;
   --popover-foreground: #0a0a0f;
-  --primary: #2d8a2d;
+  --primary: #0a4958;
   --primary-foreground: #ffffff;
   --secondary: #f4f4f5;
   --secondary-foreground: #0a0a0f;
@@ -49,7 +49,7 @@
   --destructive-foreground: #ffffff;
   --border: #e4e4e7;
   --input: #e4e4e7;
-  --ring: #2d8a2d;
+  --ring: #0a4958;
   --radius: 0.75rem;
 }
 
@@ -250,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.5;
 }
 .glow-orb--green {
-  background: radial-gradient(circle, rgba(45,138,45,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(10,73,88,0.12) 0%, transparent 70%);
 }
 .glow-orb--gold {
   background: radial-gradient(circle, rgba(196,138,26,0.10) 0%, transparent 70%);
@@ -261,9 +261,52 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 600px; height: 200px;
-  background: radial-gradient(ellipse, rgba(45,138,45,0.04) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(10,73,88,0.04) 0%, transparent 70%);
   pointer-events: none;
 }
+
+/* ═══════════════════════════════════════════════
+   Anniversary — Balloon, Confetti, Sparkles
+   ═══════════════════════════════════════════════ */
+
+/* Balloon "30" — gentle float */
+@keyframes balloonFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-14px) rotate(1deg); }
+}
+.balloon-float {
+  animation: balloonFloat 4s ease-in-out infinite;
+}
+.balloon-text {
+  background: linear-gradient(160deg, var(--accent) 0%, #e8b84b 40%, var(--accent) 70%, #a06e10 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 20px rgba(196, 138, 26, 0.3));
+}
+
+/* Confetti falling */
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  animation: confettiFall linear infinite;
+  opacity: 0;
+}
+
+/* Sparkle twinkle */
+@keyframes sparklePulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50%      { transform: scale(1.3) rotate(15deg); opacity: 1; }
+}
+.sparkle-1 { animation: sparklePulse 2s ease-in-out infinite; }
+.sparkle-2 { animation: sparklePulse 2.5s ease-in-out 0.5s infinite; }
+.sparkle-3 { animation: sparklePulse 1.8s ease-in-out 1s infinite; }
 
 /* ═══════════════════════════════════════════════
    Anniversary-Specific Styles
@@ -274,21 +317,26 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 60px;
+  min-width: 44px;
 }
 .countdown-value {
   font-family: var(--font-barlow-condensed);
   font-weight: 800;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1;
   color: var(--accent);
 }
 .countdown-label {
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted-foreground);
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
+}
+@media (min-width: 768px) {
+  .countdown-unit { min-width: 60px; }
+  .countdown-value { font-size: 2rem; }
+  .countdown-label { font-size: 0.75rem; margin-top: 0.25rem; }
 }
 
 /* Savings highlight */

@@ -1,6 +1,6 @@
 'use client'
 
-import { Dumbbell, Users, Clock, Heart, MapPin, Euro } from 'lucide-react'
+import { Dumbbell, Users, Clock, Heart, MapPin, Euro, ArrowRight } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const BENEFITS = [
@@ -36,7 +36,7 @@ const BENEFITS = [
   },
 ]
 
-export function BenefitsSection() {
+export function BenefitsSection({ onContact }: { onContact: () => void }) {
   const section = useScrollReveal(0.1)
 
   return (
@@ -68,6 +68,14 @@ export function BenefitsSection() {
               <p className="text-sm text-muted-foreground">{description}</p>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <button onClick={onContact} className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
+            30% Rabatt sichern — Jetzt anfragen
+            <ArrowRight className="w-4 h-4" />
+          </button>
+          <p className="text-xs text-muted-foreground mt-3">Nur für Neumitglieder · Bis 30. April 2026</p>
         </div>
       </div>
     </section>
