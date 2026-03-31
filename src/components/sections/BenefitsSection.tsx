@@ -72,7 +72,7 @@ export function BenefitsSection() {
 
         <div className="text-center mt-12">
           <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
-            30% Rabatt sichern — Jetzt anfragen
+            Jetzt Probetraining vereinbaren
             <ArrowRight className="w-4 h-4" />
           </a>
           <p className="text-xs text-muted-foreground mt-3">Nur für Neumitglieder · Limitiert auf 30 Plätze</p>

@@ -55,7 +55,7 @@ export function StudioSection() {
             </div>
 
             <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
-              Jubiläums-Angebot sichern
+              Kostenloses Probetraining buchen
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

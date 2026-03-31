@@ -134,7 +134,7 @@ export function OfferSection() {
                   plan.recommended ? 'btn-cta !py-4' : 'btn-outline'
                 }`}
               >
-                Jetzt Mitglied werden
+                Probetraining vereinbaren
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>

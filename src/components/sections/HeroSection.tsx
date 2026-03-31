@@ -93,7 +93,7 @@ export function HeroSection() {
         {/* CTA */}
         <div className="flex flex-col items-center gap-4 md:gap-6 animate-fade-up delay-400">
           <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 md:gap-3 text-sm md:text-lg px-5 md:px-8 py-3 md:py-4 w-full sm:w-auto justify-center">
-            Jetzt Angebot sichern
+            Kostenloses Probetraining buchen
             <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
           </a>
         </div>

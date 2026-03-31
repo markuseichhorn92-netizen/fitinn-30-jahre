@@ -35,7 +35,7 @@ export function Navbar() {
             <Phone className="w-3.5 h-3.5" /> 0651 308524
           </a>
           <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 !py-2 !px-4 !text-sm">
-            Angebot sichern
+            Probetraining buchen
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -56,7 +56,7 @@ export function Navbar() {
             <a href="/#vorteile" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Vorteile</a>
             <a href="/#angebot" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Angebot</a>
             <a href="/probetraining" className="btn-cta inline-flex items-center justify-center gap-2 mt-2">
-              Angebot sichern <ArrowRight className="w-4 h-4" />
+              Probetraining buchen <ArrowRight className="w-4 h-4" />
             </a>
             <a href="tel:+49651308524" className="btn-outline justify-center">
               <Phone className="w-4 h-4" /> 0651 308524
