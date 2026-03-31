@@ -14,10 +14,11 @@ export function HeroSection() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-20"
+          className="object-cover object-center opacity-40 md:opacity-50"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/60 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
+        <div className="absolute inset-0 hero-gradient" />
       </div>
 
       {/* Glow orbs — kleiner auf Mobile */}
@@ -48,7 +49,7 @@ export function HeroSection() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 md:mb-6 animate-fade-up">
           <PartyPopper className="w-3.5 h-3.5 md:w-4 md:h-4 text-accent" />
           <span className="text-xs md:text-sm font-medium text-accent uppercase tracking-wider">
-            Jubiläum &middot; Nur bis 30. April
+            Jubiläum &middot; Nur für die ersten 30
           </span>
         </div>
 

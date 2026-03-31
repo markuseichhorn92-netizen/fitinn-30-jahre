@@ -49,8 +49,8 @@ export function BenefitsSection() {
           <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider mb-3">
             Warum FIT-INN?
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            Dein Studio in <span className="text-primary">Trier</span>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+            Dein Studio in <span className="text-primary headline-accent">Trier</span>
           </h2>
         </div>
 
@@ -61,8 +61,8 @@ export function BenefitsSection() {
               className="feature-card p-6"
               style={{ animationDelay: `${i * 0.08}s` }}
             >
-              <div className="w-11 h-11 rounded-lg bg-secondary flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/10 flex items-center justify-center mb-4">
+                <Icon className="w-5.5 h-5.5 text-primary" />
               </div>
               <h3 className="text-lg font-bold mb-2 normal-case">{title}</h3>
               <p className="text-sm text-muted-foreground">{description}</p>
@@ -75,7 +75,7 @@ export function BenefitsSection() {
             30% Rabatt sichern — Jetzt anfragen
             <ArrowRight className="w-4 h-4" />
           </a>
-          <p className="text-xs text-muted-foreground mt-3">Nur für Neumitglieder · Bis 30. April 2026</p>
+          <p className="text-xs text-muted-foreground mt-3">Nur für Neumitglieder · Limitiert auf 30 Plätze</p>
         </div>
       </div>
     </section>

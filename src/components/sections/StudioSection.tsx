@@ -29,7 +29,7 @@ export function StudioSection() {
             <span className="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-3">
               Seit 1996
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="text-accent font-[family-name:var(--font-barlow-condensed)]">{years}</span> Jahre
               Fitness in Trier
             </h2>
@@ -46,7 +46,7 @@ export function StudioSection() {
             <div className="grid grid-cols-2 gap-4 mb-8">
               {HIGHLIGHTS.map(({ icon: Icon, label, color }) => (
                 <div key={label} className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-lg bg-secondary flex items-center justify-center ${color}`}>
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/10 flex items-center justify-center ${color}`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className="text-sm font-medium">{label}</span>

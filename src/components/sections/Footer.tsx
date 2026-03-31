@@ -44,8 +44,8 @@ export function Footer() {
             © 1996–2026 FIT-INN Trier. Alle Rechte vorbehalten.
           </p>
           <p className="text-xs text-muted-foreground/70 max-w-2xl mx-auto">
-            * Das Jubiläums-Angebot (30% Rabatt auf die ersten 6 Monate) gilt ausschließlich für Neumitglieder
-            bei Abschluss eines 52- oder 104-Wochen-Vertrags. Gültig bis 30.04.2026. Nicht kombinierbar mit anderen Aktionen.
+            * Das Jubiläums-Angebot (30% Rabatt auf die ersten 3 Monate) gilt ausschließlich für Neumitglieder
+            bei Abschluss eines 52- oder 104-Wochen-Vertrags. Limitiert auf die ersten 30 Anmeldungen. Nicht kombinierbar mit anderen Aktionen.
           </p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { Phone, MessageCircle, MapPin, Clock, ArrowRight } from 'lucide-react'
 import { CountdownTimer } from '@/components/CountdownTimer'
+import { SpotsCounter } from '@/components/SpotsCounter'
 
 export function CTASection() {
   return (
@@ -7,8 +8,8 @@ export function CTASection() {
       <div className="glow-orb glow-orb--gold w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4">
-          Jetzt <span className="text-accent">30% Rabatt</span> sichern
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Jetzt <span className="text-accent headline-accent">30% Rabatt</span> sichern
         </h2>
         <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
           Komm vorbei, ruf an oder schreib uns per WhatsApp — wir beraten dich gerne persönlich.
@@ -65,9 +66,11 @@ export function CTASection() {
           </div>
         </div>
 
-        {/* Countdown */}
+        {/* Spots + Countdown */}
+        <div className="max-w-sm mx-auto mb-6">
+          <SpotsCounter />
+        </div>
         <div className="pt-6 border-t border-border/50">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">Angebot gültig bis 30. April 2026</p>
           <CountdownTimer compact />
         </div>
       </div>
