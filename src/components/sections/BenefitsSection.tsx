@@ -36,7 +36,7 @@ const BENEFITS = [
   },
 ]
 
-export function BenefitsSection({ onContact }: { onContact: () => void }) {
+export function BenefitsSection() {
   const section = useScrollReveal(0.1)
 
   return (
@@ -71,10 +71,10 @@ export function BenefitsSection({ onContact }: { onContact: () => void }) {
         </div>
 
         <div className="text-center mt-12">
-          <button onClick={onContact} className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
+          <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
             30% Rabatt sichern — Jetzt anfragen
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </a>
           <p className="text-xs text-muted-foreground mt-3">Nur für Neumitglieder · Bis 30. April 2026</p>
         </div>
       </div>

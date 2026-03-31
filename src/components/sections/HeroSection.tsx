@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { ArrowRight, PartyPopper } from 'lucide-react'
 import { CountdownTimer } from '@/components/CountdownTimer'
 
-export function HeroSection({ onContact }: { onContact: () => void }) {
+export function HeroSection() {
   return (
     <section id="hero" className="relative min-h-[100svh] flex flex-col items-center justify-center pt-16 pb-16 px-4 md:pt-20 md:pb-24 md:px-5 overflow-hidden">
       {/* Background */}
@@ -91,10 +91,10 @@ export function HeroSection({ onContact }: { onContact: () => void }) {
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-4 md:gap-6 animate-fade-up delay-400">
-          <button onClick={onContact} className="btn-cta inline-flex items-center gap-2 md:gap-3 text-sm md:text-lg px-5 md:px-8 py-3 md:py-4 w-full sm:w-auto justify-center">
+          <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 md:gap-3 text-sm md:text-lg px-5 md:px-8 py-3 md:py-4 w-full sm:w-auto justify-center">
             Jetzt Angebot sichern
             <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-          </button>
+          </a>
         </div>
 
         {/* Countdown */}

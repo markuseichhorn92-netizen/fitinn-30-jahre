@@ -28,7 +28,7 @@ function fmt(n: number) {
   return n.toFixed(2).replace('.', ',')
 }
 
-export function OfferSection({ onContact }: { onContact: () => void }) {
+export function OfferSection() {
   const section = useScrollReveal(0.1)
 
   return (
@@ -113,10 +113,10 @@ export function OfferSection({ onContact }: { onContact: () => void }) {
                 )}
               </ul>
 
-              <button onClick={onContact} className={`inline-flex items-center gap-2 w-full justify-center ${plan.recommended ? 'btn-cta' : 'btn-outline'}`}>
+              <a href="/probetraining" className={`inline-flex items-center gap-2 w-full justify-center ${plan.recommended ? 'btn-cta' : 'btn-outline'}`}>
                 Jetzt Mitglied werden
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           ))}
         </div>

@@ -11,7 +11,7 @@ const HIGHLIGHTS = [
   { icon: MapPin, label: 'Trier-Feyen', color: 'text-primary' },
 ]
 
-export function StudioSection({ onContact }: { onContact: () => void }) {
+export function StudioSection() {
   const section = useScrollReveal(0.1)
   const years = useCountUp(30, 1500, section.isVisible)
 
@@ -54,10 +54,10 @@ export function StudioSection({ onContact }: { onContact: () => void }) {
               ))}
             </div>
 
-            <button onClick={onContact} className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
+            <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
               Jubiläums-Angebot sichern
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
           {/* Images */}

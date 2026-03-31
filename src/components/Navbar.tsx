@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Menu, X, Phone, ArrowRight } from 'lucide-react'
 
-export function Navbar({ onContact }: { onContact: () => void }) {
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -23,21 +23,21 @@ export function Navbar({ onContact }: { onContact: () => void }) {
       }`}
     >
       <div className="mx-auto max-w-6xl px-5 flex items-center justify-between h-16">
-        <a href="#" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           <Image src="/logo.png" alt="FIT-INN Trier" width={120} height={120} className="rounded" />
         </a>
 
         <div className="hidden md:flex items-center gap-6">
-          <a href="#studio" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Studio</a>
-          <a href="#vorteile" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Vorteile</a>
-          <a href="#angebot" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Angebot</a>
+          <a href="/#studio" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Studio</a>
+          <a href="/#vorteile" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Vorteile</a>
+          <a href="/#angebot" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Angebot</a>
           <a href="tel:+49651308524" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5">
             <Phone className="w-3.5 h-3.5" /> 0651 308524
           </a>
-          <button onClick={onContact} className="btn-cta inline-flex items-center gap-2 !py-2 !px-4 !text-sm">
+          <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 !py-2 !px-4 !text-sm">
             Angebot sichern
             <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          </a>
         </div>
 
         <button
@@ -52,12 +52,12 @@ export function Navbar({ onContact }: { onContact: () => void }) {
       {menuOpen && (
         <div className="md:hidden bg-background/98 backdrop-blur-md border-b border-border px-5 pb-4">
           <div className="flex flex-col gap-3">
-            <a href="#studio" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Studio</a>
-            <a href="#vorteile" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Vorteile</a>
-            <a href="#angebot" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Angebot</a>
-            <button onClick={() => { setMenuOpen(false); onContact() }} className="btn-cta inline-flex items-center justify-center gap-2 mt-2">
+            <a href="/#studio" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Studio</a>
+            <a href="/#vorteile" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Vorteile</a>
+            <a href="/#angebot" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Angebot</a>
+            <a href="/probetraining" className="btn-cta inline-flex items-center justify-center gap-2 mt-2">
               Angebot sichern <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
             <a href="tel:+49651308524" className="btn-outline justify-center">
               <Phone className="w-4 h-4" /> 0651 308524
             </a>

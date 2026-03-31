@@ -1,9 +1,7 @@
-'use client'
-
-import { Phone, MessageCircle, MapPin, Clock, Mail } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, Clock, ArrowRight } from 'lucide-react'
 import { CountdownTimer } from '@/components/CountdownTimer'
 
-export function CTASection({ onContact }: { onContact: () => void }) {
+export function CTASection() {
   return (
     <section id="kontakt" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#faf6ee' }}>
       <div className="glow-orb glow-orb--gold w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -16,15 +14,15 @@ export function CTASection({ onContact }: { onContact: () => void }) {
           Komm vorbei, ruf an oder schreib uns per WhatsApp — wir beraten dich gerne persönlich.
         </p>
 
-        {/* Contact buttons */}
+        {/* Primary CTA */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
-          <button
-            onClick={onContact}
+          <a
+            href="/probetraining"
             className="btn-cta inline-flex items-center gap-3 text-base md:text-lg px-6 md:px-8 py-3.5 md:py-4 w-full sm:w-auto justify-center"
           >
-            <Mail className="w-5 h-5" />
-            Kontaktformular öffnen
-          </button>
+            Kostenloses Probetraining buchen
+            <ArrowRight className="w-5 h-5" />
+          </a>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           <a
