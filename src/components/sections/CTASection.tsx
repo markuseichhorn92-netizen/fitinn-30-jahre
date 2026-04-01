@@ -34,7 +34,7 @@ export function CTASection() {
             0651 308524
           </a>
           <a
-            href="https://wa.me/4915679610457"
+            href="https://wa.me/49651308524"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline w-full sm:w-auto justify-center"

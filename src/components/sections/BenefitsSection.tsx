@@ -16,8 +16,8 @@ const BENEFITS = [
   },
   {
     icon: Clock,
-    title: 'Flexible Zeiten',
-    description: 'Großzügige Öffnungszeiten — Mo–Fr 6–22 Uhr, auch am Wochenende.',
+    title: 'Stoffwechselcoaching',
+    description: 'Individuelles Coaching für deinen Stoffwechsel — mit Ernährungs- und Trainingsplan.',
   },
   {
     icon: Heart,

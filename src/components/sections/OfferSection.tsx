@@ -11,7 +11,7 @@ const PLANS = [
     regularPrice: 12.0,
     discountedPrice: 8.4,
     discountWeeks: 13,
-    savings: 46.8,
+    savings: 58.5,
     recommended: false,
   },
   {
@@ -20,7 +20,7 @@ const PLANS = [
     regularPrice: 9.0,
     discountedPrice: 6.3,
     discountWeeks: 13,
-    savings: 35.1,
+    savings: 46.8,
     recommended: true,
   },
 ] as const
@@ -102,7 +102,7 @@ export function OfferSection() {
               <div className="savings-highlight mb-6 flex items-center gap-2">
                 <span className="text-lg">🎉</span>
                 <p className="text-sm font-semibold text-primary">
-                  Du sparst {fmt(plan.savings)} € in 3 Monaten
+                  Du sparst insgesamt {fmt(plan.savings)} €
                 </p>
               </div>
 
@@ -119,6 +119,10 @@ export function OfferSection() {
                 <li className="flex items-start gap-2.5">
                   <Check className="w-4.5 h-4.5 text-primary mt-0.5 shrink-0" />
                   <span>Voller Zugang zu allen Geräten und Trainingsbereichen</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <Check className="w-4.5 h-4.5 text-accent mt-0.5 shrink-0" />
+                  <span>Startpaket: <span className="line-through text-muted-foreground">39,00 €</span> → <strong className="text-primary">27,30 €</strong> (30% Rabatt)</span>
                 </li>
                 {plan.recommended && (
                   <li className="flex items-start gap-2.5">
@@ -146,7 +150,7 @@ export function OfferSection() {
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-6">
-          * Angebot gilt nur für Neumitglieder, limitiert auf die ersten 30 Anmeldungen. Der 30%-Rabatt wird auf die ersten 3 Monate der gewählten Vertragslaufzeit angerechnet.
+          * Angebot gilt nur für Neumitglieder, limitiert auf die ersten 30 Anmeldungen. Der 30%-Rabatt wird auf die ersten 3 Monate der gewählten Vertragslaufzeit angerechnet. Zzgl. einmaligem Startpaket (regulär 39,00 €, mit Jubiläums-Rabatt 27,30 €).
         </p>
       </div>
     </section>

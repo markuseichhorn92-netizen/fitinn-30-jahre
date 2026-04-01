@@ -45,7 +45,7 @@ export function Footer() {
           </p>
           <p className="text-xs text-muted-foreground/70 max-w-2xl mx-auto">
             * Das Jubiläums-Angebot (30% Rabatt auf die ersten 3 Monate) gilt ausschließlich für Neumitglieder
-            bei Abschluss eines 52- oder 104-Wochen-Vertrags. Limitiert auf die ersten 30 Anmeldungen. Nicht kombinierbar mit anderen Aktionen.
+            bei Abschluss eines 52- oder 104-Wochen-Vertrags. Limitiert auf die ersten 30 Anmeldungen. Zzgl. einmaligem Startpaket (regulär 39,00 €, mit Jubiläums-Rabatt 27,30 €). Nicht kombinierbar mit anderen Aktionen.
           </p>
         </div>
       </div>
