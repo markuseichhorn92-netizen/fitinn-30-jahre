@@ -3,25 +3,40 @@
 import { Star } from 'lucide-react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
-// TODO: Echte Google-Bewertung vom Kunden einsetzen (Sterne-Wert + Anzahl Rezensionen).
-const GOOGLE = { rating: 4.8, count: 120 }
+// Echte Google-Bewertung von FIT-INN Trier (Stand Juni 2026, Quelle: Google).
+const GOOGLE = { rating: 4.8, count: 179 }
 
-// TODO: Echte Mitglieder-Stimmen vom Kunden einsetzen (Name/Foto optional).
+// Echte Google-Rezensionen von FIT-INN Trier (verbatim, mit Klarnamen).
 const TESTIMONIALS = [
   {
-    quote: 'Endlich ein Studio, in dem man sich nicht verloren fühlt. Familiär, sauber und top betreut.',
-    author: 'Platzhalter',
-    meta: 'Mitglied seit 2023',
+    quote: 'Super gepflegte Geräte, nette Leute, angenehme Atmosphäre, Duschen + Getränke top.',
+    author: 'Jana Thielen',
+    meta: 'Google-Bewertung',
   },
   {
-    quote: 'Die TechnoGym-Geräte sind klasse und das Team nimmt sich wirklich Zeit für dich.',
-    author: 'Platzhalter',
-    meta: 'Mitglied',
+    quote: 'Angenehmes Training, nette Menschen. Die neuen Geräte von Technogym sind super.',
+    author: 'Thomas Müller',
+    meta: 'Google-Bewertung',
   },
   {
-    quote: 'Super Lage in Feyen, faire Preise und eine richtig motivierende Atmosphäre.',
-    author: 'Platzhalter',
-    meta: 'Mitglied',
+    quote: 'Ein wirklich ganz familiäres und toll ausgestattetes Studio.',
+    author: 'Annette Hoffmann',
+    meta: 'Google-Bewertung',
+  },
+  {
+    quote: 'Hier macht\'s richtig Spaß zu trainieren. Es gibt alles was man braucht. Die Geräte sind total modern.',
+    author: 'Chris Petry',
+    meta: 'Google-Bewertung',
+  },
+  {
+    quote: 'Ich bin von der Ausstattung, den Geräten und den Mitarbeitern maximal überzeugt.',
+    author: 'Gisela T.',
+    meta: 'Google-Bewertung',
+  },
+  {
+    quote: 'Wir sind nach mehr als vier Jahren bei Fit-Inn sehr zufrieden mit dem neuen Angebot.',
+    author: 'Manfred Z.',
+    meta: 'Google-Bewertung',
   },
 ]
 

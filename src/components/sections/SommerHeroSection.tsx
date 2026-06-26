@@ -56,7 +56,7 @@ export function SommerHeroSection() {
           </p>
 
           {/* Highlight-Chips */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-8 animate-fade-up delay-300">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-5 animate-fade-up delay-300">
             {CHIPS.map(({ icon: Icon, label }) => (
               <span
                 key={label}
@@ -66,6 +66,17 @@ export function SommerHeroSection() {
                 {label}
               </span>
             ))}
+          </div>
+
+          {/* Trust-Badge (Google-Bewertung) */}
+          <div className="inline-flex items-center gap-2.5 mb-7 px-3.5 py-2 rounded-full bg-card border border-border shadow-sm animate-fade-up delay-300">
+            <div className="flex gap-0.5">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="w-4 h-4 text-accent fill-accent" />
+              ))}
+            </div>
+            <span className="text-sm font-bold text-foreground">4,8</span>
+            <span className="text-sm text-muted-foreground">· 179 Google-Bewertungen</span>
           </div>
 
           {/* CTA + Trust */}

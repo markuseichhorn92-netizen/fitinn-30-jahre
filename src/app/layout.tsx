@@ -24,7 +24,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#fafafa',
+  themeColor: '#ffffff',
 }
 
 export const metadata: Metadata = {
@@ -97,6 +97,13 @@ export default function RootLayout({
                 longitude: 6.6371,
               },
               priceRange: "€€",
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.8",
+                reviewCount: "179",
+                bestRating: "5",
+                worstRating: "1",
+              },
               openingHoursSpecification: [
                 { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "13:00" },
                 { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "15:00", closes: "21:30" },
