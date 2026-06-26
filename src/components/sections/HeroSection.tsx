@@ -118,7 +118,7 @@ function Sparkle({ className }: { className?: string }) {
 }
 
 /* ── Confetti config ── */
-const COLORS = ['#c48a1a', '#0a4958', '#e8b84b', '#1a7a8a', '#f5d080', '#0d5c6e', '#ef4444', '#f59e0b']
+const COLORS = ['#c48a1a', '#1f6b1f', '#e8b84b', '#2d8a2d', '#f5d080', '#256b25', '#ef4444', '#f59e0b']
 const CONFETTI = Array.from({ length: 30 }, (_, i) => ({
   left: `${(i * 3.3 + Math.sin(i) * 8) % 100}%`,
   size: `${5 + (i % 4) * 2}px`,

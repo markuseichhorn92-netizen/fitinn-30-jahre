@@ -4,7 +4,7 @@ import { SpotsCounter } from '@/components/SpotsCounter'
 
 export function CTASection() {
   return (
-    <section id="kontakt" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#f6eedf' }}>
+    <section id="kontakt" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#f7f1e6' }}>
       <div className="glow-orb glow-orb--gold w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">

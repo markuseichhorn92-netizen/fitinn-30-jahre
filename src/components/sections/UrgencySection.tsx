@@ -6,7 +6,7 @@ import { SpotsCounter } from '@/components/SpotsCounter'
 
 export function UrgencySection() {
   return (
-    <section id="verfuegbarkeit" className="py-20 md:py-28 px-5 relative overflow-hidden" style={{ backgroundColor: '#f6eedf' }}>
+    <section id="verfuegbarkeit" className="py-20 md:py-28 px-5 relative overflow-hidden" style={{ backgroundColor: '#f7f1e6' }}>
       <div className="glow-orb glow-orb--gold w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="relative z-10 mx-auto max-w-2xl text-center">
