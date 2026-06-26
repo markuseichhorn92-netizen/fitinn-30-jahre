@@ -22,9 +22,9 @@ export default function Jubilaeum30Page() {
 
       <HeroSection />
 
-      <div className="h-24 md:h-32 bg-gradient-to-b from-background to-[#eef7ee]" />
+      <div className="h-24 md:h-32 bg-gradient-to-b from-background to-[#f0f9f9]" />
       <StudioSection />
-      <div className="h-24 md:h-32 bg-gradient-to-b from-[#eef7ee] to-background" />
+      <div className="h-24 md:h-32 bg-gradient-to-b from-[#f0f9f9] to-background" />
 
       <BenefitsSection />
 
@@ -32,9 +32,9 @@ export default function Jubilaeum30Page() {
 
       <OfferSection />
 
-      <div className="h-24 md:h-32 bg-gradient-to-b from-background to-[#fff6ec]" />
+      <div className="h-24 md:h-32 bg-gradient-to-b from-background to-[#f6eedf]" />
       <CTASection />
-      <div className="h-16 md:h-24 bg-gradient-to-b from-[#fff6ec] to-background" />
+      <div className="h-16 md:h-24 bg-gradient-to-b from-[#f6eedf] to-background" />
 
       <Footer />
     </main>

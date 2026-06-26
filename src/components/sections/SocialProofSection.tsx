@@ -70,7 +70,7 @@ export function SocialProofSection() {
             <div>
               <div className="flex gap-0.5 mb-1">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className={`w-4 h-4 ${i < fullStars ? 'text-accent fill-accent' : 'text-border'}`} />
+                  <Star key={i} className={`w-4 h-4 ${i < fullStars ? 'text-[#f6c531] fill-[#f6c531]' : 'text-border'}`} />
                 ))}
               </div>
               <p className="text-xs text-muted-foreground">{GOOGLE.count}+ Google-Bewertungen</p>
@@ -84,7 +84,7 @@ export function SocialProofSection() {
             <div key={i} className="feature-card p-6">
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: 5 }).map((_, s) => (
-                  <Star key={s} className="w-3.5 h-3.5 text-accent fill-accent" />
+                  <Star key={s} className="w-3.5 h-3.5 text-[#f6c531] fill-[#f6c531]" />
                 ))}
               </div>
               <p className="text-sm mb-4 leading-relaxed">&bdquo;{t.quote}&ldquo;</p>

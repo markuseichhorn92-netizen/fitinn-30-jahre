@@ -16,7 +16,7 @@ export function StudioSection() {
   const years = useCountUp(30, 1500, section.isVisible)
 
   return (
-    <section id="studio" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#eef7ee' }}>
+    <section id="studio" className="py-20 md:py-32 px-5 relative overflow-hidden" style={{ backgroundColor: '#f0f9f9' }}>
       <div className="glow-orb glow-orb--green w-[400px] h-[400px] -top-32 -right-48" />
 
       <div

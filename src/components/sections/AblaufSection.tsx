@@ -25,7 +25,7 @@ export function AblaufSection() {
   const section = useScrollReveal(0.1)
 
   return (
-    <section id="ablauf" className="py-20 md:py-28 px-5 relative overflow-hidden" style={{ backgroundColor: '#eef7ee' }}>
+    <section id="ablauf" className="py-20 md:py-28 px-5 relative overflow-hidden" style={{ backgroundColor: '#f0f9f9' }}>
       <div
         ref={section.ref}
         className={`mx-auto max-w-5xl fade-up ${section.isReady ? 'anim-ready' : ''} ${section.isVisible ? 'animate' : ''}`}

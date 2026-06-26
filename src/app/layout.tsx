@@ -1,20 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { CookieBanner, ConditionalAnalytics } from "@/components/CookieBanner";
 import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const barlow = Barlow({
-  variable: "--font-barlow",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-barlow-condensed",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
@@ -24,7 +17,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#ffffff',
+  themeColor: '#fbf6ef',
 }
 
 export const metadata: Metadata = {
@@ -118,7 +111,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${barlow.variable} ${barlowCondensed.variable}`}>
+      <body className={jakarta.variable}>
         {children}
         <WhatsAppWidget />
         <CookieBanner />

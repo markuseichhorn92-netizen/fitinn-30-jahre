@@ -72,7 +72,7 @@ export function SommerHeroSection() {
           <div className="inline-flex items-center gap-2.5 mb-7 px-3.5 py-2 rounded-full bg-card border border-border shadow-sm animate-fade-up delay-300">
             <div className="flex gap-0.5">
               {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className="w-4 h-4 text-accent fill-accent" />
+                <Star key={i} className="w-4 h-4 text-[#f6c531] fill-[#f6c531]" />
               ))}
             </div>
             <span className="text-sm font-bold text-foreground">4,8</span>

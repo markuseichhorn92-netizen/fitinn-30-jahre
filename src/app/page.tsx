@@ -24,30 +24,30 @@ export default function Home() {
       <SommerDealSection />
 
       {/* Übergang → Ablauf (Petrol-Hauch) */}
-      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#eef7ee]" />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#f0f9f9]" />
       <AblaufSection />
-      <div className="h-20 md:h-28 bg-gradient-to-b from-[#eef7ee] to-background" />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-[#f0f9f9] to-background" />
 
       <SommerOfferSection />
 
       {/* Übergang → Studio (Petrol-Hauch) */}
-      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#eef7ee]" />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#f0f9f9]" />
       <StudioSection />
-      <div className="h-20 md:h-28 bg-gradient-to-b from-[#eef7ee] to-background" />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-[#f0f9f9] to-background" />
 
       <SocialProofSection />
 
       {/* Übergang → Verfügbarkeit (Gold-Hauch) */}
-      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#fff6ec]" />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#f6eedf]" />
       <UrgencySection />
-      <div className="h-20 md:h-28 bg-gradient-to-b from-[#fff6ec] to-background" />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-[#f6eedf] to-background" />
 
       <FaqSection />
 
       {/* Übergang → CTA (Gold-Hauch) */}
-      <div className="h-16 md:h-24 bg-gradient-to-b from-background to-[#fff6ec]" />
+      <div className="h-16 md:h-24 bg-gradient-to-b from-background to-[#f6eedf]" />
       <SommerCTASection />
-      <div className="h-16 md:h-24 bg-gradient-to-b from-[#fff6ec] to-background" />
+      <div className="h-16 md:h-24 bg-gradient-to-b from-[#f6eedf] to-background" />
 
       <Footer />
     </main>

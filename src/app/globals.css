@@ -2,8 +2,8 @@
 @import "tw-animate-css";
 
 @theme {
-  --font-barlow: 'Barlow', sans-serif;
-  --font-barlow-condensed: 'Barlow Condensed', sans-serif;
+  --font-barlow: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-barlow-condensed: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
@@ -31,29 +31,32 @@
    Petrol (Primary) + Gold (Accent)
    ═══════════════════════════════════════════════ */
 :root {
-  --background: #ffffff;
-  --foreground: #212121;
+  --background: #fbf6ef;
+  --foreground: #19272e;
   --card: #ffffff;
-  --card-foreground: #212121;
+  --card-foreground: #19272e;
   --popover: #ffffff;
-  --popover-foreground: #212121;
-  --primary: #2e7d32;
+  --popover-foreground: #19272e;
+  --primary: #1fa3a3;
   --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #212121;
-  --muted: #f5f5f5;
-  --muted-foreground: #616161;
-  --accent: #f57c00;
+  --secondary: #f0f9f9;
+  --secondary-foreground: #19272e;
+  --muted: #f6eedf;
+  --muted-foreground: #52666f;
+  /* Akzent = Teal (gleiche Familie wie Primary) für gute Lesbarkeit;
+     das sonnige Gelb wird gezielt für Sterne & "Bester Preis"-Badge eingesetzt. */
+  --accent: #1fa3a3;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e4e7e4;
-  --input: #e4e7e4;
-  --ring: #2e7d32;
+  --border: #f4e9d7;
+  --input: #f1e5d0;
+  --ring: #1fa3a3;
   --radius: 0.75rem;
-  /* Zusatztöne der figurscout-Palette */
-  --green-dark: #1b5e20;
-  --green-light: #81c784;
+  /* happyfigur-Zusatztöne */
+  --primary-dark: #147b7b;
+  --gold: #f6c531;
+  --gold-deep: #ec9213;
 }
 
 /* ═══════════════════════════════════════════════
@@ -84,9 +87,8 @@
    ═══════════════════════════════════════════════ */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-barlow-condensed);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  font-weight: 800;
+  letter-spacing: -0.015em;
 }
 
 /* ═══════════════════════════════════════════════
@@ -171,13 +173,12 @@ h1, h2, h3, h4, h5, h6 {
 .btn-cta {
   background: var(--accent);
   color: var(--accent-foreground);
-  padding: 1rem 2rem;
-  border-radius: 0.85rem;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
   font-family: var(--font-barlow-condensed);
-  font-weight: 600;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
@@ -188,20 +189,19 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.2) 50%, transparent 80%);
   transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245, 124, 0, 0.32); }
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(31, 163, 163, 0.32); }
 .btn-cta:hover::before { left: 120%; }
 
 .btn-outline {
   background: transparent;
-  color: var(--muted-foreground);
-  border: 1px solid var(--border);
+  color: var(--foreground);
+  border: 1.5px solid var(--border);
   padding: 0.9rem 1.8rem;
-  border-radius: 0.85rem;
+  border-radius: 9999px;
   font-family: var(--font-barlow-condensed);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex; align-items: center; gap: 0.5rem;
 }
@@ -254,10 +254,10 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.5;
 }
 .glow-orb--green {
-  background: radial-gradient(circle, rgba(46,125,50,0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(31,163,163,0.16) 0%, transparent 70%);
 }
 .glow-orb--gold {
-  background: radial-gradient(circle, rgba(245,124,0,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(246,197,49,0.18) 0%, transparent 70%);
 }
 
 .footer-glow { position: relative; }
@@ -265,7 +265,7 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 600px; height: 200px;
-  background: radial-gradient(ellipse, rgba(46,125,50,0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(31,163,163,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -345,16 +345,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Savings highlight */
 .savings-highlight {
-  background: linear-gradient(135deg, rgba(46,125,50,0.10) 0%, rgba(46,125,50,0.04) 100%);
-  border: 1px solid rgba(46,125,50,0.22);
+  background: linear-gradient(135deg, rgba(31,163,163,0.10) 0%, rgba(31,163,163,0.04) 100%);
+  border: 1px solid rgba(31,163,163,0.22);
   border-radius: var(--radius);
   padding: 0.75rem 1rem;
 }
 
 /* Discount badge — pulsing gold */
 @keyframes badgePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245,124,0,0.35); }
-  50% { box-shadow: 0 0 0 6px rgba(245,124,0,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(246,197,49,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(246,197,49,0); }
 }
 .discount-badge {
   animation: badgePulse 2s ease-in-out infinite;
@@ -362,13 +362,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Recommended card — elevated look */
 .offer-card-recommended {
-  background: linear-gradient(180deg, #ffffff 0%, #f6fbf6 100%);
-  border: 2px solid var(--accent);
-  box-shadow: 0 8px 40px rgba(245,124,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  background: linear-gradient(180deg, #ffffff 0%, #f3fbfb 100%);
+  border: 2px solid var(--primary);
+  box-shadow: 0 8px 40px rgba(15,80,80,0.14), 0 2px 8px rgba(0,0,0,0.06);
   transform: scale(1.02);
 }
 .offer-card-recommended:hover {
-  box-shadow: 0 12px 50px rgba(245,124,0,0.18), 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 50px rgba(15,80,80,0.20), 0 4px 12px rgba(0,0,0,0.08);
   transform: scale(1.03);
 }
 @media (max-width: 767px) {
@@ -387,12 +387,12 @@ h1, h2, h3, h4, h5, h6 {
 /* Sommer — warmer Sonnen-Glow für den Kampagnen-Hero */
 .hero-sun-gradient {
   background:
-    radial-gradient(ellipse 70% 50% at 80% 8%, rgba(245,150,40,0.20) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 15% 85%, rgba(46,125,50,0.08) 0%, transparent 60%),
-    linear-gradient(to bottom, #fffaf3 0%, rgba(255,255,255,0.5) 45%, var(--background) 100%);
+    radial-gradient(ellipse 70% 50% at 80% 8%, rgba(246,197,49,0.20) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 15% 85%, rgba(31,163,163,0.10) 0%, transparent 60%),
+    linear-gradient(to bottom, #fffdf6 0%, rgba(251,246,239,0.5) 45%, var(--background) 100%);
 }
 .glow-orb--sun {
-  background: radial-gradient(circle, rgba(245,150,40,0.20) 0%, rgba(245,124,0,0.06) 45%, transparent 72%);
+  background: radial-gradient(circle, rgba(246,197,49,0.22) 0%, rgba(31,163,163,0.06) 45%, transparent 72%);
 }
 @keyframes sunGlowPulse {
   0%, 100% { opacity: 0.45; transform: scale(1); }

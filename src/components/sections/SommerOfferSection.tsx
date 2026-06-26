@@ -74,7 +74,7 @@ export function SommerOfferSection() {
             >
               {plan.recommended && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-accent text-white text-xs font-bold uppercase tracking-wider shadow-lg discount-badge">
+                  <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#f6c531] text-[#19272e] text-xs font-bold uppercase tracking-wider shadow-lg discount-badge">
                     <Star className="w-3.5 h-3.5" />
                     Bester Preis
                   </div>
