@@ -29,14 +29,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "30 Jahre FIT-INN Trier — Jubiläums-Angebot",
-    template: "%s | 30 Jahre FIT-INN Trier",
+    default: "Sommer-Aktion FIT-INN Trier — Beitragsfrei trainieren in den Sommerferien",
+    template: "%s | FIT-INN Trier",
   },
-  description: "FIT-INN Trier feiert 30 Jahre! Sichere dir 30% Rabatt auf unsere 52- und 104-Wochen-Tarife. Nur für Neumitglieder, nur bis 30. April 2026.",
+  description: "Jetzt anmelden und die kompletten Sommerferien (29.06.–07.08.2026) beitragsfrei trainieren. Rund 6 Wochen geschenkt on top auf deinen 52- oder 104-Wochen-Vertrag. Nur für Neumitglieder bei FIT-INN Trier.",
   keywords: [
-    "FIT-INN Trier", "30 Jahre", "Jubiläum", "Fitnessstudio Trier",
-    "Rabatt", "Mitgliedschaft", "Fitness Trier", "Angebot",
-    "Fitnessstudio Angebot Trier", "30 Prozent Rabatt",
+    "FIT-INN Trier", "Sommerferien Aktion", "beitragsfrei trainieren",
+    "Fitnessstudio Trier", "Probetraining Trier", "Mitgliedschaft",
+    "Sommer Angebot Fitness", "Trier-Feyen", "Fitness Trier",
   ],
   authors: [{ name: "FIT-INN Trier" }],
   creator: "FIT-INN Trier",
@@ -44,15 +44,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "de_DE",
-    siteName: "30 Jahre FIT-INN Trier",
-    title: "30 Jahre FIT-INN Trier — 30% Jubiläums-Rabatt",
-    description: "Feiere mit uns 30 Jahre FIT-INN Trier! 30% Rabatt auf die 52- und 104-Wochen-Tarife. Nur für Neumitglieder, nur bis 30. April 2026.",
+    siteName: "FIT-INN Trier",
+    title: "Sommer-Aktion FIT-INN Trier — Beitragsfrei durch die Sommerferien",
+    description: "Sichere dir jetzt deine 52- oder 104-Wochen-Mitgliedschaft und trainiere die kompletten Sommerferien (29.06.–07.08.2026) beitragsfrei on top. Nur für Neumitglieder.",
     images: [
       {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "30 Jahre FIT-INN Trier — Jubiläums-Angebot",
+        alt: "Sommer-Aktion FIT-INN Trier — Beitragsfrei trainieren",
       },
     ],
   },
@@ -82,7 +82,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "HealthClub",
               name: "FIT-INN Trier",
-              description: "FIT-INN Trier feiert 30-jähriges Jubiläum! 30% Rabatt auf 52- und 104-Wochen-Mitgliedschaften für Neumitglieder.",
+              description: "Sommer-Aktion bei FIT-INN Trier: Bei Abschluss einer 52- oder 104-Wochen-Mitgliedschaft trainieren Neumitglieder die kompletten Sommerferien (29.06.–07.08.2026) beitragsfrei.",
               telephone: "+49651308524",
               address: {
                 "@type": "PostalAddress",

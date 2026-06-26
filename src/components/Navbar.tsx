@@ -28,14 +28,15 @@ export function Navbar() {
         </a>
 
         <div className="hidden md:flex items-center gap-6">
-          <a href="/#studio" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Studio</a>
-          <a href="/#vorteile" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Vorteile</a>
-          <a href="/#angebot" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Angebot</a>
+          <a href="/#sommer-deal" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Aktion</a>
+          <a href="/#ablauf" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Ablauf</a>
+          <a href="/#angebot" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Preise</a>
+          <a href="/#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
           <a href="tel:+49651308524" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5">
             <Phone className="w-3.5 h-3.5" /> 0651 308524
           </a>
-          <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 !py-2 !px-4 !text-sm">
-            Probetraining buchen
+          <a href="/#probetraining" className="btn-cta inline-flex items-center gap-2 !py-2 !px-4 !text-sm">
+            Probetraining sichern
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -52,11 +53,12 @@ export function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-background/98 backdrop-blur-md border-b border-border px-5 pb-4">
           <div className="flex flex-col gap-3">
-            <a href="/#studio" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Studio</a>
-            <a href="/#vorteile" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Vorteile</a>
-            <a href="/#angebot" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Angebot</a>
-            <a href="/probetraining" className="btn-cta inline-flex items-center justify-center gap-2 mt-2">
-              Probetraining buchen <ArrowRight className="w-4 h-4" />
+            <a href="/#sommer-deal" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Aktion</a>
+            <a href="/#ablauf" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Ablauf</a>
+            <a href="/#angebot" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">Preise</a>
+            <a href="/#faq" onClick={() => setMenuOpen(false)} className="text-sm font-medium py-2 border-b border-border/50">FAQ</a>
+            <a href="/#probetraining" onClick={() => setMenuOpen(false)} className="btn-cta inline-flex items-center justify-center gap-2 mt-2">
+              Probetraining sichern <ArrowRight className="w-4 h-4" />
             </a>
             <a href="tel:+49651308524" className="btn-outline justify-center">
               <Phone className="w-4 h-4" /> 0651 308524

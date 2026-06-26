@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 
-const TARGET_DATE = new Date('2026-04-30T23:59:59').getTime()
+// Sommer-Aktion läuft bis zum Ende der RLP-Sommerferien
+const TARGET_DATE = new Date('2026-08-07T23:59:59').getTime()
 
 function getTimeLeft() {
   const now = Date.now()

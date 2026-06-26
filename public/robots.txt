@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /30-jahre
 
 Sitemap: https://30jahre.fit-inn-trier.de/sitemap.xml

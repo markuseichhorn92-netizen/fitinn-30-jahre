@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Users } from 'lucide-react'
 
 const TOTAL = 30
-const LAUNCH_DATE = new Date('2026-03-31').getTime()
+const LAUNCH_DATE = new Date('2026-06-12').getTime()
 
 function getRealisticCount() {
   const now = Date.now()
@@ -56,7 +56,7 @@ export function SpotsCounter({ variant = 'default' }: { variant?: 'default' | 'c
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Users className="w-4 h-4 text-accent" />
-          <span className="text-sm font-semibold">Jubiläums-Plätze</span>
+          <span className="text-sm font-semibold">Aktions-Plätze</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">

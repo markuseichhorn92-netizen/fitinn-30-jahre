@@ -1,10 +1,14 @@
 import { Navbar } from '@/components/Navbar'
 import { GrainOverlay } from '@/components/GrainOverlay'
-import { HeroSection } from '@/components/sections/HeroSection'
-import { OfferSection } from '@/components/sections/OfferSection'
+import { SommerHeroSection } from '@/components/sections/SommerHeroSection'
+import { SommerDealSection } from '@/components/sections/SommerDealSection'
+import { AblaufSection } from '@/components/sections/AblaufSection'
+import { SommerOfferSection } from '@/components/sections/SommerOfferSection'
 import { StudioSection } from '@/components/sections/StudioSection'
-import { BenefitsSection } from '@/components/sections/BenefitsSection'
-import { CTASection } from '@/components/sections/CTASection'
+import { SocialProofSection } from '@/components/sections/SocialProofSection'
+import { UrgencySection } from '@/components/sections/UrgencySection'
+import { FaqSection } from '@/components/sections/FaqSection'
+import { SommerCTASection } from '@/components/sections/SommerCTASection'
 import { Footer } from '@/components/sections/Footer'
 
 export default function Home() {
@@ -13,29 +17,36 @@ export default function Home() {
       <GrainOverlay />
       <Navbar />
 
-      <HeroSection />
+      <SommerHeroSection />
 
-      {/* Übergang → Studio (Petrol-Hauch) */}
-      <div className="h-24 md:h-32 bg-gradient-to-b from-background to-[#edf4f6]" />
-
-      <StudioSection />
-
-      {/* Übergang → Vorteile */}
-      <div className="h-24 md:h-32 bg-gradient-to-b from-[#edf4f6] to-background" />
-
-      <BenefitsSection />
-
-      {/* Übergang → Angebot */}
       <div className="section-divider" />
 
-      <OfferSection />
+      <SommerDealSection />
+
+      {/* Übergang → Ablauf (Petrol-Hauch) */}
+      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#edf4f6]" />
+      <AblaufSection />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-[#edf4f6] to-background" />
+
+      <SommerOfferSection />
+
+      {/* Übergang → Studio (Petrol-Hauch) */}
+      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#edf4f6]" />
+      <StudioSection />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-[#edf4f6] to-background" />
+
+      <SocialProofSection />
+
+      {/* Übergang → Verfügbarkeit (Gold-Hauch) */}
+      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#faf6ee]" />
+      <UrgencySection />
+      <div className="h-20 md:h-28 bg-gradient-to-b from-[#faf6ee] to-background" />
+
+      <FaqSection />
 
       {/* Übergang → CTA (Gold-Hauch) */}
-      <div className="h-24 md:h-32 bg-gradient-to-b from-background to-[#faf6ee]" />
-
-      <CTASection />
-
-      {/* Übergang → Footer */}
+      <div className="h-16 md:h-24 bg-gradient-to-b from-background to-[#faf6ee]" />
+      <SommerCTASection />
       <div className="h-16 md:h-24 bg-gradient-to-b from-[#faf6ee] to-background" />
 
       <Footer />

@@ -39,8 +39,9 @@ export function StudioSection() {
               eine motivierende Atmosphäre und modernste Ausstattung.
             </p>
             <p className="text-muted-foreground mb-8">
-              Zum 30-jährigen Jubiläum bedanken wir uns mit einem exklusiven
-              Rabatt für alle, die jetzt den ersten Schritt machen wollen.
+              Jetzt anmelden lohnt sich doppelt: Du trainierst die kompletten
+              Sommerferien beitragsfrei on top und startest mit voller Betreuung
+              in deine Ziele.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mb-8">
@@ -54,7 +55,7 @@ export function StudioSection() {
               ))}
             </div>
 
-            <a href="/probetraining" className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
+            <a href="/#probetraining" className="btn-cta inline-flex items-center gap-2 text-sm md:text-base">
               Kostenloses Probetraining buchen
               <ArrowRight className="w-4 h-4" />
             </a>
