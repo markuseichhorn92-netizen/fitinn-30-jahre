@@ -2,8 +2,15 @@
 // („[Betrag]“, „[Datum]“, „[Vorname], [Alter]“). Alles an einer Stelle, damit
 // es vor dem Livegang in einem Rutsch gefüllt werden kann.
 export const aktion = {
-  /** Regulärer Wochenbeitrag nach den 12 Vorteilswochen (steht so im FAQ des Designs). */
-  regulaererWochenbeitrag: '24,90 €',
+  /**
+   * Angebots-Zeile: im Design als Platzhalter „[Betrag]“ angelegt.
+   * TODO: Betrag eintragen. (Das FAQ desselben Designs nennt 24,90 € –
+   * beim Füllen bitte beide Stellen angleichen.)
+   */
+  regulaererWochenbeitrag: '[Betrag]',
+
+  /** FAQ-Antwort: nennt den Betrag im Design bereits konkret. */
+  regulaererWochenbeitragFaq: '24,90 €',
 
   /** TODO: Enddatum der Aktion eintragen (im Design nur als „[Datum]“ angelegt). */
   gueltigBis: '[Datum]',

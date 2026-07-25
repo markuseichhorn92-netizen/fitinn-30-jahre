@@ -10,7 +10,7 @@ const fragen = [
   },
   {
     frage: 'Was kostet es nach der Aktion?',
-    antwort: `Nach den 12 Vorteilswochen gilt der reguläre Wochenbeitrag von ${aktion.regulaererWochenbeitrag}.`,
+    antwort: `Nach den 12 Vorteilswochen gilt der reguläre Wochenbeitrag von ${aktion.regulaererWochenbeitragFaq}.`,
   },
   {
     frage: 'Muss ich mich sofort entscheiden?',

@@ -441,7 +441,7 @@ export function TerminSection() {
                         ? 'Freie Zeiten werden geladen …'
                         : datum
                           ? 'An diesem Tag ist online nichts mehr frei. Wähle einen anderen Tag oder ruf uns an.'
-                          : 'Wähle links einen Tag – dann erscheinen die freien Uhrzeiten.'}
+                          : 'Wähle links einen Tag – dann erscheinen die freien Uhrzeiten. Sonntags geschlossen.'}
                   </p>
                 )}
               </div>
@@ -631,7 +631,7 @@ export function TerminSection() {
                     minWidth: 220,
                   }}
                 >
-                  {sendet ? 'Wird gebucht …' : 'Termin buchen'}
+                  {sendet ? 'Wird gesendet …' : 'Termin anfragen'}
                 </button>
               )}
 
@@ -677,8 +677,8 @@ export function TerminSection() {
                 <Haken size={22} strokeWidth={2.2} />
               </span>
               <span style={{ fontSize: 17, lineHeight: 1.6, fontWeight: 300, color: 'rgba(255,255,255,.9)' }}>
-                Danke. Dein Probetraining am <span style={{ fontWeight: 600, color: '#fff' }}>{terminText}</span> ist
-                gebucht – die Bestätigung kommt gleich per E-Mail.
+                Danke. Wir haben deine Anfrage für <span style={{ fontWeight: 600, color: '#fff' }}>{terminText}</span>{' '}
+                notiert und melden uns zur Bestätigung.
               </span>
             </div>
           )}
