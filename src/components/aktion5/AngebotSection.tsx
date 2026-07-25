@@ -253,8 +253,9 @@ export function AngebotSection() {
         >
           <span style={{ fontSize: 16.5, color: 'rgba(255,255,255,.6)' }}>
             Danach regulärer Wochenbeitrag von{' '}
-            <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.regulaererWochenbeitrag}</span> · Aktion gültig bis{' '}
-            <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.gueltigBis}</span>
+            <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.wochenbeitrag.einJahr}</span> (1 Jahr) bzw.{' '}
+            <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.wochenbeitrag.zweiJahre}</span> (2 Jahre) · Aktion
+            gültig bis <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.gueltigBis}</span>
           </span>
           <a href="#termin" className="lift" style={btnAmber}>Platz sichern</a>
         </div>

@@ -1,22 +1,19 @@
-'use client'
-
-import { useState } from 'react'
 import { aktion } from './content'
 import { Glow } from './Decor'
-import { Play } from './icons'
 import { btnAmberSm, eyebrowAmber, wrap } from './styles'
 
 const VIDEO_ID = aktion.rundgangVideoId
-const POSTER = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`
+
+// Startet stumm von selbst und läuft in Schleife: keine Steuerleiste, kein
+// Play-/Pause-Knopf. Eine transparente Ebene über dem Player fängt Klicks ab,
+// damit das Video auch durch Antippen nicht pausiert.
 const EMBED =
   `https://www.youtube-nocookie.com/embed/${VIDEO_ID}` +
   `?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}` +
   '&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&iv_load_policy=3&fs=0'
 
-// AKT 6 · RUNDGANG — Fassade mit Standbild, YouTube lädt erst nach Klick.
+// AKT 6 · RUNDGANG
 export function RundgangSection() {
-  const [gestartet, setGestartet] = useState(false)
-
   return (
     <section
       id="rundgang"
@@ -61,61 +58,15 @@ export function RundgangSection() {
           data-reveal=""
           style={{ position: 'relative', borderRadius: 26, overflow: 'hidden', boxShadow: '0 40px 90px rgba(0,0,0,.45)' }}
         >
-          {gestartet ? (
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
-              <iframe
-                src={EMBED}
-                title="Rundgang durch das Fit-Inn Trier"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
-              />
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setGestartet(true)}
-              aria-label="Rundgang-Video ansehen"
-              style={{
-                display: 'block',
-                position: 'relative',
-                width: '100%',
-                aspectRatio: '16/9',
-                padding: 0,
-                border: 0,
-                cursor: 'pointer',
-                overflow: 'hidden',
-                background: `#000 center/cover no-repeat url(${POSTER})`,
-              }}
-            >
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(180deg,rgba(4,22,27,.12),rgba(4,22,27,.5))',
-                }}
-              />
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%,-50%)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 'clamp(64px,7vw,92px)',
-                  height: 'clamp(64px,7vw,92px)',
-                  borderRadius: '50%',
-                  background: 'var(--amber)',
-                  boxShadow: '0 14px 40px rgba(4,22,27,.45)',
-                }}
-              >
-                <Play />
-              </span>
-            </button>
-          )}
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
+            <iframe
+              src={EMBED}
+              title="Rundgang durch das Fit-Inn Trier"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, background: '#000' }}
+            />
+            <div aria-hidden="true" style={{ position: 'absolute', inset: 0, cursor: 'default' }} />
+          </div>
         </div>
 
         <div

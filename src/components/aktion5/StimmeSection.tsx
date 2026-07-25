@@ -52,7 +52,7 @@ export function StimmeSection() {
               {aktion.stimme.zitat}
             </blockquote>
             <span style={{ display: 'block', fontSize: 16.5, color: 'rgba(255,255,255,.65)', marginTop: '1.4em' }}>
-              {aktion.stimme.vorname}, {aktion.stimme.alter} · Mitglied im Fit-Inn Trier
+              {aktion.stimme.autor} · {aktion.stimme.quelle}
             </span>
           </div>
         </div>

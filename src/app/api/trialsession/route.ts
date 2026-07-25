@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // Magicline Connect API – kein Auth-Token nötig (öffentlicher Connect-Endpoint).
-// Übernommen aus fitinn-landing-v2, angepasst auf die Sommerferien-Aktion:
+// Übernommen aus fitinn-landing-v2, angepasst auf die laufende Kampagne:
 // keine Quiz-/Krankenkassen-Daten mehr, dafür eine feste Kampagnen-Notiz.
+// Pflichtfelder von Magicline (gegen die API verifiziert): firstname, lastname,
+// email, phone, gender, dateOfBirth und address mit street, houseNumber, zip,
+// city, country. Fehlt eines davon, antwortet Magicline mit VALIDATION_FAILED.
 const STUDIO_ID = '1210005460'
 const BASE_URL = 'https://fit-inn-trier.api.magicline.com/connect/v1'
 
-// Notiz, die mit jeder Buchung an Magicline übergeben wird (statt „30 Tage Bauchweg Projekt“).
-const CAMPAIGN_NOTE = 'Sommerferien-Aktion 2026 – beitragsfrei trainieren · Probetraining über Landingpage gebucht'
+// Notiz, die mit jeder Buchung an Magicline übergeben wird.
+const CAMPAIGN_NOTE = '5-Euro-Aktion 2026 – 12 Wochen für je 5 € · Probetraining über Landingpage gebucht'
 
 // GET: freie Probetraining-Termine im angefragten Zeitraum laden.
 export async function GET(request: NextRequest) {

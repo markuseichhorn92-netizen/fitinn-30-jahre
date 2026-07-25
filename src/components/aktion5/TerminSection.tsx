@@ -441,7 +441,7 @@ export function TerminSection() {
                         ? 'Freie Zeiten werden geladen …'
                         : datum
                           ? 'An diesem Tag ist online nichts mehr frei. Wähle einen anderen Tag oder ruf uns an.'
-                          : 'Wähle links einen Tag – dann erscheinen die freien Uhrzeiten. Sonntags geschlossen.'}
+                          : 'Wähle links einen Tag – dann erscheinen die freien Uhrzeiten. Probetermine gibt es Montag bis Samstag.'}
                   </p>
                 )}
               </div>

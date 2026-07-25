@@ -2,24 +2,23 @@
 // („[Betrag]“, „[Datum]“, „[Vorname], [Alter]“). Alles an einer Stelle, damit
 // es vor dem Livegang in einem Rutsch gefüllt werden kann.
 export const aktion = {
+  /** Regulärer Wochenbeitrag nach den 12 Vorteilswochen, je nach Laufzeit. */
+  wochenbeitrag: {
+    einJahr: '12 €',
+    zweiJahre: '9 €',
+  },
+
+  /** Letzter Tag der Aktion. */
+  gueltigBis: '31.08.2026',
+
   /**
-   * Angebots-Zeile: im Design als Platzhalter „[Betrag]“ angelegt.
-   * TODO: Betrag eintragen. (Das FAQ desselben Designs nennt 24,90 € –
-   * beim Füllen bitte beide Stellen angleichen.)
+   * Mitglieder-Stimme: verbatim aus den Google-Bewertungen von Fit-Inn Trier
+   * (dieselbe Quelle wie in components/sections/SocialProofSection.tsx).
    */
-  regulaererWochenbeitrag: '[Betrag]',
-
-  /** FAQ-Antwort: nennt den Betrag im Design bereits konkret. */
-  regulaererWochenbeitragFaq: '24,90 €',
-
-  /** TODO: Enddatum der Aktion eintragen (im Design nur als „[Datum]“ angelegt). */
-  gueltigBis: '[Datum]',
-
-  /** TODO: echtes Mitglied + schriftliche Freigabe für Zitat, Vorname, Alter und Foto. */
   stimme: {
-    zitat: '„Ich kann meine Einkäufe wieder allein tragen und die Treppe macht mir keine Angst mehr.“',
-    vorname: '[Vorname]',
-    alter: '[Alter]',
+    zitat: '„Ich bin von der Ausstattung, den Geräten und den Mitarbeitern maximal überzeugt.“',
+    autor: 'Gisela T.',
+    quelle: 'Google-Bewertung',
   },
 
   /** Rundgang-Video (im Design als Prop `rundgangVideoUrl` hinterlegt). */
