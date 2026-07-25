@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { CookieBanner, ConditionalAnalytics } from "@/components/CookieBanner";
-import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -120,7 +119,6 @@ export default function RootLayout({
       </head>
       <body className={`${barlow.variable} ${barlowCondensed.variable}`}>
         {children}
-        <WhatsAppWidget />
         <CookieBanner />
         <ConditionalAnalytics />
         <Analytics />

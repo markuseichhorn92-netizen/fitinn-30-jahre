@@ -144,16 +144,6 @@ export default function DatenschutzPage() {
         gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
       </p>
 
-      {/* TODO: vollständige Firmierung und Anschrift des Widget-Anbieters ergänzen (steht im Vertrag). */}
-      <h3>WhatsApp-Widget</h3>
-      <p>
-        Auf dieser Website ist ein Chat-Button eingebunden, über den Sie uns per WhatsApp erreichen. Er wird als
-        eingebettetes Fenster vom externen Dienst mein.studiopartner.de geladen. Dabei wird beim Aufruf der Seite eine
-        Verbindung zu dessen Servern aufgebaut und Ihre IP-Adresse übertragen. Rechtsgrundlage ist unser berechtigtes
-        Interesse an einer einfachen Kontaktmöglichkeit nach Art. 6 Abs. 1 lit. f DSGVO. Schreiben Sie uns über den
-        Button, gelten zusätzlich die Datenschutzbestimmungen von WhatsApp.
-      </p>
-
       <h3>Buchung eines Probetrainings (Magicline)</h3>
       <p>
         Für die Vereinbarung von Probetrainings nutzen wir die Studioverwaltungssoftware Magicline. Anbieter ist die
