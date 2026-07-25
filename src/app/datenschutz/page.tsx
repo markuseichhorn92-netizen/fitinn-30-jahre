@@ -25,7 +25,7 @@ export default function DatenschutzPage() {
       <h4>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</h4>
       <p>
         Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem
-        Abschnitt „Hinweis zur Verantwortlichen Stelle" in dieser Datenschutzerklärung entnehmen.
+        Abschnitt „Hinweis zur Verantwortlichen Stelle“ in dieser Datenschutzerklärung entnehmen.
       </p>
 
       <h4>Wie erfassen wir Ihre Daten?</h4>
@@ -116,7 +116,7 @@ export default function DatenschutzPage() {
 
       <h3>Cookies</h3>
       <p>
-        Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Datenpakete und richten auf Ihrem
+        Unsere Internetseiten verwenden so genannte „Cookies“. Cookies sind kleine Datenpakete und richten auf Ihrem
         Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder
         dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert. Session-Cookies werden nach Ende Ihres Besuchs
         automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese selbst löschen
@@ -142,6 +142,78 @@ export default function DatenschutzPage() {
         Wenn Sie uns per E-Mail, Telefon oder WhatsApp kontaktieren, wird Ihre Anfrage inklusive aller daraus
         hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns
         gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+      </p>
+
+      {/* TODO: vollständige Firmierung und Anschrift des Widget-Anbieters ergänzen (steht im Vertrag). */}
+      <h3>WhatsApp-Widget</h3>
+      <p>
+        Auf dieser Website ist ein Chat-Button eingebunden, über den Sie uns per WhatsApp erreichen. Er wird als
+        eingebettetes Fenster vom externen Dienst mein.studiopartner.de geladen. Dabei wird beim Aufruf der Seite eine
+        Verbindung zu dessen Servern aufgebaut und Ihre IP-Adresse übertragen. Rechtsgrundlage ist unser berechtigtes
+        Interesse an einer einfachen Kontaktmöglichkeit nach Art. 6 Abs. 1 lit. f DSGVO. Schreiben Sie uns über den
+        Button, gelten zusätzlich die Datenschutzbestimmungen von WhatsApp.
+      </p>
+
+      <h3>Buchung eines Probetrainings (Magicline)</h3>
+      <p>
+        Für die Vereinbarung von Probetrainings nutzen wir die Studioverwaltungssoftware Magicline. Anbieter ist die
+        Sport Alliance Solutions GmbH, Steinhöft 9, 20459 Hamburg.
+      </p>
+      <p>
+        Wenn Sie das Terminformular auf dieser Website absenden, übermitteln wir die von Ihnen eingegebenen Daten an
+        Magicline und speichern sie dort in unserem Studioverwaltungssystem. Das sind: Anrede, Vor- und Nachname,
+        Geburtsdatum, Anschrift, E-Mail-Adresse, Telefonnummer, der von Ihnen gewählte Termin sowie – falls Sie diese
+        freiwillig angeben – Ihr Trainingsziel und Ihre Anmerkung. Zusätzlich wird vermerkt, dass die Buchung über diese
+        Landingpage erfolgt ist.
+      </p>
+      <p>
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO: Die Verarbeitung dient der Durchführung vorvertraglicher
+        Maßnahmen, die auf Ihre Anfrage hin erfolgen. Die Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern
+        oder der Zweck der Speicherung entfällt; zwingende gesetzliche Aufbewahrungsfristen bleiben unberührt.
+      </p>
+      <p>
+        Bereits vor dem Absenden des Formulars ruft diese Website bei Magicline ab, welche Termine frei sind. Dabei
+        werden keine personenbezogenen Daten von Ihnen übertragen.
+      </p>
+
+      <h3>Rundgang-Video (YouTube)</h3>
+      <p>
+        Auf dieser Website ist ein Video von YouTube eingebunden. Anbieter ist die Google Ireland Limited, Gordon House,
+        Barrow Street, Dublin 4, Irland. Wir nutzen die Einbindung über youtube-nocookie.com, den von YouTube
+        angebotenen erweiterten Datenschutzmodus.
+      </p>
+      <p>
+        Das Video startet beim Aufruf der Seite automatisch und stumm. Bereits dadurch wird eine Verbindung zu den
+        Servern von YouTube aufgebaut und Ihre IP-Adresse an YouTube übermittelt. YouTube erfährt so, dass Sie diese
+        Seite aufgerufen haben. Sind Sie zeitgleich in Ihrem YouTube-Konto angemeldet, kann YouTube Ihr Surfverhalten
+        Ihrem Profil zuordnen; das können Sie verhindern, indem Sie sich vor dem Besuch dieser Seite aus Ihrem
+        YouTube-Konto abmelden. Eine Übermittlung in die USA kann nicht ausgeschlossen werden.
+      </p>
+      <p>
+        Rechtsgrundlage ist unser berechtigtes Interesse an einer ansprechenden Darstellung unseres Studios nach
+        Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen finden Sie in der Datenschutzerklärung von Google:{' '}
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+          https://policies.google.com/privacy
+        </a>
+      </p>
+
+      <h3>Vercel Web Analytics und Speed Insights</h3>
+      <p>
+        Diese Website nutzt Web Analytics und Speed Insights unseres Hosters Vercel Inc. Erfasst werden aggregierte
+        Zugriffszahlen und technische Kennwerte zur Ladegeschwindigkeit, etwa aufgerufene Seiten, Referrer, ungefährer
+        Standort auf Länderebene sowie Gerät und Browser. Vercel setzt für diese Dienste nach eigenen Angaben keine
+        Cookies und legt keine seitenübergreifende Kennung an, mit der einzelne Besucher wiedererkannt werden könnten.
+      </p>
+      <p>
+        Rechtsgrundlage ist unser berechtigtes Interesse an einem stabilen und schnellen Webangebot nach Art. 6 Abs. 1
+        lit. f DSGVO. Zusätzlich laden wir erst nach Ihrer Einwilligung im Cookie-Banner eine erweiterte
+        Reichweitenmessung; diese Einwilligung können Sie jederzeit über die Cookie-Einstellungen widerrufen.
+      </p>
+
+      <h3>Schriftarten</h3>
+      <p>
+        Diese Website bindet Schriftarten lokal ein. Sie werden beim Erstellen der Seite auf unseren Server kopiert und
+        von dort ausgeliefert. Eine Verbindung zu Servern von Google wird dabei nicht aufgebaut.
       </p>
 
       <h2>5. Ihre Rechte im Überblick</h2>
