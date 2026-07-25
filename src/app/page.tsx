@@ -1,54 +1,53 @@
-import { Navbar } from '@/components/Navbar'
-import { GrainOverlay } from '@/components/GrainOverlay'
-import { SommerHeroSection } from '@/components/sections/SommerHeroSection'
-import { SommerDealSection } from '@/components/sections/SommerDealSection'
-import { AblaufSection } from '@/components/sections/AblaufSection'
-import { SommerOfferSection } from '@/components/sections/SommerOfferSection'
-import { StudioSection } from '@/components/sections/StudioSection'
-import { SocialProofSection } from '@/components/sections/SocialProofSection'
-import { UrgencySection } from '@/components/sections/UrgencySection'
-import { FaqSection } from '@/components/sections/FaqSection'
-import { SommerCTASection } from '@/components/sections/SommerCTASection'
-import { Footer } from '@/components/sections/Footer'
+import { Figtree, Source_Serif_4 } from 'next/font/google'
+import '@/components/aktion5/premium.css'
 
+import { AblaufSection } from '@/components/aktion5/AblaufSection'
+import { AlltagSection } from '@/components/aktion5/AlltagSection'
+import { AngebotSection } from '@/components/aktion5/AngebotSection'
+import { AppSection } from '@/components/aktion5/AppSection'
+import { FaqSection } from '@/components/aktion5/FaqSection'
+import { Footer } from '@/components/aktion5/Footer'
+import { Hero } from '@/components/aktion5/Hero'
+import { Nav } from '@/components/aktion5/Nav'
+import { Reveal } from '@/components/aktion5/Reveal'
+import { RundgangSection } from '@/components/aktion5/RundgangSection'
+import { StimmeSection } from '@/components/aktion5/StimmeSection'
+import { StudioSection } from '@/components/aktion5/StudioSection'
+import { TerminSection } from '@/components/aktion5/TerminSection'
+import { WarumSection } from '@/components/aktion5/WarumSection'
+
+const figtree = Figtree({
+  variable: '--font-figtree',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  display: 'swap',
+})
+
+const sourceSerif = Source_Serif_4({
+  variable: '--font-source-serif',
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  display: 'swap',
+})
+
+// Startseite: 5-Euro-Aktion (Design-Handoff "5-Euro-Aktion Premium.dc.html").
+// Titel und Beschreibung kommen aus dem Root-Layout.
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-hidden">
-      <GrainOverlay />
-      <Navbar />
-
-      <SommerHeroSection />
-
-      <div className="section-divider" />
-
-      <SommerDealSection />
-
-      {/* Übergang → Ablauf (Grün-Hauch) */}
-      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#eef6ee]" />
-      <AblaufSection />
-      <div className="h-20 md:h-28 bg-gradient-to-b from-[#eef6ee] to-background" />
-
-      <SommerOfferSection />
-
-      {/* Übergang → Studio (Grün-Hauch) */}
-      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#eef6ee]" />
+    <main className={`p5 ${figtree.variable} ${sourceSerif.variable}`}>
+      <Reveal />
+      <Nav />
+      <Hero />
+      <WarumSection />
+      <AlltagSection />
       <StudioSection />
-      <div className="h-20 md:h-28 bg-gradient-to-b from-[#eef6ee] to-background" />
-
-      <SocialProofSection />
-
-      {/* Übergang → Verfügbarkeit (Gold-Hauch) */}
-      <div className="h-20 md:h-28 bg-gradient-to-b from-background to-[#f7f1e6]" />
-      <UrgencySection />
-      <div className="h-20 md:h-28 bg-gradient-to-b from-[#f7f1e6] to-background" />
-
+      <AngebotSection />
+      <AppSection />
+      <AblaufSection />
+      <RundgangSection />
+      <StimmeSection />
       <FaqSection />
-
-      {/* Übergang → CTA (Gold-Hauch) */}
-      <div className="h-16 md:h-24 bg-gradient-to-b from-background to-[#f7f1e6]" />
-      <SommerCTASection />
-      <div className="h-16 md:h-24 bg-gradient-to-b from-[#f7f1e6] to-background" />
-
+      <TerminSection />
       <Footer />
     </main>
   )

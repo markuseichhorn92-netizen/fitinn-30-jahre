@@ -29,14 +29,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Sommer-Aktion FIT-INN Trier — Beitragsfrei trainieren in den Sommerferien",
+    default: "5-Euro-Aktion FIT-INN Trier — Stark, beweglich und selbstbestimmt älter werden",
     template: "%s | FIT-INN Trier",
   },
-  description: "Jetzt anmelden und die kompletten Sommerferien (29.06.–07.08.2026) beitragsfrei trainieren. Rund 6 Wochen geschenkt on top auf deinen 52- oder 104-Wochen-Vertrag. Nur für Neumitglieder bei FIT-INN Trier.",
+  description: "Die Jahre, die zählen: zwölf Wochen für je 5 € im FIT-INN Trier. Familiengeführt seit 1996, Betreuung mit Namen, über 100 TechnoGym-Geräte. Probetraining kostenlos und unverbindlich.",
   keywords: [
-    "FIT-INN Trier", "Sommerferien Aktion", "beitragsfrei trainieren",
+    "FIT-INN Trier", "5 Euro Aktion", "Fitness ab 50",
     "Fitnessstudio Trier", "Probetraining Trier", "Mitgliedschaft",
-    "Sommer Angebot Fitness", "Trier-Feyen", "Fitness Trier",
+    "Krafttraining Senioren", "Trier-Feyen", "Fitness Trier",
   ],
   authors: [{ name: "FIT-INN Trier" }],
   creator: "FIT-INN Trier",
@@ -45,14 +45,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     siteName: "FIT-INN Trier",
-    title: "Sommer-Aktion FIT-INN Trier — Beitragsfrei durch die Sommerferien",
-    description: "Sichere dir jetzt deine 52- oder 104-Wochen-Mitgliedschaft und trainiere die kompletten Sommerferien (29.06.–07.08.2026) beitragsfrei on top. Nur für Neumitglieder.",
+    title: "5-Euro-Aktion FIT-INN Trier — Die Jahre, die zählen",
+    description: "Zwölf Wochen für je 5 € – in beiden Laufzeiten. Stark, beweglich und selbstbestimmt älter werden im FIT-INN Trier. Probetraining kostenlos und unverbindlich.",
     images: [
       {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "Sommer-Aktion FIT-INN Trier — Beitragsfrei trainieren",
+        alt: "5-Euro-Aktion FIT-INN Trier — Die Jahre, die zählen",
       },
     ],
   },
@@ -82,7 +82,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "HealthClub",
               name: "FIT-INN Trier",
-              description: "Sommer-Aktion bei FIT-INN Trier: Bei Abschluss einer 52- oder 104-Wochen-Mitgliedschaft trainieren Neumitglieder die kompletten Sommerferien (29.06.–07.08.2026) beitragsfrei.",
+              description: "5-Euro-Aktion bei FIT-INN Trier: Die ersten zwölf Wochen für je 5 € – in der 52- wie in der 104-Wochen-Mitgliedschaft. Familiengeführt seit 1996.",
               telephone: "+49651308524",
               address: {
                 "@type": "PostalAddress",
