@@ -9,6 +9,7 @@ import { FaqSection } from './FaqSection'
 import { Footer } from './Footer'
 import { Hero } from './Hero'
 import { Nav } from './Nav'
+import { Rechtshinweis } from './Rechtshinweis'
 import { Reveal } from './Reveal'
 import { RundgangSection } from './RundgangSection'
 import { StimmeSection } from './StimmeSection'
@@ -50,6 +51,7 @@ export function AktionsSeite({ variante }: { variante: Variante }) {
       <StimmeSection stimme={variante.stimme} />
       <FaqSection fragen={variante.fragen} />
       <TerminSection />
+      <Rechtshinweis />
       <Footer />
     </main>
   )
