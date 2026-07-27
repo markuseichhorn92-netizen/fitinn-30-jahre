@@ -110,9 +110,8 @@ export const ab35: Variante = {
     zeile2: 'nicht irgendwann.',
     subline: 'Stark durch Job, Familie und alles dazwischen.',
     preiszeile: 'Ab 5 € die Woche.',
-    // TODO: eigenes Motiv für die Zielgruppe ab 35 hinterlegen.
-    bild: '/aktion5/hero.webp',
-    bildAlt: 'Training im Fit-Inn Trier',
+    bild: '/aktion5/hero-ab35.webp',
+    bildAlt: 'Lachendes Paar nach dem Training im Park',
   },
   warum: {
     these: 'Ab 35 baut der Körper jedes Jahr Muskeln ab.',
@@ -152,11 +151,10 @@ export const ab35: Variante = {
     ],
   },
   stimme: {
-    zitat: '„Hier macht’s richtig Spaß zu trainieren. Es gibt alles was man braucht. Die Geräte sind total modern.“',
-    autor: 'Chris Petry',
+    zitat: '„Super gepflegte Geräte, nette Leute, angenehme Atmosphäre, Duschen + Getränke top.“',
+    autor: 'Jana Thielen',
     quelle: 'Google-Bewertung',
-    // TODO: eigenes Motiv für die Zielgruppe ab 35 hinterlegen.
-    bild: '/aktion5/stimme.webp',
-    bildAlt: 'Porträt eines Mitglieds im Fit-Inn Trier',
+    bild: '/aktion5/stimme-ab35.webp',
+    bildAlt: 'Lächelnde Frau nach dem Training im Park',
   },
 }
