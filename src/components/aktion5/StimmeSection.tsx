@@ -14,7 +14,7 @@ export function StimmeSection({ stimme }: { stimme: Variante['stimme'] }) {
               alt={stimme.bildAlt}
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 10%' }}
+              style={{ objectFit: 'cover', objectPosition: stimme.bildPos ?? 'center 10%' }}
             />
           </div>
           <div

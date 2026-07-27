@@ -17,6 +17,8 @@ export type Variante = {
     preiszeile: string
     bild: string
     bildAlt: string
+    /** object-position des Hero-Bilds, Standard: 'center 22%'. */
+    bildPos?: string
   }
   warum: { these: string; pointe: string; text: string }
   alltag: { eyebrow: string; punkte: { nr: string; titel: string }[] }
@@ -26,7 +28,15 @@ export type Variante = {
     headline: string
     items: { frage: string; antwort: string; offen?: boolean }[]
   }
-  stimme: { zitat: string; autor: string; quelle: string; bild: string; bildAlt: string }
+  stimme: {
+    zitat: string
+    autor: string
+    quelle: string
+    bild: string
+    bildAlt: string
+    /** object-position des Bilds, Standard: 'center 10%'. */
+    bildPos?: string
+  }
 }
 
 /** Antwort auf die Preisfrage – für beide Zielgruppen dieselbe Aktion. */
@@ -156,5 +166,74 @@ export const ab35: Variante = {
     quelle: 'Google-Bewertung',
     bild: '/aktion5/stimme-ab35.webp',
     bildAlt: 'Lächelnde Frau nach dem Training im Park',
+  },
+}
+
+// ─── Unterseite · Google Ads ──────────────────────────────────────────────────
+// Bei Google lässt sich das Alter nicht zuverlässig steuern – diese Fassung
+// spricht deshalb niemanden über sein Alter an, sondern über die Suchabsicht:
+// Wo ist das Studio, was steckt drin, was kostet es, kann ich es ansehen?
+// Als Motive echte Aufnahmen der Trainingsfläche statt Personenfotos.
+export const googleAds: Variante = {
+  pfad: '/fitnessstudio-trier',
+  meta: {
+    titel: 'Fitnessstudio in Trier — 12 Wochen für je 5 € bei FIT-INN',
+    beschreibung:
+      'Fitnessstudio in Trier-Feyen: familiengeführt seit 1996, über 100 TechnoGym-Geräte, Betreuung mit Namen. Die ersten 12 Wochen für je 5 €. Probetraining kostenlos und unverbindlich buchen.',
+  },
+  hero: {
+    eyebrow: 'Trier-Feyen · seit 1996',
+    zeile1: 'Dein Studio',
+    zeile2: 'in Trier.',
+    subline: 'Über 100 Geräte, Betreuung mit Namen, familiengeführt seit 1996.',
+    preiszeile: 'Ab 5 € die Woche.',
+    bild: '/studio-1.avif',
+    bildAlt: 'Trainingsfläche mit TechnoGym-Geräten im Fit-Inn Trier',
+    bildPos: 'center 62%',
+  },
+  warum: {
+    these: 'Der beste Zeitpunkt anzufangen war gestern.',
+    pointe: 'Der zweitbeste ist heute.',
+    text:
+      'Kraft, Ausdauer und Beweglichkeit lassen sich in jedem Alter aufbauen. Entscheidend ist nicht, wie fit ' +
+      'du heute bist – sondern dass du anfängst. Den Rest zeigen wir dir.',
+  },
+  alltag: {
+    eyebrow: 'Was das im Alltag heißt',
+    punkte: [
+      { nr: '01', titel: 'Ein Rücken, der mitmacht' },
+      { nr: '02', titel: 'Mehr Energie, den ganzen Tag' },
+      { nr: '03', titel: 'Ein Körper, dem du vertraust' },
+    ],
+  },
+  ablaufBegleitung: 'Fachkundige Betreuung von Menschen, die dich beim Namen kennen – vom ersten Tag an.',
+  fragen: {
+    headline: 'Passt das zu mir?',
+    items: [
+      {
+        frage: 'Ja – egal, wo du gerade stehst.',
+        antwort:
+          'Ob Wiedereinstieg nach Jahren oder das erste Mal überhaupt: Wir beginnen genau da, wo du stehst. Mit Einweisung an jedem Gerät, ohne Wettbewerb.',
+        offen: true,
+      },
+      { frage: 'Was kostet es nach der Aktion?', antwort: preisAntwort },
+      {
+        frage: 'Kann ich mir das Studio vorher ansehen?',
+        antwort:
+          'Ja. Komm zum kostenlosen Probetraining vorbei – wir zeigen dir alles in Ruhe und beantworten deine Fragen.',
+      },
+      {
+        frage: 'Muss ich mich sofort entscheiden?',
+        antwort: 'Nein. Das Probetraining ist unverbindlich und kostet dich nichts.',
+      },
+    ],
+  },
+  stimme: {
+    zitat: '„Angenehmes Training, nette Menschen. Die neuen Geräte von Technogym sind super.“',
+    autor: 'Thomas Müller',
+    quelle: 'Google-Bewertung',
+    bild: '/studio-2.avif',
+    bildAlt: 'Trainingsbereich mit Geräten von TechnoGym im Fit-Inn Trier',
+    bildPos: 'center 55%',
   },
 }

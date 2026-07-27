@@ -160,7 +160,7 @@ export function Hero({ hero }: { hero: Variante['hero'] }) {
               fill
               priority
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 22%' }}
+              style={{ objectFit: 'cover', objectPosition: hero.bildPos ?? 'center 22%' }}
             />
           </div>
           <div
