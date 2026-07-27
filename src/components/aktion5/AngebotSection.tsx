@@ -82,6 +82,7 @@ export function AngebotSection() {
             }}
           >
             5 € die Woche.
+            <span style={{ fontSize: '.4em', verticalAlign: 'super', fontWeight: 600, color: 'var(--amber)' }}>*</span>
           </h2>
           <p
             data-reveal=""
@@ -259,6 +260,21 @@ export function AngebotSection() {
           </span>
           <a href="#termin" className="lift" style={btnAmber}>Platz sichern</a>
         </div>
+
+        {/* Pflichtangaben zum Angebot */}
+        <p
+          data-reveal=""
+          style={{
+            fontSize: 13.5,
+            lineHeight: 1.6,
+            fontWeight: 300,
+            color: 'rgba(255,255,255,.42)',
+            margin: 'clamp(2rem,4vw,3rem) 0 0',
+            maxWidth: '92ch',
+          }}
+        >
+          <span style={{ color: 'rgba(255,255,255,.6)' }}>*</span> {aktion.rechtshinweis}
+        </p>
       </div>
     </section>
   )

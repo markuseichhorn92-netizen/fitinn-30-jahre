@@ -24,6 +24,27 @@ export const aktion = {
   /** Rundgang-Video (im Design als Prop `rundgangVideoUrl` hinterlegt). */
   rundgangVideoId: 'C3CuSfV57jE',
 
+  /**
+   * Pflichtangaben zum Angebot, erscheint als Fußnote unter den Tarifen.
+   * Achtung: Beträge und Datum stehen hier bewusst ausgeschrieben und werden
+   * nicht aus den Feldern oben eingesetzt – der Text ist rechtlich geprüft und
+   * soll nur als Ganzes geändert werden. Bei Preisänderungen also beides
+   * anpassen: die Felder oben UND diesen Absatz.
+   */
+  rechtshinweis:
+    'Das Angebot gilt für Mitgliedschaftsverträge, die bis zum 31.08.2026 neu abgeschlossen werden. ' +
+    'Die ersten 12 Wochen der Mitgliedschaft kosten je 5 €. Danach beträgt der Beitrag 12 € pro Woche ' +
+    'bei einer Laufzeit von 52 Wochen bzw. 9 € pro Woche bei einer Laufzeit von 104 Wochen. Die 12 ' +
+    'Vorteilswochen sind Teil der vereinbarten Laufzeit und verlängern diese nicht. Daraus ergibt sich ' +
+    'ein Gesamtbetrag von 540 € über 52 Wochen bzw. 888 € über 104 Wochen. Alle Preise verstehen sich ' +
+    'inklusive der gesetzlichen Mehrwertsteuer. Hinzu kommt eine einmalige Aufnahmegebühr von 39 €. ' +
+    'Der Einzug erfolgt in 14-tägigen Intervallen per SEPA-Lastschrift. Nach Ablauf der vereinbarten ' +
+    'Laufzeit verlängert sich die Mitgliedschaft auf unbestimmte Zeit und kann jederzeit mit einer Frist ' +
+    'von einem Monat gekündigt werden. Zum Ende der Erstlaufzeit ist eine Kündigung mit einer Frist von ' +
+    '4 Wochen möglich. Das Angebot gilt nur für Neumitglieder, ist nicht mit anderen Aktionen oder ' +
+    'Rabatten kombinierbar und nicht auf bestehende Verträge übertragbar. Mindestalter 18 Jahre. ' +
+    'Es gelten unsere Allgemeinen Geschäftsbedingungen und unsere Hausordnung.',
+
   telefon: { anzeige: '0651 30 85 24', link: '+49651308524' },
   email: 'info@fit-inn-trier.de',
   adresse: 'Auf Hirtenberg 8 · 54296 Trier',
