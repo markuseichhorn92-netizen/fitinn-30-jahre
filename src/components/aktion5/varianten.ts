@@ -50,7 +50,7 @@ export const ab50: Variante = {
   meta: {
     titel: '5-Euro-Aktion FIT-INN Trier — Stark, beweglich und selbstbestimmt älter werden',
     beschreibung:
-      'Die Jahre, die zählen: zwölf Wochen für je 5 € im FIT-INN Trier. Familiengeführt seit 1996, Betreuung mit Namen, über 100 TechnoGym-Geräte. Probetraining kostenlos und unverbindlich.',
+      'Die Jahre, die zählen: zwölf Wochen für je 5 € im FIT-INN Trier. Familiengeführt seit 1996, Betreuung mit Namen, computergesteuerte Premiumgeräte von TechnoGym. Probetraining kostenlos und unverbindlich.',
   },
   hero: {
     eyebrow: 'Sommer 2026 · Fit-Inn Trier',
@@ -179,13 +179,13 @@ export const googleAds: Variante = {
   meta: {
     titel: 'Fitnessstudio in Trier — 12 Wochen für je 5 € bei FIT-INN',
     beschreibung:
-      'Fitnessstudio in Trier-Feyen: familiengeführt seit 1996, über 100 TechnoGym-Geräte, Betreuung mit Namen. Die ersten 12 Wochen für je 5 €. Probetraining kostenlos und unverbindlich buchen.',
+      'Fitnessstudio in Trier-Feyen: familiengeführt seit 1996, computergesteuerte Premiumgeräte von TechnoGym, Betreuung mit Namen. Die ersten 12 Wochen für je 5 €. Probetraining kostenlos und unverbindlich buchen.',
   },
   hero: {
     eyebrow: 'Trier-Feyen · seit 1996',
     zeile1: 'Dein Studio',
     zeile2: 'in Trier.',
-    subline: 'Über 100 Geräte, Betreuung mit Namen, familiengeführt seit 1996.',
+    subline: 'Computergesteuerte TechnoGym-Geräte, Betreuung mit Namen, seit 1996.',
     preiszeile: 'Ab 5 € die Woche.',
     bild: '/studio-1.avif',
     bildAlt: 'Trainingsfläche mit TechnoGym-Geräten im Fit-Inn Trier',
