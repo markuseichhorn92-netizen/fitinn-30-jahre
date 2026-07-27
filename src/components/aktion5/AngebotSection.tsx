@@ -124,7 +124,7 @@ export function AngebotSection() {
             </span>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '.2em', margin: 'clamp(1.6rem,3vw,2.4rem) 0 0' }}>
               <span style={{ fontSize: 'clamp(52px,7vw,84px)', lineHeight: 1, letterSpacing: '-.04em', fontWeight: 800 }}>
-                5&nbsp;€
+                5&nbsp;€<span style={{ fontSize: '.28em', verticalAlign: 'super', fontWeight: 600, color: 'var(--amber)', letterSpacing: 0 }}>*</span>
               </span>
               <span style={{ fontSize: 18, color: 'rgba(255,255,255,.55)' }}>/ Woche</span>
             </div>
@@ -192,7 +192,7 @@ export function AngebotSection() {
             <span style={{ fontSize: 16, color: 'var(--muted)', marginTop: '.25em' }}>104 Wochen Mitgliedschaft</span>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '.2em', margin: 'clamp(1.6rem,3vw,2.4rem) 0 0' }}>
               <span style={{ fontSize: 'clamp(52px,7vw,84px)', lineHeight: 1, letterSpacing: '-.04em', fontWeight: 800 }}>
-                5&nbsp;€
+                5&nbsp;€<span style={{ fontSize: '.28em', verticalAlign: 'super', fontWeight: 600, color: '#8a5a13', letterSpacing: 0 }}>*</span>
               </span>
               <span style={{ fontSize: 18, color: 'var(--muted)' }}>/ Woche</span>
             </div>
@@ -257,6 +257,7 @@ export function AngebotSection() {
             <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.wochenbeitrag.einJahr}</span> (1 Jahr) bzw.{' '}
             <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.wochenbeitrag.zweiJahre}</span> (2 Jahre) · Aktion
             gültig bis <span style={{ color: '#fff', fontWeight: 600 }}>{aktion.gueltigBis}</span>
+            <span style={{ color: 'var(--amber)', fontWeight: 600 }}>&nbsp;*</span>
           </span>
           <a href="#termin" className="lift" style={btnAmber}>Platz sichern</a>
         </div>
