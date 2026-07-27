@@ -18,7 +18,7 @@ export function Rechtshinweis() {
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 clamp(20px,5vw,60px)' }}>
         <span
           data-reveal=""
-          style={{ ...eyebrow, fontSize: 13, color: 'rgba(255,255,255,.32)', marginBottom: '1.3em' }}
+          style={{ ...eyebrow, fontSize: 13, color: 'rgba(255,255,255,.45)', marginBottom: '1.3em' }}
         >
           Pflichtangaben zum Angebot
         </span>
@@ -32,7 +32,7 @@ export function Rechtshinweis() {
             fontSize: 13.5,
             lineHeight: 1.75,
             fontWeight: 300,
-            color: 'rgba(255,255,255,.4)',
+            color: 'rgba(255,255,255,.56)',
             hyphens: 'auto',
           }}
         >
@@ -44,7 +44,7 @@ export function Rechtshinweis() {
                 href={teil.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'rgba(255,255,255,.62)', textDecoration: 'underline', textUnderlineOffset: '.2em' }}
+                style={{ color: 'rgba(255,255,255,.78)', textDecoration: 'underline', textUnderlineOffset: '.2em' }}
               >
                 {teil.t}
               </a>

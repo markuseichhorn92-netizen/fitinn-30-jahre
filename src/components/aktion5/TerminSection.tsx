@@ -53,8 +53,8 @@ const navBtn: CSSProperties = {
   border: '1px solid var(--line-dark)',
   background: 'transparent',
   color: '#fff',
-  width: 42,
-  height: 42,
+  width: 46,
+  height: 46,
   borderRadius: '50%',
   display: 'inline-flex',
   alignItems: 'center',
@@ -319,7 +319,7 @@ export function TerminSection() {
           style={{
             border: '1px solid var(--line-dark)',
             borderRadius: 24,
-            padding: 'clamp(1.5rem,4vw,3.2rem)',
+            padding: 'clamp(1rem,4vw,3.2rem)',
             display: 'grid',
             gap: 'clamp(1.8rem,3.5vw,2.6rem)',
           }}
@@ -369,7 +369,7 @@ export function TerminSection() {
                   </button>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 4, marginBottom: 8 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 3, marginBottom: 8 }}>
                   {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(t => (
                     <span key={t} style={{ textAlign: 'center', fontSize: 13.5, fontWeight: 600, color: 'rgba(255,255,255,.45)' }}>
                       {t}
@@ -377,7 +377,7 @@ export function TerminSection() {
                   ))}
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 4 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 3 }}>
                   {zellen.map(z => {
                     if (!z.iso) return <span key={z.key} style={{ ...zellBasis, visibility: 'hidden' }} />
                     const gewaehlt = datum === z.iso

@@ -1,8 +1,13 @@
+'use client'
+
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { aktion } from './content'
 import { Glow } from './Decor'
+import { Play } from './icons'
 import { btnAmberSm, eyebrowAmber, wrap } from './styles'
 
 const VIDEO_ID = aktion.rundgangVideoId
+const POSTER = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`
 
 // Startet stumm von selbst und läuft in Schleife: keine Steuerleiste, kein
 // Play-/Pause-Knopf. Eine transparente Ebene über dem Player fängt Klicks ab,
@@ -14,6 +19,35 @@ const EMBED =
 
 // AKT 6 · RUNDGANG
 export function RundgangSection() {
+  const bereich = useRef<HTMLDivElement>(null)
+  const [laden, setLaden] = useState(false)
+
+  // Wer Bewegung reduzieren möchte, bekommt kein von selbst laufendes Video,
+  // sondern ein Standbild mit Abspieltaste.
+  const sparsam = useSyncExternalStore(
+    melden => {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+      mq.addEventListener('change', melden)
+      return () => mq.removeEventListener('change', melden)
+    },
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false,
+  )
+
+  useEffect(() => {
+    if (sparsam) return
+    // Das Video hängt weit unten. Erst laden, wenn es in die Nähe kommt –
+    // sonst zieht jeder Seitenaufruf am Handy unnötig Mobilfunkvolumen.
+    const el = bereich.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setLaden(true); io.disconnect() } },
+      { rootMargin: '300px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [sparsam])
+
   return (
     <section
       id="rundgang"
@@ -55,17 +89,71 @@ export function RundgangSection() {
         </div>
 
         <div
+          ref={bereich}
           data-reveal=""
           style={{ position: 'relative', borderRadius: 26, overflow: 'hidden', boxShadow: '0 40px 90px rgba(0,0,0,.45)' }}
         >
           <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
-            <iframe
-              src={EMBED}
-              title="Rundgang durch das Fit-Inn Trier"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, background: '#000' }}
-            />
-            <div aria-hidden="true" style={{ position: 'absolute', inset: 0, cursor: 'default' }} />
+            {laden && (
+              <>
+                <iframe
+                  src={EMBED}
+                  title="Rundgang durch das Fit-Inn Trier"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, background: '#000' }}
+                />
+                <div aria-hidden="true" style={{ position: 'absolute', inset: 0, cursor: 'default' }} />
+              </>
+            )}
+
+            {/* Vor dem Laden und bei reduzierter Bewegung: Standbild, auf Wunsch abspielbar */}
+            {!laden && (
+              <button
+                type="button"
+                onClick={() => setLaden(true)}
+                aria-label="Rundgang-Video abspielen"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  padding: 0,
+                  border: 0,
+                  cursor: sparsam ? 'pointer' : 'default',
+                  background: `#000 center/cover no-repeat url(${POSTER})`,
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(180deg,rgba(4,22,27,.12),rgba(4,22,27,.5))',
+                  }}
+                />
+                {sparsam && (
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%,-50%)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 'clamp(64px,7vw,92px)',
+                      height: 'clamp(64px,7vw,92px)',
+                      borderRadius: '50%',
+                      background: 'var(--amber)',
+                      boxShadow: '0 14px 40px rgba(4,22,27,.45)',
+                    }}
+                  >
+                    <Play />
+                  </span>
+                )}
+              </button>
+            )}
           </div>
         </div>
 

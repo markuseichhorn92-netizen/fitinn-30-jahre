@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react'
 
-// Blendet alle `[data-reveal]`-Elemente beim Scrollen ein — wie im Design:
-// bereits sichtbare Elemente sofort, alles andere per IntersectionObserver.
+// Blendet alle `[data-reveal]`-Elemente beim Scrollen ein. Bereits sichtbare
+// Elemente sofort, alles andere per IntersectionObserver. Bewusst ohne
+// Scroll-Listener: Ein Handler, der bei jedem Scroll-Ereignis das gesamte
+// Dokument abfragt und Geometrien liest, kostet auf dem Handy spürbar Leistung.
 export function Reveal() {
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -18,20 +20,13 @@ export function Reveal() {
       { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
     )
 
-    const beobachte = () => {
-      document.querySelectorAll('[data-reveal]:not(.is-in)').forEach(el => {
-        const r = el.getBoundingClientRect()
-        if (r.top < window.innerHeight * 0.98 && r.bottom > 0) el.classList.add('is-in')
-        else io.observe(el)
-      })
-    }
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach(el => {
+      const r = el.getBoundingClientRect()
+      if (r.top < window.innerHeight * 0.98 && r.bottom > 0) el.classList.add('is-in')
+      else io.observe(el)
+    })
 
-    beobachte()
-    window.addEventListener('scroll', beobachte, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', beobachte)
-      io.disconnect()
-    }
+    return () => io.disconnect()
   }, [])
 
   return null

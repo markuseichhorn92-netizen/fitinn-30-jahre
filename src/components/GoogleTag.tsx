@@ -2,6 +2,7 @@
 
 import Script from 'next/script'
 import { useEffect } from 'react'
+import { CONSENT_EVENT, analyticsErlaubt } from '@/components/CookieBanner'
 
 // Google-Tag (GA4). Geladen wird er immer, gesetzt werden Cookies aber erst
 // nach Zustimmung im Banner: Der Consent Mode startet auf "denied", und sobald
@@ -29,15 +30,17 @@ export function GoogleTag() {
   useEffect(() => {
     let nachgereicht = false
     const pruefen = () => {
-      if (nachgereicht) return
-      if (localStorage.getItem('cookie-consent') !== 'all') return
+      if (nachgereicht || !analyticsErlaubt()) return
       nachgereicht = true
       window.gtag?.('consent', 'update', ERLAUBT)
     }
-    // Gleiches Muster wie ConditionalAnalytics: der Banner meldet keine Events.
     pruefen()
-    const timer = setInterval(pruefen, 500)
-    return () => clearInterval(timer)
+    window.addEventListener(CONSENT_EVENT, pruefen)
+    window.addEventListener('storage', pruefen)
+    return () => {
+      window.removeEventListener(CONSENT_EVENT, pruefen)
+      window.removeEventListener('storage', pruefen)
+    }
   }, [])
 
   return (

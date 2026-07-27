@@ -66,7 +66,7 @@ export function Footer() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'rgba(255,255,255,.65)', textDecoration: 'none' }}
+                style={{ color: 'rgba(255,255,255,.75)', textDecoration: 'none' }}
               >
                 {l.label}
               </a>
@@ -74,13 +74,13 @@ export function Footer() {
               <Link
                 key={l.label}
                 href={l.href}
-                style={{ color: 'rgba(255,255,255,.65)', textDecoration: 'none' }}
+                style={{ color: 'rgba(255,255,255,.75)', textDecoration: 'none' }}
               >
                 {l.label}
               </Link>
             ),
           )}
-          <span style={{ marginLeft: 'auto', color: 'rgba(255,255,255,.4)' }}>
+          <span style={{ marginLeft: 'auto', color: 'rgba(255,255,255,.55)' }}>
             Familiengeführt seit 1996
           </span>
         </div>

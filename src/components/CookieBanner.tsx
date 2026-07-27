@@ -11,9 +11,20 @@ const CONSENT_DATE_KEY = 'cookie-consent-date'
 
 type ConsentValue = 'all' | 'essential' | null
 
+// Verbraucher der Einwilligung (Analytics, Google-Tag) hören auf dieses
+// Ereignis. Vorher fragten sie im Sekundentakt den localStorage ab – das kostet
+// auf dem Handy dauerhaft Rechenzeit und Akku, ohne je etwas zu erfahren.
+export const CONSENT_EVENT = 'fitinn:cookie-consent'
+
 function saveConsent(value: 'all' | 'essential') {
   localStorage.setItem(CONSENT_KEY, value)
   localStorage.setItem(CONSENT_DATE_KEY, new Date().toISOString())
+  window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: value }))
+}
+
+/** Aktueller Stand der Einwilligung, auch für andere Komponenten. */
+export function analyticsErlaubt(): boolean {
+  return typeof window !== 'undefined' && localStorage.getItem(CONSENT_KEY) === 'all'
 }
 
 function getConsent(): ConsentValue {
@@ -207,17 +218,15 @@ export function ConditionalAnalytics() {
   const [analyticsAllowed, setAnalyticsAllowed] = useState(false)
 
   useEffect(() => {
-    setAnalyticsAllowed(getConsent() === 'all')
-
-    const interval = setInterval(() => {
-      const current = getConsent() === 'all'
-      setAnalyticsAllowed(prev => {
-        if (prev !== current) return current
-        return prev
-      })
-    }, 500)
-
-    return () => clearInterval(interval)
+    const lesen = () => setAnalyticsAllowed(getConsent() === 'all')
+    lesen()
+    window.addEventListener(CONSENT_EVENT, lesen)
+    // Deckt auch den Fall ab, dass in einem zweiten Tab zugestimmt wurde.
+    window.addEventListener('storage', lesen)
+    return () => {
+      window.removeEventListener(CONSENT_EVENT, lesen)
+      window.removeEventListener('storage', lesen)
+    }
   }, [])
 
   if (!analyticsAllowed) return null
