@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { formatTime, toLocalDateKey, type Slot } from '@/lib/booking'
+import { meldeBuchung } from '@/components/GoogleTag'
 import { aktion } from './content'
 import { Sprig } from './Decor'
 import { Haken, PfeilLinks, PfeilRechts } from './icons'
@@ -212,6 +213,7 @@ export function TerminSection() {
         setFehler(ergebnis.error || 'Die Buchung hat nicht geklappt.')
       } else {
         setGesendet(true)
+        meldeBuchung({ termin: slot.startDateTime })
       }
     } catch {
       setFehler('Verbindungsfehler. Bitte versuche es erneut.')

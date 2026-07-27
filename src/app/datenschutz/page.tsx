@@ -187,6 +187,28 @@ export default function DatenschutzPage() {
         </a>
       </p>
 
+      <h3>Google Analytics</h3>
+      <p>
+        Diese Website nutzt Google Analytics 4. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street,
+        Dublin 4, Irland. Google Analytics verwendet Cookies und ähnliche Technologien, um Ihre Nutzung der Website
+        auszuwerten – etwa aufgerufene Seiten, Verweildauer, Herkunft des Besuchs und ob ein Probetraining gebucht
+        wurde. Diese Auswertung hilft uns einzuschätzen, welche unserer Anzeigen tatsächlich zu Terminen führen.
+      </p>
+      <p>
+        Wir setzen den Google-Einwilligungsmodus (Consent Mode) ein: Solange Sie im Cookie-Banner nicht zugestimmt
+        haben, speichert Google keine Cookies und legt keine Kennung an, mit der Sie wiedererkannt werden könnten.
+        Erst wenn Sie „Alle akzeptieren“ wählen, wird die Messung mit Cookies aktiviert. Rechtsgrundlage ist damit
+        Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Sie können sie jederzeit über die
+        Cookie-Einstellungen widerrufen.
+      </p>
+      <p>
+        Eine Übermittlung Ihrer Daten in die USA kann nicht ausgeschlossen werden. Weitere Informationen finden Sie in
+        der Datenschutzerklärung von Google:{' '}
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+          https://policies.google.com/privacy
+        </a>
+      </p>
+
       <h3>Vercel Web Analytics und Speed Insights</h3>
       <p>
         Diese Website nutzt Web Analytics und Speed Insights unseres Hosters Vercel Inc. Erfasst werden aggregierte

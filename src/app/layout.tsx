@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { CookieBanner, ConditionalAnalytics } from "@/components/CookieBanner";
+import { GoogleTag } from "@/components/GoogleTag";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -74,6 +75,18 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
+        {/*
+          Google Consent Mode v2: Diese Standardwerte müssen in der
+          dataLayer-Warteschlange stehen, bevor gtag.js den ersten Messaufruf
+          absetzt – deshalb synchron im <head> und nicht über next/script.
+          Ohne Zustimmung im Cookie-Banner setzt Google keine Cookies; die
+          Freigabe reicht src/components/GoogleTag.tsx nach.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -121,6 +134,7 @@ export default function RootLayout({
         {children}
         <CookieBanner />
         <ConditionalAnalytics />
+        <GoogleTag />
         <Analytics />
         <SpeedInsights />
       </body>
