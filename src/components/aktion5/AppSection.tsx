@@ -39,7 +39,7 @@ const bausteine: { icon: ReactNode; titel: string; punkte: string[]; pad: string
   },
   {
     icon: <Buch />,
-    titel: 'Wöchentliche Begleitung',
+    titel: 'Wöchentliche Impulse in der App',
     punkte: [
       'Lektionen und Vertiefungen Woche für Woche.',
       'Tagesimpulse und eine Erfolgskontrolle nach 14 Tagen.',
@@ -86,7 +86,7 @@ export function AppSection() {
           }}
         >
           <div>
-            <span data-reveal="" style={eyebrowMuted}>Nur bei 2 Jahren</span>
+            <span data-reveal="" style={eyebrowMuted}>Nur bei 2 Jahren · in der Fit-Inn App</span>
             <h2
               data-reveal=""
               style={{
@@ -97,7 +97,7 @@ export function AppSection() {
                 margin: '.25em 0 0',
               }}
             >
-              Dein Coach.<br />Auch zu Hause.
+              Dein Coach<br />in der App.
             </h2>
           </div>
           <p
@@ -113,7 +113,9 @@ export function AppSection() {
           >
             Zur <span style={{ color: 'var(--ink)', fontWeight: 600 }}>2-Jahres-Mitgliedschaft</span> gehören{' '}
             <span style={{ color: 'var(--ink)', fontWeight: 600 }}>3 Monate Coach Premium</span> in der Fit-Inn Trier
-            App – kostenfrei. Dein persönlicher Begleiter für Ernährung, Training und Erholung.
+            App – kostenfrei. Das sind{' '}
+            <span style={{ color: 'var(--ink)', fontWeight: 600 }}>digitale Funktionen auf deinem Handy</span> für die
+            Zeit zwischen den Trainings. Die persönliche Betreuung im Studio bekommst du ohnehin von unserem Team.
           </p>
         </div>
 
@@ -170,8 +172,9 @@ export function AppSection() {
               3 Monate inklusive.<br />Danach freiwillig.
             </span>
             <p style={{ fontSize: 17, lineHeight: 1.55, fontWeight: 300, color: 'var(--muted)', margin: 0 }}>
-              Coach Premium gehört zur 2-Jahres-Mitgliedschaft. Nach drei Monaten entscheidest du selbst, ob du sie
-              weiterführst.
+              Coach Premium ist ein Zusatz in der App und gehört zur 2-Jahres-Mitgliedschaft. Nach drei Monaten
+              entscheidest du selbst, ob du es weiterführst. Am Training und an der Betreuung im Studio ändert sich
+              dadurch nichts.
             </p>
             <a href="#termin" className="lift" style={{ ...btnAmberSm, alignSelf: 'start' }}>Termin wählen</a>
           </div>
