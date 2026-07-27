@@ -41,7 +41,7 @@ const bausteine: { icon: ReactNode; titel: string; punkte: string[]; pad: string
     icon: <Buch />,
     titel: 'Wöchentliche Begleitung',
     punkte: [
-      'Lektionen und Vertiefungen Woche für Woche – Woche 1 gratis.',
+      'Lektionen und Vertiefungen Woche für Woche.',
       'Tagesimpulse und eine Erfolgskontrolle nach 14 Tagen.',
     ],
     pad: cellPadLeft,
