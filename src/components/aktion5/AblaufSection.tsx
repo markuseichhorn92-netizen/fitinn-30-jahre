@@ -1,5 +1,6 @@
 import { Sprig } from './Decor'
 import { decorLayer, eyebrowMuted, wrap } from './styles'
+import type { Variante } from './varianten'
 
 const schritte = [
   {
@@ -12,15 +13,11 @@ const schritte = [
     titel: 'Dein Plan',
     text: 'Ein Training, das zu deinem Körper passt – mit Einweisung an jedem Gerät.',
   },
-  {
-    nr: '03',
-    titel: 'Begleitet bleiben',
-    text: 'Fachkundige Betreuung von Menschen, die wissen, worauf es ab 50 ankommt.',
-  },
 ]
 
 // AKT 5 · ABLAUF
-export function AblaufSection() {
+export function AblaufSection({ begleitung }: { begleitung: Variante['ablaufBegleitung'] }) {
+  const alleSchritte = [...schritte, { nr: '03', titel: 'Begleitet bleiben', text: begleitung }]
   return (
     <section
       id="ablauf"
@@ -106,7 +103,7 @@ export function AblaufSection() {
             marginTop: 'clamp(3rem,6vw,4.5rem)',
           }}
         >
-          {schritte.map(s => (
+          {alleSchritte.map(s => (
             <div key={s.nr} data-reveal="">
               <span
                 style={{

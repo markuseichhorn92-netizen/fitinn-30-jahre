@@ -1,7 +1,8 @@
 import { decorLayer, wrap } from './styles'
+import type { Variante } from './varianten'
 
 // AKT 2 · SPANNUNG
-export function WarumSection() {
+export function WarumSection({ warum }: { warum: Variante['warum'] }) {
   return (
     <section
       id="warum"
@@ -40,7 +41,7 @@ export function WarumSection() {
             textWrap: 'balance',
           }}
         >
-          Ab 50 verlieren wir jedes Jahr Muskelkraft.
+          {warum.these}
         </p>
         <p
           data-reveal=""
@@ -53,7 +54,7 @@ export function WarumSection() {
             color: 'var(--amber)',
           }}
         >
-          Wenn wir nichts tun.
+          {warum.pointe}
         </p>
         <p
           data-reveal=""
@@ -66,8 +67,7 @@ export function WarumSection() {
             maxWidth: '46ch',
           }}
         >
-          Die gute Nachricht: Dieser Prozess lässt sich in fast jedem Alter umkehren. Kraft, Balance und
-          Beweglichkeit halten dich selbstständig, aktiv und unabhängig.
+          {warum.text}
         </p>
       </div>
     </section>

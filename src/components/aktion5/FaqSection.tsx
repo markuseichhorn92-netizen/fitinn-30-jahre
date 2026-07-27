@@ -1,31 +1,8 @@
-import { aktion } from './content'
 import { Plus } from './icons'
-
-const fragen = [
-  {
-    frage: 'Nein – du bist genau richtig.',
-    antwort:
-      'Viele unserer Mitglieder starten nach einer langen Pause. Wir beginnen genau da, wo du stehst – ohne Wettbewerb, ohne Druck.',
-    offen: true,
-  },
-  {
-    frage: 'Was kostet es nach der Aktion?',
-    antwort:
-      `Nach den 12 Vorteilswochen gilt der reguläre Wochenbeitrag: ${aktion.wochenbeitrag.einJahr} pro Woche ` +
-      `bei einem Jahr Laufzeit, ${aktion.wochenbeitrag.zweiJahre} pro Woche bei zwei Jahren.`,
-  },
-  {
-    frage: 'Muss ich mich sofort entscheiden?',
-    antwort: 'Nein. Komm erst einmal unverbindlich vorbei und lern uns kennen.',
-  },
-  {
-    frage: 'Werde ich betreut?',
-    antwort: 'Ja. Jede Mitgliedschaft startet mit einem persönlichen Gespräch und einer Einweisung.',
-  },
-]
+import type { Variante } from './varianten'
 
 // AKT 7 · EINWÄNDE
-export function FaqSection() {
+export function FaqSection({ fragen }: { fragen: Variante['fragen'] }) {
   return (
     <section
       id="fragen"
@@ -52,16 +29,16 @@ export function FaqSection() {
               maxWidth: '12ch',
             }}
           >
-            Bin ich zu alt dafür?
+            {fragen.headline}
           </h2>
           <div data-reveal="" style={{ display: 'flex', flexDirection: 'column' }}>
-            {fragen.map((f, i) => (
+            {fragen.items.map((f, i) => (
               <details
                 key={f.frage}
                 open={f.offen}
                 style={{
                   borderTop: '1px solid var(--line)',
-                  borderBottom: i === fragen.length - 1 ? '1px solid var(--line)' : undefined,
+                  borderBottom: i === fragen.items.length - 1 ? '1px solid var(--line)' : undefined,
                   padding: 'clamp(1.1rem,2vw,1.5rem) 0',
                 }}
               >

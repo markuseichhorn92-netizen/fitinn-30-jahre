@@ -1,17 +1,17 @@
 import Image from 'next/image'
-import { aktion } from './content'
 import { wrapWide } from './styles'
+import type { Variante } from './varianten'
 
 // AKT 7 · BEWEIS
-export function StimmeSection() {
+export function StimmeSection({ stimme }: { stimme: Variante['stimme'] }) {
   return (
     <section style={{ background: 'var(--paper)', padding: 'clamp(5rem,11vw,9rem) 0 clamp(6rem,13vw,11rem)' }}>
       <div data-reveal="" style={wrapWide}>
         <div style={{ position: 'relative', borderRadius: 26, overflow: 'hidden', background: 'var(--ink)' }}>
           <div style={{ position: 'relative', width: '100%', height: 'clamp(420px,64vh,680px)' }}>
             <Image
-              src="/aktion5/stimme.webp"
-              alt="Porträt eines Mitglieds im Fit-Inn Trier"
+              src={stimme.bild}
+              alt={stimme.bildAlt}
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 10%' }}
@@ -49,10 +49,10 @@ export function StimmeSection() {
                 maxWidth: '20ch',
               }}
             >
-              {aktion.stimme.zitat}
+              {stimme.zitat}
             </blockquote>
             <span style={{ display: 'block', fontSize: 16.5, color: 'rgba(255,255,255,.65)', marginTop: '1.4em' }}>
-              {aktion.stimme.autor} · {aktion.stimme.quelle}
+              {stimme.autor} · {stimme.quelle}
             </span>
           </div>
         </div>

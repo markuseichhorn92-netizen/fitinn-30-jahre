@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import { Sprig, Glow } from './Decor'
 import { btnAmber, btnGhost, decorLayer, eyebrowAmber, wrap, wrapWide } from './styles'
+import type { Variante } from './varianten'
 
 // AKT 1 · HOOK
-export function Hero() {
+export function Hero({ hero }: { hero: Variante['hero'] }) {
   return (
     <header style={{ position: 'relative', background: 'var(--ink)', color: '#fff', overflow: 'hidden' }}>
       <Sprig
@@ -43,7 +44,7 @@ export function Hero() {
 
       <div style={{ ...wrap, zIndex: 2, padding: 'clamp(7rem,14vh,10rem) clamp(20px,5vw,60px) 0', textAlign: 'center' }}>
         <span data-reveal="" style={{ ...eyebrowAmber, display: 'inline-block' }}>
-          Sommer 2026 · Fit-Inn Trier
+          {hero.eyebrow}
         </span>
         <h1
           data-reveal=""
@@ -56,7 +57,7 @@ export function Hero() {
             textWrap: 'balance',
           }}
         >
-          Die Jahre,<br />die zählen.
+          {hero.zeile1}<br />{hero.zeile2}
         </h1>
         <p
           data-reveal=""
@@ -69,8 +70,8 @@ export function Hero() {
             maxWidth: '24ch',
           }}
         >
-          Stark, beweglich und selbstbestimmt älter werden.<br />
-          <span style={{ color: '#fff', fontWeight: 600, whiteSpace: 'nowrap' }}>Ab 5 € die Woche.</span>
+          {hero.subline}<br />
+          <span style={{ color: '#fff', fontWeight: 600, whiteSpace: 'nowrap' }}>{hero.preiszeile}</span>
         </p>
         <div
           data-reveal=""
@@ -154,8 +155,8 @@ export function Hero() {
         <div style={{ position: 'relative', borderRadius: '26px 26px 0 0', overflow: 'hidden' }}>
           <div style={{ position: 'relative', width: '100%', height: 'clamp(320px,52vh,560px)' }}>
             <Image
-              src="/aktion5/hero.webp"
-              alt="Lächelnde Frau nach dem Training im Fit-Inn Trier"
+              src={hero.bild}
+              alt={hero.bildAlt}
               fill
               priority
               sizes="100vw"

@@ -1,14 +1,16 @@
 import { Glasses, Sprig } from './Decor'
 import { decorLayer, eyebrowMuted, wrap } from './styles'
+import type { Variante } from './varianten'
 
-const punkte = [
-  { nr: '01', titel: 'Einkäufe wieder selbst tragen', pad: 'clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.5vw,2rem) clamp(1.6rem,3vw,2.4rem) 0' },
-  { nr: '02', titel: 'Treppen ohne Pause nehmen', pad: 'clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.5vw,2rem)' },
-  { nr: '03', titel: 'Mit den Enkeln mithalten', pad: 'clamp(1.6rem,3vw,2.4rem) 0 clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.5vw,2rem)' },
+// Innenabstände je nach Spaltenposition (links / Mitte / rechts).
+const paddings = [
+  'clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.5vw,2rem) clamp(1.6rem,3vw,2.4rem) 0',
+  'clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.5vw,2rem)',
+  'clamp(1.6rem,3vw,2.4rem) 0 clamp(1.6rem,3vw,2.4rem) clamp(1.4rem,2.5vw,2rem)',
 ]
 
 // AKT 3 · WAS DAS IM ALLTAG HEISST
-export function AlltagSection() {
+export function AlltagSection({ alltag }: { alltag: Variante['alltag'] }) {
   return (
     <section
       style={{ position: 'relative', overflow: 'hidden', background: 'var(--paper)', padding: 'clamp(5rem,11vw,9rem) 0' }}
@@ -45,7 +47,7 @@ export function AlltagSection() {
       </div>
 
       <div style={wrap}>
-        <span data-reveal="" style={eyebrowMuted}>Was das im Alltag heißt</span>
+        <span data-reveal="" style={eyebrowMuted}>{alltag.eyebrow}</span>
         <div
           style={{
             display: 'grid',
@@ -54,8 +56,8 @@ export function AlltagSection() {
             marginTop: 'clamp(2rem,4vw,3rem)',
           }}
         >
-          {punkte.map(p => (
-            <div key={p.nr} data-reveal="" style={{ borderTop: '1px solid var(--line)', padding: p.pad }}>
+          {alltag.punkte.map((p, i) => (
+            <div key={p.nr} data-reveal="" style={{ borderTop: '1px solid var(--line)', padding: paddings[i % 3] }}>
               <span style={{ display: 'block', fontSize: 15, fontWeight: 600, color: 'var(--amber)', letterSpacing: '.04em' }}>
                 {p.nr}
               </span>
