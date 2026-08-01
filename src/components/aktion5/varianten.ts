@@ -101,8 +101,9 @@ export const ab50: Variante = {
     zitat: '„Ich bin von der Ausstattung, den Geräten und den Mitarbeitern maximal überzeugt.“',
     autor: 'Gisela T.',
     quelle: 'Google-Bewertung',
-    bild: '/aktion5/stimme.webp',
-    bildAlt: 'Porträt eines Mitglieds im Fit-Inn Trier',
+    bild: '/studio-2.avif',
+    bildAlt: 'Trainingsbereich mit Geräten von TechnoGym im Fit-Inn Trier',
+    bildPos: 'center 55%',
   },
 }
 
@@ -164,8 +165,9 @@ export const ab35: Variante = {
     zitat: '„Super gepflegte Geräte, nette Leute, angenehme Atmosphäre, Duschen + Getränke top.“',
     autor: 'Jana Thielen',
     quelle: 'Google-Bewertung',
-    bild: '/aktion5/stimme-ab35.webp',
-    bildAlt: 'Lächelnde Frau nach dem Training im Park',
+    bild: '/studio-2.avif',
+    bildAlt: 'Trainingsbereich mit Geräten von TechnoGym im Fit-Inn Trier',
+    bildPos: 'center 55%',
   },
 }
 
