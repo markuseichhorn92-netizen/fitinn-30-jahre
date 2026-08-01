@@ -19,6 +19,8 @@ export type Variante = {
     bildAlt: string
     /** object-position des Hero-Bilds, Standard: 'center 22%'. */
     bildPos?: string
+    /** Blendet die Plakette „KI-generiert“ über dem Bild ein. */
+    kiGeneriert?: boolean
   }
   warum: { these: string; pointe: string; text: string }
   alltag: { eyebrow: string; punkte: { nr: string; titel: string }[] }
@@ -60,6 +62,7 @@ export const ab50: Variante = {
     preiszeile: 'Ab 5 € die Woche.',
     bild: '/aktion5/hero.webp',
     bildAlt: 'Lächelnde Frau nach dem Training im Fit-Inn Trier',
+    kiGeneriert: true,
   },
   warum: {
     these: 'Ab 50 verlieren wir jedes Jahr Muskelkraft.',
@@ -123,6 +126,7 @@ export const ab35: Variante = {
     preiszeile: 'Ab 5 € die Woche.',
     bild: '/aktion5/hero-ab35.webp',
     bildAlt: 'Lachendes Paar nach dem Training im Park',
+    kiGeneriert: true,
   },
   warum: {
     these: 'Ab 35 baut der Körper jedes Jahr Muskeln ab.',

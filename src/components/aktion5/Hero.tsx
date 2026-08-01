@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Sprig, Glow } from './Decor'
+import { KiHinweis } from './KiHinweis'
 import { btnAmber, btnGhost, decorLayer, eyebrowAmber, wrap, wrapWide } from './styles'
 import type { Variante } from './varianten'
 
@@ -172,6 +173,7 @@ export function Hero({ hero }: { hero: Variante['hero'] }) {
               background: 'linear-gradient(180deg,rgba(4,22,27,.18) 0%,rgba(4,22,27,0) 34%)',
             }}
           />
+          {hero.kiGeneriert && <KiHinweis />}
         </div>
       </div>
     </header>
