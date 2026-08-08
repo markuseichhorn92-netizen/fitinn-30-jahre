@@ -73,18 +73,18 @@ export function Maschine() {
             <div>
               <h1
                 style={{
-                  fontSize: 'clamp(40px,6.6vw,92px)',
-                  lineHeight: .96,
-                  letterSpacing: '-.048em',
+                  fontSize: 'clamp(38px,4.7vw,66px)',
+                  lineHeight: .98,
+                  letterSpacing: '-.04em',
                   fontWeight: 700,
-                  maxWidth: '11ch',
+                  maxWidth: '14ch',
                   textWrap: 'balance',
                 }}
               >
                 Zwölf Wochen. Je fünf Euro.
               </h1>
               <Absatz
-                style={{ marginTop: 'clamp(1.1rem,2.4vw,1.7rem)', maxWidth: '38ch', fontSize: 'clamp(19px,1.8vw,23px)' }}
+                style={{ marginTop: '.7em', maxWidth: '40ch', fontSize: 'clamp(18px,1.5vw,20px)' }}
                 kind={
                   <>
                     Und ein Gerät, das dich erkennt, sich auf dich einstellt und mitschreibt. Damit
@@ -92,7 +92,7 @@ export function Maschine() {
                   </>
                 }
               />
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 'clamp(1.5rem,3vw,2.2rem)' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 'clamp(1.1rem,2.2vw,1.6rem)' }}>
                 <a href="#termin" className="tf-knopf">Probetraining wählen</a>
                 <a
                   href="#angebot"

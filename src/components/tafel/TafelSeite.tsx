@@ -2,7 +2,6 @@ import { Archivo, Martian_Mono } from 'next/font/google'
 import './tafel.css'
 
 import { Anmeldung } from './Anmeldung'
-import { Auf } from './Auf'
 import { Fussleiste } from './Fussleiste'
 import { Kopfleiste } from './Kopfleiste'
 import { Maschine } from './Maschine'
@@ -71,7 +70,6 @@ export function TafelSeite() {
   return (
     <main className={`tf ${archivo.variable} ${martian.variable}`}>
       <div style={{ display: 'none' }} dangerouslySetInnerHTML={{ __html: KONTRAKT }} />
-      <Auf />
       <Kopfleiste />
       <div style={{ display: 'grid', gap: 'clamp(1.2rem,3vw,2.4rem)', padding: 'clamp(1.2rem,3vw,2.4rem) 0 0' }}>
         <Maschine />

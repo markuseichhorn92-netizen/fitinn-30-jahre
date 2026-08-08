@@ -46,7 +46,7 @@ export function Platte({
 }) {
   return (
     <section id={id} style={{ ...satz, scrollMarginTop: 76 }}>
-      <div data-auf="" className="tf-platte" style={{ borderRadius: 2, ...style }}>
+      <div className="tf-platte" style={{ borderRadius: 2, ...style }}>
         <div style={spiegel}>{kind}</div>
         <div
           style={{
