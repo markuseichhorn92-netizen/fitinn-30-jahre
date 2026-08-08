@@ -1,0 +1,277 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   DIE LEHRTAFEL — Testfläche /tafel
+
+   Die Welt: die deutsche Schautafel, wie sie zwischen 1925 und 1970 in
+   Arztpraxen, Turnhallen und Klassenzimmern hing — Deutsches Hygiene-Museum,
+   Fritz Kahns Schaubilder. Ein Grund aus Preußischblau, darauf Tafeln aus
+   Knochenpapier, oben auf eine dunkle Leiste montiert. Flache Druckfarben,
+   Haarlinien, nummerierte Verweise, die von der Zeichnung in die Legende
+   laufen.
+
+   Farbregel, aus dem Druckverfahren abgeleitet und bindend:
+   Zinnober ist die Verweisfarbe AUF dem Papier. Chromgelb ist die Verweisfarbe
+   AUF dem Blau. Nie umgekehrt — Zinnober auf Blau erreicht nur 2,4:1.
+
+   Hier steht nur, was inline am Element nicht geht: Tokens, der Reset gegen
+   die globale Seitentypografie, Zustände und die eine gestaltete Bewegung
+   (der Zeiger). Maße und Farben der Sektionen liegen an den Elementen.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.tf {
+  /* Grund */
+  --blau: #142f49;
+  --blau-tief: #0d2237;
+  --blau-hell: #1d4166;
+
+  /* Papier */
+  --knochen: #ede5d6;
+  --knochen-2: #e2d8c4;
+
+  /* Druckfarben */
+  --russ: #17191c;
+  --zinnober: #c4402b;      /* Flächen, Linien, große Ziffern auf Papier */
+  --zinnober-tief: #a6301f; /* dieselbe Farbe für Fließtext — 5,6:1 auf Papier */
+  --chrom: #dfa02a;         /* Verweisfarbe auf dem Blau — 5,5:1 */
+  --kupfer: #2e7d6c;
+
+  /* Abgesetzter Text, aus dem jeweiligen Grund getönt statt grau */
+  --matt-papier: #46586b;
+  --matt-blau: #a7b6c4;
+
+  --font-tafel: var(--font-archivo), system-ui, sans-serif;
+  --font-schluessel: var(--font-martian), ui-monospace, monospace;
+
+  font-family: var(--font-tafel);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.62;
+  color: var(--knochen);
+  background: var(--blau);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Die globale Seitentypografie (Barlow Condensed, uppercase) abschalten. */
+.tf h1, .tf h2, .tf h3, .tf h4, .tf h5, .tf h6 {
+  font-family: var(--font-tafel);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -.035em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.tf p { margin: 0; }
+
+/* ─── Die Oberflächen, die der Browser stellt ──────────────────────────── */
+.tf ::selection { background: var(--chrom); color: var(--russ); }
+.tf .tf-platte ::selection { background: var(--zinnober); color: var(--knochen); }
+.tf { caret-color: var(--zinnober); scrollbar-color: var(--blau-hell) var(--blau-tief); }
+.tf :focus-visible {
+  outline: 2px solid var(--chrom);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.tf .tf-platte :focus-visible { outline-color: var(--zinnober); }
+.tf a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+/* Zahlen in Tabellen und Preisfeldern laufen sonst unterschiedlich breit. */
+.tf .tf-zahl { font-variant-numeric: tabular-nums; }
+
+/* ─── Die Tafel als Gegenstand ─────────────────────────────────────────── */
+/* Oben die dunkle Leiste, auf die die Tafel montiert ist; darunter das
+   Papier mit einer eingerückten Haarlinie als Satzspiegel. */
+.tf-platte {
+  position: relative;
+  background: var(--knochen);
+  color: var(--russ);
+  box-shadow: 0 18px 40px -12px rgba(6, 18, 32, .55), 0 3px 8px -2px rgba(6, 18, 32, .4);
+}
+.tf-platte::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 7px;
+  background: var(--russ);
+}
+.tf-platte::after {
+  content: "";
+  position: absolute;
+  inset: 7px 0 0;
+  border: 1px solid rgba(23, 25, 28, .22);
+  margin: clamp(9px, 1.1vw, 15px);
+  pointer-events: none;
+}
+
+/* ─── Der Zeiger: die eine gestaltete Bewegung ─────────────────────────── */
+/* Die Verweislinien zeichnen sich einmal, wenn die Tafel in den Blick kommt.
+   Danach gehört die Bewegung dem Leser: Legende anfassen, Linie antwortet. */
+.tf-linie {
+  stroke-dasharray: var(--laenge, 300);
+  stroke-dashoffset: var(--laenge, 300);
+}
+.tf-diagramm.is-in .tf-linie {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s cubic-bezier(.16, 1, .3, 1);
+}
+.tf-ruf { transition: opacity .3s ease-out; }
+.tf-ruf[data-an="0"] { opacity: .24; }
+.tf-ruf[data-an="1"] .tf-linie { stroke: var(--zinnober); stroke-width: 2.4; }
+.tf-ruf[data-an="1"] .tf-punkt { fill: var(--zinnober); r: 8; }
+.tf-ruf[data-an="1"] .tf-marke { fill: var(--zinnober); stroke: var(--zinnober); }
+.tf-ruf[data-an="1"] .tf-marke-nr { fill: var(--knochen); }
+
+/* Legendenzeilen sind Schalter, keine Karten. */
+.tf-legende {
+  display: block;
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  border: 0;
+  border-top: 1px solid rgba(23, 25, 28, .2);
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: clamp(.85rem, 1.6vw, 1.15rem) 0;
+  transition: background .25s ease-out;
+}
+.tf-legende:last-child { border-bottom: 1px solid rgba(23, 25, 28, .2); }
+@media (hover: hover) {
+  .tf-legende:hover { background: rgba(196, 64, 43, .07); }
+}
+.tf-legende[data-an="1"] { background: rgba(196, 64, 43, .1); }
+
+/* ─── Sanftes Erscheinen ───────────────────────────────────────────────── */
+/* Verborgen wird erst, wenn das Skript die Aufgabe übernommen hat. Ohne
+   JavaScript – oder wenn der Beobachter scheitert – steht alles da. */
+.tf[data-bewegt="1"] [data-auf] { opacity: 0; transform: translateY(16px); }
+.tf[data-bewegt="1"] [data-auf].is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .8s cubic-bezier(.16, 1, .3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf[data-bewegt="1"] [data-auf] { opacity: 1; transform: none; transition: none; }
+  .tf-linie { stroke-dashoffset: 0; }
+  .tf-diagramm.is-in .tf-linie { transition: none; }
+}
+
+/* ─── Schaltflächen ────────────────────────────────────────────────────── */
+/* Unter `.tf` gescoped, weil `.tf a { color: inherit }` weiter oben sonst
+   spezifischer ist und die Textfarbe der Knöpfe überschreibt. */
+.tf .tf-knopf {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6em;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  min-height: 52px;
+  padding: .85em 1.7em;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--zinnober);
+  color: var(--knochen);
+  transition: background .25s ease-out, transform .25s cubic-bezier(.16, 1, .3, 1);
+}
+@media (hover: hover) { .tf .tf-knopf:hover { background: var(--zinnober-tief); } }
+.tf .tf-knopf:active { transform: translateY(1px); }
+.tf .tf-knopf:disabled { cursor: not-allowed; background: rgba(23, 25, 28, .3); }
+
+/* Auf dem Blau trägt Zinnober zu wenig Kontrast — dort schreibt Chromgelb. */
+.tf .tf-knopf--chrom { background: var(--chrom); color: var(--russ); }
+@media (hover: hover) { .tf .tf-knopf--chrom:hover { background: #c98d1e; } }
+
+.tf .tf-knopf--offen {
+  background: transparent;
+  color: var(--knochen);
+  border: 1px solid rgba(237, 229, 214, .4);
+}
+@media (hover: hover) { .tf .tf-knopf--offen:hover { background: rgba(237, 229, 214, .1); } }
+
+/* ─── Trefferflächen ───────────────────────────────────────────────────── */
+/* Einzeln stehende Verweise sind nur so hoch wie ihre Zeile. Der negative
+   Außenabstand hält die Optik, das Innenmaß macht sie treffbar. */
+.tf .tf-ziel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: .55rem;
+  margin-block: -.55rem;
+}
+
+/* Der Stern verweist auf den Rechtshinweis und steht mitten im Satz – hier
+   spannt eine unsichtbare Ebene die Trefferfläche auf, ohne den Satz zu
+   verschieben. */
+.tf .tf-stern { position: relative; }
+.tf .tf-stern::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+/* ─── Fragen: die Erläuterungen der Tafel ──────────────────────────────── */
+.tf-frage summary { list-style: none; cursor: pointer; padding: clamp(1rem, 2vw, 1.3rem) 0; min-height: 44px; box-sizing: border-box; }
+.tf-frage summary::-webkit-details-marker { display: none; }
+.tf-frage .tf-kreuz { transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
+.tf-frage details[open] .tf-kreuz { transform: rotate(135deg); }
+
+/* ─── Formularfelder ───────────────────────────────────────────────────── */
+/* Die Seite setzt global `font-size:16px !important`; ohne Gegenwehr springt
+   iOS Safari beim Antippen in den Zoom. Das Feld ist eine beschriftete Zeile
+   auf dem Papier, kein Kasten. */
+.tf-feld {
+  width: 100%;
+  font: inherit;
+  font-size: 19px !important;
+  color: var(--russ);
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid rgba(23, 25, 28, .3);
+  border-radius: 0;
+  padding: 12px 2px;
+  outline: none;
+  transition: border-color .2s ease-out, background .2s ease-out;
+}
+.tf-feld::placeholder { color: var(--matt-papier); opacity: 1; }
+.tf-feld:focus { border-bottom-color: var(--zinnober); background: rgba(196, 64, 43, .05); }
+.tf-feld:user-invalid { border-bottom-color: var(--zinnober); }
+.tf select.tf-feld { color-scheme: light; }
+
+/* ─── Kalender ─────────────────────────────────────────────────────────── */
+.tf-tag, .tf-zeit {
+  appearance: none;
+  font: inherit;
+  font-weight: 500;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease-out, border-color .2s ease-out;
+}
+@media (hover: hover) {
+  .tf-tag:not(:disabled):hover, .tf-zeit:hover { background: rgba(196, 64, 43, .12); }
+}
+
+/* Die Seite schaltet den Tap-Highlight global ab — ohne Ersatz fühlen sich
+   Schaltflächen am Handy tot an. */
+@media (hover: none) {
+  .tf a[href]:active, .tf button:not(:disabled):active { transform: scale(.985); }
+}
+
+/* ─── Kopfleiste ───────────────────────────────────────────────────────── */
+.tf-kopf-menue { display: none; }
+@media (max-width: 860px) {
+  .tf-kopf-links { display: none !important; }
+  .tf-kopf-schalter { display: inline-flex !important; }
+  .tf-kopf-menue { display: flex !important; }
+}

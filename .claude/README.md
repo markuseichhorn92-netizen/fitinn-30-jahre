@@ -13,6 +13,7 @@ Aufruf im Chat mit `/<name>`, z. B. `/impeccable audit` oder `/animate`.
 | Emil Kowalski · Design Engineering | [emilkowalski/skills](https://github.com/emilkowalski/skills) | `de33dbe` | MIT |
 | Leon · taste-skill | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | `e988add` | MIT |
 | Paul Bakaus · Impeccable v4.0.4 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `aee6ce9` | Apache 2.0 |
+| tenfoldmarc · website-builder-setup | [tenfoldmarc/website-builder-setup](https://github.com/tenfoldmarc/website-builder-setup) | `83d94da` | keine Lizenzdatei im Repo |
 
 Die Lizenztexte liegen unverändert in `skills/_lizenzen/`.
 
@@ -64,6 +65,30 @@ Dazu gehören vier Unteragenten in `agents/`
 **Bewusst nicht aktiviert:** der Design-Detector-Hook von Impeccable. Er würde
 nach jeder Änderung an einer UI-Datei automatisch laufen. Falls gewünscht:
 `/impeccable hooks on`.
+
+### website-builder-setup (1 Skill)
+
+Kein Wissens-Skill, sondern ein **Installationsassistent**. Aufgerufen mit
+`/website-builder-setup` führt er drei Schritte aus:
+
+1. `npm install -g uipro-cli` — eine globale CLI („UI/UX Pro Max").
+2. `npm install framer-motion` — als Abhängigkeit **in dieses Projekt**.
+3. Trägt einen MCP-Server `@21st-dev/magic` samt deinem API-Schlüssel in
+   `~/.claude.json` ein.
+
+Vor dem Ausführen bedenken:
+
+- Schritt 2 landet in der `package.json` dieses Projekts. Die Landingpage
+  benutzt Framer Motion nicht — es wäre eine ungenutzte Abhängigkeit.
+- Schritt 3 schreibt einen Schlüssel im Klartext in eine Konfigurationsdatei
+  und bindet einen fremden MCP-Server ein, der dann in allen Sitzungen
+  mitläuft.
+- In dieser Cloud-Sitzung sind globale npm-Installationen und `~/.claude.json`
+  flüchtig — sie sind weg, sobald der Container recycelt wird. Der Assistent
+  entfaltet seinen Zweck nur auf einem Rechner, der bestehen bleibt.
+
+Beide npm-Pakete existieren (`uipro-cli` 2.2.3, `@21st-dev/magic` 0.2.2). Das
+Repository enthält keine Lizenzdatei.
 
 ## Überschneidungen
 
