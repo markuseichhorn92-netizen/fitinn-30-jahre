@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { aktion } from './content'
 
 const links = [
   { href: '#warum', label: 'Warum' },
@@ -177,11 +178,11 @@ export function Nav() {
             </a>
           ))}
           <a
-            href={`tel:+49651308524`}
+            href={`tel:${aktion.telefon.link}`}
             onClick={() => setOffen(false)}
             style={{ color: 'rgba(255,255,255,.7)', textDecoration: 'none', fontSize: 17, padding: '1em 0 0' }}
           >
-            0651 30 85 24
+            {aktion.telefon.anzeige}
           </a>
         </div>
       )}

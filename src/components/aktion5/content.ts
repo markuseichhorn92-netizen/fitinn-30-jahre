@@ -53,7 +53,12 @@ export const aktion = {
     { t: '.' },
   ] as { t: string; href?: string }[],
 
-  telefon: { anzeige: '0651 30 85 24', link: '+49651308524' },
+  /**
+   * Kontaktnummer der Kampagne. Bewusst getrennt von der Nummer im Impressum
+   * und in den strukturierten Daten – dort steht weiterhin der Anschluss des
+   * Studios in Trier.
+   */
+  telefon: { anzeige: '030 82 68 05 85', link: '+493082680585' },
   email: 'info@fit-inn-trier.de',
   adresse: 'Auf Hirtenberg 8 · 54296 Trier',
 } as const
