@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import { Countdown } from '@/components/kampagne/Countdown'
 import { formatTime, toLocalDateKey, type Slot } from '@/lib/booking'
 import { meldeBuchung } from '@/components/GoogleTag'
 import { aktion } from './content'
@@ -307,6 +308,10 @@ export function TerminSection() {
           >
             Kostenlos, unverbindlich, in deinem Tempo.
           </p>
+        </div>
+
+        <div data-reveal="" style={{ display: 'flex', justifyContent: 'center', margin: '0 0 clamp(2rem,4vw,3rem)' }}>
+          <Countdown />
         </div>
 
         <form

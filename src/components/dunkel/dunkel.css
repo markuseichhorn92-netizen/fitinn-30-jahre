@@ -216,3 +216,13 @@
 @media (hover: none) {
   .dk a[href]:active, .dk button:not(:disabled):active { transform: scale(.985); }
 }
+
+/* ─── Countdown ───────────────────────────────────────────────────────── */
+.dk .kc {
+  --kc-vorder: var(--hell);
+  --kc-matt: var(--matt);
+  --kc-akzent: var(--glut);
+  --kc-flaeche: rgba(244, 242, 238, .06);
+  --kc-rand: var(--linie-stark);
+  --kc-radius: 3px;
+}

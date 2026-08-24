@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { Countdown } from '@/components/kampagne/Countdown'
 import { aktion, rufe } from './inhalt'
 import { Absatz, satz, schluessel, spiegel, Stern } from './teile'
 
@@ -102,6 +103,7 @@ export function Maschine() {
                   Was es danach kostet
                 </a>
               </div>
+              <Countdown style={{ marginTop: 'clamp(1.4rem,2.8vw,2rem)' }} />
             </div>
 
             {/* Das Preisfeld – gestempelt, wie der Vermerk auf einer Tafel. */}

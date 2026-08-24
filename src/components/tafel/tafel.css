@@ -272,3 +272,15 @@
   .tf-kopf-schalter { display: inline-flex !important; }
   .tf-kopf-menue { display: flex !important; }
 }
+
+/* ─── Countdown ───────────────────────────────────────────────────────── */
+/* Auf dem Papier schreibt Zinnober, nicht Chromgelb. */
+.tf .kc {
+  --kc-vorder: var(--russ);
+  --kc-matt: var(--matt-papier);
+  --kc-akzent: var(--zinnober);
+  --kc-flaeche: rgba(23, 25, 28, .05);
+  --kc-rand: rgba(23, 25, 28, .22);
+  --kc-radius: 2px;
+}
+.tf .kc-teil b { font-family: var(--font-schluessel); }

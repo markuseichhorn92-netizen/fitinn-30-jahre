@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Countdown } from '@/components/kampagne/Countdown'
 import Link from 'next/link'
 import { Inter, Onest } from 'next/font/google'
 import type { CSSProperties, ReactNode } from 'react'
@@ -145,6 +146,7 @@ export function HellSeite() {
               <a href="#termin" className="hl-knopf">Probetraining sichern</a>
               <a href="#angebot" className="hl-knopf hl-knopf--rand">Was es kostet</a>
             </div>
+            <Countdown style={{ marginTop: 'clamp(1.5rem,2.8vw,2rem)' }} />
 
             <div
               style={{
@@ -482,6 +484,7 @@ export function HellSeite() {
             <Anzeige kind={termin.titel} style={{ maxWidth: '12ch' }} />
             <p style={{ fontSize: 'clamp(17px,1.4vw,20px)', lineHeight: 1.6, color: 'var(--matt)', maxWidth: '44ch' }}>{termin.text}</p>
           </div>
+          <Countdown style={{ marginTop: 'clamp(1.5rem,2.8vw,2rem)' }} />
           <div style={{ marginTop: 'clamp(1.8rem,3.5vw,2.6rem)' }}>
             <Formular />
           </div>

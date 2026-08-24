@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   NACH DER AKTION
+
+   Eine Seite, kein Kampagnenaufbau. Wer nach dem 31.08. hier landet, kommt
+   über eine alte Anzeige, ein Lesezeichen oder einen geteilten Link. Er soll
+   in einem Blick sehen, dass das Angebot vorbei ist – und in einem Klick da
+   sein, wo es weitergeht.
+
+   Bewusst nur ein Erscheinungsbild für alle Routen: ein Abschied braucht
+   keine fünf Handschriften.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ab {
+  --ink: #04161b;
+  --paper: #f7f5f2;
+  --amber: #ffb54f;
+  --matt: rgba(247, 245, 242, .66);
+  --linie: rgba(247, 245, 242, .18);
+
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-figtree), system-ui, sans-serif;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Globale Seitentypografie (Barlow Condensed, uppercase) abschalten. */
+.ab h1, .ab h2 {
+  font-family: var(--font-figtree), system-ui, sans-serif;
+  text-transform: none;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.04;
+  margin: 0;
+}
+.ab p { margin: 0; }
+.ab a { color: inherit; text-decoration: none; }
+.ab ::selection { background: var(--amber); color: var(--ink); }
+.ab :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+
+.ab-satz {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px);
+}
+
+/* Unter `.ab` gescoped: `.ab a { color: inherit }` weiter oben ist sonst
+   spezifischer und färbt die Knopfschrift hell – auf Bernstein wären das
+   1,8:1. */
+.ab .ab-knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6em;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  min-height: 54px;
+  padding: 1em 2.1em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--amber);
+  color: var(--ink);
+  transition: background .25s ease;
+}
+@media (hover: hover) { .ab .ab-knopf:hover { background: #ffc470; } }
+
+.ab .ab-knopf--offen {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--linie);
+}
+@media (hover: hover) { .ab .ab-knopf--offen:hover { border-color: var(--paper); background: rgba(247, 245, 242, .06); } }
+
+.ab .ab-ziel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: .5rem;
+  margin-block: -.5rem;
+}
+@media (hover: hover) { .ab .ab-ziel:hover { color: var(--amber); } }

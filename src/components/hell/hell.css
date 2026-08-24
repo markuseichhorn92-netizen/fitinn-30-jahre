@@ -233,3 +233,14 @@
 @media (hover: none) {
   .hl a[href]:active, .hl button:not(:disabled):active { transform: scale(.985); }
 }
+
+/* ─── Countdown ───────────────────────────────────────────────────────── */
+.hl .kc {
+  --kc-vorder: var(--tinte);
+  --kc-matt: var(--matt);
+  --kc-akzent: var(--blau);
+  --kc-flaeche: var(--grund-2);
+  --kc-rand: var(--linie);
+  --kc-radius: 12px;
+}
+.hl .kc-teil b { font-family: var(--anzeige); }

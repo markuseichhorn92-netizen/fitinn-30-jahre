@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import { Countdown } from '@/components/kampagne/Countdown'
 import { meldeBuchung } from '@/components/GoogleTag'
 import { formatTime, toLocalDateKey, type Slot } from '@/lib/booking'
 import { aktion } from './inhalt'
@@ -208,6 +209,8 @@ export function Anmeldung() {
           <Titel kind={<>Einmal vorbeikommen.</>} />
           <Absatz kind={<>Kostenlos und unverbindlich. Du siehst dir alles an, stellst deine Fragen und gehst wieder – oder bleibst.</>} />
         </div>
+
+        <Countdown style={{ marginTop: 'clamp(1.5rem,3vw,2.2rem)' }} />
 
         <form
           ref={formRef}

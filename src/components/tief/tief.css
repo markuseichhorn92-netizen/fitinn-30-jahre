@@ -215,3 +215,14 @@
 @media (hover: none) {
   .tf-c a[href]:active, .tf-c button:not(:disabled):active { transform: scale(.985); }
 }
+
+/* ─── Countdown ───────────────────────────────────────────────────────── */
+.tf-c .kc {
+  --kc-vorder: var(--hell);
+  --kc-matt: var(--matt);
+  --kc-akzent: var(--gold);
+  --kc-flaeche: rgba(241, 245, 242, .09);
+  --kc-rand: var(--kante);
+  --kc-radius: 14px;
+}
+.tf-c .kc-teil b { font-family: var(--anzeige); }

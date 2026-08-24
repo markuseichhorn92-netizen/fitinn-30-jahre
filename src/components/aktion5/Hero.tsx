@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Countdown } from '@/components/kampagne/Countdown'
 import { Sprig, Glow } from './Decor'
 import { KiHinweis } from './KiHinweis'
 import { btnAmber, btnGhost, decorLayer, eyebrowAmber, wrap, wrapWide } from './styles'
@@ -86,6 +87,10 @@ export function Hero({ hero }: { hero: Variante['hero'] }) {
         >
           <a href="#termin" className="lift" style={btnAmber}>Probetraining sichern</a>
           <a href="#angebot" className="lift" style={btnGhost}>Angebot ansehen</a>
+        </div>
+
+        <div data-reveal="" style={{ display: 'flex', justifyContent: 'center', marginTop: 'clamp(1.6rem,3vw,2.2rem)' }}>
+          <Countdown />
         </div>
       </div>
 

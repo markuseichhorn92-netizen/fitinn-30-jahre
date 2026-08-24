@@ -12,6 +12,16 @@ export const aktion = {
   gueltigBis: '31.08.2026',
 
   /**
+   * Derselbe Zeitpunkt sekundengenau, für den Countdown: der 31.08.2026 um
+   * 23:59:59 deutscher Zeit. Im Sommer gilt MESZ (UTC+2), deshalb 21:59:59Z.
+   *
+   * Achtung: Bei einer Verlängerung der Aktion müssen BEIDE Felder geändert
+   * werden – und der Rechtshinweis weiter unten nennt das Datum ein drittes
+   * Mal im Fließtext.
+   */
+  gueltigBisZeit: '2026-08-31T21:59:59.000Z',
+
+  /**
    * Mitglieder-Stimme: verbatim aus den Google-Bewertungen von Fit-Inn Trier
    * (dieselbe Quelle wie in components/sections/SocialProofSection.tsx).
    */

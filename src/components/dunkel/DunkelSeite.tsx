@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Countdown } from '@/components/kampagne/Countdown'
 import Link from 'next/link'
 import { Schibsted_Grotesk } from 'next/font/google'
 import type { CSSProperties, ReactNode } from 'react'
@@ -114,6 +115,7 @@ export function DunkelSeite() {
               <a href="#termin" className="dk-knopf">Probetraining sichern</a>
               <a href="#angebot" className="dk-knopf dk-knopf--rand">Angebot ansehen</a>
             </div>
+            <Countdown style={{ marginTop: 'clamp(1.6rem,3vw,2.2rem)' }} />
           </div>
         </div>
 
@@ -365,6 +367,7 @@ export function DunkelSeite() {
             <Anzeige kind={termin.titel} style={{ maxWidth: '12ch' }} />
             <p style={{ fontSize: 'clamp(18px,1.45vw,21px)', lineHeight: 1.62, color: 'var(--matt)', maxWidth: '44ch' }}>{termin.text}</p>
           </div>
+          <Countdown style={{ marginTop: 'clamp(1.6rem,3vw,2.2rem)' }} />
           <div style={{ marginTop: 'clamp(2rem,4vw,3rem)' }}>
             <Formular />
           </div>

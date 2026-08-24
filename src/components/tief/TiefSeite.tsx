@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Countdown } from '@/components/kampagne/Countdown'
 import Link from 'next/link'
 import { Archivo, Bricolage_Grotesque } from 'next/font/google'
 import type { CSSProperties, ReactNode } from 'react'
@@ -107,6 +108,7 @@ export function TiefSeite() {
                 <a href="#termin" className="tc-knopf">Probetraining sichern</a>
                 <a href="#angebot" className="tc-knopf tc-knopf--glas">Angebot ansehen</a>
               </div>
+              <Countdown style={{ marginTop: 'clamp(1.6rem,3vw,2.2rem)' }} />
             </div>
 
             {/* Die Preiskarte als eigene Ebene */}
@@ -399,6 +401,7 @@ export function TiefSeite() {
               <Anzeige kind={termin.titel} style={{ maxWidth: '11ch' }} />
               <p style={{ fontSize: 'clamp(18px,1.45vw,21px)', lineHeight: 1.6, color: 'var(--matt)', maxWidth: '44ch' }}>{termin.text}</p>
             </div>
+            <Countdown style={{ marginTop: 'clamp(1.6rem,3vw,2.2rem)' }} />
             <div style={{ marginTop: 'clamp(2rem,4vw,3rem)' }}>
               <Formular />
             </div>

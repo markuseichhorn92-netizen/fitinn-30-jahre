@@ -117,3 +117,14 @@
 .p5 .pinput:focus { border-bottom-color: var(--amber); }
 .p5 select.pinput { color-scheme: dark; }
 .p5 .pinput option { color: #04161b; background: #fff; }
+
+/* ─── Countdown ───────────────────────────────────────────────────────── */
+/* Steht in dieser Welt nur auf dunklem Grund (Hero und Terminbereich). */
+.p5 .kc {
+  --kc-vorder: #fff;
+  --kc-matt: rgba(255, 255, 255, .62);
+  --kc-akzent: var(--amber);
+  --kc-flaeche: rgba(255, 255, 255, .07);
+  --kc-rand: rgba(255, 255, 255, .2);
+  --kc-radius: 14px;
+}
