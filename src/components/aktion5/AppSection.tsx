@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Glow } from './Decor'
-import { Bot, Buch, Diagramm, Hantel, Puls } from './icons'
+import { Bot, Buch, Diagramm } from './icons'
 import {
   btnAmberSm, cardTitle, cellPadLeft, cellPadMid, cellPadRight, eyebrowMuted, iconBubble, wrap,
 } from './styles'
@@ -18,33 +18,13 @@ const bausteine: { icon: ReactNode; titel: string; punkte: string[]; pad: string
     pad: cellPadLeft,
   },
   {
-    icon: <Hantel />,
-    titel: 'Zusätzliche KI-Pläne für zu Hause',
-    punkte: [
-      'Deinen Studio-Trainingsplan bekommst du ohnehin von uns – diese Pläne entstehen zusätzlich in der App.',
-      'Für Tage ohne Studio: nach Ziel, Level und der Ausrüstung, die du daheim hast.',
-      'Steigern sich automatisch anhand deiner protokollierten Einheiten.',
-    ],
-    pad: cellPadMid,
-  },
-  {
-    icon: <Puls />,
-    titel: 'Herz & Erholung im Blick',
-    punkte: [
-      'Morgen-Messung zeigt, ob heute Training oder Ruhe ansteht.',
-      'Cardio-Zonen und Ziel-Gewichte für die Kraft-Last.',
-      'HRV-Fitnessalter und Warnung vor Übertraining.',
-    ],
-    pad: cellPadRight,
-  },
-  {
     icon: <Buch />,
     titel: 'Wöchentliche Impulse in der App',
     punkte: [
       'Lektionen und Vertiefungen Woche für Woche.',
       'Tagesimpulse und eine Erfolgskontrolle nach 14 Tagen.',
     ],
-    pad: cellPadLeft,
+    pad: cellPadMid,
   },
   {
     icon: <Bot />,
@@ -54,7 +34,7 @@ const bausteine: { icon: ReactNode; titel: string; punkte: string[]; pad: string
       'Wochen-Auswertung mit Empfehlungen aus deinen echten Daten.',
       'Einordnung von InBody-Messung und Figur-Check.',
     ],
-    pad: cellPadMid,
+    pad: cellPadRight,
   },
 ]
 
