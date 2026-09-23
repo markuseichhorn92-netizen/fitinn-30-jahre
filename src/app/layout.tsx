@@ -5,6 +5,7 @@ import { CookieBanner, ConditionalAnalytics } from "@/components/CookieBanner";
 import { GoogleTag } from "@/components/GoogleTag";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AusserAuf } from "@/components/AusserAuf";
 
 const barlow = Barlow({
   variable: "--font-barlow",
@@ -87,56 +88,67 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`,
           }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "HealthClub",
-              name: "FIT-INN Trier",
-              description: "5-Euro-Aktion bei FIT-INN Trier: Die ersten zwölf Wochen für je 5 € – in der 52- wie in der 104-Wochen-Mitgliedschaft. Familiengeführt seit 1996.",
-              telephone: "+49651308524",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Auf Hirtenberg 8",
-                addressLocality: "Trier",
-                postalCode: "54296",
-                addressCountry: "DE",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 49.7492,
-                longitude: 6.6371,
-              },
-              priceRange: "€€",
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.8",
-                reviewCount: "179",
-                bestRating: "5",
-                worstRating: "1",
-              },
-              openingHoursSpecification: [
-                { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "13:00" },
-                { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "15:00", closes: "21:30" },
-                { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "13:00", closes: "18:00" },
-                { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "09:00", closes: "15:00" },
-              ],
-              sameAs: [
-                "https://www.instagram.com/fit_inn_trier/",
-                "https://www.facebook.com/FitInnFeyen",
-              ],
-            }),
-          }}
-        />
+        {/*
+          Strukturierte Daten der 5-Euro-Aktion. Eigenständige Routen wie
+          /oktober bringen eigene mit (Telefon, Beschreibung) und sollen hier
+          nicht zwei widersprüchliche Einträge ausliefern.
+        */}
+        <AusserAuf>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "HealthClub",
+                name: "FIT-INN Trier",
+                description: "5-Euro-Aktion bei FIT-INN Trier: Die ersten zwölf Wochen für je 5 € – in der 52- wie in der 104-Wochen-Mitgliedschaft. Familiengeführt seit 1996.",
+                telephone: "+49651308524",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "Auf Hirtenberg 8",
+                  addressLocality: "Trier",
+                  postalCode: "54296",
+                  addressCountry: "DE",
+                },
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: 49.7492,
+                  longitude: 6.6371,
+                },
+                priceRange: "€€",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  reviewCount: "179",
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+                openingHoursSpecification: [
+                  { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "13:00" },
+                  { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "15:00", closes: "21:30" },
+                  { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "13:00", closes: "18:00" },
+                  { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "09:00", closes: "15:00" },
+                ],
+                sameAs: [
+                  "https://www.instagram.com/fit_inn_trier/",
+                  "https://www.facebook.com/FitInnFeyen",
+                ],
+              }),
+            }}
+          />
+        </AusserAuf>
       </head>
       <body className={`${barlow.variable} ${barlowCondensed.variable}`}>
         {children}
-        <CookieBanner />
-        <ConditionalAnalytics />
-        <GoogleTag />
-        <Analytics />
-        <SpeedInsights />
+        {/* Eigenständige Routen (/oktober) laufen ohne Tracking und damit
+            auch ohne Cookie-Banner – siehe src/components/AusserAuf.tsx. */}
+        <AusserAuf>
+          <CookieBanner />
+          <ConditionalAnalytics />
+          <GoogleTag />
+          <Analytics />
+          <SpeedInsights />
+        </AusserAuf>
       </body>
     </html>
   );
