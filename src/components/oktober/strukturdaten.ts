@@ -1,3 +1,4 @@
+import { faqSchema } from '@/components/fitinn/Faq'
 import { fragen, kontakt, meta } from './inhalt'
 
 const BASIS = 'https://30jahre.fit-inn-trier.de'
@@ -5,8 +6,8 @@ const BASIS = 'https://30jahre.fit-inn-trier.de'
 // Strukturierte Daten der Seite /oktober: das Studio als HealthClub
 // (LocalBusiness) und die sichtbaren FAQ als FAQPage. Bewusst ohne
 // Bewertungen (selbst ausgewiesene Bewertungen zeigt Google für
-// LocalBusiness nicht an), ohne Öffnungszeiten (noch Platzhalter) und ohne
-// Geokoordinaten (nicht gegengeprüft).
+// LocalBusiness nicht an), ohne Öffnungszeiten (noch nicht bestätigt) und
+// ohne Geokoordinaten (nicht gegengeprüft).
 export function strukturdaten() {
   const url = `${BASIS}${meta.pfad}`
   return {
@@ -22,8 +23,8 @@ export function strukturdaten() {
         url: kontakt.website.href,
         telephone: kontakt.telefon.link,
         email: kontakt.email,
-        foundingDate: '1996',
-        image: `${BASIS}/logo.png`,
+        foundingDate: kontakt.gegruendet,
+        image: `${BASIS}/studio-1.avif`,
         logo: `${BASIS}/logo.png`,
         priceRange: '€€',
         address: {
@@ -35,7 +36,7 @@ export function strukturdaten() {
           addressCountry: 'DE',
         },
         areaServed: { '@type': 'City', name: 'Trier' },
-        sameAs: ['https://www.instagram.com/fit_inn_trier/', 'https://www.facebook.com/FitInnFeyen'],
+        sameAs: [kontakt.instagram, kontakt.facebook],
       },
       {
         '@type': 'WebPage',
@@ -46,15 +47,7 @@ export function strukturdaten() {
         inLanguage: 'de-DE',
         about: { '@id': `${kontakt.website.href}/#studio` },
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${url}#fragen`,
-        mainEntity: fragen.map(f => ({
-          '@type': 'Question',
-          name: f.frage,
-          acceptedAnswer: { '@type': 'Answer', text: f.antwort },
-        })),
-      },
+      faqSchema(fragen, `${url}#fragen`),
     ],
   }
 }

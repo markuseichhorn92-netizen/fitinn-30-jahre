@@ -4,21 +4,21 @@ import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
 /**
- * Routen, die ohne Tracking, ohne Cookie-Banner und ohne die strukturierten
- * Daten der 5-Euro-Aktion auskommen. /oktober ist bewusst frei von externen
- * Diensten und bringt eigene strukturierte Daten mit.
+ * Routen ohne Tracking und damit ohne Cookie-Banner. /oktober ist bewusst
+ * frei von externen Diensten.
  */
-export const EIGENSTAENDIGE_ROUTEN = ['/oktober'] as const
+export const OHNE_TRACKING = ['/oktober'] as const
+
+/**
+ * Routen mit eigenen strukturierten Daten. Dort entfällt das JSON-LD der
+ * 5-Euro-Aktion aus dem Root-Layout, damit keine zwei widersprüchlichen
+ * Einträge (Telefon, Beschreibung) ausgeliefert werden.
+ */
+export const EIGENE_STRUKTURDATEN = ['/', '/oktober'] as const
 
 /** Rendert seine Kinder auf allen Routen außer den genannten. */
-export function AusserAuf({
-  pfade = EIGENSTAENDIGE_ROUTEN,
-  children,
-}: {
-  pfade?: readonly string[]
-  children: ReactNode
-}) {
+export function AusserAuf({ pfade, children }: { pfade: readonly string[]; children: ReactNode }) {
   const pfad = usePathname() ?? ''
-  if (pfade.some(p => pfad === p || pfad.startsWith(`${p}/`))) return null
+  if (pfade.some(p => pfad === p || (p !== '/' && pfad.startsWith(`${p}/`)))) return null
   return <>{children}</>
 }

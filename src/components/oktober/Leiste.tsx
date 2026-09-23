@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Knopf, Telefon } from '@/components/fitinn/Teile'
 import { kontakt } from './inhalt'
-import { CtaKnopf, Telefon } from './Teile'
 
 // Klebende Leiste am unteren Rand, nur auf dem Handy (CSS blendet sie ab
 // 820 px aus). Sie erscheint, sobald die Schaltflächen der ersten Ansicht aus
@@ -26,18 +26,18 @@ export function Leiste() {
   }, [])
 
   return (
-    <div className="leiste" data-sichtbar={sichtbar ? 'ja' : 'nein'} aria-hidden={!sichtbar}>
-      <CtaKnopf cta="oktober-allgemein" stil="bernstein" tabIndex={sichtbar ? undefined : -1}>
+    <div className="fi-leiste-unten" data-sichtbar={sichtbar ? 'ja' : 'nein'} aria-hidden={!sichtbar}>
+      <Knopf href="#anfrage" cta="oktober-allgemein" tabIndex={sichtbar ? undefined : -1}>
         Unverbindlich anfragen
-      </CtaKnopf>
+      </Knopf>
       <a
         href={`tel:${kontakt.telefon.link}`}
         data-kontakt="telefon"
-        className="knopf knopf-linie-hell knopf-anruf"
+        className="fi-knopf fi-knopf--linie"
         aria-label={`Anrufen: ${kontakt.telefon.anzeige}`}
         tabIndex={sichtbar ? undefined : -1}
       >
-        <Telefon groesse={22} />
+        <Telefon groesse={20} />
       </a>
     </div>
   )

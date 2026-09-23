@@ -5,13 +5,16 @@ import { CookieBanner, ConditionalAnalytics } from "@/components/CookieBanner";
 import { GoogleTag } from "@/components/GoogleTag";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { AusserAuf } from "@/components/AusserAuf";
+import { AusserAuf, EIGENE_STRUKTURDATEN, OHNE_TRACKING } from "@/components/AusserAuf";
 
 const barlow = Barlow({
   variable: "--font-barlow",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  // Nur noch die Archiv- und Unterseiten nutzen Barlow – nicht vorladen,
+  // sonst konkurrieren die Dateien auf / und /oktober mit deren Schriften.
+  preload: false,
 });
 
 const barlowCondensed = Barlow_Condensed({
@@ -19,6 +22,7 @@ const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -83,17 +87,19 @@ export default function RootLayout({
           Ohne Zustimmung im Cookie-Banner setzt Google keine Cookies; die
           Freigabe reicht src/components/GoogleTag.tsx nach.
         */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`,
-          }}
-        />
+        <AusserAuf pfade={OHNE_TRACKING}>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`,
+            }}
+          />
+        </AusserAuf>
         {/*
-          Strukturierte Daten der 5-Euro-Aktion. Eigenständige Routen wie
-          /oktober bringen eigene mit (Telefon, Beschreibung) und sollen hier
-          nicht zwei widersprüchliche Einträge ausliefern.
+          Strukturierte Daten der 5-Euro-Aktion. Die Startseite und /oktober
+          bringen eigene mit (Telefon, Beschreibung) und sollen hier nicht zwei
+          widersprüchliche Einträge ausliefern.
         */}
-        <AusserAuf>
+        <AusserAuf pfade={EIGENE_STRUKTURDATEN}>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -142,7 +148,7 @@ export default function RootLayout({
         {children}
         {/* Eigenständige Routen (/oktober) laufen ohne Tracking und damit
             auch ohne Cookie-Banner – siehe src/components/AusserAuf.tsx. */}
-        <AusserAuf>
+        <AusserAuf pfade={OHNE_TRACKING}>
           <CookieBanner />
           <ConditionalAnalytics />
           <GoogleTag />

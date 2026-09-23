@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Settings, ChevronDown, ChevronUp } from 'lucide-react'
 
 // ─── Consent Storage ────────────────────────────────────────────────────────
@@ -15,6 +16,13 @@ type ConsentValue = 'all' | 'essential' | null
 // Ereignis. Vorher fragten sie im Sekundentakt den localStorage ab – das kostet
 // auf dem Handy dauerhaft Rechenzeit und Akku, ohne je etwas zu erfahren.
 export const CONSENT_EVENT = 'fitinn:cookie-consent'
+
+// Öffnet die Einstellungen von außen, z. B. über einen Verweis im Fuß.
+export const EINSTELLUNGEN_EVENT = 'fitinn:cookie-einstellungen'
+
+// Routen, die „Cookie-Einstellungen“ im Fuß anbieten. Dort entfällt der
+// schwebende Knopf unten links – er läge sonst über Inhalten und Aktionen.
+const OHNE_SCHWEBEKNOPF = ['/']
 
 function saveConsent(value: 'all' | 'essential') {
   localStorage.setItem(CONSENT_KEY, value)
@@ -40,10 +48,17 @@ export function CookieBanner() {
   const [mounted, setMounted] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
+  const pfad = usePathname()
 
   useEffect(() => {
     setMounted(true)
     setConsent(getConsent())
+  }, [])
+
+  useEffect(() => {
+    const oeffnen = () => setShowSettings(true)
+    window.addEventListener(EINSTELLUNGEN_EVENT, oeffnen)
+    return () => window.removeEventListener(EINSTELLUNGEN_EVENT, oeffnen)
   }, [])
 
   const acceptAll = useCallback(() => {
@@ -68,7 +83,7 @@ export function CookieBanner() {
   if (consent === null) {
     return (
       <div className="fixed bottom-0 left-0 right-0 z-[200] p-4 sm:p-6 animate-slide-up">
-        <div className="max-w-xl mx-auto bg-card border border-border rounded-2xl shadow-2xl shadow-black/50 p-5 sm:p-6">
+        <div className="max-w-xl mx-auto bg-card border border-border rounded-sm shadow-lg shadow-black/20 p-5 sm:p-6">
           <h3 className="text-base font-bold mb-2">Cookie-Einstellungen</h3>
           <p className="text-sm text-muted-foreground leading-relaxed mb-3">
             Wir nutzen Cookies und ähnliche Technologien. Notwendige Cookies ermöglichen grundlegende Funktionen
@@ -79,7 +94,7 @@ export function CookieBanner() {
           {/* Detail-Aufklappbereich */}
           <button
             onClick={() => setShowDetails(d => !d)}
-            className="flex items-center gap-1.5 text-sm text-primary font-semibold mb-3 hover:underline"
+            className="flex items-center gap-1.5 text-sm text-[#0a4958] font-semibold mb-3 hover:underline"
           >
             Details anzeigen {showDetails ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
@@ -121,22 +136,22 @@ export function CookieBanner() {
 
           <p className="text-xs text-muted-foreground mb-4">
             Weitere Informationen in unserer{' '}
-            <Link href="/datenschutz" className="text-primary underline hover:text-primary/80">Datenschutzerklärung</Link>
+            <Link href="/datenschutz" className="text-[#0a4958] underline hover:text-[#14252d]">Datenschutzerklärung</Link>
             {' '}und im{' '}
-            <Link href="/impressum" className="text-primary underline hover:text-primary/80">Impressum</Link>.
+            <Link href="/impressum" className="text-[#0a4958] underline hover:text-[#14252d]">Impressum</Link>.
           </p>
 
           {/* Buttons — gleichwertig gestaltet (DSGVO) */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <button
               onClick={acceptEssential}
-              className="flex-1 py-3 rounded-xl text-sm font-semibold border-2 border-border bg-card text-foreground hover:bg-secondary transition-colors"
+              className="flex-1 py-3 rounded-sm text-sm font-semibold border-2 border-[#183240] bg-card text-foreground hover:bg-secondary transition-colors"
             >
               Nur notwendige
             </button>
             <button
               onClick={acceptAll}
-              className="flex-1 py-3 rounded-xl text-sm font-semibold border-2 border-primary bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="flex-1 py-3 rounded-sm text-sm font-semibold border-2 border-[#183240] bg-[#183240] text-white hover:bg-[#14252d] transition-colors"
             >
               Alle akzeptieren
             </button>
@@ -150,7 +165,7 @@ export function CookieBanner() {
   if (showSettings) {
     return (
       <div className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-slide-up">
-        <div className="w-full max-w-xl bg-card border border-border rounded-2xl shadow-2xl shadow-black/50 p-5 sm:p-6">
+        <div className="w-full max-w-xl bg-card border border-border rounded-sm shadow-lg shadow-black/20 p-5 sm:p-6">
           <h3 className="text-base font-bold mb-3">Cookie-Einstellungen ändern</h3>
 
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -177,13 +192,13 @@ export function CookieBanner() {
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <button
               onClick={acceptEssential}
-              className="flex-1 py-3 rounded-xl text-sm font-semibold border-2 border-border bg-card text-foreground hover:bg-secondary transition-colors"
+              className="flex-1 py-3 rounded-sm text-sm font-semibold border-2 border-[#183240] bg-card text-foreground hover:bg-secondary transition-colors"
             >
               Nur notwendige
             </button>
             <button
               onClick={acceptAll}
-              className="flex-1 py-3 rounded-xl text-sm font-semibold border-2 border-primary bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="flex-1 py-3 rounded-sm text-sm font-semibold border-2 border-[#183240] bg-[#183240] text-white hover:bg-[#14252d] transition-colors"
             >
               Alle akzeptieren
             </button>
@@ -200,7 +215,9 @@ export function CookieBanner() {
     )
   }
 
-  // Floating settings button (immer sichtbar nach Consent)
+  // Floating settings button (immer sichtbar nach Consent) – außer auf
+  // Routen, die den Verweis im Fuß tragen.
+  if (OHNE_SCHWEBEKNOPF.includes(pfad ?? '')) return null
   return (
     <button
       onClick={openSettings}

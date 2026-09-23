@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Beendet } from '@/components/oktober/Beendet'
-import { aktion, meta } from '@/components/oktober/inhalt'
+import { meta } from '@/components/oktober/inhalt'
+import { oktoberLaeuft as laeuft } from '@/components/oktober/stand'
 import { OktoberSeite } from '@/components/oktober/OktoberSeite'
 import { strukturdaten } from '@/components/oktober/strukturdaten'
 
@@ -10,9 +11,6 @@ import { strukturdaten } from '@/components/oktober/strukturdaten'
 // Next verlangt hier einen festen Wert, keine importierte Konstante: alle
 // zehn Minuten neu erzeugen, damit die Umschaltung zeitnah greift.
 export const revalidate = 600
-
-const ENDE = new Date(aktion.endeZeit).getTime()
-const laeuft = () => Date.now() <= ENDE
 
 export function generateMetadata(): Metadata {
   if (!laeuft()) {
@@ -25,6 +23,10 @@ export function generateMetadata(): Metadata {
   return {
     title: { absolute: meta.titel },
     description: meta.beschreibung,
+    keywords: ['Fitnessstudio Trier', 'Trier-Feyen', 'Oktober-Special', 'Fitness Trier', 'Ernährungsplan'],
+    authors: [{ name: 'Fit-Inn Trier' }],
+    creator: 'Fit-Inn Trier',
+    publisher: 'Fit-Inn Trier',
     alternates: { canonical: meta.pfad },
     openGraph: {
       type: 'website',

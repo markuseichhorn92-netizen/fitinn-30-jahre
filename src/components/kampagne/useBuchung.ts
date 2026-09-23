@@ -35,7 +35,12 @@ const iso = (d: Date) =>
 export const langesDatum = (datum: string) =>
   new Date(datum + 'T00:00:00').toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })
 
-export function useBuchung() {
+/**
+ * @param quelle Kennung der Seite, von der gebucht wird (z. B. 'startseite').
+ *   Die API setzt daraus die Notiz im Magicline-Termin; ohne Angabe bleibt
+ *   es bei der bisherigen Kampagnen-Notiz.
+ */
+export function useBuchung(quelle?: string) {
   const [schritt, setSchritt] = useState(1)
   const [monatOffset, setMonatOffset] = useState(0)
   const [datum, setDatum] = useState<string | null>(null)
@@ -157,6 +162,7 @@ export function useBuchung() {
           marketingConsent: false,
           note: [ziel && `Ziel: ${ziel}`, nachricht && `Anmerkung: ${nachricht}`].filter(Boolean).join(' | '),
           startDateTime: slot.startDateTime,
+          quelle,
         }),
       })
       const ergebnis = await res.json()
@@ -186,7 +192,8 @@ export function useBuchung() {
     zellen.push({ key: k, label: String(d), aus: dt < heute || !slotsProTag[k], iso: k })
   }
 
-  const jahre = Array.from({ length: 84 }, (_, i) => new Date().getFullYear() - 16 - i)
+  // Mitgliedschaft und Training erst ab 18 Jahren (AGB Ziffer 1.6, seit 09/2026).
+  const jahre = Array.from({ length: 82 }, (_, i) => new Date().getFullYear() - 18 - i)
 
   /** Text für die Zeitspalte, wenn dort gerade nichts zu wählen ist. */
   const zeitHinweis = ladeFehler

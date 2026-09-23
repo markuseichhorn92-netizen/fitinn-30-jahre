@@ -1,16 +1,20 @@
+import { studio } from '@/components/fitinn/studio'
+
 // Oktober-Special 2026 „Dein Herbst. Dein Neustart.“
 //
 // Alle Texte, Preise und Pflichtangaben der Seite /oktober an einer Stelle.
 // Die Sektionen setzen nur zusammen, was hier steht – wer eine Zahl ändert,
 // ändert sie hier und sonst nirgends. Einzige Ausnahme: der Rechtshinweis
 // unten nennt Beträge und Datum ausgeschrieben im Fließtext (siehe dort).
+//
+// Nur belegte Aussagen. Was zu den Ernährungsplänen im Detail gehört, ist
+// noch nicht bestätigt – deshalb nennt die Seite nur, was feststeht.
 
 // ─── Aktion ───────────────────────────────────────────────────────────────────
 
 export const aktion = {
   /** Aktionszeitraum: Vertragsabschlüsse im gesamten Oktober 2026. */
   zeitraum: '01.10.–31.10.2026',
-  zeitraumLang: '1. bis 31. Oktober 2026',
 
   /**
    * Letzter Moment der Aktion, sekundengenau: 31.10.2026, 23:59:59 deutscher
@@ -19,19 +23,12 @@ export const aktion = {
    */
   endeZeit: '2026-10-31T22:59:59.000Z',
 
-  /** Die ersten 12 Wochen jeder Aktions-Mitgliedschaft. */
   vorteilsWochen: 12,
   vorteilsPreis: '5 €',
-
   aufnahmegebuehr: '39 €',
-
-  ernaehrung: {
-    dauer: '12 Monate',
-    wert: '119,99 €',
-  },
 } as const
 
-/** Die beiden Laufzeiten. Rechnung offen bis zur Endsumme. */
+/** Die beiden Laufzeiten. Rechnung offen bis zur Endsumme inkl. Gebühr. */
 export const laufzeiten = [
   {
     id: 'oktober-52',
@@ -50,7 +47,8 @@ export const laufzeiten = [
       { was: 'Woche 1–12', rechnung: '12 × 5 €', summe: '60 €' },
       { was: 'Woche 13–52', rechnung: '40 × 12 €', summe: '480 €' },
     ],
-    gesamt: '540 €',
+    beitraege: '540 €',
+    gesamt: '579 €',
     knopf: 'Mit 52 Wochen anfragen',
     empfohlen: false,
   },
@@ -63,17 +61,18 @@ export const laufzeiten = [
     leistungen: [
       'Alles aus „Loslegen & wohlfühlen“',
       '104 Wochen Mitgliedschaft',
-      'Der günstigste Wochenbeitrag ab Woche 13',
+      'Ab Woche 13: 9 € statt 12 € pro Woche',
     ],
     extra: {
-      titel: '12 Monate Ernährungspläne gratis',
+      titel: '12 Monate Ernährungspläne inklusive',
       wert: 'Wert 119,99 €',
     },
     rechnung: [
       { was: 'Woche 1–12', rechnung: '12 × 5 €', summe: '60 €' },
       { was: 'Woche 13–104', rechnung: '92 × 9 €', summe: '828 €' },
     ],
-    gesamt: '888 €',
+    beitraege: '888 €',
+    gesamt: '927 €',
     knopf: 'Mit 104 Wochen anfragen',
     empfohlen: true,
   },
@@ -81,70 +80,68 @@ export const laufzeiten = [
 
 export type CtaId = 'oktober-allgemein' | 'oktober-52' | 'oktober-104'
 
-// ─── Kontakt ──────────────────────────────────────────────────────────────────
+/** Stammdaten aus der gemeinsamen Quelle. */
+export const kontakt = studio
 
-export const kontakt = {
-  name: 'Fit-Inn Trier',
-  telefon: { anzeige: '0651 493 688 19', link: '+4965149368819' },
-  email: 'info@fit-inn-trier.de',
-  strasse: 'Auf Hirtenberg 8',
-  plz: '54296',
-  ort: 'Trier',
-  stadtteil: 'Trier-Feyen',
-  website: { anzeige: 'www.fit-inn-trier.de', href: 'https://www.fit-inn-trier.de' },
-  route:
-    'https://www.google.com/maps/search/?api=1&query=Fit-Inn+Trier%2C+Auf+Hirtenberg+8%2C+54296+Trier',
-  /** PLATZHALTER – echte Öffnungszeiten vor dem Livegang eintragen. */
-  oeffnungszeiten: [
-    { tage: 'Montag – Freitag', zeit: '[bitte ergänzen]' },
-    { tage: 'Samstag', zeit: '[bitte ergänzen]' },
-    { tage: 'Sonntag', zeit: '[bitte ergänzen]' },
-  ],
-} as const
+// ─── Kopf und Hero ────────────────────────────────────────────────────────────
 
-// ─── Seitenkopf und Hero ──────────────────────────────────────────────────────
+export const nav = [
+  { href: '#angebot', text: 'Angebot' },
+  { href: '#ernaehrung', text: 'Ernährung' },
+  { href: '#ablauf', text: 'Ablauf' },
+  { href: '#fragen', text: 'Fragen' },
+]
 
 export const hero = {
-  ort: 'Fitnessstudio Trier-Feyen',
-  headline: ['Dein Herbst.', 'Dein Neustart.'],
+  ort: 'Oktober-Special · Fitnessstudio Trier-Feyen',
+  zeilen: ['Dein Herbst.', 'Dein Neustart.'],
   subline:
-    'Mehr Energie für die dunklen Monate: mit einem Team, das dich kennt, und einem Plan, ' +
-    'der nach dem Training in deiner Küche weitergeht.',
+    'Mehr Energie für die dunklen Monate – mit einem Team, das dich kennt und dich vom ersten Termin an begleitet.',
   preisVorsatz: 'Die ersten 12 Wochen',
   preisNachsatz: 'pro Woche',
-  preisBedingung: 'bei 52 oder 104 Wochen Laufzeit, danach 12 € bzw. 9 € pro Woche.',
+  preisBedingung:
+    'Bei 52 oder 104 Wochen Laufzeit. Danach 12 € bzw. 9 € pro Woche, einmalig 39 € Aufnahmegebühr. ' +
+    'Für Abschlüsse vom 01. bis 31.10.2026.',
   knopf: 'Unverbindlich anfragen',
-  bild: {
-    motiv: 'Mitglied im Gespräch mit einer Trainerin auf der Trainingsfläche, warmes Herbstlicht',
-    format: 'Hochformat 4:5',
-    alt: 'Eine Trainerin des Fit-Inn Trier bespricht mit einem Mitglied den Trainingsplan',
+  tafel: {
+    kopf: 'Oktober-Special',
+    marke: 'Studiofoto',
+    bildAlt: 'Trainingsfläche im Fit-Inn Trier mit computergesteuerten Kraftgeräten von Technogym',
+    werte: [
+      { wert: '12 Wochen', text: 'je 5 €' },
+      { wert: '12 € / 9 €', text: 'ab Woche 13' },
+      { wert: '12 Monate', text: 'Ernährungspläne bei 104 Wochen' },
+      { wert: '31.10.', text: 'letzter Abschlusstag' },
+    ],
+    streifenLabel: 'Anfrage',
+    streifenText: 'unverbindlich und kostenlos',
   },
 }
 
 /** Vertrauensleiste direkt unter der ersten Ansicht. */
 export const vertrauen = [
-  { wert: 'Seit 1996', text: 'Fitness in Trier' },
-  { wert: 'Rund 1.200', text: 'Mitglieder, mehrere Tausend seit der Gründung' },
-  { wert: 'Familienbetrieb', text: 'geführt von Familie Eichhorn' },
-  { wert: 'Trier-Feyen', text: 'Auf Hirtenberg 8' },
+  { titel: 'Seit 1996', text: 'Fitness in Trier' },
+  { titel: 'Rund 1.200 Mitglieder', text: 'mehrere Tausend seit der Gründung' },
+  { titel: 'Familienbetrieb', text: 'geführt von Familie Eichhorn' },
+  { titel: 'Trier-Feyen', text: 'Auf Hirtenberg 8' },
 ]
 
 // ─── Angebot ──────────────────────────────────────────────────────────────────
 
 export const angebot = {
-  titel: 'Zwei Wege in deinen Neustart.',
+  label: 'Das Angebot',
+  zeilen: ['Zwei Wege in', 'deinen Neustart.'],
   text:
-    'In beiden Laufzeiten kosten die ersten 12 Wochen je 5 €. Du entscheidest nur, wie lange du ' +
-    'dabeibleibst – und ob die Ernährungspläne dazugehören sollen.',
+    'In beiden Laufzeiten kosten die ersten 12 Wochen je 5 €. Du entscheidest, wie lange du dabeibleibst – ' +
+    'und ob die Ernährungspläne dazugehören sollen.',
   empfehlung: 'Unsere Empfehlung',
-  /**
-   * Pflichthinweise direkt am Preis. Die ausführliche Fassung steht im
-   * Rechtshinweis am Seitenende.
-   */
+  /** Pflichthinweise direkt am Preis. Ausführlich im Rechtshinweis unten. */
   hinweise: [
-    `Aktionszeitraum: ${aktion.zeitraum}. Gilt für Mitgliedschaften über 52 oder 104 Wochen, die in diesem Zeitraum neu abgeschlossen werden.`,
+    `Aktionszeitraum ${aktion.zeitraum}: gilt für Mitgliedschaften über 52 oder 104 Wochen, die in diesem Zeitraum neu abgeschlossen werden.`,
+    'Nur für Neumitglieder ab 18 Jahren, nicht mit anderen Aktionen kombinierbar.',
     'Ab Woche 13 gilt der reguläre Beitrag der gewählten Laufzeit: 12 € pro Woche bei 52 Wochen, 9 € pro Woche bei 104 Wochen. Die 12 Vorteilswochen zählen zur Laufzeit.',
-    `Einmalig kommt eine Aufnahmegebühr von ${aktion.aufnahmegebuehr} hinzu. Alle Preise inklusive Mehrwertsteuer.`,
+    `Einmalig kommt eine Aufnahmegebühr von ${aktion.aufnahmegebuehr} hinzu, weitere Pauschalen gibt es nicht. Alle Preise inklusive Mehrwertsteuer.`,
+    'Nach der Laufzeit läuft die Mitgliedschaft unbefristet weiter und ist mit einem Monat Frist kündbar.',
     'Die Anfrage ist unverbindlich. Eine Mitgliedschaft schließt du erst nach einer persönlichen Beratung und mit vollständigen Konditionen ab.',
   ],
 }
@@ -152,56 +149,51 @@ export const angebot = {
 // ─── Das Fit-Inn-Gefühl ───────────────────────────────────────────────────────
 
 export const gefuehl = {
-  titel: 'Du kommst zum Training. Und gehörst dazu.',
+  label: 'Das Fit-Inn-Gefühl',
+  zeilen: ['Du kommst zum Training.', 'Und gehörst dazu.'],
   text:
-    'Keine Nummer am Drehkreuz, kein Gerätepark ohne Ansprechpartner. Bei uns trainierst du mit ' +
-    'Menschen, die wissen, was du vorhast – und die nachfragen, wenn du länger nicht da warst.',
+    'Keine Nummer am Drehkreuz, kein Gerätepark ohne Ansprechpartner. Bei uns trainierst du mit Menschen, die ' +
+    'dich kennen und wissen, was du vorhast.',
   saeulen: [
     {
-      titel: 'Persönlich',
+      titel: 'Persönlich.',
       text:
-        'Trainerinnen und Trainer, Ernährungs- und Gesundheitscoaches begleiten dich. Vom ersten ' +
-        'Gespräch bis zu dem Tag, an dem das Training einfach zu deiner Woche gehört.',
+        'Trainerinnen und Trainer, Ernährungs- und Gesundheitscoaches begleiten dich – vom ersten Gespräch bis ' +
+        'zu dem Tag, an dem das Training einfach zu deiner Woche gehört.',
     },
     {
-      titel: 'Hochwertig',
+      titel: 'Hochwertig.',
       text:
-        'Biostrength-Geräte von Technogym, die sich automatisch auf dich einstellen. Dazu moderne ' +
-        'Cardiogeräte und ein Freihantelbereich, in dem auch Erfahrene nichts vermissen.',
+        'Biostrength-Geräte von Technogym, die sich automatisch auf dich einstellen. Dazu moderne Cardiogeräte ' +
+        'und ein Freihantelbereich, in dem auch Erfahrene nichts vermissen.',
     },
     {
-      titel: 'Familiär',
+      titel: 'Familiär.',
       text:
-        'Seit 1996 in Familienhand, rund 15 Menschen im Team, rund 1.200 Mitglieder. Groß genug ' +
-        'für alles, was du brauchst. Klein genug, um dich zu kennen.',
+        'Seit 1996 in Familienhand, rund 15 Menschen im Team, rund 1.200 Mitglieder. Groß genug für alles, was ' +
+        'du brauchst. Klein genug, um dich zu kennen.',
     },
   ],
-  bild: {
-    motiv: 'Trainingsfläche mit Biostrength-Geräten, zwei Mitglieder im Austausch mit einem Trainer',
-    format: 'Querformat 16:9',
-    alt: 'Trainingsfläche des Fit-Inn Trier mit Biostrength-Geräten von Technogym',
-  },
+  fussnote: 'Neu im Studio oder lange raus? Zum Start besprechen wir gemeinsam deine Ziele.',
 }
 
 // ─── Training trifft Ernährung ────────────────────────────────────────────────
 
 export const ernaehrung = {
-  titel: 'Training trifft Ernährung.',
+  label: 'Training trifft Ernährung',
+  zeilen: ['Training trifft', 'Ernährung.'],
   text:
-    'Was du im Studio aufbaust, entscheidet sich auch in deiner Küche. Damit dein Neustart nicht an ' +
-    'der Studiotür endet, gehören bei 104 Wochen Laufzeit zwölf Monate Ernährungspläne dazu – ohne Aufpreis.',
+    'Was du im Studio aufbaust, entscheidet sich auch in deiner Küche. Damit dein Neustart nicht an der ' +
+    'Studiotür endet, gehören bei 104 Wochen Laufzeit zwölf Monate Ernährungspläne dazu – ohne Aufpreis.',
   punkte: [
-    'Abgestimmt auf dein Ziel: Muskelaufbau, Gewicht reduzieren oder mehr Energie im Alltag',
-    'Klassisch, vegetarisch, vegan oder flexitarisch',
-    'Allergien, Unverträglichkeiten und Vorlieben werden berücksichtigt',
-    'Gerichte tauschen, Einkaufslisten inklusive',
-    'Fragen dazu klärst du mit unseren Ernährungscoaches im Studio',
+    '12 Monate Ernährungspläne, abgestimmt auf dein Ziel',
+    'Inklusive bei 104 Wochen Laufzeit – ohne Aufpreis',
+    'Was genau drinsteckt, zeigen wir dir in der Beratung',
   ],
-  stempel: {
-    zeile1: '12 Monate',
-    zeile2: 'Ernährungspläne',
+  kasten: {
+    zahl: '12 Monate',
+    text: 'Ernährungspläne inklusive – bei einer Mitgliedschaft über 104 Wochen.',
     wert: 'Wert 119,99 €',
-    bedingung: 'gratis bei 104 Wochen',
   },
   knopf: 'Mit 104 Wochen anfragen',
 }
@@ -209,42 +201,40 @@ export const ernaehrung = {
 // ─── Ablauf ───────────────────────────────────────────────────────────────────
 
 export const ablauf = {
-  titel: 'In drei Schritten zum Start.',
+  label: 'Ablauf',
+  zeilen: ['In drei Schritten', 'zum Start.'],
+  text: 'Neu im Studio oder lange raus? Genau dafür ist die gemeinsame Zielbesprechung zum Start da.',
   schritte: [
     {
-      nr: '01',
-      titel: 'Anfragen',
+      titel: 'Anfragen.',
       text: 'Schick uns deine unverbindliche Anfrage oder ruf an. Das kostet nichts und verpflichtet dich zu nichts.',
     },
     {
-      nr: '02',
-      titel: 'Beraten lassen',
+      titel: 'Beraten lassen.',
       text:
-        'Wir vereinbaren einen Termin im Studio. Dort besprechen wir gemeinsam deine Ziele, zeigen dir alles ' +
-        'und legen alle Konditionen offen auf den Tisch.',
+        'Wir vereinbaren einen Termin im Studio. Dort besprechen wir gemeinsam deine Ziele, zeigen dir alles und ' +
+        'legen alle Konditionen offen auf den Tisch.',
     },
     {
-      nr: '03',
-      titel: 'Loslegen',
+      titel: 'Loslegen.',
       text:
-        'Erst wenn alles passt, entscheidest du dich. Dann starten wir mit Einweisung und Trainingsplan – ' +
-        'bei 104 Wochen auch mit deinem Ernährungsplan.',
+        'Erst wenn alles passt, entscheidest du dich. Dann starten wir mit Einweisung und Trainingsplan – bei ' +
+        '104 Wochen auch mit deinem Ernährungsplan.',
     },
   ],
-  einsteiger: 'Neu im Studio oder lange raus? Genau dafür ist die Zielbesprechung zum Start da.',
 }
 
 // ─── Team ─────────────────────────────────────────────────────────────────────
 
 export const team = {
-  titel: 'Familie Eichhorn und Team.',
+  label: 'Team',
+  zeilen: ['Familie Eichhorn', 'und Team.'],
   text:
-    'Das Fit-Inn ist seit 1996 ein Familienbetrieb. Mit uns arbeiten rund 15 Menschen: Trainerinnen und ' +
-    'Trainer, Ernährungs- und Gesundheitscoaches und das Team am Empfang. Du trainierst nicht bei einer ' +
-    'Kette, sondern bei Menschen, die jeden Tag hier sind.',
+    'Das Fit-Inn ist seit 1996 ein Familienbetrieb. Mit uns arbeiten rund 15 Menschen, darunter Trainerinnen und ' +
+    'Trainer, Ernährungs- und Gesundheitscoaches. Du trainierst nicht bei einer Kette, sondern bei Menschen, ' +
+    'die du im Studio wiedersiehst.',
   familie: {
-    motiv: 'Familie Eichhorn gemeinsam im Studio',
-    format: 'Querformat 16:9',
+    motiv: 'Familie Eichhorn gemeinsam im Studio · Querformat 21:9',
     alt: 'Familie Eichhorn, die Inhaberfamilie des Fit-Inn Trier, im Studio',
   },
   /** PLATZHALTER – Namen, Rollen und Fotos vor dem Livegang ersetzen. */
@@ -263,7 +253,8 @@ export const team = {
  * gekennzeichneten Leerplatz statt eines Zitats.
  */
 export const stimmen = {
-  titel: 'Das sagen unsere Mitglieder.',
+  label: 'Mitglieder',
+  zeilen: ['Das sagen unsere', 'Mitglieder.'],
   eintraege: [
     { platzhalter: true, zitat: '', name: '[Vorname, Initial]', seit: '[Mitglied seit …]' },
     { platzhalter: true, zitat: '', name: '[Vorname, Initial]', seit: '[Mitglied seit …]' },
@@ -281,22 +272,23 @@ export const fragen = [
   {
     frage: 'Was beinhaltet das Oktober-Angebot?',
     antwort:
-      'Wenn du im Oktober 2026 eine Mitgliedschaft über 52 oder 104 Wochen abschließt, kosten die ersten ' +
-      '12 Wochen je 5 €. Enthalten sind persönliche Trainingsbetreuung sowie Kraft- und Cardiotraining. ' +
-      'Bei 104 Wochen bekommst du zusätzlich 12 Monate Ernährungspläne gratis (Wert 119,99 €).',
+      'Wenn du vom 1. bis 31. Oktober 2026 neu eine Mitgliedschaft über 52 oder 104 Wochen abschließt, kosten ' +
+      'die ersten 12 Wochen je 5 €. Enthalten sind persönliche Trainingsbetreuung sowie Kraft- und Cardiotraining. ' +
+      'Bei 104 Wochen sind zusätzlich 12 Monate Ernährungspläne inklusive (Wert 119,99 €). Das Angebot gilt für ' +
+      'Neumitglieder ab 18 Jahren und ist nicht mit anderen Aktionen kombinierbar.',
   },
   {
     frage: 'Was zahle ich nach den ersten 12 Wochen?',
     antwort:
-      'Ab Woche 13 gilt der reguläre Beitrag deiner Laufzeit: 12 € pro Woche bei 52 Wochen, 9 € pro Woche ' +
-      'bei 104 Wochen. Über die gesamte Laufzeit sind das 540 € bzw. 888 €. Einmalig kommt eine ' +
-      'Aufnahmegebühr von 39 € hinzu. Die 12 Vorteilswochen zählen zur Laufzeit und verlängern sie nicht.',
+      'Ab Woche 13 gilt der reguläre Beitrag deiner Laufzeit: 12 € pro Woche bei 52 Wochen, 9 € pro Woche bei ' +
+      '104 Wochen. An Beiträgen sind das über die gesamte Laufzeit 540 € bzw. 888 €, mit der einmaligen ' +
+      'Aufnahmegebühr von 39 € insgesamt 579 € bzw. 927 €. Die 12 Vorteilswochen zählen zur Laufzeit.',
   },
   {
     frage: 'Kann ich auch als Anfänger starten?',
     antwort:
-      'Ja. Viele fangen bei uns ohne Vorerfahrung an oder nach einer langen Pause. Zum Start besprechen wir ' +
-      'gemeinsam deine Ziele, weisen dich an den Geräten ein und bauen einen Plan, der zu dir passt.',
+      'Ja. Du kannst ohne Vorerfahrung oder nach einer langen Pause starten. Zum Start besprechen wir gemeinsam ' +
+      'deine Ziele, weisen dich an den Geräten ein und bauen einen Plan, der zu dir passt.',
   },
   {
     frage: 'Schließe ich über die Anfrage schon eine Mitgliedschaft ab?',
@@ -314,15 +306,15 @@ export const fragen = [
   {
     frage: 'Was steckt in den Ernährungsplänen?',
     antwort:
-      'Individuelle Pläne, abgestimmt auf dein Ziel und deine Ernährungsweise – klassisch, vegetarisch, ' +
-      'vegan oder flexitarisch. Allergien und Unverträglichkeiten werden berücksichtigt, Gerichte lassen ' +
-      'sich tauschen, Einkaufslisten sind dabei. Bei 104 Wochen Laufzeit bekommst du sie 12 Monate lang gratis.',
+      'Bei 104 Wochen Laufzeit bekommst du 12 Monate Ernährungspläne ohne Aufpreis, abgestimmt auf dein Ziel. ' +
+      'Was genau dazugehört, zeigen wir dir in der persönlichen Beratung.',
   },
   {
     frage: 'Wie lange gilt das Angebot?',
     antwort:
-      'Für Mitgliedschaften, die vom 1. bis 31. Oktober 2026 neu abgeschlossen werden. Anfragen kannst du ' +
-      'schon jetzt.',
+      'Für Mitgliedschaften, die vom 1. bis 31. Oktober 2026 neu abgeschlossen werden. Maßgeblich ist der ' +
+      'Vertragsabschluss im Studio bis Samstag, 31.10.2026 – frag am besten früh an, damit wir dir noch im ' +
+      'Oktober einen Beratungstermin geben können.',
   },
   {
     frage: 'Was passiert nach der Laufzeit?',
@@ -335,7 +327,8 @@ export const fragen = [
 // ─── Anfrage (Ziel aller Schaltflächen) ───────────────────────────────────────
 
 export const anfrage = {
-  titel: 'Dein Neustart beginnt mit einem Gespräch.',
+  label: 'Anfrage',
+  zeilen: ['Dein Neustart', 'beginnt mit', 'einem Gespräch.'],
   text:
     'Schick uns deine Anfrage – wir melden uns bei dir und vereinbaren einen Beratungstermin im Studio. ' +
     'Lieber direkt sprechen? Ruf uns an.',
@@ -347,8 +340,9 @@ export const anfrage = {
 /**
  * Pflichtangaben zum Angebot, ausführlich. Grundlage ist der geprüfte
  * Rechtshinweis der 5-Euro-Aktion (src/components/aktion5/content.ts);
- * geändert sind Aktionszeitraum, Ernährungspläne und der Satz zur
- * unverbindlichen Anfrage. Vor dem Livegang erneut prüfen lassen.
+ * geändert sind Aktionszeitraum, Gesamtpreis inkl. Gebühr, Ernährungspläne
+ * und der Satz zur unverbindlichen Anfrage. Vor dem Livegang erneut prüfen
+ * lassen.
  *
  * Beträge und Datum stehen bewusst ausgeschrieben im Text und werden nicht
  * eingesetzt: der Absatz wird nur als Ganzes geändert.
@@ -360,17 +354,18 @@ export const rechtshinweis: { t: string; href?: string }[] = [
       'Wochen, die in diesem Zeitraum neu abgeschlossen werden. Die ersten 12 Wochen der Mitgliedschaft ' +
       'kosten je 5 €. Danach beträgt der Beitrag 12 € pro Woche bei einer Laufzeit von 52 Wochen bzw. 9 € ' +
       'pro Woche bei einer Laufzeit von 104 Wochen. Die 12 Vorteilswochen sind Teil der vereinbarten ' +
-      'Laufzeit und verlängern diese nicht. Daraus ergibt sich ein Gesamtbetrag von 540 € über 52 Wochen ' +
-      'bzw. 888 € über 104 Wochen. Alle Preise verstehen sich inklusive der gesetzlichen Mehrwertsteuer. ' +
-      'Hinzu kommt eine einmalige Aufnahmegebühr von 39 €. Bei einer Laufzeit von 104 Wochen sind ' +
-      '12 Monate Ernährungspläne im Wert von 119,99 € ohne Aufpreis enthalten. Der Einzug erfolgt in ' +
-      '14-tägigen Intervallen per SEPA-Lastschrift. Nach Ablauf der vereinbarten Laufzeit verlängert sich ' +
-      'die Mitgliedschaft auf unbestimmte Zeit und kann jederzeit mit einer Frist von einem Monat ' +
-      'gekündigt werden. Zum Ende der Erstlaufzeit ist eine Kündigung mit einer Frist von 4 Wochen ' +
-      'möglich. Die Anfrage über diese Seite ist unverbindlich und kostenlos; eine Mitgliedschaft kommt ' +
-      'erst nach einer persönlichen Beratung und mit Vorlage der vollständigen Vertragsbedingungen ' +
-      'zustande. Das Angebot gilt nur für Neumitglieder, ist nicht mit anderen Aktionen oder Rabatten ' +
-      'kombinierbar und nicht auf bestehende Verträge übertragbar. Mindestalter 18 Jahre. Es gelten unsere ',
+      'Laufzeit und verlängern diese nicht. Hinzu kommt eine einmalige Aufnahmegebühr von 39 €. Daraus ' +
+      'ergibt sich ein Gesamtpreis von 579 € über 52 Wochen (540 € Beiträge zzgl. 39 € Aufnahmegebühr) bzw. ' +
+      '927 € über 104 Wochen (888 € Beiträge zzgl. 39 € Aufnahmegebühr). Alle Preise verstehen sich ' +
+      'inklusive der gesetzlichen Mehrwertsteuer. Bei einer Laufzeit von 104 Wochen sind 12 Monate ' +
+      'Ernährungspläne im Wert von 119,99 € ohne Aufpreis enthalten. Der Einzug erfolgt in 14-tägigen ' +
+      'Intervallen per SEPA-Lastschrift. Nach Ablauf der vereinbarten Laufzeit verlängert sich die ' +
+      'Mitgliedschaft auf unbestimmte Zeit und kann jederzeit mit einer Frist von einem Monat gekündigt ' +
+      'werden. Zum Ende der Erstlaufzeit ist eine Kündigung mit einer Frist von 4 Wochen möglich. Die ' +
+      'Anfrage über diese Seite ist unverbindlich und kostenlos; eine Mitgliedschaft kommt erst nach einer ' +
+      'persönlichen Beratung und mit Vorlage der vollständigen Vertragsbedingungen zustande. Das Angebot ' +
+      'gilt nur für Neumitglieder, ist nicht mit anderen Aktionen oder Rabatten kombinierbar und nicht auf ' +
+      'bestehende Verträge übertragbar. Mindestalter 18 Jahre. Es gelten unsere ',
   },
   { t: 'Allgemeinen Geschäftsbedingungen', href: 'https://fit-inn-trier.de/agbs-fit-inn-trier' },
   { t: ' und unsere ' },
@@ -382,8 +377,8 @@ export const rechtshinweis: { t: string; href?: string }[] = [
 
 export const meta = {
   pfad: '/oktober',
-  titel: 'Fitnessstudio Trier: Herbst-Neustart ab 5 € pro Woche | Fit-Inn',
+  titel: 'Fitnessstudio Trier: 12 Wochen je 5 € im Oktober | Fit-Inn',
   beschreibung:
-    'Oktober-Special im Fit-Inn Trier-Feyen: die ersten 12 Wochen für 5 € pro Woche, persönliche ' +
-    'Betreuung und bei 104 Wochen 12 Monate Ernährungspläne gratis.',
+    'Oktober-Special im Fit-Inn Trier-Feyen: bei 52 oder 104 Wochen Laufzeit die ersten 12 Wochen je 5 €, ' +
+    'danach 12 € bzw. 9 € pro Woche. Persönlich betreut.',
 }

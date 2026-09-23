@@ -9,8 +9,13 @@ import { NextRequest, NextResponse } from 'next/server'
 const STUDIO_ID = '1210005460'
 const BASE_URL = 'https://fit-inn-trier.api.magicline.com/connect/v1'
 
-// Notiz, die mit jeder Buchung an Magicline übergeben wird.
+// Notiz, die mit jeder Buchung an Magicline übergeben wird. Die Seite, von
+// der gebucht wurde, schickt ihre Kennung als `quelle` mit; nur bekannte
+// Kennungen werden übernommen, alles andere bekommt die bisherige Notiz.
 const CAMPAIGN_NOTE = '5-Euro-Aktion 2026 – 12 Wochen für je 5 € · Probetraining über Landingpage gebucht'
+const NOTIZ_JE_QUELLE: Record<string, string> = {
+  startseite: 'Probetraining über die Startseite (30jahre.fit-inn-trier.de) gebucht',
+}
 
 // Warnung, die nur im Ausnahmefall in der Notiz landet (siehe unten).
 const OHNE_TRAINER_NOTE = 'ACHTUNG: Ohne Trainerzuweisung gebucht – zum Zeitpunkt der Buchung war '
@@ -47,7 +52,7 @@ export async function POST(request: NextRequest) {
       firstName, lastName, email, mobilephone, gender, dateOfBirth,
       street, houseNumber, zip, city,
       marketingConsent, note,
-      startDateTime,
+      startDateTime, quelle,
     } = body
 
     // Pflichtfelder prüfen (entspricht den Anforderungen der Magicline-Buchung).
@@ -57,7 +62,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Kampagnen-Notiz + optionale Anmerkung des Interessenten zusammenführen.
-    const bookingNote = [CAMPAIGN_NOTE, note ? `Anmerkung: ${note}` : '']
+    const grundNotiz = (typeof quelle === 'string' && NOTIZ_JE_QUELLE[quelle]) || CAMPAIGN_NOTE
+    const bookingNote = [grundNotiz, note ? `Anmerkung: ${note}` : '']
       .filter(Boolean)
       .join(' | ')
 
