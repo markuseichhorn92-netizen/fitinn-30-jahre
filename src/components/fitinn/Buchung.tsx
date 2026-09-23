@@ -1,12 +1,21 @@
 'use client'
 
-import Link from 'next/link'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
 import { formatTime } from '@/lib/booking'
 import { langesDatum, MONATE, useBuchung, WOCHENTAGE, ZIELE } from '@/components/kampagne/useBuchung'
 import { studio, telLink } from './studio'
 import { Pfeil } from './Teile'
 
 const SCHRITTE = ['Termin', 'Person', 'Anschrift']
+
+// Kalender und Monatsname hängen vom heutigen Datum ab. Der Server kennt nur
+// seine eigene Zeit (und liefert per ISR bis zu zehn Minuten alte Seiten) –
+// deshalb erst nach dem Hydrieren rendern, sonst passt das HTML am
+// Monatswechsel nicht zum Browser.
+const nichts = () => () => {}
+function useImBrowser() {
+  return useSyncExternalStore(nichts, () => true, () => false)
+}
 
 function Feld({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -29,6 +38,16 @@ export function Buchung({ quelle }: { quelle: string }) {
     geschlecht, setGeschlecht, sendet, fehler, setFehler, gesendet,
     formRef, absenden, jahre,
   } = useBuchung(quelle)
+  const imBrowser = useImBrowser()
+
+  // Beim Schrittwechsel den Fokus auf den neuen Schritt setzen – sonst fällt
+  // er auf <body>, wenn der auslösende Knopf verschwindet.
+  const schritte = useRef<(HTMLDivElement | null)[]>([])
+  const ersterLauf = useRef(true)
+  useEffect(() => {
+    if (ersterLauf.current) { ersterLauf.current = false; return }
+    schritte.current[schritt - 1]?.focus()
+  }, [schritt])
 
   return (
     <form ref={formRef} onSubmit={absenden} noValidate className="fi-formular" aria-label="Probetraining buchen">
@@ -43,9 +62,22 @@ export function Buchung({ quelle }: { quelle: string }) {
         })}
       </ol>
 
+      <p className="sr-only" aria-live="polite">Schritt {schritt} von 3: {SCHRITTE[schritt - 1]}</p>
+
       {/* ─── 01 · Termin ─────────────────────────────────────────────── */}
-      <div data-step="1" hidden={schritt !== 1}>
+      <div
+        data-step="1"
+        hidden={schritt !== 1}
+        role="group"
+        aria-label="Schritt 1 von 3: Termin"
+        tabIndex={-1}
+        ref={el => { schritte.current[0] = el }}
+        className="fi-schritt-feld"
+      >
         <div className="fi-termin-raster">
+          {!imBrowser ? (
+            <p className="fi-zeithinweis">Freie Termine werden geladen …</p>
+          ) : (
           <div>
             <div className="fi-monat">
               <button
@@ -87,13 +119,14 @@ export function Buchung({ quelle }: { quelle: string }) {
               })}
             </div>
           </div>
+          )}
 
-          <div>
-            <p className="fi-feld-label" style={{ fontSize: 17 }}>
+          <div aria-live="polite">
+            <p id="fi-zeiten-titel" className="fi-feld-label">
               {datum ? `Freie Zeiten am ${langesDatum(datum)}` : 'Uhrzeit'}
             </p>
             {tagesSlots.length > 0 ? (
-              <div className="fi-zeiten">
+              <div className="fi-zeiten" role="group" aria-labelledby="fi-zeiten-titel">
                 {tagesSlots.map(s => (
                   <button
                     key={s.startDateTime}
@@ -114,7 +147,15 @@ export function Buchung({ quelle }: { quelle: string }) {
       </div>
 
       {/* ─── 02 · Person ─────────────────────────────────────────────── */}
-      <div data-step="2" hidden={schritt !== 2} className="fi-feldgruppe">
+      <div
+        data-step="2"
+        hidden={schritt !== 2}
+        className="fi-feldgruppe fi-schritt-feld"
+        role="group"
+        aria-label="Schritt 2 von 3: Person"
+        tabIndex={-1}
+        ref={el => { schritte.current[1] = el }}
+      >
         <div className="fi-paar">
           <Feld label="Vorname"><input className="fi-feld" name="vorname" type="text" required autoComplete="given-name" /></Feld>
           <Feld label="Nachname"><input className="fi-feld" name="nachname" type="text" required autoComplete="family-name" /></Feld>
@@ -159,7 +200,15 @@ export function Buchung({ quelle }: { quelle: string }) {
       </div>
 
       {/* ─── 03 · Anschrift ──────────────────────────────────────────── */}
-      <div data-step="3" hidden={schritt !== 3} className="fi-feldgruppe">
+      <div
+        data-step="3"
+        hidden={schritt !== 3}
+        className="fi-feldgruppe fi-schritt-feld"
+        role="group"
+        aria-label="Schritt 3 von 3: Anschrift"
+        tabIndex={-1}
+        ref={el => { schritte.current[2] = el }}
+      >
         <div className="fi-paar" style={{ gridTemplateColumns: 'minmax(0, 3fr) minmax(0, 1fr)' }}>
           <Feld label="Straße"><input className="fi-feld" name="strasse" type="text" required autoComplete="address-line1" /></Feld>
           <Feld label="Nr."><input className="fi-feld" name="hausnummer" type="text" required /></Feld>
@@ -181,15 +230,17 @@ export function Buchung({ quelle }: { quelle: string }) {
           <input type="checkbox" name="datenschutz" required />
           <span>
             Ich bin mit der Verarbeitung meiner Daten zur Terminvereinbarung einverstanden. Mehr dazu in der{' '}
-            <Link href="/datenschutz">Datenschutzerklärung</Link>.
+            <a href="/datenschutz">Datenschutzerklärung</a>.
           </span>
         </label>
       </div>
 
       {/* ─── Steuerung ───────────────────────────────────────────────── */}
-      {terminText && !gesendet && (
-        <p className="fi-gewaehlt">Gewählt: <strong>{terminText}</strong></p>
-      )}
+      <div aria-live="polite">
+        {terminText && !gesendet && (
+          <p className="fi-gewaehlt">Gewählt: <strong>{terminText}</strong></p>
+        )}
+      </div>
 
       {!gesendet && (
         <div className="fi-steuerung">

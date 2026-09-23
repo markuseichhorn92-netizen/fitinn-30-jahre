@@ -145,11 +145,15 @@ export default function RootLayout({
         </AusserAuf>
       </head>
       <body className={`${barlow.variable} ${barlowCondensed.variable}`}>
-        {children}
         {/* Eigenständige Routen (/oktober) laufen ohne Tracking und damit
-            auch ohne Cookie-Banner – siehe src/components/AusserAuf.tsx. */}
+            auch ohne Cookie-Banner – siehe src/components/AusserAuf.tsx.
+            Der Banner steht vor dem Seiteninhalt, damit er in der Tab-Folge
+            als Erstes kommt. */}
         <AusserAuf pfade={OHNE_TRACKING}>
           <CookieBanner />
+        </AusserAuf>
+        {children}
+        <AusserAuf pfade={OHNE_TRACKING}>
           <ConditionalAnalytics />
           <GoogleTag />
           <Analytics />

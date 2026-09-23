@@ -3,7 +3,7 @@ import { Erscheinen } from '@/components/fitinn/Erscheinen'
 import { Fuss } from '@/components/fitinn/Fuss'
 import { Kopf } from '@/components/fitinn/Kopf'
 import { schriftKlassen } from '@/components/fitinn/schriften'
-import { Hero, Vertrauen } from './Hero'
+import { Hero } from './Hero'
 import { nav, PROBETRAINING } from './inhalt'
 import { Mitgliedschaft } from './Mitgliedschaft'
 import { Staerken } from './Staerken'
@@ -21,7 +21,6 @@ export function StartSeite({ oktober }: { oktober: boolean }) {
       <Kopf nav={nav} aktion={{ href: PROBETRAINING, lang: 'Probetraining anfragen', kurz: 'Probetraining', cta: 'startseite-kopf' }} />
       <main id="inhalt">
         <Hero />
-        <Vertrauen />
         <Staerken />
         <Mitgliedschaft oktober={oktober} />
         <Start />

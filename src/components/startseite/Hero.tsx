@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Knopf, Zeilen } from '@/components/fitinn/Teile'
-import { hero, PROBETRAINING, vertrauen } from './inhalt'
+import { hero, PROBETRAINING } from './inhalt'
 
 // Große Aussage links, Bildtafel rechts: das echte Studiofoto in einem
 // dunklen Rahmen mit Kopfzeile, belegten Eckdaten und orangem Streifen.
@@ -57,23 +57,6 @@ export function Hero() {
             <strong>{hero.tafel.streifenText}</strong>
           </figcaption>
         </figure>
-      </div>
-    </section>
-  )
-}
-
-export function Vertrauen() {
-  return (
-    <section className="fi-leiste-vertrauen" aria-label="Fit-Inn Trier auf einen Blick">
-      <div className="fi-satz">
-        <ul>
-          {vertrauen.map(v => (
-            <li key={v.titel}>
-              <strong>{v.titel}</strong>
-              <span>{v.text}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   )

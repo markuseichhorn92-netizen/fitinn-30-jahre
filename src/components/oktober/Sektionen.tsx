@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import { Faq } from '@/components/fitinn/Faq'
+import { aktivierungsgebuehr, GEBUEHR_NAME } from '@/components/fitinn/studio'
 import { Anruf, FotoPlatzhalter, Haken, Knopf, Label, Zeilen } from '@/components/fitinn/Teile'
 import {
-  ablauf, aktion, anfrage, angebot, ernaehrung, fragen, gefuehl, hero, kontakt, laufzeiten, rechtshinweis,
-  stimmen, team, vertrauen, type CtaId,
+  ablauf, aktion, anfrage, angebot, ernaehrung, fragen, gefuehl, hero, kontakt, laufzeiten, platzhalterZeigen,
+  rechtshinweis, stimmen, team, vertrauen, type CtaId,
 } from './inhalt'
 
 // Alle Sektionen der Oktober-Seite im Fit-Inn-Designsystem. Jede Schaltfläche
@@ -158,9 +159,9 @@ export function Angebot() {
                     <td>{l.beitraege}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Aufnahmegebühr</th>
+                    <th scope="row">{GEBUEHR_NAME}</th>
                     <td className="fi-formel">einmalig</td>
-                    <td>{aktion.aufnahmegebuehr}</td>
+                    <td>{aktivierungsgebuehr}</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -252,7 +253,7 @@ export function Ernaehrung() {
         <div className="fi-kasten" style={{ alignSelf: 'center' }} data-zeigen="">
           <span className="fi-kasten-zahl">{ernaehrung.kasten.zahl}</span>
           <p>{ernaehrung.kasten.text}</p>
-          <small>{ernaehrung.kasten.wert}</small>
+          <p className="fi-kasten-wert">{ernaehrung.kasten.wert}</p>
         </div>
       </div>
     </section>
@@ -292,13 +293,14 @@ export function Ablauf() {
 
 export function Team() {
   return (
-    <section id="team" className="fi-abschnitt" aria-labelledby="team-titel" style={{ paddingTop: 0 }}>
+    <section id="team" className="fi-abschnitt fi-trenner" aria-labelledby="team-titel">
       <div className="fi-satz">
         <Label nr="05">{team.label}</Label>
         <div className="fi-zwei fi-zwei--gleich" style={{ alignItems: 'end' }}>
           <h2 id="team-titel" className="fi-h2"><Zeilen zeilen={team.zeilen} /></h2>
           <p className="fi-text">{team.text}</p>
         </div>
+        {platzhalterZeigen && (
         <div className="fi-team">
           <FotoPlatzhalter motiv={team.familie.motiv} alt={team.familie.alt} seitenverhaeltnis="21 / 9" />
           <ul className="fi-team-personen">
@@ -311,19 +313,23 @@ export function Team() {
             ))}
           </ul>
         </div>
+        )}
       </div>
     </section>
   )
 }
 
+// Solange nur Platzhalter vorliegen und diese ausgeblendet sind, entfällt
+// der Abschnitt ganz – eine Überschrift ohne Stimmen wäre ein leeres Versprechen.
 export function Stimmen() {
+  if (!platzhalterZeigen && stimmen.eintraege.every(s => s.platzhalter)) return null
   return (
-    <section id="stimmen" className="fi-abschnitt" aria-labelledby="stimmen-titel" style={{ paddingTop: 0 }}>
+    <section id="stimmen" className="fi-abschnitt fi-hell" aria-labelledby="stimmen-titel">
       <div className="fi-satz">
         <Label nr="06">{stimmen.label}</Label>
         <h2 id="stimmen-titel" className="fi-h2"><Zeilen zeilen={stimmen.zeilen} /></h2>
         <ul className="fi-spalten fi-spalten--3">
-          {stimmen.eintraege.map((s, i) =>
+          {stimmen.eintraege.filter(s => platzhalterZeigen || !s.platzhalter).map((s, i) =>
             s.platzhalter ? (
               <li key={i} className="fi-spalte fi-stimme-leer" data-platzhalter="stimme">
                 <span className="fi-platzhalter-marke">Platzhalter</span>
@@ -349,7 +355,7 @@ export function Stimmen() {
 
 export function Fragen() {
   return (
-    <section id="fragen" className="fi-abschnitt" aria-labelledby="fragen-titel" style={{ paddingTop: 0 }}>
+    <section id="fragen" className="fi-abschnitt" aria-labelledby="fragen-titel">
       <div className="fi-satz fi-zwei">
         <div className="fi-zwei-links fi-zwei-links--klebend">
           <Label nr="07">Fragen</Label>

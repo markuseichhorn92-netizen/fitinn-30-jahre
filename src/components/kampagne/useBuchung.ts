@@ -106,11 +106,27 @@ export function useBuchung(quelle?: string) {
   const terminText =
     datum && slot ? `${langesDatum(datum)}, ${formatTime(slot.startDateTime)} Uhr` : null
 
+  /** Ist das eingegebene Geburtsdatum mindestens 18 Jahre her? (Leer = ja, das prüft `required`.) */
+  const volljaehrig = () => {
+    const form = formRef.current
+    if (!form) return true
+    const wert = (name: string) => Number((form.elements.namedItem(name) as HTMLSelectElement | null)?.value)
+    const [tag, monat, jahr] = [wert('gebTag'), wert('gebMonat'), wert('gebJahr')]
+    if (!tag || !monat || !jahr) return true
+    const grenze = new Date()
+    grenze.setFullYear(grenze.getFullYear() - 18)
+    return new Date(jahr, monat - 1, tag) <= grenze
+  }
+
   /** Prüft nur die Felder des sichtbaren Schritts. */
   const schrittGueltig = (n: number) => {
     if (n === 1) return !!(datum && slot)
     if (n === 2 && !geschlecht) {
       setFehler('Bitte wähle die Anrede – ohne sie nimmt das Buchungssystem den Termin nicht an.')
+      return false
+    }
+    if (n === 2 && !volljaehrig()) {
+      setFehler('Training und Mitgliedschaft sind bei uns ab 18 Jahren möglich.')
       return false
     }
     const form = formRef.current
@@ -202,7 +218,7 @@ export function useBuchung(quelle?: string) {
       ? 'Freie Zeiten werden geladen …'
       : datum
         ? 'An diesem Tag ist online nichts mehr frei. Wähle einen anderen Tag oder ruf uns an.'
-        : 'Wähle links einen Tag – dann erscheinen die freien Uhrzeiten. Probetermine gibt es Montag bis Samstag.'
+        : 'Wähle zuerst einen Tag im Kalender – dann erscheinen die freien Uhrzeiten.'
 
   return {
     schritt, setSchritt, weiter, zurueck,

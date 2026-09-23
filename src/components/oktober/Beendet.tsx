@@ -1,4 +1,5 @@
 import '@/components/fitinn/fitinn.css'
+import { Fuss } from '@/components/fitinn/Fuss'
 import { schriftKlassen } from '@/components/fitinn/schriften'
 import { Knopf, Zeilen } from '@/components/fitinn/Teile'
 import { kontakt } from './inhalt'
@@ -9,7 +10,7 @@ import { kontakt } from './inhalt'
 export function Beendet() {
   return (
     <div className={`fi ${schriftKlassen}`}>
-      <main className="fi-dunkel fi-raster-grund" style={{ minHeight: '100svh', display: 'grid', alignItems: 'center' }}>
+      <main className="fi-dunkel fi-raster-grund" style={{ minHeight: '80svh', display: 'grid', alignItems: 'center' }}>
         <div className="fi-satz" style={{ paddingBlock: 'clamp(64px, 12vh, 128px)' }}>
           <h1 className="fi-h2"><Zeilen zeilen={['Das Oktober-Special', 'ist beendet.']} /></h1>
           <p className="fi-text fi-lead" style={{ marginTop: 20 }}>
@@ -24,6 +25,7 @@ export function Beendet() {
           </div>
         </div>
       </main>
+      <Fuss nav={[{ href: '/', text: 'Startseite' }, { href: '/#probetraining', text: 'Probetraining' }]} />
     </div>
   )
 }

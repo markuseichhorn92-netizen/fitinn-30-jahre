@@ -1,4 +1,4 @@
-import { aktivierungsgebuehr, studio } from '@/components/fitinn/studio'
+import { aktivierungsgebuehr, GEBUEHR_NAME, kuendigung, studio } from '@/components/fitinn/studio'
 
 // Alle Texte der Startseite an einer Stelle. Nur belegte Aussagen: Quellen
 // sind PRODUCT.md, die Preisliste auf fit-inn-trier.de und die Angaben der
@@ -31,21 +31,14 @@ export const hero = {
     bildAlt: 'Trainingsfläche im Fit-Inn Trier mit computergesteuerten Kraftgeräten von Technogym',
     werte: [
       { wert: studio.gegruendet, text: 'gegründet' },
-      { wert: 'Familie', text: 'geführt, kein Franchise' },
       { wert: 'Technogym', text: 'Premiumgeräte' },
+      { wert: 'Einweisung', text: 'an jedem Gerät' },
       { wert: 'Feyen', text: 'Stadtteil von Trier' },
     ],
     streifenLabel: 'Probetraining',
     streifenText: 'kostenlos und unverbindlich',
   },
 }
-
-export const vertrauen = [
-  { titel: `Seit ${studio.gegruendet}`, text: 'Fitness in Trier' },
-  { titel: 'Familienbetrieb', text: 'kein Franchise' },
-  { titel: `${studio.mitglieder[0].toUpperCase()}${studio.mitglieder.slice(1)} Mitglieder`, text: 'trainieren aktuell bei uns' },
-  { titel: studio.stadtteil, text: `${studio.strasse}` },
-]
 
 export const staerken = {
   label: 'Was uns ausmacht',
@@ -79,7 +72,7 @@ export const mitgliedschaft = {
   zeilen: ['Deine Mitgliedschaft.', 'Klar gerechnet.'],
   text:
     'Drei Laufzeiten, ein Leistungsumfang. Du zahlst pro Woche, abgebucht wird alle 14 Tage. Dazu kommt ' +
-    `einmalig eine Aktivierungsgebühr von ${aktivierungsgebuehr} – weitere Pauschalen gibt es nicht.`,
+    `einmalig eine ${GEBUEHR_NAME} von ${aktivierungsgebuehr} – weitere Pauschalen gibt es nicht.`,
   /** Beschreibung je Laufzeit (Reihenfolge wie in studio.tarife). */
   beschreibung: {
     '52': 'Ein Jahr Zeit, um das Training zur Gewohnheit zu machen.',
@@ -89,9 +82,9 @@ export const mitgliedschaft = {
   marke: 'Günstigster Wochenbeitrag',
   inklusiveTitel: 'In jeder Mitgliedschaft enthalten',
   kleingedruckt:
-    `Alle Preise inkl. MwSt. Einmalige Aktivierungsgebühr ${aktivierungsgebuehr}. Abbuchung alle 14 Tage per ` +
-    'SEPA-Lastschrift. Ermäßigung für Schüler, Azubis und Studierende – sprich uns an. Mitgliedschaft ab 18 ' +
-    'Jahren. Alle Vertragsbedingungen bekommst du vor dem Abschluss; es gelten unsere ',
+    `Alle Preise inkl. MwSt. Einmalige ${GEBUEHR_NAME} ${aktivierungsgebuehr}. Abbuchung alle 14 Tage per ` +
+    `SEPA-Lastschrift. ${kuendigung} Ermäßigung für Schüler, Azubis und Studierende – sprich uns an. ` +
+    'Mitgliedschaft ab 18\u00a0Jahren. Alle Vertragsbedingungen bekommst du vor dem Abschluss; es gelten unsere ',
 }
 
 export const start = {
@@ -101,7 +94,7 @@ export const start = {
     'Du musst nichts vorbereiten und dich zu nichts verpflichten. Such dir einen freien Termin aus – den Rest ' +
     'machen wir gemeinsam.',
   schritte: [
-    { titel: 'Probetraining anfragen.', text: 'Wähl online einen freien Termin oder ruf uns an.' },
+    { titel: 'Probetraining anfragen.', text: 'Wähle online einen freien Termin oder ruf uns an.' },
     { titel: 'Studio und Team kennenlernen.', text: 'Du schaust dir alles in Ruhe an und stellst deine Fragen.' },
     { titel: 'Ziele gemeinsam besprechen.', text: 'Wir sprechen darüber, was du erreichen willst und was dein Alltag zulässt.' },
     { titel: 'Mit deinem Training starten.', text: 'Mit Einweisung an jedem Gerät und einem Plan, der zu dir passt.' },
@@ -120,12 +113,12 @@ export const vorOrt = {
   label: 'Vor Ort',
   zeilen: ['In Trier-Feyen.', 'Für dein gutes Gefühl.'],
   text:
-    `Das Fit-Inn ist seit ${studio.gegruendet} ein Familienbetrieb. Rund 15 Menschen arbeiten hier, rund 1.200 ` +
-    'Mitglieder trainieren bei uns. Groß genug für alles, was du brauchst – und klein genug, um dich zu kennen.',
+    `Das Fit-Inn ist seit ${studio.gegruendet} ein Familienbetrieb – kein Franchise, keine Kette. Groß genug ` +
+    'für alles, was du brauchst, und klein genug, um dich zu kennen.',
   bildAlt: 'Helle Trainingsfläche im Fit-Inn Trier mit Holzdecke und Technogym-Geräten',
   kasten: {
-    zahl: studio.gegruendet,
-    text: 'gegründet und seitdem in Familienhand. Kein Franchise, keine Kette – ein Studio aus Trier.',
+    zahl: studio.mitglieder,
+    text: `Mitglieder trainieren aktuell bei uns – betreut von ${studio.team} Menschen im Team.`,
     quelle: 'Stand: September 2026',
   },
 }
@@ -155,9 +148,13 @@ export const fragen = [
   {
     frage: 'Welche Mitgliedschaften gibt es?',
     antwort:
-      'Drei Laufzeiten mit demselben Leistungsumfang: 104 Wochen für 9 € pro Woche, 52 Wochen für 12 € pro Woche ' +
-      `und 4 Wochen für 15 € pro Woche. Einmalig kommt eine Aktivierungsgebühr von ${aktivierungsgebuehr} hinzu, ` +
+      'Drei Laufzeiten mit demselben Leistungsumfang: 104\u00a0Wochen für 9\u00a0€ pro Woche, 52\u00a0Wochen für 12\u00a0€ pro Woche ' +
+      `und 4\u00a0Wochen für 15\u00a0€ pro Woche. Einmalig kommt eine ${GEBUEHR_NAME} von ${aktivierungsgebuehr} hinzu, ` +
       'abgebucht wird alle 14 Tage per SEPA-Lastschrift.',
+  },
+  {
+    frage: 'Wie lange binde ich mich?',
+    antwort: `So lange, wie die gewählte Erstlaufzeit dauert: 4, 52 oder 104\u00a0Wochen. ${kuendigung}`,
   },
   {
     frage: 'Welche Geräte habt ihr?',
@@ -167,7 +164,7 @@ export const fragen = [
   },
   {
     frage: 'Ab welchem Alter kann ich Mitglied werden?',
-    antwort: 'Mitgliedschaft und Training sind bei uns ab 18 Jahren möglich.',
+    antwort: 'Mitgliedschaft und Training sind bei uns ab 18\u00a0Jahren möglich.',
   },
   {
     frage: 'Wo finde ich euch?',
@@ -187,5 +184,5 @@ export const meta = {
   titel: 'Fitnessstudio Trier-Feyen: persönlich betreut | Fit-Inn Trier',
   beschreibung:
     'Familiengeführtes Fitnessstudio in Trier-Feyen seit 1996: persönliche Betreuung, computergesteuerte ' +
-    'Technogym-Geräte, klare Preise. Probetraining kostenlos und unverbindlich.',
+    'Technogym-Geräte. Probetraining kostenlos und unverbindlich.',
 }

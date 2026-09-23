@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { CookieVerweis } from './CookieVerweis'
 import type { NavPunkt } from './Kopf'
 import { studio, telLink } from './studio'
@@ -62,8 +61,10 @@ export function Fuss({
           <nav aria-label="Rechtliches">
             <h2>Rechtliches</h2>
             <ul>
-              <li><Link href="/impressum">Impressum</Link></li>
-              <li><Link href="/datenschutz">Datenschutz</Link></li>
+              {/* Bewusst <a> statt <Link>: ein voller Seitenaufbau lädt das Root-Layout
+                  der Zielseite samt Consent-Voreinstellung frisch (siehe AusserAuf). */}
+              <li><a href="/impressum">Impressum</a></li>
+              <li><a href="/datenschutz">Datenschutz</a></li>
               <li><a href={studio.agb} target="_blank" rel="noopener noreferrer">AGB<span className="sr-only"> (öffnet in neuem Tab)</span></a></li>
               <li><a href={studio.website.href}>{studio.website.anzeige}</a></li>
               {cookieEinstellungen && <li><CookieVerweis /></li>}

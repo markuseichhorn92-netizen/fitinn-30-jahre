@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { studio, telLink } from './studio'
 import { Anruf, Pfeil } from './Teile'
 
@@ -18,10 +18,16 @@ export function Kopf({
   aktion: { href: string; lang: string; kurz: string; cta?: string }
 }) {
   const [offen, setOffen] = useState(false)
+  const schalter = useRef<HTMLButtonElement>(null)
 
+  // Escape schließt das Menü und gibt den Fokus an den Menüknopf zurück.
   useEffect(() => {
     if (!offen) return
-    const taste = (e: KeyboardEvent) => { if (e.key === 'Escape') setOffen(false) }
+    const taste = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setOffen(false)
+      schalter.current?.focus()
+    }
     window.addEventListener('keydown', taste)
     return () => window.removeEventListener('keydown', taste)
   }, [offen])
@@ -50,6 +56,7 @@ export function Kopf({
         </a>
 
         <button
+          ref={schalter}
           type="button"
           className="fi-menue-schalter"
           aria-expanded={offen}
@@ -65,18 +72,17 @@ export function Kopf({
         </button>
       </div>
 
-      {offen && (
-        <div id="fi-menue" className="fi-menue">
-          <div className="fi-satz">
-            <ul>
-              {nav.map(p => (
-                <li key={p.href}><a href={p.href} onClick={() => setOffen(false)}>{p.text}</a></li>
-              ))}
-            </ul>
-            <Anruf vorsatz="Anrufen:" />
-          </div>
+      {/* Immer im DOM, damit aria-controls gültig bleibt; [hidden] blendet aus. */}
+      <nav id="fi-menue" className="fi-menue" aria-label="Seitenbereiche (Menü)" hidden={!offen}>
+        <div className="fi-satz">
+          <ul>
+            {nav.map(p => (
+              <li key={p.href}><a href={p.href} onClick={() => setOffen(false)}>{p.text}</a></li>
+            ))}
+          </ul>
+          <Anruf vorsatz="Anrufen:" />
         </div>
-      )}
+      </nav>
     </header>
   )
 }

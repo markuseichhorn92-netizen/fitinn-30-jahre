@@ -1,43 +1,16 @@
 import { faqSchema } from '@/components/fitinn/Faq'
-import { fragen, kontakt, meta } from './inhalt'
+import { BASIS, healthClubSchema, studio } from '@/components/fitinn/studio'
+import { fragen, meta } from './inhalt'
 
-const BASIS = 'https://30jahre.fit-inn-trier.de'
-
-// Strukturierte Daten der Seite /oktober: das Studio als HealthClub
-// (LocalBusiness) und die sichtbaren FAQ als FAQPage. Bewusst ohne
-// Bewertungen (selbst ausgewiesene Bewertungen zeigt Google für
-// LocalBusiness nicht an), ohne Öffnungszeiten (noch nicht bestätigt) und
-// ohne Geokoordinaten (nicht gegengeprüft).
+// Strukturierte Daten der Seite /oktober: das Studio als HealthClub (dieselbe
+// Entität wie auf der Startseite) und die sichtbaren FAQ als FAQPage. Ohne
+// Bewertungen, Öffnungszeiten und Geokoordinaten – nichts davon ist belegt.
 export function strukturdaten() {
   const url = `${BASIS}${meta.pfad}`
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'HealthClub',
-        '@id': `${kontakt.website.href}/#studio`,
-        name: kontakt.name,
-        description:
-          'Familiengeführtes Fitnessstudio in Trier-Feyen seit 1996: persönliche Betreuung durch Trainer, ' +
-          'Ernährungs- und Gesundheitscoaches, Biostrength-Geräte von Technogym, Cardio- und Freihantelbereich.',
-        url: kontakt.website.href,
-        telephone: kontakt.telefon.link,
-        email: kontakt.email,
-        foundingDate: kontakt.gegruendet,
-        image: `${BASIS}/studio-1.avif`,
-        logo: `${BASIS}/logo.png`,
-        priceRange: '€€',
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: kontakt.strasse,
-          postalCode: kontakt.plz,
-          addressLocality: kontakt.ort,
-          addressRegion: 'Rheinland-Pfalz',
-          addressCountry: 'DE',
-        },
-        areaServed: { '@type': 'City', name: 'Trier' },
-        sameAs: [kontakt.instagram, kontakt.facebook],
-      },
+      healthClubSchema(),
       {
         '@type': 'WebPage',
         '@id': `${url}#seite`,
@@ -45,7 +18,7 @@ export function strukturdaten() {
         name: meta.titel,
         description: meta.beschreibung,
         inLanguage: 'de-DE',
-        about: { '@id': `${kontakt.website.href}/#studio` },
+        about: { '@id': `${studio.website.href}/#studio` },
       },
       faqSchema(fragen, `${url}#fragen`),
     ],

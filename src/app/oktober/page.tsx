@@ -16,7 +16,13 @@ export function generateMetadata(): Metadata {
   if (!laeuft()) {
     return {
       title: { absolute: 'Das Oktober-Special ist beendet — Fit-Inn Trier' },
-      description: 'Die Aktion ist abgelaufen. Aktuelle Angebote findest du auf fit-inn-trier.de.',
+      description: 'Die Aktion ist abgelaufen. Ein kostenloses Probetraining kannst du weiterhin buchen.',
+      openGraph: {
+        type: 'website',
+        siteName: 'Fit-Inn Trier',
+        title: 'Das Oktober-Special ist beendet — Fit-Inn Trier',
+        description: 'Die Aktion ist abgelaufen. Ein kostenloses Probetraining kannst du weiterhin buchen.',
+      },
       robots: { index: false, follow: true },
     }
   }

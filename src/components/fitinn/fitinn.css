@@ -68,7 +68,8 @@
   outline-offset: 3px;
 }
 .fi .fi-dunkel :focus-visible,
-.fi .fi-fuss :focus-visible { outline-color: var(--akzent); }
+.fi .fi-fuss :focus-visible,
+.fi .fi-preis--dunkel :focus-visible { outline-color: var(--akzent); }
 .fi .fi-orange :focus-visible { outline-color: var(--text); }
 
 .fi .sr-only {
@@ -88,9 +89,14 @@
   width: min(var(--breite), 100% - 2 * var(--rand));
   margin-inline: auto;
 }
-.fi .fi-abschnitt {
-  padding-block: var(--abschnitt);
-  scroll-margin-top: 72px;
+.fi .fi-abschnitt { padding-block: var(--abschnitt); }
+.fi .fi-trenner { border-top: 1px solid var(--linie); }
+
+/* Sprungziele nicht unter der klebenden Kopfzeile (und auf /oktober nicht
+   unter der Leiste am unteren Rand) verschwinden lassen. */
+html:has(.fi) { scroll-padding-top: 84px; }
+@media (max-width: 819px) {
+  html:has(.fi-mit-leiste) { scroll-padding-bottom: 96px; }
 }
 .fi .fi-dunkel { background: var(--dunkel); color: var(--weiss); }
 .fi .fi-hell { background: var(--hell); }
@@ -99,22 +105,27 @@
 /* Zwei Spalten: Aussage links, Inhalt rechts */
 .fi .fi-zwei {
   display: grid;
-  gap: clamp(36px, 6vw, 88px);
+  gap: var(--spalten-abstand);
 }
+/* Alle Zweispalter teilen dieselbe Achse – die rechte Spalte beginnt auf der
+   ganzen Seite an derselben Linie. Nur der Hero hat sein eigenes Verhältnis. */
 @media (min-width: 960px) {
-  .fi .fi-zwei { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
-  .fi .fi-zwei--gleich { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .fi .fi-zwei { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
 /* ─── Typografie ──────────────────────────────────────────────────────── */
 .fi .fi-h1 {
-  font-size: clamp(38px, 5.6vw, 68px);
+  font-size: clamp(36px, 4.6vw, 58px);
   line-height: 1.02;
   letter-spacing: -.028em;
 }
 .fi .fi-h2 {
   font-size: clamp(32px, 3.9vw, 46px);
   line-height: 1.06;
+}
+/* Schmale Handys: die breite Achse zurücknehmen, damit gesetzte Zeilen halten. */
+@media (max-width: 479px) {
+  .fi .fi-h1, .fi .fi-h2 { font-stretch: 100%; }
 }
 .fi .fi-h3 {
   font-size: clamp(19px, 1.5vw, 21px);
@@ -146,6 +157,7 @@
   margin-bottom: clamp(18px, 2.4vw, 26px);
 }
 .fi .fi-label-nr { color: var(--akzent-schrift); }
+.fi .fi-hell .fi-label-nr { color: #8a4600; } /* 5,4:1 auf #CFE5EA */
 .fi .fi-label-strich { width: 40px; height: 1px; background: currentColor; opacity: .5; }
 .fi .fi-dunkel .fi-label { color: var(--matt-hell); }
 .fi .fi-dunkel .fi-label-nr { color: var(--akzent); }
@@ -156,7 +168,6 @@
   font-weight: 500;
   letter-spacing: .02em;
 }
-.fi .fi-zahl { font-variant-numeric: tabular-nums lining-nums; }
 
 /* ─── Schaltflächen ───────────────────────────────────────────────────── */
 .fi .fi-knopf {
@@ -210,7 +221,7 @@
   text-underline-offset: .25em;
 }
 .fi .fi-verweis:hover { text-decoration-thickness: 2px; }
-.fi .fi-verweis--mono { font-family: var(--mono); font-weight: 500; font-size: 15px; text-decoration: none; }
+.fi .fi-verweis--mono { font-family: var(--mono); font-weight: 500; font-size: 17px; text-decoration: none; }
 .fi .fi-verweis--mono:hover { text-decoration: underline; }
 
 .fi .fi-aktionen {
@@ -282,7 +293,7 @@
 .fi .fi-hero { padding-block: clamp(40px, 7vw, 104px) clamp(56px, 8vw, 112px); }
 .fi .fi-hero-raster { display: grid; gap: clamp(40px, 6vw, 72px); align-items: center; }
 @media (min-width: 960px) {
-  .fi .fi-hero-raster { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .fi .fi-hero-raster { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--spalten-abstand); }
 }
 .fi .fi-hero-ort {
   display: flex; align-items: center; gap: 10px;
@@ -315,10 +326,10 @@
   .fi .fi-merkmale span { margin-top: 0; }
 }
 .fi .fi-merkmale strong { display: block; font-size: 17px; font-stretch: 105%; line-height: 1.3; }
-.fi .fi-merkmale span { display: block; font-size: 15.5px; line-height: 1.45; color: var(--matt); margin-top: 4px; }
+.fi .fi-merkmale span { display: block; font-size: 17px; line-height: 1.45; color: var(--matt); margin-top: 4px; }
 
 /* Die Bildtafel rechts: dunkler Rahmen, Kopfzeile, Foto, Kennzahlen, Streifen */
-.fi .fi-tafel { background: var(--dunkel); color: var(--weiss); }
+.fi .fi-tafel { background: var(--dunkel); color: var(--weiss); container-type: inline-size; }
 .fi .fi-tafel-kopf {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 12px 16px;
@@ -326,28 +337,28 @@
   color: var(--matt-hell);
 }
 .fi .fi-tafel-kopf-punkt { display: inline-flex; align-items: center; gap: 8px; }
-.fi .fi-tafel-kopf-punkt::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #5fd08a; }
+.fi .fi-tafel-kopf-punkt::before { content: ''; width: 7px; height: 7px; background: var(--akzent); }
 .fi .fi-tafel-bild { position: relative; aspect-ratio: 4 / 3; margin: 0 16px; overflow: hidden; background: var(--petrol); }
 .fi .fi-tafel-bild img { object-fit: cover; }
 .fi .fi-tafel-werte {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0; padding: 0; list-style: none;
 }
-@media (min-width: 480px) {
-  .fi .fi-tafel-werte { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+/* Vier Spalten nur, wenn die Tafel selbst breit genug ist – nicht nach
+   Fensterbreite, denn ab 960 px steht sie in der schmaleren Hero-Spalte. */
+@container (min-width: 600px) {
+  .fi .fi-tafel-werte:not(.fi-tafel-werte--2) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fi .fi-tafel-werte:not(.fi-tafel-werte--2) li:nth-child(3) { border-left: 1px solid var(--linie-hell); }
 }
 .fi .fi-tafel-werte li { padding: 14px 16px; border-top: 1px solid var(--linie-hell); }
-.fi .fi-tafel-werte--2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-.fi .fi-tafel-werte--2 li:nth-child(3) { border-left: 0; }
+.fi .fi-tafel-werte--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 959px) {
   .fi .fi-tafel-bild { aspect-ratio: 16 / 10; }
 }
 .fi .fi-tafel-werte li + li { border-left: 1px solid var(--linie-hell); }
-@media (max-width: 479px) {
-  .fi .fi-tafel-werte li:nth-child(3) { border-left: 0; }
-}
+.fi .fi-tafel-werte li:nth-child(3) { border-left: 0; }
 .fi .fi-tafel-werte strong { display: block; font-size: 18px; font-stretch: 108%; line-height: 1.2; }
-.fi .fi-tafel-werte span { display: block; font-size: 14.5px; color: var(--matt-hell); margin-top: 2px; line-height: 1.35; }
+.fi .fi-tafel-werte span { display: block; font-size: 17px; color: var(--matt-hell); margin-top: 2px; line-height: 1.35; }
 .fi .fi-tafel-streifen {
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px 16px;
   padding: 14px 16px; background: var(--akzent); color: var(--text);
@@ -378,7 +389,7 @@
   .fi .fi-leiste-vertrauen li:nth-child(n+3) { border-top: 1px solid var(--linie); }
 }
 .fi .fi-leiste-vertrauen strong { display: block; font-size: 17px; font-stretch: 108%; line-height: 1.25; }
-.fi .fi-leiste-vertrauen span { display: block; font-size: 15.5px; color: var(--matt); line-height: 1.4; margin-top: 2px; }
+.fi .fi-leiste-vertrauen span { display: block; font-size: 17px; color: var(--matt); line-height: 1.4; margin-top: 2px; }
 
 /* ─── Dunkle Fläche mit feinem Raster ─────────────────────────────────── */
 .fi .fi-raster-grund {
@@ -414,17 +425,18 @@
   color: var(--akzent-schrift); margin-bottom: 14px;
 }
 .fi .fi-dunkel .fi-spalte-nr { color: var(--akzent); }
-.fi .fi-spalte p { margin-top: 10px; font-size: 16.5px; line-height: 1.6; color: var(--matt); }
+.fi .fi-spalte p { margin-top: 10px; font-size: 17px; line-height: 1.6; color: var(--matt); }
 .fi .fi-dunkel .fi-spalte p { color: var(--matt-hell); }
 .fi .fi-fussnote {
   margin-top: clamp(40px, 5vw, 56px);
-  font-family: var(--mono); font-size: 14px; font-weight: 500; letter-spacing: .02em; color: var(--matt);
+  font-size: 17px; font-weight: 500; color: var(--matt);
 }
 .fi .fi-dunkel .fi-fussnote { color: var(--matt-hell); }
 
 /* ─── Preise ──────────────────────────────────────────────────────────── */
 .fi .fi-preise {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   margin-top: clamp(48px, 6vw, 80px);
   align-items: stretch;
@@ -450,7 +462,7 @@
   background: var(--akzent); color: var(--text); padding: 5px 9px; margin-bottom: 18px;
 }
 .fi .fi-preis-name { font-size: clamp(20px, 1.7vw, 23px); font-weight: 700; font-stretch: 108%; line-height: 1.2; }
-.fi .fi-preis-unter { font-size: 16px; color: var(--matt); margin-top: 4px; }
+.fi .fi-preis-unter { font-size: 17px; color: var(--matt); margin-top: 4px; }
 .fi .fi-preis--dunkel .fi-preis-unter { color: var(--matt-hell); }
 .fi .fi-preis-kopf {
   margin-top: clamp(22px, 2.6vw, 30px);
@@ -464,17 +476,17 @@
   font-size: clamp(36px, 3.6vw, 44px); font-weight: 700; font-stretch: 110%; line-height: 1; letter-spacing: -.03em;
   font-variant-numeric: tabular-nums lining-nums;
 }
-.fi .fi-preis-betrag span { font-size: 17px; font-weight: 600; }
-.fi .fi-preis-betrag sup a { text-decoration: none; padding: 0 4px; color: var(--akzent-schrift); }
-.fi .fi-preis--dunkel .fi-preis-betrag sup a { color: var(--akzent); }
+.fi .fi-preis-betrag > span { font-size: 17px; font-weight: 600; }
+/* Das Sternchen am Aktionspreis: hochgestellt, damit es als Verweis lesbar bleibt. */
+.fi .fi-preis-betrag strong span,
+.fi .fi-vermerk-preis strong span { font-size: .5em; vertical-align: .7em; font-weight: 700; margin-left: .04em; }
 .fi .fi-preis-trenner { height: 1px; background: var(--linie); margin: clamp(20px, 2.4vw, 26px) 0; border: 0; }
 .fi .fi-preis--dunkel .fi-preis-trenner { background: var(--linie-hell); }
 
 .fi .fi-haken-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.fi .fi-haken-liste li { display: flex; gap: 10px; align-items: flex-start; font-size: 16.5px; line-height: 1.5; }
+.fi .fi-haken-liste li { display: flex; gap: 10px; align-items: flex-start; font-size: 17px; line-height: 1.5; }
 .fi .fi-haken-liste svg { flex: none; margin-top: 4px; color: var(--akzent-schrift); }
-.fi .fi-preis--dunkel .fi-haken-liste svg,
-.fi .fi-dunkel .fi-haken-liste svg { color: var(--akzent); }
+.fi .fi-preis--dunkel .fi-haken-liste svg { color: var(--akzent); }
 
 .fi .fi-rechnung { width: 100%; border-collapse: collapse; font-size: 17px; font-variant-numeric: tabular-nums; }
 .fi .fi-rechnung caption {
@@ -485,6 +497,7 @@
 .fi .fi-rechnung th, .fi .fi-rechnung td { padding: 8px 0; border-top: 1px solid var(--linie); text-align: left; font-weight: 400; vertical-align: top; }
 .fi .fi-preis--dunkel .fi-rechnung th, .fi .fi-preis--dunkel .fi-rechnung td { border-top-color: var(--linie-hell); }
 .fi .fi-rechnung td { text-align: right; white-space: nowrap; padding-left: 12px; }
+@media (max-width: 359px) { .fi .fi-rechnung .fi-formel { white-space: normal; } }
 .fi .fi-rechnung .fi-formel { color: var(--matt); }
 .fi .fi-preis--dunkel .fi-rechnung .fi-formel { color: var(--matt-hell); }
 .fi .fi-rechnung .fi-summe th, .fi .fi-rechnung .fi-summe td { font-weight: 700; border-top: 2px solid currentColor; }
@@ -506,11 +519,11 @@
 }
 .fi .fi-preis-leiste ul {
   list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px;
-  font-size: 16.5px;
+  font-size: 17px;
 }
 .fi .fi-preis-leiste li { display: inline-flex; gap: 8px; align-items: center; }
 .fi .fi-preis-leiste li svg { color: var(--akzent-schrift); flex: none; }
-.fi .fi-kleingedruckt { margin-top: 16px; font-size: 16px; line-height: 1.55; color: var(--matt); max-width: 80ch; }
+.fi .fi-kleingedruckt { margin-top: 16px; font-size: 17px; line-height: 1.6; color: var(--matt); max-width: 80ch; }
 .fi .fi-kleingedruckt a { color: var(--text); font-weight: 600; text-underline-offset: .2em; }
 
 /* Hinweiskasten (Aktion) */
@@ -518,8 +531,9 @@
   display: grid; gap: 14px 32px; align-items: center;
   margin-top: clamp(32px, 4vw, 44px);
   padding: 20px 22px;
+  border: 1px solid var(--linie);
   border-left: 4px solid var(--akzent);
-  background: #fff7eb;
+  background: var(--weiss);
 }
 @media (min-width: 760px) { .fi .fi-hinweis { grid-template-columns: minmax(0, 1fr) auto; } }
 .fi .fi-hinweis strong { font-stretch: 106%; }
@@ -540,7 +554,7 @@
   font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--text);
 }
 .fi .fi-schritt:first-child .fi-schritt-nr { background: var(--akzent); border-color: var(--akzent); }
-.fi .fi-schritt p { color: var(--matt); font-size: 16.5px; line-height: 1.6; }
+.fi .fi-schritt p { color: var(--matt); font-size: 17px; line-height: 1.6; }
 .fi .fi-zwei-links { align-self: start; }
 @media (min-width: 960px) {
   .fi .fi-zwei-links--klebend { position: sticky; top: 104px; }
@@ -578,6 +592,7 @@
   line-height: 1; letter-spacing: -.03em;
 }
 .fi .fi-kasten p { margin-top: 12px; color: var(--matt-hell); font-size: 17px; line-height: 1.55; max-width: 44ch; }
+.fi .fi-kasten .fi-kasten-wert { margin-top: 6px; color: var(--weiss); font-weight: 600; }
 .fi .fi-kasten small {
   display: block; margin-top: 18px;
   font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--matt-hell);
@@ -603,8 +618,6 @@
 .fi .fi-faq-plus::after { transform: rotate(90deg); }
 .fi .fi-faq details[open] .fi-faq-plus::after { transform: rotate(0deg); }
 .fi .fi-faq-antwort { padding: 0 36px 22px 0; color: var(--matt); font-size: 17px; line-height: 1.65; max-width: 64ch; }
-.fi .fi-faq-antwort p + p { margin-top: .8em; }
-.fi .fi-faq-antwort a { color: var(--text); font-weight: 600; }
 /* Ruhiges Öffnen, wo der Browser es kann (::details-content) */
 @supports (interpolate-size: allow-keywords) {
   .fi .fi-faq { interpolate-size: allow-keywords; }
@@ -621,14 +634,14 @@
 @media (min-width: 960px) {
   .fi .fi-abschluss-raster { grid-template-columns: minmax(0, 1fr) auto; }
 }
-.fi .fi-abschluss .fi-h2 { font-size: clamp(34px, 4.6vw, 56px); }
+.fi .fi-abschluss .fi-h2 { font-size: clamp(34px, 4.2vw, 48px); }
 .fi .fi-abschluss .fi-text { margin-top: 20px; font-size: 18px; }
 .fi .fi-abschluss-rechts { display: grid; gap: 10px; justify-items: start; }
 @media (min-width: 960px) { .fi .fi-abschluss-rechts { justify-items: end; } }
 .fi .fi-abschluss .fi-verweis--mono { color: var(--text); }
 
 /* ─── Fuß ─────────────────────────────────────────────────────────────── */
-.fi .fi-fuss { background: var(--dunkel); color: var(--matt-hell); padding-block: clamp(48px, 6vw, 72px) 28px; font-size: 16.5px; }
+.fi .fi-fuss { background: var(--dunkel); color: var(--matt-hell); padding-block: clamp(48px, 6vw, 72px) 28px; font-size: 17px; }
 .fi .fi-fuss-raster {
   display: grid; gap: 36px clamp(24px, 4vw, 56px);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
@@ -644,12 +657,12 @@
 }
 .fi .fi-fuss ul { list-style: none; margin: 0; padding: 0; }
 .fi .fi-fuss li a, .fi .fi-fuss address a {
-  display: inline-flex; align-items: center; min-height: 40px; color: var(--weiss); text-decoration: none;
+  display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; color: var(--weiss); text-decoration: none;
 }
 .fi .fi-fuss li a:hover, .fi .fi-fuss address a:hover { text-decoration: underline; text-underline-offset: .25em; }
 .fi .fi-fuss address { font-style: normal; line-height: 1.6; }
 .fi .fi-fuss-knopf {
-  display: inline-flex; align-items: center; min-height: 40px; padding: 0;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0;
   border: 0; background: none; color: var(--weiss); font: inherit; cursor: pointer; text-align: left;
 }
 .fi .fi-fuss-knopf:hover { text-decoration: underline; text-underline-offset: .25em; }
@@ -677,8 +690,13 @@
 .fi .fi-fortschritt li[data-zustand='fertig'] { border-top-color: var(--dunkel); color: var(--text); }
 .fi .fi-formular { container-type: inline-size; }
 .fi .fi-termin-raster { display: grid; gap: clamp(24px, 3vw, 40px); }
-@container (min-width: 640px) {
+@container (min-width: 720px) {
   .fi .fi-termin-raster { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+/* Schmale Handys: Formular bis an den Rand, damit jeder Kalendertag 44 px breit wird. */
+@media (max-width: 419px) {
+  .fi .fi-formular { margin-inline: calc(-1 * var(--rand)); border-inline: 0; padding-inline: 12px; }
+  .fi .fi-tage, .fi .fi-wochentage { gap: 2px; }
 }
 .fi .fi-monat { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
 .fi .fi-monat strong { font-size: 18px; font-stretch: 106%; }
@@ -702,11 +720,17 @@
 .fi .fi-zeiten { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
 .fi .fi-feldgruppe { display: grid; gap: 16px; }
 .fi .fi-paar { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
-.fi .fi-feld-label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.fi .fi-feld-label { display: block; font-size: 17px; font-weight: 600; margin-bottom: 6px; }
 .fi .fi-feld {
   width: 100%; min-height: 50px; padding: 10px 12px;
   border: 1px solid var(--linie-stark); border-radius: 2px; background: var(--weiss); color: var(--text);
-  font: inherit; font-size: 19px !important; /* globale 16-px-Regel würde in iOS Safari zoomen */
+  font: inherit;
+}
+/* globals.css setzt Formularfelder in @layer base mit !important auf 16 px.
+   Ein !important außerhalb eines Layers verliert dagegen – deshalb dieselbe
+   Ebene, dort gewinnt die höhere Spezifität. 19 px entsprechen PRODUCT.md. */
+@layer base {
+  .fi .fi-feld { font-size: 19px !important; }
 }
 .fi .fi-feld:focus { outline: 3px solid var(--petrol); outline-offset: 0; border-color: var(--petrol); }
 .fi .fi-feld:user-invalid { border-color: #b3261e; }
@@ -715,18 +739,18 @@
 .fi .fi-fieldset legend { padding: 0; }
 .fi .fi-wahlen { display: flex; gap: 8px; }
 .fi .fi-wahl { padding: 0 24px; }
-.fi .fi-einwilligung { display: flex; gap: 12px; align-items: flex-start; font-size: 16.5px; line-height: 1.55; cursor: pointer; }
+.fi .fi-einwilligung { display: flex; gap: 12px; align-items: flex-start; font-size: 17px; line-height: 1.55; cursor: pointer; }
 .fi .fi-einwilligung input { width: 22px; height: 22px; flex: none; margin-top: 2px; accent-color: var(--dunkel); }
 .fi .fi-einwilligung a { font-weight: 600; text-underline-offset: .2em; }
-.fi .fi-gewaehlt { margin-top: 20px; padding: 12px 14px; background: var(--hell); font-size: 16.5px; }
+.fi .fi-gewaehlt { margin-top: 20px; padding: 12px 14px; background: var(--hell); font-size: 17px; }
 .fi .fi-steuerung {
   display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
   margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--linie);
 }
 .fi .fi-steuerung .fi-knopf--orange { flex: 1 1 220px; }
-.fi .fi-fehler { margin-top: 16px; padding: 14px 16px; border-left: 4px solid #b3261e; background: #fdf1f0; font-size: 16.5px; line-height: 1.55; }
+.fi .fi-fehler { margin-top: 16px; padding: 14px 16px; border-left: 4px solid #b3261e; background: #fdf1f0; font-size: 17px; line-height: 1.55; }
 .fi .fi-erfolg { margin-top: 20px; padding: 18px 20px; border-left: 4px solid #1f7a4d; background: #eef8f2; font-size: 17px; line-height: 1.6; }
-.fi .fi-zeithinweis { color: var(--matt); font-size: 16.5px; line-height: 1.6; max-width: 42ch; }
+.fi .fi-zeithinweis { color: var(--matt); font-size: 17px; line-height: 1.6; max-width: 42ch; }
 
 /* ─── Platzhalter (klar gekennzeichnet) ───────────────────────────────── */
 .fi .fi-platzhalter {
@@ -747,7 +771,7 @@
   font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
   background: var(--text); color: var(--weiss); padding: 4px 8px;
 }
-.fi .fi-platzhalter p { font-size: 16.5px; line-height: 1.5; }
+.fi .fi-platzhalter p { font-size: 17px; line-height: 1.5; }
 
 /* ─── Klebende Leiste (nur /oktober, nur Handy) ───────────────────────── */
 .fi .fi-leiste-unten {
@@ -761,11 +785,18 @@
   transform: translateY(110%); visibility: hidden;
   transition: transform .3s cubic-bezier(.16, 1, .3, 1), visibility 0s .3s;
 }
+/* Tastaturfokus im Inhalt: Leiste zurücknehmen, damit sie nichts Fokussiertes
+   verdeckt (WCAG 2.4.11). Die Aktionen sind in der Tab-Folge ohnehin erreichbar. */
+.fi.fi-mit-leiste:has(main :focus-visible, .fi-fuss :focus-visible) .fi-leiste-unten {
+  transform: translateY(110%); visibility: hidden;
+}
 .fi .fi-leiste-unten .fi-knopf { flex: 1; }
 .fi .fi-leiste-unten .fi-knopf--linie { flex: none; width: 52px; padding: 0; }
 @media (min-width: 820px) { .fi .fi-leiste-unten { display: none; } }
 @media (max-width: 819px) {
-  .fi .fi-mit-leiste .fi-fuss { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .fi.fi-mit-leiste .fi-fuss { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  /* Die Leiste übernimmt die Hauptaktion – kein zweiter oranger Knopf im Kopf. */
+  .fi.fi-mit-leiste .fi-kopf .fi-knopf { display: none; }
 }
 
 /* ─── Erscheinen beim Scrollen ────────────────────────────────────────── */
@@ -778,6 +809,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .fi *, .fi *::before, .fi *::after { transition: none !important; animation: none !important; }
+  .fi .fi-faq details::details-content { transition: none !important; }
   .fi-js .fi [data-zeigen] { opacity: 1; transform: none; }
   html:has(.fi) { scroll-behavior: auto; }
 }
@@ -810,14 +842,14 @@
 .fi .fi-preis-extra {
   display: flex; gap: 12px; align-items: flex-start;
   margin-top: 20px; padding: 14px 16px;
-  background: rgba(255, 181, 79, .14); border-left: 3px solid var(--akzent);
+  border: 1px solid var(--linie-hell); border-left: 3px solid var(--akzent);
 }
 .fi .fi-preis-extra-plus {
   flex: none; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
   background: var(--akzent); color: var(--text); padding: 4px 7px; margin-top: 2px;
 }
 .fi .fi-preis-extra strong { display: block; font-size: 17px; line-height: 1.35; }
-.fi .fi-preis-extra-wert { display: block; font-size: 16px; color: var(--matt-hell); margin-top: 2px; }
+.fi .fi-preis-extra-wert { display: block; font-size: 17px; color: var(--matt-hell); margin-top: 2px; }
 
 .fi .fi-hinweise {
   margin-top: clamp(32px, 4vw, 48px);
@@ -848,14 +880,14 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
 }
 .fi .fi-team-personen strong { display: block; margin-top: 12px; font-size: 17px; }
-.fi .fi-team-personen li > span { display: block; font-size: 16px; color: var(--matt); }
+.fi .fi-team-personen li > span { display: block; font-size: 17px; color: var(--matt); }
 
 .fi .fi-stimme-leer { display: flex; flex-direction: column; gap: 10px; }
 .fi .fi-stimme-leer p { font-size: 17px; line-height: 1.55; color: var(--matt); }
 .fi .fi-stimme-name { font-family: var(--mono); font-size: 13px; color: var(--matt); margin-top: auto; }
 .fi .fi-stimme-zitat { margin: 0; font-size: clamp(19px, 1.6vw, 22px); font-weight: 600; font-stretch: 105%; line-height: 1.4; }
 
-.fi .fi-pflicht { padding-block: clamp(40px, 5vw, 56px); border-top: 1px solid var(--linie); scroll-margin-top: 72px; }
+.fi .fi-pflicht { padding-block: clamp(40px, 5vw, 56px); border-top: 1px solid var(--linie); }
 .fi .fi-pflicht h2 {
   font-family: var(--mono); font-size: 12px; font-weight: 500; font-stretch: 100%;
   letter-spacing: .1em; text-transform: uppercase; color: var(--matt); margin-bottom: 14px;
@@ -865,3 +897,4 @@
   column-width: 46ch; column-gap: clamp(32px, 5vw, 64px); hyphens: auto;
 }
 .fi .fi-pflicht a { color: var(--text); text-decoration: underline; text-underline-offset: .2em; }
+.fi .fi-schritt-feld:focus { outline: none; }

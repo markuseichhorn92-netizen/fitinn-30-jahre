@@ -26,7 +26,12 @@ export function Leiste() {
   }, [])
 
   return (
-    <div className="fi-leiste-unten" data-sichtbar={sichtbar ? 'ja' : 'nein'} aria-hidden={!sichtbar}>
+    <aside
+      className="fi-leiste-unten"
+      aria-label="Schnellkontakt"
+      data-sichtbar={sichtbar ? 'ja' : 'nein'}
+      aria-hidden={!sichtbar}
+    >
       <Knopf href="#anfrage" cta="oktober-allgemein" tabIndex={sichtbar ? undefined : -1}>
         Unverbindlich anfragen
       </Knopf>
@@ -39,6 +44,6 @@ export function Leiste() {
       >
         <Telefon groesse={20} />
       </a>
-    </div>
+    </aside>
   )
 }

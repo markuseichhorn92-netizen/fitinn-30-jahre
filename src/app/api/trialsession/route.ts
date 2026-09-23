@@ -61,8 +61,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Alle Pflichtfelder sind erforderlich' }, { status: 400 })
     }
 
+    // Mitgliedschaft und Training erst ab 18 Jahren (AGB Ziffer 1.6).
+    const geburt = new Date(`${dateOfBirth}T00:00:00`)
+    const grenze = new Date()
+    grenze.setFullYear(grenze.getFullYear() - 18)
+    if (Number.isNaN(geburt.getTime()) || geburt > grenze) {
+      return NextResponse.json({ error: 'Training ist bei uns ab 18 Jahren möglich.' }, { status: 400 })
+    }
+
     // Kampagnen-Notiz + optionale Anmerkung des Interessenten zusammenführen.
-    const grundNotiz = (typeof quelle === 'string' && NOTIZ_JE_QUELLE[quelle]) || CAMPAIGN_NOTE
+    const grundNotiz =
+      typeof quelle === 'string' && Object.hasOwn(NOTIZ_JE_QUELLE, quelle) ? NOTIZ_JE_QUELLE[quelle] : CAMPAIGN_NOTE
     const bookingNote = [grundNotiz, note ? `Anmerkung: ${note}` : '']
       .filter(Boolean)
       .join(' | ')
