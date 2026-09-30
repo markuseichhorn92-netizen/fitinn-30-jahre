@@ -17,7 +17,6 @@ export const metadata: Metadata = {
     locale: 'de_DE',
     type: 'website',
   },
-  icons: { icon: '/favicon.png' },
 };
 
 export const viewport: Viewport = { themeColor: '#05090B', width: 'device-width', initialScale: 1 };
