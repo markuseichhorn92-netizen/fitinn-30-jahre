@@ -49,7 +49,7 @@
 @media (max-width: 767px) {
   .sec { padding: 80px 16px; }
   .quote, .q0, .q1, .q2 { align-self: stretch; padding: 52px 22px 24px; }
-  .mark { left: 18px; top: -52px; font-size: 110px; }
+  .mark { left: 16px; top: -78px; font-size: 110px; }
   .text { font-size: 21px; }
   .head { margin-bottom: 40px; }
   .stack { gap: 20px; }

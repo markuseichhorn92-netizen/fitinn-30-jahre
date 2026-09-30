@@ -38,7 +38,7 @@
 .future { background: linear-gradient(180deg, #3BC9E0 0%, #0F7D96 100%); }
 .past { background: #ffffff1a; }
 .now { background: var(--color-kit-white, #F4FAFB); box-shadow: 0 0 18px #3BC9E0; min-width: 4px; }
-.nowTag { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); padding: 4px 10px; border-radius: 999px; background: var(--color-kit-white, #F4FAFB); color: var(--color-kit-black, #05090B); font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.nowTag { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); padding: 4px 10px; border-radius: 999px; background: var(--color-kit-white, #F4FAFB); color: var(--color-kit-black, #05090B); font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
 .axis { display: flex; justify-content: space-between; margin-top: 10px; font-size: 13px; opacity: 0.6; }
 .limit { display: flex; align-items: center; gap: 12px; margin-top: 22px; padding: 14px 16px; border-radius: 16px; background: #3BC9E014; box-shadow: inset 0 0 0 1px #3BC9E040; font-size: 16px; font-weight: 700; line-height: 1.35; }
 .limitDot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--color-kit-key2, #3BC9E0); box-shadow: 0 0 0 4px #3BC9E033; animation: limitPulse 2s ease-in-out infinite; }

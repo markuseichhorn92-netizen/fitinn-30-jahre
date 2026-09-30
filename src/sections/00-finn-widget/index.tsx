@@ -661,7 +661,7 @@ export default function FinnChat(props: any) {
             ) : null}
           </div>
 
-          <form className={styles.form} onSubmit={(e) => { e.preventDefault(); send(input); }}>
+          {booking ? null : (<form className={styles.form} onSubmit={(e) => { e.preventDefault(); send(input); }}>
             <label htmlFor="fi-finn-input" className={styles.srOnly}>{inputLabel}</label>
             <textarea
               id="fi-finn-input"
@@ -677,7 +677,7 @@ export default function FinnChat(props: any) {
               onKeyDown={onKey}
             />
             <Button type="submit" disabled={busy || !!booking || !input.trim()}>{sendLabel}</Button>
-          </form>
+          </form>)}
           <p className={styles.disclosure}>
             {disclosure} <a href={privacyHref} target="_blank" rel="noopener noreferrer">{privacyLabel}</a>
           </p>

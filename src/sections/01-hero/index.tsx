@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
@@ -35,13 +35,18 @@ export default function Hero({
   const saveMax = saveAt(startTs) || 1;
   const promoOver = todayTs !== null && todayTs > untilTs;
   const [stickyOn, setStickyOn] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!showSticky) return;
     let targetVisible = false;
     const target = typeof document !== 'undefined' && stickyHref && stickyHref.startsWith('#')
       ? document.getElementById(stickyHref.slice(1))
       : null;
-    const update = () => setStickyOn(window.scrollY > 520 && !targetVisible);
+    const hero = heroRef.current;
+    const update = () => {
+      const passed = hero ? hero.getBoundingClientRect().bottom < 120 : window.scrollY > 520;
+      setStickyOn(passed && !targetVisible);
+    };
     let obs: IntersectionObserver | null = null;
     if (target && 'IntersectionObserver' in window) {
       obs = new IntersectionObserver(([e]) => { targetVisible = e.isIntersecting; update(); }, { threshold: 0.05 });
@@ -59,7 +64,7 @@ export default function Hero({
     : undefined;
 
   return (
-    <section className={`${styles.hero} ${fullHeight ? styles.full : ''}`} style={bgStyle}>
+    <section ref={heroRef} className={`${styles.hero} ${fullHeight ? styles.full : ''}`} style={bgStyle}>
       {imgStyle ? <div className={styles.bgImg} style={imgStyle} aria-hidden="true" /> : null}
       {imgStyle ? <div className={styles.bgOverlay} style={{ background: `#05090B${overlayHex}` }} aria-hidden="true" /> : null}
       <div className={styles.glowA} aria-hidden="true" />

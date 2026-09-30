@@ -52,6 +52,10 @@
 .fi-cta__contact { font-size: 18px; color: #F4FAFBdd; }
 .fi-cta__contact p { margin: 0 0 10px; }
 .fi-cta__contact a, .fi-cta__phone {
+  display: inline-block;
+  padding: 8px 0;
+  min-height: 44px;
+  box-sizing: border-box;
   color: var(--color-kit-white, #F4FAFB);
   font-weight: 700;
   text-decoration: none;
@@ -269,7 +273,7 @@
   .fi-cta__inner { grid-template-columns: 1fr; gap: 44px; }
   .fi-cta__form { padding: 26px 18px; }
   .fi-cal__slotgrid { grid-template-columns: repeat(2, 1fr); }
-  .fi-cal__daybtn { width: 40px; height: 40px; }
+  .fi-cal__daybtn { width: 44px; height: 44px; }
   .fi-cta__row2, .fi-cta__row3 { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
