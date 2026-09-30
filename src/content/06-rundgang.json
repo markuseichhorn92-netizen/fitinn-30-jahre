@@ -7,9 +7,12 @@
     "src": "media/833da1bc-191f-4c62-a865-5783d332fd28",
     "name": "fitinn-studio-1.avif"
   },
-  "eyebrow": "Rundgang",
+  "eyebrow": "Studio-Rundgang",
   "title": "Schau dich um, bevor du kommst.",
   "playLabel": "Rundgang abspielen",
   "consentNote": "Beim Abspielen wird das Video von YouTube geladen. Dabei werden Daten an Google übertragen.",
-  "iframeTitle": "Rundgang durch das Fit-Inn Trier"
+  "iframeTitle": "Rundgang durch das Fit-Inn Trier",
+  "intro": "Einmal durchs ganze Studio: Geräte, Trainingsbereiche und die Atmosphäre, die dich erwartet.",
+  "bgDeco": "play",
+  "bookLabel": "Gefällt dir? Probetraining buchen"
 }

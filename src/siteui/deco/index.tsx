@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Dezente Linien-Grafiken als Hintergrund-Motiv einer Sektion (wie früher das große "1996").
-// kind: euro | dumbbell | stars | calendar | question | pin | check | route
+// kind: euro | dumbbell | stars | calendar | question | pin | check | route | play
 type Props = { kind: string; className?: string };
 
 const S = { fill: 'none', stroke: 'currentColor', strokeWidth: 3, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
@@ -65,7 +65,16 @@ export default function Deco({ kind, className }: Props) {
       </g>
     );
   }
-  else if (kind === 'pin') {
+  else if (kind === 'play') {
+    body = (
+      <g {...S}>
+        <rect x="14" y="40" width="172" height="120" rx="22" />
+        <path d="M84 72v56l48-28z" strokeWidth="6" />
+        <path d="M14 180h172" strokeDasharray="4 10" />
+        <circle cx="62" cy="180" r="6" fill="currentColor" stroke="none" />
+      </g>
+    );
+  } else if (kind === 'pin') {
     body = (
       <g {...S}>
         <path d="M100 184s-58-52-58-98a58 58 0 01116 0c0 46-58 98-58 98z" />

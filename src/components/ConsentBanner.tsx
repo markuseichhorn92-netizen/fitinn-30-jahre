@@ -37,7 +37,7 @@ export default function ConsentBanner() {
           <div className={styles.box}>
             <p id="fi-consent-title" className={styles.title}>Kurz zu Cookies 🍪</p>
             <p className={styles.text}>
-              Notwendiges (Buchung, FINN-Chat) läuft immer. Anonyme Statistik, passende Tipps und Google Maps nur mit deinem Okay.{' '}
+              Notwendiges (Buchung, FINN-Chat) läuft immer. Anonyme Statistik, passende Tipps, Maps und YouTube nur mit deinem Okay.{' '}
               <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Datenschutz</a> · <a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a>
             </p>
             {details ? (
@@ -52,7 +52,7 @@ export default function ConsentBanner() {
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={media} onChange={(e) => setMedia(e.target.checked)} />
-                  <span><strong>Externe Medien</strong>Google Maps auf der Bestätigungsseite. Dabei werden Daten an Google übertragen.</span>
+                  <span><strong>Externe Medien</strong>Google Maps und das YouTube-Rundgangsvideo. Dabei werden Daten an Google übertragen.</span>
                 </label>
               </div>
             ) : null}

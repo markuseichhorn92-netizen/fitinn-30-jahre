@@ -38,6 +38,7 @@ export function dwellReport(sectionId: string, seconds: number) {
 export function signal(type: string, value = '') {
   const v = String(value).toLowerCase();
   if (type === 'tariff') score.price += 4;
+  if (type === 'rundgang') score.geraete += 3;
   if (type === 'incl') score.price += 2;
   if (type === 'chart') score.price += 2;
   if (type === 'tile') score.geraete += 3;
