@@ -4,15 +4,17 @@ import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Badge from '@siteui/badge';
 import Image from '@siteui/image';
+import Deco from '@siteui/deco';
 import styles from './styles.module.css';
 
 
 const ease = [0.22, 1, 0.36, 1] as any;
 
 // Kompakte Anzeigen-Version: Kopf, ein Bild, vier Kacheln (Bereich + Nutzen in einer Zeile).
-export default function Bereiche({ anchorId, bgColor, image, kicker, headline, imageAlt, bereiche }: any) {
+export default function Bereiche({ anchorId, bgColor, image, kicker, headline, imageAlt, bereiche, bgDeco }: any) {
   return (
     <section id={anchorId} className={styles.sec} style={{ background: bgColor }}>
+      {bgDeco ? <Deco kind={String(bgDeco)} className={styles.bgDeco} /> : null}
       <div className={styles.container}>
         <div className={styles.head}>
           <Badge tone="accent" className={styles.badge}>{kicker}</Badge>

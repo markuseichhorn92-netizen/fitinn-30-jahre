@@ -5,6 +5,7 @@ import Title from '@siteui/title';
 import Text from '@siteui/text';
 import Badge from '@siteui/badge';
 import Button from '@siteui/button';
+import Deco from '@siteui/deco';
 import styles from './styles.module.css';
 
 const ease = [0.22, 1, 0.36, 1] as any;
@@ -60,6 +61,7 @@ export default function Angebot(props: any) {
     promoStart, priceUntil, signupUntil,
     promoPrice, promoLabelSpar, afterLabelSpar, tarifSaveText, promoWeekly, tarife,
     inclTitle, included,
+    bgDeco,
     hinweise, legalToggle, rechtstext, totalText, agbIntro, agbLabel, agbHref, andLabel, houseLabel, houseHref,
   } = props;
 
@@ -99,6 +101,7 @@ export default function Angebot(props: any) {
   return (
     <section id={anchorId} className={`${styles.sec} ${fullHeight ? styles.full : ''}`} style={{ background: bgColor }}>
       <div className={styles.glow} aria-hidden="true" />
+      {bgDeco ? <Deco kind={String(bgDeco)} className={styles.bgDeco} /> : null}
       <div className={styles.container}>
         <div className={styles.head}>
           <div className={styles.headCopy}>

@@ -46,5 +46,6 @@
   "crmFormId": "ad26190c-4d15-4db1-bcc6-7eb14df258eb",
   "crmSource": "Landingpage-Formular (Oktober-Aktion)",
   "crmTrainerValue": "Mit Trainer",
-  "bgColor": "var(--color-kit-key1)"
+  "bgColor": "var(--color-kit-key1)",
+  "bgDeco": "calendar"
 }

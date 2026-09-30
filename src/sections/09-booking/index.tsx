@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { crm } from '@/lib/onepage-kit';
+import Deco from '@siteui/deco';
 import './styles.css';
 
 type Slot = { startDateTime: string; endDateTime: string };
@@ -48,7 +49,7 @@ export default function FitInnBookingForm(props: any) {
     validationError, bookingErrorText, successTitle, successText, privacyNote,
     contactIntro, contactPhone, contactInstagram, contactInstagramHref, contactAddress,
     bookingWindowDays, apiBaseUrl, studioId, bgColor,
-    crmFormId, crmSource, crmTrainerValue
+    crmFormId, crmSource, crmTrainerValue, bgDeco
   } = props;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -221,6 +222,7 @@ export default function FitInnBookingForm(props: any) {
 
   return (
     <section id="anmeldung" className="fi-cta" style={{ background: bgColor }}>
+      {bgDeco ? <Deco kind={String(bgDeco)} className="fi-cta__bgword" /> : null}
       <div ref={ref} className={'fi-cta__inner' + (visible ? ' is-visible' : '')}>
         <div>
           <span className="fi-cta__eyebrow">{eyebrow}</span>

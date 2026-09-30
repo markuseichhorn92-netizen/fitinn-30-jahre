@@ -19,5 +19,6 @@
       "author": "Thomas Müller"
     }
   ],
-  "stars": true
+  "stars": true,
+  "bgDeco": "stars"
 }

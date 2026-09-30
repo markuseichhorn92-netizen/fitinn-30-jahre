@@ -187,3 +187,17 @@
   .legal { margin-top: 20px; }
 }
 
+
+.bgDeco {
+  position: absolute;
+  top: -20px;
+  right: -60px;
+  width: 460px;
+  height: 460px;
+  color: #3BC9E01a;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(-8deg);
+}
+@media (max-width: 1023px) { .bgDeco { width: 340px; height: 340px; right: -70px; } }
+@media (max-width: 767px) { .bgDeco { width: 230px; height: 230px; top: -10px; right: -50px; } }

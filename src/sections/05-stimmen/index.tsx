@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
 import Badge from '@siteui/badge';
+import Deco from '@siteui/deco';
 import styles from './styles.module.css';
 
 
@@ -19,9 +20,10 @@ function Stars() {
 
 const ease = [0.22, 1, 0.36, 1] as any;
 
-export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title, source, quotes, stars }: any) {
+export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title, source, quotes, stars, bgDeco }: any) {
   return (
     <section id={anchorId} className={`${styles.sec} ${fullHeight ? styles.full : ''}`} style={{ background: bgColor }}>
+      {bgDeco ? <Deco kind={String(bgDeco)} className={styles.bgDeco} /> : null}
       <div className={styles.container}>
         <div className={styles.head}>
           <Badge tone="accent">{eyebrow}</Badge>

@@ -279,3 +279,17 @@
 @media (prefers-reduced-motion: reduce) {
   .fi-cta__inner { transition: none; opacity: 1; transform: none; }
 }
+
+.fi-cta__bgword {
+  position: absolute;
+  top: -20px;
+  right: -60px;
+  width: 460px;
+  height: 460px;
+  color: #F4FAFB1f;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(-8deg);
+}
+@media (max-width: 1023px) { .fi-cta__bgword { width: 340px; height: 340px; right: -70px; } }
+@media (max-width: 767px) { .fi-cta__bgword { width: 230px; height: 230px; top: -10px; right: -50px; } }
