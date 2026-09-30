@@ -15,8 +15,8 @@ export default function Footer({ bgColor, logo, brand, tagline, address, phoneLa
               src={mediaUrl(logo.src, 'md')}
               srcSet={`${mediaUrl(logo.src, 'md')} 1x, ${mediaUrl(logo.src, 'md2x')} 2x`}
               alt={brand}
-              width={500}
-              height={83}
+              width={240}
+              height={40}
               loading="lazy"
             />
           ) : (

@@ -13,7 +13,8 @@
   gap: 40px;
 }
 .brandCol { display: flex; flex-direction: column; gap: 10px; }
-.logo { display: block; height: 40px; width: auto; margin-bottom: 6px; }
+.logo { display: block; align-self: flex-start; height: 40px; width: auto; max-width: 100%; object-fit: contain; object-position: left center; margin-bottom: 6px; }
+@media (max-width: 767px) { .logo { height: 32px; } }
 .brand { font-family: var(--font-kit-header-font); font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
 .contact { font-style: normal; display: flex; flex-direction: column; gap: 6px; font-size: 17px; }
 .contact a, .links a {
