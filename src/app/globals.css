@@ -1,0 +1,26 @@
+/* Entspricht dem Onepage-Farbschema und Font-Kit der Aktionsseite */
+:root {
+  --color-kit-key1: #0F7D96;
+  --color-kit-key2: #3BC9E0;
+  --color-kit-white: #F4FAFB;
+  --color-kit-black: #05090B;
+  --color-kit-light: #DCEAEE;
+  --color-kit-dark: #0C161A;
+  --font-kit-header-font: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  --font-kit-text-font: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --con-kit-section-min-height: 100vh;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--color-kit-black);
+  color: var(--color-kit-white);
+  font-family: var(--font-kit-text-font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--font-kit-header-font); font-weight: 700; line-height: 1.2; }
+img { max-width: 100%; }

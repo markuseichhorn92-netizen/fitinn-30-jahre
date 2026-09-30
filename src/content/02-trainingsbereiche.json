@@ -1,0 +1,36 @@
+{
+  "fullHeight": false,
+  "anchorId": "geraete",
+  "bgColor": "var(--color-kit-white)",
+  "image": {
+    "src": "media/1266cf3a-3b28-4752-ab90-ed9fc97d5583",
+    "name": "fitinn-studio-2.avif"
+  },
+  "kicker": "Über 100 Geräte auf zwei Etagen",
+  "headline": "Vier Bereiche. Ein Dach.",
+  "intro": "Vom geführten Zirkel für den Einstieg bis zur Freihantelzone: Bei uns findest du für jedes Ziel das passende Training. Und an jedem Gerät zeigt dir jemand, wie es geht.",
+  "imageAlt": "Trainingsbereich mit Geräten von TechnoGym im Fit-Inn Trier",
+  "imageCaption": "Echte Aufnahme unserer Trainingsfläche",
+  "bereiche": [
+    {
+      "tag": "Biocircuit",
+      "title": "Ganzkörpertraining in rund 30 Minuten",
+      "text": "Ein geführter Zirkel an vernetzten TechnoGym-Geräten für alle großen Muskelgruppen. Die Geräte stellen sich automatisch auf dich ein – ideal für den Einstieg und für alle mit wenig Zeit."
+    },
+    {
+      "tag": "Biostrength",
+      "title": "Krafttraining, das mitdenkt",
+      "text": "Programme für Straffung, Kraft oder Muskelaufbau mit verschiedenen Widerstandsarten. Du wählst dein Ziel, das Gerät führt dich durch die Einheit."
+    },
+    {
+      "tag": "Cardio",
+      "title": "Ausdauer, die nicht langweilt",
+      "text": "TechnoGym-Cardiogeräte mit HD-Bildschirm: virtueller Coach, Outdoor-Strecken, Serien und deine Playlists – die Zeit vergeht wie im Flug."
+    },
+    {
+      "tag": "Powerbereich",
+      "title": "Für alle, die frei trainieren",
+      "text": "Zwei Freihantelzonen, olympische Kraftstationen, Plate-Loaded-Geräte von Life Fitness und ein elektromotorisch gesteuerter Kabelzug."
+    }
+  ]
+}

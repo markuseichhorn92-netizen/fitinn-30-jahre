@@ -1,0 +1,75 @@
+{
+  "fullHeight": true,
+  "bgImage": {
+    "src": "media/833da1bc-191f-4c62-a865-5783d332fd28",
+    "name": "fitinn-studio-1.avif"
+  },
+  "overlayStrength": 82,
+  "bgColor": "var(--color-kit-black)",
+  "showGrid": true,
+  "logo": {
+    "src": "media/77c4274d-cac5-4f25-88b1-15387b0fa6b9",
+    "name": "fitinn-logo-white.png"
+  },
+  "logoAlt": "Fit-Inn Trier",
+  "logoHref": "https://fit-inn-trier.de",
+  "topPhoneLabel": "0651 493 688 19",
+  "topPhoneHref": "tel:+4965149368819",
+  "showTopPhone": true,
+  "stickyLabel": "Probetraining buchen",
+  "stickyHref": "#anmeldung",
+  "stickyNoteSpar": "Heute bis zu {x} € sparen",
+  "stickyChatLabel": "Chat mit FINN öffnen",
+  "showSticky": true,
+  "eyebrowSpar": "Nur für die ersten 25 · Trier-Feyen seit 1996",
+  "hlTopSpar": "Fünf Euro pro Woche.",
+  "hlAccentSpar": "Bis Silvester.",
+  "sublineSpar": "Bis 31.12.2026 zahlst du nur 5 € pro Woche – je früher du startest, desto mehr sparst du. Mit computergesteuerten TechnoGym-Geräten und Trainern, die deinen Namen kennen.",
+  "primaryLabel": "Kostenloses Probetraining",
+  "primaryHref": "#anmeldung",
+  "secondaryLabel": "Angebot ansehen",
+  "secondaryHref": "#angebot",
+  "showSecondary": true,
+  "ribbonSpar": "Nur für die ersten 25",
+  "priceValue": "5",
+  "currency": "€",
+  "priceUnit": "pro Woche",
+  "durationSpar": "bis 31.12.2026",
+  "heroSaveText": "Start heute: bis zu {x} € gespart",
+  "heroSaveHint": "Morgen nur noch {morgen} € – jeden Tag weniger.",
+  "priceListSpar": [
+    {
+      "text": "Ab 01.01.2027: 12 € pro Woche bei 52 Wochen"
+    },
+    {
+      "text": "oder 9 € pro Woche bei 104 Wochen"
+    },
+    {
+      "text": "Einweisung an jedem Gerät inklusive"
+    }
+  ],
+  "promoStart": "2026-10-01",
+  "priceUntil": "2026-12-31",
+  "promoWeekly": 5,
+  "regularMax": 12,
+  "priceNote": "Zzgl. einmalig 39 € Aufnahmegebühr. Nur für Neumitglieder ab 18 Jahren.",
+  "features": [
+    {
+      "strong": "1996",
+      "text": "in Familienhand"
+    },
+    {
+      "strong": "7.000+",
+      "text": "zufriedene Kunden"
+    },
+    {
+      "strong": "250+",
+      "text": "positive Bewertungen"
+    },
+    {
+      "strong": "TechnoGym",
+      "text": "computergesteuert"
+    }
+  ],
+  "factsLabel": "Kurz erklärt"
+}

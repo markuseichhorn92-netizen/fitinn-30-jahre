@@ -1,0 +1,89 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": true, "tab": "layout", "group": "root" },
+      "bgImage": { "title": "Hintergrundbild", "type": "media", "default": { "src": "media/833da1bc-191f-4c62-a865-5783d332fd28", "name": "fitinn-studio-1.avif" }, "tab": "styles", "group": "background" },
+      "overlayStrength": { "title": "Abdunklung Bild", "type": "number-slider", "min": 0, "max": 100, "step": 5, "default": 82, "tab": "styles", "group": "background" },
+      "bgColor": { "title": "Hintergrundfarbe", "type": "color", "default": "var(--color-kit-black)", "tab": "styles", "group": "background" },
+      "showGrid": { "title": "Rasterlinien anzeigen", "type": "checkbox", "default": true, "tab": "styles", "group": "background" },
+
+      "logo": { "title": "Logo", "type": "media", "default": { "src": "media/77c4274d-cac5-4f25-88b1-15387b0fa6b9", "name": "fitinn-logo-white.png" }, "tab": "content", "group": "topbar" },
+      "logoAlt": { "title": "Logo Alt-Text", "type": "text", "default": "Fit-Inn Trier", "tab": "content", "group": "topbar" },
+      "logoHref": { "title": "Logo Link", "type": "text", "default": "https://fit-inn-trier.de", "tab": "content", "group": "topbar" },
+      "topPhoneLabel": { "title": "Telefon oben (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
+      "topPhoneHref": { "title": "Telefon oben (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
+      "showTopPhone": { "title": "Telefon oben anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "topbar" },
+
+      "stickyLabel": { "title": "Leiste unten: Button", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "sticky" },
+      "stickyHref": { "title": "Leiste unten: Link", "type": "text", "default": "#anmeldung", "tab": "content", "group": "sticky" },
+      "stickyNoteSpar": { "title": "Leiste unten: Zusatz ({x} = Ersparnis heute)", "type": "text", "default": "Heute bis zu {x} € sparen", "tab": "content", "group": "sticky" },
+      "stickyChatLabel": { "title": "Leiste unten: Chat-Button (Screenreader)", "type": "text", "default": "Chat mit FINN öffnen", "tab": "content", "group": "sticky" },
+      "showSticky": { "title": "Leiste unten am Handy anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "sticky" },
+
+      "eyebrowSpar": { "title": "Kicker", "type": "text", "default": "Nur für die ersten 25 · Trier-Feyen seit 1996", "tab": "content", "group": "headline" },
+      "hlTopSpar": { "title": "Headline", "type": "text", "default": "Fünf Euro pro Woche.", "tab": "content", "group": "headline" },
+      "hlAccentSpar": { "title": "Headline Akzent", "type": "text", "default": "Bis Silvester.", "tab": "content", "group": "headline" },
+      "sublineSpar": { "title": "Subline", "type": "text", "default": "Bis 31.12.2026 zahlst du nur 5 € pro Woche – je früher du startest, desto mehr sparst du. Mit computergesteuerten TechnoGym-Geräten und Trainern, die deinen Namen kennen.", "tab": "content", "group": "headline" },
+
+      "primaryLabel": { "title": "Button 1 Text", "type": "text", "default": "Kostenloses Probetraining", "tab": "content", "group": "buttons" },
+      "primaryHref": { "title": "Button 1 Link", "type": "text", "default": "#anmeldung", "tab": "content", "group": "buttons" },
+      "secondaryLabel": { "title": "Button 2 Text", "type": "text", "default": "Angebot ansehen", "tab": "content", "group": "buttons", "hideWhen": "!showSecondary" },
+      "secondaryHref": { "title": "Button 2 Link", "type": "text", "default": "#angebot", "tab": "content", "group": "buttons", "hideWhen": "!showSecondary" },
+      "showSecondary": { "title": "Button 2 anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "buttons" },
+
+      "ribbonSpar": { "title": "Label oben", "type": "text", "default": "Nur für die ersten 25", "tab": "content", "group": "price" },
+      "priceValue": { "title": "Preis", "type": "text", "default": "5", "tab": "content", "group": "price" },
+      "currency": { "title": "Währung", "type": "text", "default": "€", "tab": "content", "group": "price" },
+      "priceUnit": { "title": "Einheit", "type": "text", "default": "pro Woche", "tab": "content", "group": "price" },
+      "durationSpar": { "title": "Laufzeit-Hinweis", "type": "text", "default": "bis 31.12.2026", "tab": "content", "group": "price" },
+      "heroSaveText": { "title": "Ersparnis heute ({x})", "type": "text", "default": "Start heute: bis zu {x} € gespart", "tab": "content", "group": "price" },
+      "heroSaveHint": { "title": "Ersparnis morgen ({morgen})", "type": "text", "default": "Morgen nur noch {morgen} € – jeden Tag weniger.", "tab": "content", "group": "price" },
+      "priceListSpar": {
+        "title": "Danach",
+        "type": "array",
+        "tab": "content",
+        "group": "price",
+        "items": { "text": { "title": "Text", "type": "text", "default": "Zeile" } },
+        "default": [
+          { "text": "Ab 01.01.2027: 12 € pro Woche bei 52 Wochen" },
+          { "text": "oder 9 € pro Woche bei 104 Wochen" },
+          { "text": "Einweisung an jedem Gerät inklusive" }
+        ]
+      },
+      "promoStart": { "title": "Aktionsstart (JJJJ-MM-TT)", "type": "text", "default": "2026-10-01", "tab": "settings", "group": "calc" },
+      "priceUntil": { "title": "5-€-Preis gilt bis (JJJJ-MM-TT)", "type": "text", "default": "2026-12-31", "tab": "settings", "group": "calc" },
+      "promoWeekly": { "title": "Aktionspreis pro Woche (Zahl)", "type": "number", "default": 5, "tab": "settings", "group": "calc" },
+      "regularMax": { "title": "Höchster Regelpreis pro Woche (Zahl)", "type": "number", "default": 12, "tab": "settings", "group": "calc" },
+      "priceNote": { "title": "Kleingedrucktes", "type": "text", "default": "Zzgl. einmalig 39 € Aufnahmegebühr. Nur für Neumitglieder ab 18 Jahren.", "tab": "content", "group": "price" },
+
+      "features": {
+        "title": "Kennzahlen",
+        "type": "array",
+        "tab": "content",
+        "group": "facts",
+        "items": {
+          "strong": { "title": "Wert", "type": "text", "default": "Wert" },
+          "text": { "title": "Beschreibung", "type": "text", "default": "Beschreibung" }
+        },
+        "default": [
+          { "strong": "1996", "text": "in Familienhand" },
+          { "strong": "7.000+", "text": "zufriedene Kunden" },
+          { "strong": "250+", "text": "positive Bewertungen" },
+          { "strong": "TechnoGym", "text": "computergesteuert" }
+        ]
+      },
+      "factsLabel": { "title": "Überschrift Kennzahlen", "type": "text", "default": "Kurz erklärt", "tab": "content", "group": "facts" }
+    },
+    "group": {
+      "background": { "title": "Hintergrund" },
+      "topbar": { "title": "Logo-Leiste" },
+      "sticky": { "title": "Buchungsleiste (Handy)" },
+      "headline": { "title": "Headline" },
+      "buttons": { "title": "Buttons" },
+      "price": { "title": "Preis-Karte" },
+      "calc": { "title": "Berechnung Ersparnis" },
+      "facts": { "title": "Kennzahlen" }
+    }
+  }
+}

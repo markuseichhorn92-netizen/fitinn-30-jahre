@@ -1,0 +1,33 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": false, "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "stimmen", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-black)", "tab": "settings", "group": "root" },
+      "eyebrow": { "title": "Kicker", "type": "text", "default": "Google-Bewertungen", "tab": "content", "group": "intro" },
+      "title": { "title": "Headline", "type": "text", "default": "Nicht wir sagen das.", "tab": "content", "group": "intro" },
+      "source": { "title": "Quellenhinweis", "type": "text", "default": "Wörtlich aus öffentlichen Google-Bewertungen", "tab": "content", "group": "intro" },
+      "quotes": {
+        "title": "Stimmen",
+        "type": "array",
+        "tab": "content",
+        "group": "quotes",
+        "items": {
+          "quote": { "title": "Zitat", "type": "text", "default": "Zitat" },
+          "author": { "title": "Name", "type": "text", "default": "Name" }
+        },
+        "default": [
+          { "quote": "Ich bin von der Ausstattung, den Geräten und den Mitarbeitern maximal überzeugt.", "author": "Gisela T." },
+          { "quote": "Super gepflegte Geräte, nette Leute, angenehme Atmosphäre, Duschen + Getränke top.", "author": "Jana Thielen" },
+          { "quote": "Angenehmes Training, nette Menschen. Die neuen Geräte von Technogym sind super.", "author": "Thomas Müller" }
+        ]
+      },
+      "stars": { "title": "Sterne anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "quotes" }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "quotes": { "title": "Stimmen" }
+    }
+  }
+}

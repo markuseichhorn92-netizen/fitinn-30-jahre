@@ -1,0 +1,16 @@
+.text {
+  font-family: var(--font-kit-text-font);
+  margin: 0;
+  color: inherit;
+  line-height: 1.6;
+}
+.muted { opacity: 0.72; }
+.center { text-align: center; }
+.lg { font-size: 20px; }
+.md { font-size: 17px; }
+.sm { font-size: 15px; }
+.xs { font-size: 13px; line-height: 1.5; }
+@media (max-width: 767px) {
+  .lg { font-size: 18px; }
+  .md { font-size: 16px; }
+}

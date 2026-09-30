@@ -1,0 +1,32 @@
+{
+  "anchorId": "chat",
+  "bgColor": "var(--color-kit-black)",
+  "badge": "KI-Assistent",
+  "headline": "Noch Fragen? Frag FINN.",
+  "introText": "FINN ist unser digitaler Assistent. Er kennt das Studio, nennt dir die aktuellen Öffnungszeiten und die Auslastung live – und bucht dir auf Wunsch direkt dein kostenloses Probetraining.",
+  "openLabel": "Chat mit FINN starten",
+  "note": "FINN ist ein KI-Assistent, kein Mensch. Bitte keine Gesundheits- oder Vertragsdaten eingeben.",
+  "suggestionsLabel": "Oder direkt fragen",
+  "bookLabel": "Probetraining buchen",
+  "fragenChips": [
+    {
+      "text": "Wie viel spare ich, wenn ich heute starte?"
+    },
+    {
+      "text": "Was kostet es ab Januar?"
+    },
+    {
+      "text": "Wie voll ist es gerade im Studio?"
+    },
+    {
+      "text": "Wann habt ihr heute geöffnet?"
+    },
+    {
+      "text": "Wie läuft das Probetraining ab?"
+    }
+  ],
+  "previewQuestion": "Ich war ewig nicht im Studio. Ist das okay?",
+  "previewAnswer": "Klar! Viele starten bei uns nach langer Pause. Du bekommst eine Einweisung an jedem Gerät – soll ich dir einen Probetraining-Termin raussuchen?",
+  "botName": "FINN",
+  "previewLabel": "Beispiel"
+}

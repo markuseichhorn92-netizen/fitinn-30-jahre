@@ -1,0 +1,49 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": false, "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "studio", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-light)", "tab": "settings", "group": "root" },
+      "bigYear": { "title": "Große Zahl", "type": "text", "default": "1996", "tab": "content", "group": "intro" },
+      "title": { "title": "Headline", "type": "text", "default": "Seit 1996 in einer Hand.", "tab": "content", "group": "intro" },
+      "text": { "title": "Text", "type": "text", "default": "Kein Franchise, keine wechselnden Gesichter. Dieselben Leute, die dich beim Namen kennen – und die auch noch da sind, wenn du im dritten Jahr wiederkommst.", "tab": "content", "group": "intro" },
+      "stats": {
+        "title": "Zahlen",
+        "type": "array",
+        "tab": "content",
+        "group": "stats",
+        "items": {
+          "value": { "title": "Wert", "type": "text", "default": "Wert" },
+          "label": { "title": "Label", "type": "text", "default": "Label" }
+        },
+        "default": [
+          { "value": "30 Jahre", "label": "in Familienhand" },
+          { "value": "7.000+", "label": "zufriedene Kunden" },
+          { "value": "250+", "label": "positive Bewertungen" }
+        ]
+      },
+      "listTitle": { "title": "Liste Überschrift", "type": "text", "default": "Was drin ist", "tab": "content", "group": "list" },
+      "items": {
+        "title": "Leistungen",
+        "type": "array",
+        "tab": "content",
+        "group": "list",
+        "items": { "text": { "title": "Text", "type": "text", "default": "Leistung" } },
+        "default": [
+          { "text": "Über 100 Geräte auf zwei Etagen – alles unter einem Dach" },
+          { "text": "Gesundheits-Check-up mit Körperanalyse" },
+          { "text": "Digitale Trainingspläne in der App" },
+          { "text": "Stoffwechsel-Coaching mit Atemgasanalyse (optional)" },
+          { "text": "Mineralgetränke inklusive, Duschen, WLAN" },
+          { "text": "Für Sauberkeit werden wir am häufigsten gelobt" }
+        ]
+      }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "stats": { "title": "Zahlen" },
+      "list": { "title": "Leistungen" }
+    }
+  }
+}

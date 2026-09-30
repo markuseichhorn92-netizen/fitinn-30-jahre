@@ -1,0 +1,6 @@
+{
+    "name": "@siteui/image",
+    "main": "index.tsx",
+    "description": "SITE DEFAULT PACKAGE, EDIT IN PLACE - a site-wide style request (brutalism, glassmorphism, editorial, ...) means restyling THIS package by editing its styles.module.css and index.tsx; NEVER create a parallel package for a new look of the same primitive. Image component with lazysizes.js and onepage CDN integration. Default export <Image src alt className> for every image element; named export mediaUrl(src, size) builds a CDN URL for CSS background images, which must be set as an inline style because a CSS module cannot interpolate a value.",
+    "dependencies": {}
+}

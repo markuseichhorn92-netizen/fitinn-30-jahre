@@ -1,0 +1,35 @@
+.badge {
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.glass {
+  background: #ffffff0f;
+  color: var(--color-kit-white, #F4FAFB);
+  box-shadow: inset 0 0 0 1px #ffffff24;
+}
+.accent {
+  background: #3BC9E01f;
+  color: var(--color-kit-key2, #3BC9E0);
+  box-shadow: inset 0 0 0 1px #3BC9E055;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-kit-key2, #3BC9E0);
+  box-shadow: 0 0 0 4px #3BC9E033;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px #3BC9E033; }
+  50% { box-shadow: 0 0 0 7px #3BC9E011; }
+}

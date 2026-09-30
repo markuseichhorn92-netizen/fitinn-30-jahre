@@ -1,0 +1,37 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": false, "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "geraete", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-white)", "tab": "settings", "group": "root" },
+      "image": { "title": "Bild", "type": "media", "default": { "src": "media/1266cf3a-3b28-4752-ab90-ed9fc97d5583", "name": "fitinn-studio-2.avif" }, "tab": "content", "group": "intro" },
+      "kicker": { "title": "Kicker", "type": "text", "default": "Über 100 Geräte auf zwei Etagen", "tab": "content", "group": "intro" },
+      "headline": { "title": "Headline", "type": "text", "default": "Vier Bereiche. Ein Dach.", "tab": "content", "group": "intro" },
+      "intro": { "title": "Text", "type": "text", "default": "Vom geführten Zirkel für den Einstieg bis zur Freihantelzone: Bei uns findest du für jedes Ziel das passende Training. Und an jedem Gerät zeigt dir jemand, wie es geht.", "tab": "content", "group": "intro" },
+      "imageAlt": { "title": "Bild Alt-Text", "type": "text", "default": "Trainingsbereich mit Geräten von TechnoGym im Fit-Inn Trier", "tab": "content", "group": "intro" },
+      "imageCaption": { "title": "Bildunterschrift", "type": "text", "default": "Echte Aufnahme unserer Trainingsfläche", "tab": "content", "group": "intro" },
+      "bereiche": {
+        "title": "Bereiche",
+        "type": "array",
+        "tab": "content",
+        "group": "points",
+        "items": {
+          "tag": { "title": "Bereich", "type": "text", "default": "Bereich" },
+          "title": { "title": "Titel", "type": "text", "default": "Titel" },
+          "text": { "title": "Text", "type": "text", "default": "Text" }
+        },
+        "default": [
+          { "tag": "Biocircuit", "title": "Ganzkörpertraining in rund 30 Minuten", "text": "Ein geführter Zirkel an vernetzten TechnoGym-Geräten für alle großen Muskelgruppen. Die Geräte stellen sich automatisch auf dich ein – ideal für den Einstieg und für alle mit wenig Zeit." },
+          { "tag": "Biostrength", "title": "Krafttraining, das mitdenkt", "text": "Programme für Straffung, Kraft oder Muskelaufbau mit verschiedenen Widerstandsarten. Du wählst dein Ziel, das Gerät führt dich durch die Einheit." },
+          { "tag": "Cardio", "title": "Ausdauer, die nicht langweilt", "text": "TechnoGym-Cardiogeräte mit HD-Bildschirm: virtueller Coach, Outdoor-Strecken, Serien und deine Playlists – die Zeit vergeht wie im Flug." },
+          { "tag": "Powerbereich", "title": "Für alle, die frei trainieren", "text": "Zwei Freihantelzonen, olympische Kraftstationen, Plate-Loaded-Geräte von Life Fitness und ein elektromotorisch gesteuerter Kabelzug." }
+        ]
+      }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "points": { "title": "Bereiche" }
+    }
+  }
+}

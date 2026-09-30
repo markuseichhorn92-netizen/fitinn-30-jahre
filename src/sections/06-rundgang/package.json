@@ -1,0 +1,20 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": false, "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "rundgang", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-dark)", "tab": "settings", "group": "root" },
+      "videoId": { "title": "YouTube-Video-ID", "type": "text", "default": "C3CuSfV57jE", "tab": "settings", "group": "root" },
+      "poster": { "title": "Vorschaubild", "type": "media", "default": { "src": "media/833da1bc-191f-4c62-a865-5783d332fd28", "name": "fitinn-studio-1.avif" }, "tab": "content", "group": "video" },
+      "eyebrow": { "title": "Kicker", "type": "text", "default": "Rundgang", "tab": "content", "group": "video" },
+      "title": { "title": "Headline", "type": "text", "default": "Schau dich um, bevor du kommst.", "tab": "content", "group": "video" },
+      "playLabel": { "title": "Play-Button Text", "type": "text", "default": "Rundgang abspielen", "tab": "content", "group": "video" },
+      "consentNote": { "title": "Datenschutz-Hinweis", "type": "text", "default": "Beim Abspielen wird das Video von YouTube geladen. Dabei werden Daten an Google übertragen.", "tab": "content", "group": "video" },
+      "iframeTitle": { "title": "Video-Titel (Barrierefreiheit)", "type": "text", "default": "Rundgang durch das Fit-Inn Trier", "tab": "content", "group": "video" }
+    },
+    "group": {
+      "video": { "title": "Video" }
+    }
+  }
+}
