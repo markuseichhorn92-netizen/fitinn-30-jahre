@@ -58,7 +58,7 @@ export default function Fragen(props: any) {
     const last = el.lastElementChild as HTMLElement | null;
     if (last && typeof last.scrollIntoView === 'function') last.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }, [entries.length]);
-  const MAX_OLD = 3;
+  const MAX_OLD = embed ? 0 : 3; // eingebettet: nur die neueste Antwort, Karte wächst nicht
   const visible = entries.slice(-(MAX_OLD + 1));
 
   const askVerified = (q: string) => {
@@ -145,7 +145,7 @@ export default function Fragen(props: any) {
                       <span className={`${styles.tag} ${e.kind === 'ai' ? styles.tagAi : styles.tagOk}`}>{e.kind === 'ai' ? aiLabel : verifiedLabel}</span>
                     </span>
                     <p className={styles.a}>{renderText(e.a)}</p>
-                    {isLast ? (
+                    {isLast && !embed ? (
                       <div className={styles.follow}>
                         <span className={styles.followLabel}>{followLabel}</span>
                         <div className={styles.followRow}>

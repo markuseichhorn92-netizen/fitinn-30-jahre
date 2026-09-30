@@ -163,3 +163,6 @@
   .embed { padding: 20px; }
   .embed .chips { flex-wrap: wrap; overflow: visible; padding: 0; margin: 0; }
 }
+/* eingebettet: Antwort feste Maximalhöhe, lange Antworten scrollen innen */
+.embed .panel { min-height: 0; }
+.embed .card .a { max-height: 190px; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
