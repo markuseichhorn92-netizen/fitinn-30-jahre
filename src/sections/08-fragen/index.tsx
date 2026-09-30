@@ -34,8 +34,9 @@ export default function Fragen(props: any) {
   const {
     anchorId, bgColor, bgDeco, kicker, headline, intro, finnApi, maxChars, botName,
     verifiedLabel, aiLabel, followLabel, inputLabel, inputPlaceholder, sendLabel, thinkingLabel, errorText,
-    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context,
+    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context, variant, leadLabel, lead,
   } = props;
+  const embed = variant === 'embed';
   const list: Array<{ question: string; answer: string }> = Array.isArray(fragen) ? fragen : [];
   const [entries, setEntries] = useState<Entry[]>([]);
   const [input, setInput] = useState('');
@@ -97,16 +98,8 @@ export default function Fragen(props: any) {
     window.dispatchEvent(new CustomEvent('finn:open', { detail: last ? { text: fill(continueIntro, { frage: last.q }) } : undefined }));
   };
 
-  return (
-    <section id={anchorId} className={styles.sec} style={{ background: bgColor }}>
-      {bgDeco ? <Deco kind={String(bgDeco)} className={styles.bgDeco} /> : null}
-      <div className={styles.container}>
-        <div className={styles.head}>
-          <Badge tone="accent" className={styles.badge}>{kicker}</Badge>
-          <Title as="h2" size="xl">{headline}</Title>
-          <Text size="lg" className={styles.intro}>{intro}</Text>
-        </div>
-
+  const body = (
+    <>
         <div className={styles.chips} aria-label={kicker}>
           {list.map((f) => (
             <button
@@ -211,6 +204,37 @@ export default function Fragen(props: any) {
             {continueLabel ? <button type="button" className={styles.linkBtn} onClick={continueInChat}>{continueLabel}</button> : null}
           </div>
         </div>
+    </>
+  );
+
+  if (embed) {
+    return (
+      <div className={`${styles.embed} ${entries.length ? styles.embedActive : ''}`}>
+        <div className={styles.embedHead}>
+          <span className={styles.avatar} aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /></svg>
+          </span>
+          <div className={styles.embedLead}>
+            <span className={styles.embedLabel}>{leadLabel}</span>
+            <p aria-live="polite">{lead}</p>
+          </div>
+        </div>
+        {intro ? <p className={styles.embedIntro}>{intro}</p> : null}
+        {body}
+      </div>
+    );
+  }
+
+  return (
+    <section id={anchorId} className={styles.sec} style={{ background: bgColor }}>
+      {bgDeco ? <Deco kind={String(bgDeco)} className={styles.bgDeco} /> : null}
+      <div className={styles.container}>
+        <div className={styles.head}>
+          <Badge tone="accent" className={styles.badge}>{kicker}</Badge>
+          <Title as="h2" size="xl">{headline}</Title>
+          <Text size="lg" className={styles.intro}>{intro}</Text>
+        </div>
+        {body}
       </div>
     </section>
   );

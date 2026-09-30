@@ -33,3 +33,9 @@
   .foot { padding: 48px 16px 28px; }
   .container { grid-template-columns: 1fr; gap: 24px; }
 }
+.consentBtn {
+  align-self: flex-start; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+  color: var(--color-kit-white, #F4FAFB); opacity: 0.85; font: inherit; font-size: 17px; text-align: left;
+}
+.consentBtn:hover { opacity: 1; color: var(--color-kit-key2, #3BC9E0); }
+.consentBtn:focus-visible { outline: 3px solid var(--color-kit-key2, #3BC9E0); outline-offset: 2px; }

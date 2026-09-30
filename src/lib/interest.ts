@@ -1,6 +1,7 @@
 // Interessenprofil eines Besuchs – lebt nur im Speicher des Browsers (kein Cookie, keine Speicherung).
 // Abschnitte und Aktionen erhöhen Punkte je Thema; daraus wird der passende Hinweis gewählt.
 import { track } from '@vercel/analytics';
+import { hasConsent } from './consent';
 
 export type Topic = 'price' | 'fit' | 'geraete' | 'hours' | 'default';
 type Score = Record<Exclude<Topic, 'default'>, number>;
@@ -16,6 +17,7 @@ const SECTION_TOPIC: Record<string, Exclude<Topic, 'default'> | null> = {
 };
 
 function send(name: string, data: Record<string, string | number>) {
+  if (!hasConsent('stats')) return; // nur mit Einwilligung
   try { track(name, data); } catch { /* Analytics optional */ }
   try {
     const body = JSON.stringify({ name, data, t: Date.now() });
@@ -73,6 +75,7 @@ export function summary(): string {
 }
 
 export function interestNote(): string {
+  if (!hasConsent('stats')) return ''; // Profil nur mit Einwilligung
   const t = topTopic();
   const label: Record<Topic, string> = { price: 'Preis/Ersparnis', fit: 'Einstieg/Betreuung', geraete: 'Geräte & Bereiche', hours: 'Öffnungszeiten', default: 'allgemein' };
   const q = questions.length ? ` · Fragen: ${questions.slice(-2).join(' / ').slice(0, 120)}` : '';

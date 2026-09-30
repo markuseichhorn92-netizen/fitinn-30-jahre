@@ -9,6 +9,8 @@ import Text from '@siteui/text';
 import Badge from '@siteui/badge';
 import Button from '@siteui/button';
 import Fragen from '@/sections/08-fragen';
+import Deco from '@siteui/deco';
+import { hasConsent, CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
 
 type Booking = { vorname: string; start: string; end: string; trainer: boolean; ziel: string; erfahrung: string };
@@ -44,7 +46,7 @@ export default function Bestaetigung(props: any) {
     finnLabel, finnFallback, finnPrompt, flowTitle, flow, bringTitle, bring, onsiteTitle, onsite,
     wayTitle, address, parkingNote, routeGoogleLabel, routeAppleLabel, routeQuery, mapLoadLabel, mapNote,
     changeTitle, changeText, phoneLabel, phoneHref, emailLabel, emailHref,
-    noBookingTitle, noBookingText, noBookingCta, backLabel, backHref, fragen,
+    noBookingTitle, noBookingText, noBookingCta, backLabel, backHref, fragen, heroBg, chatIntro,
   } = props;
 
   const [ready, setReady] = useState(false);
@@ -53,6 +55,13 @@ export default function Bestaetigung(props: any) {
   const [mapOn, setMapOn] = useState(false);
 
   useEffect(() => { setB(readBooking()); setReady(true); }, []);
+  // Google Maps direkt laden, wenn "Externe Medien" erlaubt sind
+  useEffect(() => {
+    const upd = () => { if (hasConsent('media')) setMapOn(true); };
+    upd();
+    window.addEventListener(CONSENT_EVENT, upd);
+    return () => window.removeEventListener(CONSENT_EVENT, upd);
+  }, []);
 
   // FINN-Motivation (Rückfall: fester Text). Nur Ziel/Erfahrung, kein Name, keine Gesundheitsdaten.
   useEffect(() => {
@@ -123,7 +132,13 @@ export default function Bestaetigung(props: any) {
   return (
     <>
       {/* 1 · Termin */}
-      <section className={styles.hero}>
+      <section className={styles.hero} data-bg={String(heroBg || 'glow')}>
+        <div className={styles.bgLayer} aria-hidden="true">
+          <span className={styles.bgDate}>{fmt(b.start, { day: '2-digit', month: '2-digit' })}</span>
+          <Deco kind="route" className={styles.bgRoute} />
+          <span className={styles.bgConfetti} />
+        </div>
+        <Deco kind="check" className={styles.decoHero} />
         <div className={styles.container}>
           <motion.div className={styles.check} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5, ease }} aria-hidden="true">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
@@ -156,20 +171,17 @@ export default function Bestaetigung(props: any) {
             </div>
           </div>
 
-          <motion.div className={styles.finn} {...rise(2)}>
-            <span className={styles.finnAvatar} aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /></svg>
-            </span>
-            <div>
-              <span className={styles.finnLabel}>{finnLabel}</span>
-              <p className={styles.finnText} aria-live="polite">{finnLine || finnFallback}</p>
-            </div>
+          <motion.div {...rise(2)}>
+            {fragen ? (
+              <Fragen {...fragen} variant="embed" leadLabel={finnLabel} lead={finnLine || finnFallback} intro={chatIntro} context={fragenContext} />
+            ) : null}
           </motion.div>
         </div>
       </section>
 
       {/* 2 · Ablauf + Mitbringen */}
       <section className={styles.sec}>
+        <Deco kind="dumbbell" className={styles.deco} />
         <div className={styles.container}>
           <Title as="h2" size="lg">{flowTitle}</Title>
           <ol className={styles.flow}>
@@ -196,6 +208,7 @@ export default function Bestaetigung(props: any) {
 
       {/* 3 · Anfahrt */}
       <section className={`${styles.sec} ${styles.secDark}`} id="anfahrt">
+        <Deco kind="pin" className={`${styles.deco} ${styles.decoDark}`} />
         <div className={styles.container}>
           <Title as="h2" size="lg">{wayTitle}</Title>
           <p className={styles.addr}>{address}</p>
@@ -229,9 +242,6 @@ export default function Bestaetigung(props: any) {
           </div>
         </div>
       </section>
-
-      {/* 4 · Rückfragen an FINN (mit Termin-Kontext) */}
-      {fragen ? <Fragen {...fragen} context={fragenContext} /> : null}
 
       <div className={styles.back}><a href={backHref}>{backLabel}</a></div>
     </>

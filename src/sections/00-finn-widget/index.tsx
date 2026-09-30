@@ -8,6 +8,7 @@ import Chip from '@siteui/chip';
 // Button aus @siteui wird im Widget nur noch für die Buchung genutzt
 import { crm } from '@/lib/onepage-kit';
 import * as interest from '@/lib/interest';
+import { hasConsent, CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
 
 type Msg = { role: 'user' | 'assistant'; text: string; kind?: 'error' | 'local' };
@@ -130,6 +131,15 @@ export default function FinnChat(props: any) {
   const startBookingRef = useRef<(t?: string) => void>(() => {});
   const sendRef = useRef<(t: string) => void>(() => {});
 
+  // Einwilligung Statistik/Personalisierung (Cookie-Banner)
+  const [consentStats, setConsentStats] = useState(false);
+  useEffect(() => {
+    const upd = () => setConsentStats(hasConsent('stats'));
+    upd();
+    window.addEventListener(CONSENT_EVENT, upd);
+    return () => window.removeEventListener(CONSENT_EVENT, upd);
+  }, []);
+
   useEffect(() => { overlayRef.current = overlay; }, [overlay]);
   useEffect(() => { nudgeRef.current = nudge; }, [nudge]);
 
@@ -183,6 +193,7 @@ export default function FinnChat(props: any) {
     const list = Array.isArray(nudges) ? nudges : [];
     const max = Number(maxNudges);
     if (!list.length || !(max > 0)) return;
+    if (!consentStats) return; // personalisierte Hinweise nur mit Einwilligung
     let shown = 0;
     try { shown = Number(window.sessionStorage.getItem('finn_nudges') || 0); } catch { shown = 0; }
     const seen = new Set<number>();
@@ -259,7 +270,7 @@ export default function FinnChat(props: any) {
       acts.forEach((a) => window.removeEventListener(a, resetIdle));
       document.removeEventListener('mouseout', onOut);
     };
-  }, [nudges, maxNudges]);
+  }, [nudges, maxNudges, consentStats]);
 
   // Verweildauer je Abschnitt (Interessenprofil, nur im Speicher) + Aktionen aus den Sektionen
   useEffect(() => {

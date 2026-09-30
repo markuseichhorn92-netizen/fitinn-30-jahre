@@ -126,3 +126,40 @@
   .bgDeco { right: -40px; }
 }
 @media (prefers-reduced-motion: reduce) { .dots i { animation: none; } }
+
+/* Eingebettete Variante (Bestätigungsseite): FINN-Karte mit Chat, dunkel */
+.embed {
+  position: relative; display: flex; flex-direction: column; gap: 12px;
+  padding: 16px; border-radius: 24px;
+  background: #0C161Aee; color: var(--color-kit-white, #F4FAFB);
+  box-shadow: inset 0 0 0 1px #3BC9E040, 0 30px 70px -40px #000;
+  font-family: var(--font-kit-text-font);
+  backdrop-filter: blur(6px);
+}
+.embed * { font-family: inherit; }
+.embedHead { display: flex; gap: 12px; align-items: flex-start; }
+.embedHead .avatar { width: 36px; height: 36px; border-radius: 12px; }
+.embedLead { min-width: 0; }
+.embedLabel { display: block; font-size: 14px; font-weight: 700; color: var(--color-kit-key2, #3BC9E0); margin-bottom: 4px; }
+.embedLead p { margin: 0; font-size: 16px; line-height: 1.5; }
+.embedIntro { margin: 2px 0 0; font-size: 14px; opacity: 0.7; }
+.embed .chips { padding: 2px 16px 4px; }
+.embed .chip { background: #F4FAFB14; color: var(--color-kit-white, #F4FAFB); box-shadow: inset 0 0 0 1px #F4FAFB2e; font-size: 14px; min-height: 42px; padding: 9px 14px; }
+.embed .chip:hover:not(:disabled) { background: var(--color-kit-key1, #0F7D96); }
+.embed .chipDone { background: #3BC9E026; color: var(--color-kit-key2, #3BC9E0); box-shadow: none; }
+.embed .card { padding: 14px; border-radius: 18px; box-shadow: none; }
+.embed .card:not(.cardAi) { background: #F4FAFB; color: var(--color-kit-black, #05090B); }
+.embed .cardAi { background: #05090B; box-shadow: inset 0 0 0 1px #3BC9E033; }
+.embed .q { font-size: 16px; margin-bottom: 8px; }
+.embed .a { font-size: 15px; }
+.embed .avatar { width: 28px; height: 28px; border-radius: 9px; }
+.embed .input { background: #F4FAFB; border-color: transparent; min-height: 48px; font-size: 16px; }
+.embed .send { background: var(--color-kit-key2, #3BC9E0); color: var(--color-kit-black, #05090B); min-width: 48px; width: 48px; padding: 0; border-radius: 50%; min-height: 48px; }
+.embed .sendText { display: none; }
+.embed .disclosure { font-size: 12px; }
+.embed .disclosure a, .embed .linkBtn { color: var(--color-kit-key2, #3BC9E0); }
+.embed .error { color: var(--color-kit-white, #F4FAFB); }
+@media (min-width: 768px) {
+  .embed { padding: 20px; }
+  .embed .chips { flex-wrap: wrap; overflow: visible; padding: 0; margin: 0; }
+}

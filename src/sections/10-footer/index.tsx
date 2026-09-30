@@ -2,6 +2,7 @@
 import React from 'react';
 import Text from '@siteui/text';
 import { mediaUrl } from '@siteui/image';
+import { openConsent } from '@/lib/consent';
 import styles from './styles.module.css';
 
 export default function Footer({ bgColor, logo, brand, tagline, address, phoneLabel, phoneHref, email, links, copyright }: any) {
@@ -33,6 +34,7 @@ export default function Footer({ bgColor, logo, brand, tagline, address, phoneLa
           {(links || []).map((l: any, i: number) => (
             <a key={i} href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
           ))}
+          <button type="button" className={styles.consentBtn} onClick={openConsent}>Cookie-Einstellungen</button>
         </nav>
       </div>
       <div className={styles.bottom}>{copyright}</div>

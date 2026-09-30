@@ -130,3 +130,54 @@
   .routeRow { display: flex; }
   .routeBtn { padding: 12px 22px; }
 }
+
+/* Hintergrund-Grafiken (Linien-Motive wie auf der Hauptseite) */
+.hero, .sec { overflow: hidden; }
+.container { position: relative; z-index: 1; }
+.deco { position: absolute; top: 10px; right: -56px; width: 220px; height: 220px; color: #0F7D961c; pointer-events: none; transform: rotate(-8deg); }
+.decoDark { color: #3BC9E01a; }
+.decoHero { position: absolute; top: 18px; right: -60px; width: 230px; height: 230px; color: #3BC9E01f; pointer-events: none; transform: rotate(10deg); z-index: 0; }
+
+/* Header-Hintergrund: Varianten über data-bg (glow | photo | date | route | confetti) */
+.bgLayer { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.bgLayer > * { display: none; }
+.hero[data-bg='photo'] {
+  background:
+    linear-gradient(180deg, #05090Bcc 0%, #05090B99 30%, #05090Bf2 72%, #05090B 100%),
+    linear-gradient(135deg, #0F7D9666, transparent 60%),
+    url('/media/1266cf3a-3b28-4752-ab90-ed9fc97d5583.avif') center 30% / cover no-repeat;
+}
+.hero[data-bg='photo'] .decoHero { display: none; }
+.hero[data-bg='date'] { background: radial-gradient(90% 60% at 80% 10%, #0F7D9644 0%, #05090B 70%); }
+.hero[data-bg='date'] .bgDate {
+  display: block; position: absolute; top: 8px; right: -14px;
+  font-family: var(--font-kit-header-font); font-weight: 700; font-size: 124px; line-height: 0.9; letter-spacing: -0.05em;
+  color: transparent; -webkit-text-stroke: 2px #3BC9E040; white-space: nowrap;
+}
+.hero[data-bg='date'] .decoHero { display: none; }
+.hero[data-bg='route'] { background: linear-gradient(180deg, #0C161A 0%, #05090B 100%); }
+.hero[data-bg='route'] .bgRoute { display: block; position: absolute; top: -10px; right: -40px; width: 420px; height: 420px; color: #3BC9E040; transform: rotate(6deg); }
+.hero[data-bg='route'] .decoHero { display: none; }
+.hero[data-bg='confetti'] { background: radial-gradient(120% 70% at 50% 0%, #0F7D9655 0%, #05090B 62%); }
+.hero[data-bg='confetti'] .bgConfetti {
+  display: block; position: absolute; inset: 0 0 45% 0;
+  background:
+    radial-gradient(circle, #3BC9E0 0 3px, transparent 4px) 12% 18% / 100% 100% no-repeat,
+    radial-gradient(circle, #F4FAFB 0 2px, transparent 3px) 30% 8% / 100% 100% no-repeat,
+    radial-gradient(circle, #0F7D96 0 4px, transparent 5px) 78% 14% / 100% 100% no-repeat,
+    radial-gradient(circle, #3BC9E0 0 2px, transparent 3px) 88% 34% / 100% 100% no-repeat,
+    radial-gradient(circle, #F4FAFB 0 3px, transparent 4px) 62% 26% / 100% 100% no-repeat,
+    radial-gradient(circle, #3BC9E0 0 2px, transparent 3px) 46% 40% / 100% 100% no-repeat,
+    radial-gradient(circle, #0F7D96 0 3px, transparent 4px) 6% 52% / 100% 100% no-repeat,
+    radial-gradient(circle, #F4FAFB 0 2px, transparent 3px) 94% 58% / 100% 100% no-repeat;
+  opacity: 0.8;
+  animation: fall 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes fall { from { transform: translateY(-40px); opacity: 0; } to { transform: none; opacity: 0.8; } }
+@media (min-width: 720px) {
+  .deco { width: 380px; height: 380px; right: -60px; }
+  .decoHero { width: 400px; height: 400px; }
+  .hero[data-bg='date'] .bgDate { font-size: 240px; right: -10px; top: 20px; }
+  .hero[data-bg='route'] .bgRoute { width: 640px; height: 640px; right: -80px; }
+}
+@media (prefers-reduced-motion: reduce) { .bgConfetti { animation: none !important; } }

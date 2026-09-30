@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Dezente Linien-Grafiken als Hintergrund-Motiv einer Sektion (wie früher das große "1996").
-// kind: euro | dumbbell | stars | calendar | question
+// kind: euro | dumbbell | stars | calendar | question | pin | check | route
 type Props = { kind: string; className?: string };
 
 const S = { fill: 'none', stroke: 'currentColor', strokeWidth: 3, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
@@ -62,6 +62,31 @@ export default function Deco({ kind, className }: Props) {
         <path d="M100 26c48 0 82 30 82 68s-34 66-82 66c-8 0-16-1-24-3l-36 22 8-32C30 134 18 116 18 94c0-38 34-68 82-68z" />
         <path d="M78 78c0-13 10-22 24-22s24 8 24 20c0 18-22 18-22 38" strokeWidth="7" />
         <circle cx="104" cy="134" r="5" fill="currentColor" stroke="none" />
+      </g>
+    );
+  }
+  else if (kind === 'pin') {
+    body = (
+      <g {...S}>
+        <path d="M100 184s-58-52-58-98a58 58 0 01116 0c0 46-58 98-58 98z" />
+        <circle cx="100" cy="86" r="22" strokeWidth="6" />
+        <path d="M40 190h120" strokeDasharray="4 10" />
+      </g>
+    );
+  } else if (kind === 'check') {
+    body = (
+      <g {...S}>
+        <circle cx="100" cy="100" r="84" />
+        <circle cx="100" cy="100" r="68" strokeDasharray="5 11" />
+        <path d="M62 102l26 26 50-56" strokeWidth="9" />
+      </g>
+    );
+  } else if (kind === 'route') {
+    body = (
+      <g {...S}>
+        <path d="M16 186c30-10 40-44 70-50s52 14 70-8-10-46 10-70 22-26 22-26" strokeDasharray="2 12" strokeWidth="5" />
+        <circle cx="16" cy="186" r="7" />
+        <path d="M188 40s-18-16-18-30a18 18 0 0136 0c0 14-18 30-18 30z" transform="translate(-12 -4)" />
       </g>
     );
   }
