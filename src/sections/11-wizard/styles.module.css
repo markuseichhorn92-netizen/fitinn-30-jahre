@@ -130,3 +130,22 @@
   .plan li { font-size: 13px; }
   .planRec { font-size: 12px; }
 }
+
+/* Desktop: Termin-Schritt zweispaltig (Tage links als kompakter Kalender, Uhrzeiten rechts) – kein Scrollen */
+@media (min-width: 900px) {
+  .boxWide { width: min(900px, calc(100vw - 48px)); height: auto; max-height: min(760px, calc(100vh - 48px)); }
+  .boxWide .body { overflow: visible; }
+  .slotGrid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 4px; }
+  .slotDays, .slotTimes { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .slotTimes { padding-left: 28px; border-left: 1px solid #ffffff14; min-height: 100%; }
+  .slotGrid .slotLabel { margin-top: 0; }
+  .slotGrid .dayStrip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; overflow: visible; padding: 0; margin: 0; }
+  .slotGrid .dayCard { width: auto; padding: 7px 0 6px; border-radius: 12px; }
+  .slotGrid .dNum { font-size: 20px; }
+  .slotGrid .dMon { display: none; }
+  .slotGrid .dWd { font-size: 11px; }
+  .slotGrid .dCount { margin-top: 3px; font-size: 10.5px; padding: 0 6px; }
+  .slotGrid .times { grid-template-columns: repeat(3, 1fr); }
+  .slotGrid .time { min-height: 44px; }
+}
+@media (max-width: 899px) { .slotGrid, .slotDays, .slotTimes { display: contents; } }

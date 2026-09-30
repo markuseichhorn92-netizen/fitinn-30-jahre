@@ -13,7 +13,12 @@ import Deco from '@siteui/deco';
 import { hasConsent, CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
 
-type Booking = { vorname: string; start: string; end: string; trainer: boolean; ziel: string; erfahrung: string };
+type Booking = {
+  vorname: string; start: string; end: string; trainer: boolean; ziel: string; erfahrung: string;
+  goalKey: string; expKey: string; focusLabels: string[]; plan: string[]; planTrainer: boolean;
+};
+const strList = (v: any, n: number) => (Array.isArray(v) ? v : []).map((x) => String(x || '').slice(0, 80)).filter(Boolean).slice(0, n);
+const keyOf = (v: any) => (/^[a-z_]{1,24}$/.test(String(v || '')) ? String(v) : '');
 const TZ = 'Europe/Berlin';
 const ease = [0.22, 1, 0.36, 1] as any;
 const fill = (t: string, v: Record<string, string>) => String(t || '').replace(/\{(\w+)\}/g, (_, k) => v[k] ?? '');
@@ -32,7 +37,8 @@ function readBooking(): Booking | null {
     if (!raw) return null;
     const d = JSON.parse(raw);
     if (!d || typeof d.start !== 'string' || isNaN(new Date(d.start).getTime())) return null;
-    return { vorname: String(d.vorname || '').slice(0, 40), start: d.start, end: typeof d.end === 'string' ? d.end : '', trainer: !!d.trainer, ziel: String(d.ziel || ''), erfahrung: String(d.erfahrung || '') };
+    return { vorname: String(d.vorname || '').slice(0, 40), start: d.start, end: typeof d.end === 'string' ? d.end : '', trainer: !!d.trainer, ziel: String(d.ziel || ''), erfahrung: String(d.erfahrung || ''),
+      goalKey: keyOf(d.goalKey), expKey: keyOf(d.expKey), focusLabels: strList(d.focusLabels, 3), plan: strList(d.plan, 4), planTrainer: !!d.planTrainer };
   } catch { return null; }
 }
 const fmt = (iso: string, o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('de-DE', { timeZone: TZ, ...o }).format(new Date(iso));
@@ -47,10 +53,19 @@ export default function Bestaetigung(props: any) {
     wayTitle, address, parkingNote, routeGoogleLabel, routeAppleLabel, routeQuery, mapLoadLabel, mapNote,
     changeTitle, changeText, phoneLabel, phoneHref, emailLabel, emailHref,
     noBookingTitle, noBookingText, noBookingCta, backLabel, backHref, fragen, heroBg, chatIntro,
+    planTitle, planFocusLabel, planNote, goalCopy, expCopy,
   } = props;
 
   const [ready, setReady] = useState(false);
   const [b, setB] = useState<Booking | null>(null);
+  // Personalisierung aus dem Funnel (Ziel, Erfahrung, Fokus, Vorbereitung)
+  const g = (b && goalCopy && goalCopy[b.goalKey]) || null;
+  const x = (b && expCopy && expCopy[b.expKey]) || null;
+  const flowP = useMemo(() => (flow || []).map((f: any, i: number) => (
+    i === 1 && g?.talk ? { ...f, text: g.talk } : i === 2 && x?.flowTry && b?.trainer ? { ...f, text: x.flowTry } : f
+  )), [flow, g, x, b]);
+  const bringP = useMemo(() => [...(bring || []), ...((g?.bring as string[]) || [])], [bring, g]);
+  const fragenP = useMemo(() => (fragen && g?.faq?.length ? { ...fragen, fragen: [...g.faq, ...(fragen.fragen || [])] } : fragen), [fragen, g]);
   const [finnLine, setFinnLine] = useState('');
   const [mapOn, setMapOn] = useState(false);
 
@@ -67,7 +82,7 @@ export default function Bestaetigung(props: any) {
   useEffect(() => {
     if (!b || !finnApi || !finnPrompt) return;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 6000);
-    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnPrompt, { ziel: b.ziel || 'nicht angegeben', erfahrung: b.erfahrung || 'nicht angegeben' }), history: [], visitorId: getVid() }) })
+    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnPrompt, { ziel: b.ziel || 'nicht angegeben', erfahrung: b.erfahrung || 'nicht angegeben', fokus: b.focusLabels.join(', ') || 'nicht angegeben' }), history: [], visitorId: getVid() }) })
       .then((r) => r.json())
       .then((d: any) => {
         clearTimeout(to);
@@ -110,7 +125,7 @@ export default function Bestaetigung(props: any) {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&z=15&output=embed`;
 
   const fragenContext = b && times
-    ? `Kontext (nicht wiederholen): Der Interessent hat bereits ein kostenloses Probetraining im Fit-Inn Trier gebucht – am ${fmt(b.start, { weekday: 'long', day: 'numeric', month: 'long' })} um ${fmt(b.start, { hour: '2-digit', minute: '2-digit' })} Uhr, ${b.trainer ? 'mit Trainer' : 'ohne Trainer'}, ca. 90 Minuten. Adresse: Auf Hirtenberg 8, 54296 Trier, kostenlose Parkplätze direkt am Studio. Beantworte die Frage kurz und freundlich.`
+    ? `Kontext (nicht wiederholen): Der Interessent hat bereits ein kostenloses Probetraining im Fit-Inn Trier gebucht – am ${fmt(b.start, { weekday: 'long', day: 'numeric', month: 'long' })} um ${fmt(b.start, { hour: '2-digit', minute: '2-digit' })} Uhr, ${b.trainer ? 'mit Trainer' : 'ohne Trainer'}, ca. 90 Minuten.${b.ziel ? ` Ziel: ${b.ziel}.` : ''}${b.erfahrung ? ` Erfahrung: ${b.erfahrung}.` : ''}${b.focusLabels.length ? ` Wichtig ist ihm: ${b.focusLabels.join(', ')}.` : ''}${b.plan.length ? ` Geplant fürs Probetraining: ${b.plan.join('; ')}.` : ''} Gehe, wo es passt, auf sein Ziel ein. Adresse: Auf Hirtenberg 8, 54296 Trier, kostenlose Parkplätze direkt am Studio. Beantworte die Frage kurz und freundlich.`
     : '';
 
   if (!ready) return <section className={styles.hero} aria-busy="true"><div className={styles.container} style={{ minHeight: '60vh' }} /></section>;
@@ -158,10 +173,11 @@ export default function Bestaetigung(props: any) {
                 <li>{b.trainer ? withTrainer : withoutTrainer}</li>
                 {b.ziel ? <li>{b.ziel}</li> : null}
                 {b.erfahrung ? <li>{b.erfahrung}</li> : null}
+                {b.focusLabels.map((f) => <li key={f}>{f}</li>)}
               </ul>
             </div>
           </motion.div>
-          <p className={styles.mail}>{mailNote}</p>
+          <p className={styles.mail}>{mailNote}{x?.tip ? <> <strong>{x.tip}</strong></> : null}</p>
 
           <div className={styles.cal}>
             <span className={styles.calLabel}>{calendarLabel}</span>
@@ -173,7 +189,7 @@ export default function Bestaetigung(props: any) {
 
           <motion.div {...rise(2)}>
             {fragen ? (
-              <Fragen {...fragen} variant="embed" booked leadLabel={finnLabel} lead={finnLine || finnFallback} intro={chatIntro} context={fragenContext} />
+              <Fragen {...fragenP} variant="embed" booked leadLabel={finnLabel} lead={finnLine || g?.lead || finnFallback} intro={chatIntro} context={fragenContext} />
             ) : null}
           </motion.div>
         </div>
@@ -183,9 +199,22 @@ export default function Bestaetigung(props: any) {
       <section className={styles.sec}>
         <Deco kind="dumbbell" className={styles.deco} />
         <div className={styles.container}>
+          {b.plan.length ? (
+            <motion.div className={styles.plan} {...rise(0)}>
+              <div className={styles.planHead}>
+                <span className={styles.planIcon} aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg></span>
+                <div><strong>{planTitle}</strong>{b.ziel ? <span>{b.ziel}{b.erfahrung ? ` · ${b.erfahrung}` : ''}</span> : null}</div>
+              </div>
+              {b.focusLabels.length ? (
+                <p className={styles.planFocus}><span>{planFocusLabel}:</span> {b.focusLabels.join(' · ')}</p>
+              ) : null}
+              <ul className={styles.planList}>{b.plan.map((p) => <li key={p}>{p}</li>)}</ul>
+              {planNote ? <p className={styles.planNote}>{planNote}</p> : null}
+            </motion.div>
+          ) : null}
           <Title as="h2" size="lg">{flowTitle}</Title>
           <ol className={styles.flow}>
-            {(flow || []).map((f: any, i: number) => (
+            {flowP.map((f: any, i: number) => (
               <motion.li key={f.title} className={styles.flowItem} {...rise(i)}>
                 <span className={styles.flowNum}>{String(i + 1).padStart(2, '0')}</span>
                 <div><strong>{f.title}</strong><p>{f.text}</p></div>
@@ -196,7 +225,7 @@ export default function Bestaetigung(props: any) {
           <div className={styles.lists}>
             <motion.div className={styles.listCard} {...rise(0)}>
               <h3>{bringTitle}</h3>
-              <ul>{(bring || []).map((x: string) => <li key={x}>{x}</li>)}</ul>
+              <ul>{bringP.map((t: string) => <li key={t}>{t}</li>)}</ul>
             </motion.div>
             <motion.div className={`${styles.listCard} ${styles.listCardAlt}`} {...rise(1)}>
               <h3>{onsiteTitle}</h3>

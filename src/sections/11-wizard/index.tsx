@@ -215,6 +215,7 @@ export default function Wizard(props: any) {
         window.sessionStorage.setItem('fi_booking', JSON.stringify({
           v: 1, vorname: form.firstname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '',
           trainer, ziel: goal?.label || '', erfahrung: exp?.label || '', fokus: focusStr, at: Date.now(),
+          goalKey: goal?.key || '', expKey: exp?.key || '', focusKeys: focus.map((f) => f.key), focusLabels: focus.map((f) => f.label), plan: plan.items, planTrainer: plan.trainer,
         }));
         saved = true;
       } catch { /* privater Modus */ }
@@ -230,7 +231,7 @@ export default function Wizard(props: any) {
   return (
     <div className={styles.root} role="dialog" aria-modal="true" aria-label={title}>
       <div className={styles.backdrop} onClick={() => setOpen(false)} aria-hidden="true" />
-      <div className={styles.box} ref={boxRef}>
+      <div className={`${styles.box} ${step === 'slot' ? styles.boxWide : ''}`} ref={boxRef}>
         <div className={styles.head}>
           <div className={styles.headText}>
             <span className={styles.stepNo}>{step === 'done' ? title : fill(stepLabel, { n: idx + 1, total })}</span>
@@ -262,6 +263,8 @@ export default function Wizard(props: any) {
                 {slotState === 'error' ? <p className={styles.alert}>{errorSlotsText} <a href={phoneHref}>{phoneDisplay}</a></p> : null}
                 {slotState === 'ok' ? (
                   <>
+                    <div className={styles.slotGrid}>
+                    <div className={styles.slotDays}>
                     <span className={styles.slotLabel}>{dayLabel || 'Tag'}</span>
                     <div className={styles.dayStrip} role="listbox" aria-label={dayLabel || 'Tag'}>
                       {days.map((d) => {
@@ -276,6 +279,8 @@ export default function Wizard(props: any) {
                         );
                       })}
                     </div>
+                    </div>
+                    <div className={styles.slotTimes}>
                     {day ? (
                       <>
                         <span className={styles.slotLabel}>{timeLabel || 'Uhrzeit'}</span>
@@ -293,6 +298,8 @@ export default function Wizard(props: any) {
                         </div>
                       </>
                     ) : null}
+                    </div>
+                    </div>
                   </>
                 ) : null}
               </>

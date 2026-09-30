@@ -14,7 +14,7 @@
   "calDescription": "Kostenloses Probetraining (ca. 90 Min.). Mitbringen: Sportkleidung, saubere Trainingsschuhe, Handtuch. Fragen: 0651 493 688 19",
   "finnLabel": "FINN",
   "finnFallback": "Richtig gute Entscheidung! Dein Trainer freut sich auf dich – und du wirst sehen: Der erste Schritt ist der schwerste, der Rest macht Spaß.",
-  "finnPrompt": "Ein Interessent hat gerade ein kostenloses Probetraining gebucht. Ziel: {ziel}. Erfahrung: {erfahrung}. Schreibe 2 kurze, herzliche und motivierende Sätze (max. 45 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen, kein Name), die bestärken, dass dieser Schritt richtig war, und Vorfreude auf das Probetraining machen. Antworte nur mit dem Text.",
+  "finnPrompt": "Ein Interessent hat gerade ein kostenloses Probetraining gebucht. Ziel: {ziel}. Erfahrung: {erfahrung}. Wichtig ist ihm: {fokus}. Schreibe 2 kurze, herzliche und motivierende Sätze (max. 45 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen, kein Name), die konkret auf sein Ziel und seinen Fokus eingehen und Vorfreude auf das Probetraining machen. Antworte nur mit dem Text.",
   "flowTitle": "So läuft dein Probetraining",
   "flow": [
     {
@@ -127,5 +127,110 @@
     ]
   },
   "heroBg": "glow",
-  "chatIntro": "Noch Fragen vor deinem Termin? Tipp an oder frag FINN direkt."
+  "chatIntro": "Noch Fragen vor deinem Termin? Tipp an oder frag FINN direkt.",
+  "planTitle": "So bereitet dein Trainer dein Probetraining vor",
+  "planFocusLabel": "Dir ist wichtig",
+  "planNote": "Dein Trainer hat deine Angaben schon – du musst nichts erklären.",
+  "goalCopy": {
+    "abnehmen": {
+      "lead": "Abnehmen ist dein Ziel – dein Trainer zeigt dir, wie Cardio und Kraft zusammen am meisten bringen.",
+      "talk": "Wir sprechen über dein Ziel Abnehmen und wie viel Zeit du pro Woche hast.",
+      "bring": [
+        "Eine Pulsuhr oder Fitnessuhr, falls du eine hast"
+      ],
+      "faq": [
+        {
+          "question": "Wie oft sollte ich zum Abnehmen trainieren?",
+          "answer": "Für den Start sind zwei bis drei Einheiten pro Woche ein guter Rhythmus. Beim Probetraining schaut dein Trainer mit dir, was realistisch in deinen Alltag passt."
+        },
+        {
+          "question": "Bekomme ich auch Tipps zur Ernährung?",
+          "answer": "Ja, dein Trainer gibt dir beim Probetraining erste Tipps. Für die Ernährung arbeiten wir außerdem mit unserem Partner Upfit zusammen – Details dazu bekommst du vor Ort."
+        }
+      ]
+    },
+    "muskeln": {
+      "lead": "Muskelaufbau ist dein Ziel – du lernst die Biostrength-Geräte kennen, die dich durch jede Übung führen.",
+      "talk": "Wir sprechen über deinen Muskelaufbau und welche Bereiche dir wichtig sind.",
+      "bring": [
+        "Trainingshandschuhe, falls du gern welche nutzt"
+      ],
+      "faq": [
+        {
+          "question": "Wie schnell sehe ich Fortschritte beim Muskelaufbau?",
+          "answer": "Mit regelmäßigem Training merkst du meist nach wenigen Wochen, dass du mehr schaffst. Dein Trainer zeigt dir beim Probetraining, wie du Fortschritte in der TechnoGym App verfolgst."
+        },
+        {
+          "question": "Kann ich auch mit Freihanteln trainieren?",
+          "answer": "Ja, im Powerbereich gibt es Freihanteln, Kraftstationen und Kabelzug. Beim Probetraining kannst du dir den Bereich gern zeigen lassen."
+        }
+      ]
+    },
+    "fit": {
+      "lead": "Fit und gesund bleiben ist dein Ziel – dein Trainer stellt dir einen Mix zusammen, der in deinen Alltag passt.",
+      "talk": "Wir sprechen darüber, was dir guttut und wie viel Zeit du hast.",
+      "bring": [],
+      "faq": [
+        {
+          "question": "Reichen zwei Trainings pro Woche?",
+          "answer": "Für die meisten ist das ein guter, dauerhaft machbarer Rhythmus. Beim Probetraining besprichst du mit deinem Trainer, was zu deinem Alltag passt."
+        }
+      ]
+    },
+    "ruecken": {
+      "lead": "Rücken und Beweglichkeit sind dein Ziel – der Biocircuit führt dich gelenkschonend durch jede Übung.",
+      "talk": "Wir sprechen über deinen Rücken, deine Haltung und was dir im Alltag schwerfällt.",
+      "bring": [
+        "Bequeme, dehnbare Kleidung"
+      ],
+      "faq": [
+        {
+          "question": "Ist das Training gut für meinen Rücken?",
+          "answer": "Beim Probetraining zeigt dir dein Trainer geführte, gelenkschonende Übungen für Rumpf und Rücken. Sag vor Ort gern Bescheid, was dir wichtig ist. Bei akuten Beschwerden kläre das Training bitte vorher mit deinem Arzt ab."
+        }
+      ]
+    },
+    "stress": {
+      "lead": "Stress abbauen ist dein Ziel – der 30-Minuten-Zirkel ist kurz, geführt und macht den Kopf frei.",
+      "talk": "Wir sprechen darüber, wann Training für dich am besten in den Tag passt.",
+      "bring": [],
+      "faq": [
+        {
+          "question": "Wann ist es im Studio am ruhigsten?",
+          "answer": "Meist ist es vormittags und am frühen Nachmittag ruhiger. Die aktuelle Auslastung kann FINN dir live sagen – frag einfach."
+        }
+      ]
+    },
+    "wiedereinstieg": {
+      "lead": "Du startest neu – wir gehen es entspannt an, mit Einweisung an jedem Gerät und einem Plan, der dich nicht überfordert.",
+      "talk": "Wir sprechen darüber, was du früher gemacht hast und wie wir sanft wieder einsteigen.",
+      "bring": [
+        "Deinen alten Trainingsplan, falls du noch einen hast"
+      ],
+      "faq": [
+        {
+          "question": "Wie fange ich nach langer Pause richtig an?",
+          "answer": "Langsam und mit Plan. Beim Probetraining startet dein Trainer mit leichten Gewichten und zeigt dir, wie du dich Woche für Woche steigerst."
+        }
+      ]
+    }
+  },
+  "expCopy": {
+    "neu": {
+      "tip": "Komm gern 10 Minuten früher – dann ist alles ganz entspannt.",
+      "flowTry": "Dein Trainer zeigt dir jedes Gerät Schritt für Schritt. Du musst nichts vorher wissen."
+    },
+    "pause": {
+      "tip": "",
+      "flowTry": "Dein Trainer frischt mit dir die wichtigsten Geräte auf und stellt alles auf dich ein."
+    },
+    "unregelmaessig": {
+      "tip": "",
+      "flowTry": "Du probierst die Geräte aus, die zu deinem Ziel passen – mit einem ersten Plan für mehr Regelmäßigkeit."
+    },
+    "regelmaessig": {
+      "tip": "",
+      "flowTry": "Du testest die Bereiche, die dich interessieren – Biostrength, Powerbereich oder Cardio, ganz wie du magst."
+    }
+  }
 }
