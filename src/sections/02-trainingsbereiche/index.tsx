@@ -23,7 +23,7 @@ export default function Bereiche({ anchorId, bgColor, image, kicker, headline, i
         <div className={styles.grid}>
           {image && image.src ? (
             <div className={styles.photo}>
-              <Image src={image.src} alt={imageAlt} className={styles.img} />
+              <Image src={image.src} alt={imageAlt} className={styles.img} sizes="(max-width: 767px) 100vw, 55vw" />
             </div>
           ) : null}
           <ul className={styles.tiles}>

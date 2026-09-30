@@ -1,4 +1,5 @@
 'use client';
+import NextImage from 'next/image';
 import React from 'react';
 import Text from '@siteui/text';
 import { mediaUrl } from '@siteui/image';
@@ -11,15 +12,7 @@ export default function Footer({ bgColor, logo, brand, tagline, address, phoneLa
       <div className={styles.container}>
         <div className={styles.brandCol}>
           {logo && logo.src ? (
-            <img
-              className={styles.logo}
-              src={mediaUrl(logo.src, 'md')}
-              srcSet={`${mediaUrl(logo.src, 'md')} 1x, ${mediaUrl(logo.src, 'md2x')} 2x`}
-              alt={brand}
-              width={240}
-              height={40}
-              loading="lazy"
-            />
+            <NextImage className={styles.logo} src={mediaUrl(logo.src)} alt={brand} width={2917} height={486} quality={85} sizes="240px" />
           ) : (
             <span className={styles.brand}>{brand}</span>
           )}

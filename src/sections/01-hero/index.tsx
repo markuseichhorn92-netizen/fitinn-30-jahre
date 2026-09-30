@@ -1,4 +1,5 @@
 'use client';
+import NextImage from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Title from '@siteui/title';
@@ -65,7 +66,7 @@ export default function Hero({
 
   return (
     <section ref={heroRef} className={`${styles.hero} ${fullHeight ? styles.full : ''}`} style={bgStyle}>
-      {imgStyle ? <div className={styles.bgImg} style={imgStyle} aria-hidden="true" /> : null}
+      {imgStyle ? <NextImage className={styles.bgImg} src={mediaUrl(bgImage.src)} alt="" fill priority fetchPriority="high" quality={85} sizes="100vw" /> : null}
       {imgStyle ? <div className={styles.bgOverlay} style={{ background: `#05090B${overlayHex}` }} aria-hidden="true" /> : null}
       <div className={styles.glowA} aria-hidden="true" />
       <div className={styles.glowB} aria-hidden="true" />
@@ -75,14 +76,7 @@ export default function Hero({
       <div className={styles.topbar}>
         <a className={styles.logoLink} href={logoHref}>
           {logo && logo.src ? (
-            <img
-              className={styles.logo}
-              src={mediaUrl(logo.src, 'md')}
-              srcSet={`${mediaUrl(logo.src, 'md')} 1x, ${mediaUrl(logo.src, 'md2x')} 2x`}
-              alt={logoAlt}
-              width={500}
-              height={83}
-            />
+            <NextImage className={styles.logo} src={mediaUrl(logo.src)} alt={logoAlt} width={2917} height={486} quality={85} sizes="240px" priority />
           ) : null}
         </a>
         {showTopPhone ? (
