@@ -14,6 +14,11 @@ function dayTs(s: string): number {
   const [y, m, d] = String(s).split('-').map(Number);
   return new Date(y, (m || 1) - 1, d || 1).getTime();
 }
+// Kalendertag verschieben (sommerzeitsicher, statt + n * 24 h)
+function addDays(ts: number, n: number): number {
+  const d = new Date(ts);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n).getTime();
+}
 function startOfToday(): number {
   const n = new Date();
   return new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime();
@@ -74,14 +79,15 @@ export default function Angebot(props: any) {
   const maxSave = (day: number) => Math.round(promoDays(day, untilTs) * perDay);
 
   const today = maxSave(signupTs);
-  const tomorrow = maxSave(signupTs + DAY);
+  const tomorrow = maxSave(addDays(signupTs, 1));
   const lastDay = maxSave(lastSignupTs);
   const isLastDay = signupTs >= lastSignupTs;
 
   const barCount = Math.max(1, Math.round((lastSignupTs - startTs) / DAY) + 1);
-  const bars = Array.from({ length: barCount }, (_, i) => startTs + i * DAY);
+  const bars = Array.from({ length: barCount }, (_, i) => addDays(startTs, i));
   const top = maxSave(startTs) || 1;
-  const fmtAxis = (ts: number) => new Date(ts).toLocaleDateString('de-DE', { day: 'numeric', month: 'short' });
+  const MONTHS = ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sept.', 'Okt.', 'Nov.', 'Dez.'];
+  const fmtAxis = (ts: number) => { const d = new Date(ts); return `${d.getDate()}. ${MONTHS[d.getMonth()]}`; };
 
   const totals = list.map((t) => {
     const pw = promoDays(signupTs, untilTs) / 7;
@@ -138,7 +144,7 @@ export default function Angebot(props: any) {
                   </div>
                   <div className={styles.axis} aria-hidden="true">
                     <span>{fmtAxis(startTs)}</span>
-                    <span>{fmtAxis(startTs + Math.floor(barCount / 2) * DAY)}</span>
+                    <span>{fmtAxis(addDays(startTs, Math.floor(barCount / 2)))}</span>
                     <span>{fmtAxis(lastSignupTs)}</span>
                   </div>
                 </div>

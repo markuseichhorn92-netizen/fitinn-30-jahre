@@ -31,7 +31,7 @@ export default function Hero({
   const saveAt = (ts: number) => Math.max(0, Math.round((Math.round((untilTs - ts) / DAY) + 1) * perDay));
   const signupTs = Math.max(todayTs === null ? startTs : todayTs, startTs);
   const saveToday = saveAt(signupTs);
-  const saveTomorrow = saveAt(signupTs + DAY);
+  const saveTomorrow = saveAt(new Date(new Date(signupTs).getFullYear(), new Date(signupTs).getMonth(), new Date(signupTs).getDate() + 1).getTime());
   const saveMax = saveAt(startTs) || 1;
   const promoOver = todayTs !== null && todayTs > untilTs;
   const [stickyOn, setStickyOn] = useState(false);
