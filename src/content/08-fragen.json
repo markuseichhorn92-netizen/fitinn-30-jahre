@@ -1,0 +1,59 @@
+{
+  "anchorId": "fragen",
+  "bgColor": "var(--color-kit-white)",
+  "bgDeco": "question",
+  "kicker": "Frag einfach",
+  "headline": "Deine Frage. Sofort beantwortet.",
+  "intro": "Tipp auf eine Frage oder stell deine eigene – FINN, unser digitaler Assistent, antwortet direkt hier.",
+  "finnApi": "https://mitglieder.fit-inn-trier.de/api/finn/public",
+  "maxChars": 800,
+  "botName": "FINN",
+  "verifiedLabel": "Vom Team geprüft",
+  "aiLabel": "KI-Antwort",
+  "followLabel": "Passt dazu",
+  "inputLabel": "Deine Frage an FINN",
+  "inputPlaceholder": "Deine Frage …",
+  "sendLabel": "Fragen",
+  "thinkingLabel": "FINN überlegt …",
+  "errorText": "Gerade keine Verbindung zu FINN. Ruf uns gern an:",
+  "phoneLabel": "0651 493 688 19",
+  "phoneHref": "tel:+4965149368819",
+  "continueLabel": "Im Chat weitermachen",
+  "continueIntro": "Wir waren gerade bei „{frage}“ – frag mich gern weiter.",
+  "bookLabel": "Probetraining buchen",
+  "bookHref": "#anmeldung",
+  "clearLabel": "Antworten ausblenden",
+  "disclosure": "FINN ist ein KI-Assistent, kein Mensch. Geprüfte Antworten stammen vom Team; KI-Antworten können Fehler enthalten. Keine Gesundheits- oder Vertragsdaten eingeben.",
+  "privacyLabel": "Datenschutz",
+  "privacyHref": "https://fit-inn-trier.de/datenschutz-fit-inn-trier",
+  "fragen": [
+    {
+      "question": "Wie funktioniert das mit den 5 €?",
+      "answer": "Ab deinem Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche – in beiden Tarifen. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis. Nur für die ersten 25 Neuanmeldungen."
+    },
+    {
+      "question": "Was kostet es ab Januar?",
+      "answer": "Ab 01.01.2027 zahlst du 12 € pro Woche (Basic, 52 Wochen Laufzeit) oder 9 € pro Woche (Premium, 104 Wochen). Die Aktionswochen zählen zur Laufzeit. Einmalig kommen 39 € Aufnahmegebühr dazu."
+    },
+    {
+      "question": "Basic oder Premium – was passt zu mir?",
+      "answer": "Basic läuft 52 Wochen und kostet ab Januar 12 € pro Woche. Premium läuft 104 Wochen und ist mit 9 € pro Woche die günstigste Woche. Bis Silvester zahlst du in beiden Fällen 5 €. Wer länger dabei bleiben will, fährt mit Premium günstiger."
+    },
+    {
+      "question": "Wie läuft das Probetraining ab?",
+      "answer": "Kostenlos und unverbindlich, rund 90 Minuten, wahlweise mit oder ohne Trainer. Du lernst die Geräte kennen, stellst deine Fragen und entscheidest danach in Ruhe. Ab 18 Jahren."
+    },
+    {
+      "question": "Bin ich zu alt oder zu unfit dafür?",
+      "answer": "Nein. Viele fangen bei uns nach Jahren ohne Sport wieder an, manche zum ersten Mal überhaupt. Du bekommst eine Einweisung an jedem Gerät und wir beginnen da, wo du stehst."
+    },
+    {
+      "question": "Wann habt ihr geöffnet?",
+      "answer": "Mo–Do 09:30–13:00 und 15:00–21:30 Uhr, Sa 13:00–18:00 Uhr, So 09:00–15:00 Uhr. Freitag und Feiertage findest du auf fit-inn-trier.de/kontakt – oder frag FINN nach der aktuellen Auslastung."
+    },
+    {
+      "question": "Kann ich die Aktion als bestehendes Mitglied nutzen?",
+      "answer": "Nein, das Angebot gilt nur für Neumitglieder und ist nicht auf bestehende Verträge übertragbar. Es ist auch nicht mit anderen Aktionen kombinierbar."
+    }
+  ]
+}

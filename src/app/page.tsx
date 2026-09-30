@@ -3,7 +3,7 @@ import Hero from '@/sections/01-hero';
 import Trainingsbereiche from '@/sections/02-trainingsbereiche';
 import Angebot from '@/sections/03-angebot';
 import Stimmen from '@/sections/05-stimmen';
-import Faq from '@/sections/08-faq';
+import Fragen from '@/sections/08-fragen';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
 
@@ -12,7 +12,7 @@ import hero from '@/content/01-hero.json';
 import trainingsbereiche from '@/content/02-trainingsbereiche.json';
 import angebot from '@/content/03-angebot.json';
 import stimmen from '@/content/05-stimmen.json';
-import faq from '@/content/08-faq.json';
+import fragen from '@/content/08-fragen.json';
 import booking from '@/content/09-booking.json';
 import footer from '@/content/10-footer.json';
 
@@ -26,7 +26,7 @@ export default function Page() {
       <Trainingsbereiche {...trainingsbereiche} />
       <Stimmen {...stimmen} />
       <Booking {...booking} />
-      <Faq {...faq} />
+      <Fragen {...fragen} />
       <Footer {...footer} />
     </main>
   );
