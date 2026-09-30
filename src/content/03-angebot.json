@@ -1,0 +1,107 @@
+{
+  "fullHeight": false,
+  "anchorId": "angebot",
+  "bgColor": "var(--color-kit-dark)",
+  "eyebrow": "Das Angebot",
+  "headlineSpar": "Je früher du startest, desto mehr sparst du.",
+  "textSpar": "Zahl ab deinem Vertragsbeginn bis 31.12.2026 nur 5 € pro Woche – in beiden Tarifen. Ab dem 01.01.2027 gilt dein regulärer Wochenbeitrag. Jeder Tag, den du wartest, ist ein 5-€-Tag weniger. Und: Nur die ersten 25 Neuanmeldungen bekommen das Angebot.",
+  "ctaLabel": "Erst mal Probetraining buchen",
+  "ctaHref": "#anmeldung",
+  "sparLabel": "Wer heute abschließt, spart bis zu",
+  "currencySign": "€",
+  "tomorrowText": "Morgen nur noch {morgen} €. Jeder Tag Warten kostet dich rund 1 €.",
+  "lastDayText": "Heute ist der letzte Tag zum 5-€-Preis.",
+  "limitText": "Limitiert: Nur die ersten 25 Neuanmeldungen bekommen das Angebot.",
+  "todayMarker": "Heute",
+  "chartAria": "Die Ersparnis sinkt jeden Tag um rund 1 €: von {max} € bei Start am 1. Oktober bis auf {min} € am 31. Dezember. Heute: {heute} €.",
+  "expiredText": "Die Aktion ist beendet. Frag gern nach unserem aktuellen Angebot.",
+  "promoStart": "2026-10-01",
+  "priceUntil": "2026-12-31",
+  "signupUntil": "2026-12-31",
+  "promoPrice": "5 €",
+  "promoLabelSpar": "pro Woche bis 31.12.2026",
+  "afterLabelSpar": "ab 01.01.2027 pro Woche",
+  "tarifSaveText": "Abschluss heute: {x} € gespart",
+  "promoWeekly": 5,
+  "tarife": [
+    {
+      "name": "Basic",
+      "term": "52 Wochen Laufzeit",
+      "after": "12 €",
+      "highlight": "Meiste Ersparnis",
+      "regular": 12,
+      "weeks": 52
+    },
+    {
+      "name": "Premium",
+      "term": "104 Wochen Laufzeit",
+      "after": "9 €",
+      "highlight": "Günstigste Woche",
+      "regular": 9,
+      "weeks": 104
+    }
+  ],
+  "inclTitle": "In jeder Mitgliedschaft enthalten",
+  "included": [
+    {
+      "icon": "club",
+      "title": "Komplette Clubnutzung",
+      "text": "Über 100 Geräte auf zwei Etagen: Kraft, Cardio und Powerbereich unter einem Dach."
+    },
+    {
+      "icon": "heart",
+      "title": "Gesundheits-Check-up",
+      "text": "Mit Körperanalyse, damit du weißt, wo du startest."
+    },
+    {
+      "icon": "person",
+      "title": "Einweisung an jedem Gerät",
+      "text": "Persönlich, von Menschen, die dich beim Namen kennen."
+    },
+    {
+      "icon": "plan",
+      "title": "Trainingspläne",
+      "text": "Individuell erstellt und digital gespeichert."
+    },
+    {
+      "icon": "app",
+      "title": "TechnoGym App",
+      "text": "Dein Plan und jede Einheit immer auf dem Handy."
+    },
+    {
+      "icon": "screen",
+      "title": "Cardio-Entertainment",
+      "text": "Bildschirme an den Cardio-Geräten."
+    },
+    {
+      "icon": "drink",
+      "title": "Mineralgetränke",
+      "text": "So viel du beim Training brauchst."
+    },
+    {
+      "icon": "wifi",
+      "title": "WLAN, Duschen, Umkleiden",
+      "text": "Alles da, alles gepflegt."
+    }
+  ],
+  "hinweise": [
+    {
+      "text": "Der 5-€-Preis gilt ab Vertragsbeginn bis 31.12.2026. Vertragsbeginn ist der Tag des Abschlusses."
+    },
+    {
+      "text": "Einmalige Aufnahmegebühr 39 €. Einzug in 14-tägigen Intervallen per SEPA-Lastschrift."
+    },
+    {
+      "text": "Nur für die ersten 25 Neuanmeldungen, nur für Neumitglieder ab 18 Jahren."
+    }
+  ],
+  "legalToggle": "Alle Bedingungen lesen",
+  "rechtstext": "Das Angebot gilt für die ersten 25 Mitgliedschaftsverträge, die ab dem 01.10.2026 neu abgeschlossen werden, längstens bis zum 31.12.2026. Vertragsbeginn ist der Tag des Abschlusses. Vom Vertragsbeginn bis einschließlich 31.12.2026 beträgt der Beitrag 5 € pro Woche. Ab dem 01.01.2027 beträgt der Beitrag 12 € pro Woche bei einer Laufzeit von 52 Wochen bzw. 9 € pro Woche bei einer Laufzeit von 104 Wochen. Der Aktionszeitraum ist Teil der vereinbarten Laufzeit und verlängert diese nicht; die Laufzeit beginnt mit dem Vertragsbeginn. Je früher der Abschluss, desto länger gilt der Aktionspreis. Alle Preise verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Hinzu kommt eine einmalige Aufnahmegebühr von 39 €. Der Einzug erfolgt in 14-tägigen Intervallen per SEPA-Lastschrift. Nach Ablauf der vereinbarten Laufzeit verlängert sich die Mitgliedschaft auf unbestimmte Zeit und kann jederzeit mit einer Frist von einem Monat gekündigt werden. Zum Ende der Erstlaufzeit ist eine Kündigung mit einer Frist von 4 Wochen möglich. Das Angebot gilt nur für Neumitglieder, ist nicht mit anderen Aktionen oder Rabatten kombinierbar und nicht auf bestehende Verträge übertragbar. Mindestalter 18 Jahre.",
+  "totalText": "Bei Abschluss heute ergibt sich rechnerisch ein Gesamtbetrag von {basic} € über 52 Wochen (Basic) bzw. {premium} € über 104 Wochen (Premium), jeweils zzgl. Aufnahmegebühr.",
+  "agbIntro": "Es gelten unsere",
+  "agbLabel": "Allgemeinen Geschäftsbedingungen",
+  "agbHref": "https://fit-inn-trier.de/agbs-fit-inn-trier",
+  "andLabel": "und unsere",
+  "houseLabel": "Hausordnung",
+  "houseHref": "https://fit-inn-trier.de/hausordnung"
+}

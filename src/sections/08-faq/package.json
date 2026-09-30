@@ -1,0 +1,39 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": false, "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "fragen", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-white)", "tab": "settings", "group": "root" },
+      "eyebrow": { "title": "Kicker", "type": "text", "default": "Fragen", "tab": "content", "group": "intro" },
+      "title": { "title": "Headline", "type": "text", "default": "Passt das zu mir?", "tab": "content", "group": "intro" },
+      "text": { "title": "Text", "type": "text", "default": "Deine Frage ist nicht dabei? Ruf uns an, wir nehmen uns Zeit.", "tab": "content", "group": "intro" },
+      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "intro" },
+      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "intro" },
+      "fragen": {
+        "title": "Fragen",
+        "type": "array",
+        "tab": "content",
+        "group": "items",
+        "items": {
+          "question": { "title": "Frage", "type": "text", "default": "Frage" },
+          "answer": { "title": "Antwort", "type": "text", "default": "Antwort" },
+          "open": { "title": "Aufgeklappt starten", "type": "checkbox", "default": false }
+        },
+        "default": [
+          { "question": "Bin ich zu alt oder zu unfit dafür?", "answer": "Nein. Viele unserer Mitglieder fangen nach Jahren ohne Sport wieder an, manche zum ersten Mal überhaupt. Wir beginnen da, wo du stehst – ohne Wettbewerb, ohne Publikum.", "open": true },
+          { "question": "Wie funktioniert das mit den 5 €?", "answer": "Ab deinem Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis – jeder Tag Warten kostet dich rund 1 € Ersparnis.", "open": false },
+          { "question": "Was kostet es ab Januar?", "answer": "Ab 01.01.2027 zahlst du 12 € pro Woche bei 52 Wochen Laufzeit oder 9 € pro Woche bei 104 Wochen. Die Aktionswochen zählen zur Laufzeit und verlängern sie nicht. Einmalig kommt die Aufnahmegebühr von 39 € dazu.", "open": false },
+          { "question": "Wie läuft das Probetraining ab?", "answer": "Kostenlos und unverbindlich, rund 90 Minuten – wahlweise mit oder ohne Trainer. Du lernst die Geräte kennen, stellst deine Fragen und entscheidest danach in Ruhe. Ab 18 Jahren.", "open": false },
+          { "question": "Werde ich eingewiesen?", "answer": "Ja. Jede Mitgliedschaft beginnt mit einem Gespräch und einer Einweisung an jedem Gerät, das du benutzen wirst.", "open": false },
+          { "question": "Was ist Coach Premium?", "answer": "Trainingspläne, Anleitungen und Auswertungen in der App – also Inhalte auf deinem Telefon. Persönliches Training mit einem Trainer vor Ort ist damit nicht gemeint.", "open": false },
+          { "question": "Wer bekommt das Angebot?", "answer": "Nur die ersten 25 Neuanmeldungen. Es gilt für Neumitglieder ab 18 Jahren und ist nicht mit anderen Aktionen kombinierbar.", "open": false }
+        ]
+      }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "items": { "title": "Fragen" }
+    }
+  }
+}

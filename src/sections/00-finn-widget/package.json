@@ -1,0 +1,137 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "mode": { "title": "Darstellung", "type": "select", "default": "widget", "options": [ { "value": "widget", "label": "Nur schwebendes Chat-Widget" }, { "value": "inline", "label": "Chat als Sektion auf der Seite" } ], "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "chat", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-black)", "tab": "settings", "group": "root" },
+      "finnApi": { "title": "FINN-API URL", "type": "text", "default": "https://mitglieder.fit-inn-trier.de/api/finn/public", "tab": "settings", "group": "root" },
+
+      "badge": { "title": "KI-Label", "type": "text", "default": "KI-Assistent", "tab": "content", "group": "intro" },
+      "headline": { "title": "Headline", "type": "text", "default": "Noch Fragen? Frag FINN.", "tab": "content", "group": "intro" },
+      "introText": { "title": "Text", "type": "text", "default": "FINN ist unser digitaler Assistent. Er kennt das Studio, nennt dir die aktuellen Öffnungszeiten und die Auslastung live – und wenn du magst, gibt er dein Anliegen direkt an unser Team weiter.", "tab": "content", "group": "intro" },
+      "disclosure": { "title": "KI-Hinweis", "type": "text", "default": "FINN ist ein KI-Assistent von Fit-Inn Trier, kein Mensch. Antworten können Fehler enthalten – verbindlich sind die Angaben unseres Teams. Bitte gib keine Gesundheits- oder Vertragsdaten ein. Die Verarbeitung erfolgt über Amazon Bedrock in Frankfurt.", "tab": "content", "group": "intro" },
+      "privacyLabel": { "title": "Datenschutz Linktext", "type": "text", "default": "Datenschutz", "tab": "content", "group": "intro" },
+      "privacyHref": { "title": "Datenschutz Link", "type": "text", "default": "https://fit-inn-trier.de/datenschutz-fit-inn-trier", "tab": "content", "group": "intro" },
+
+      "suggestionsLabel": { "title": "Überschrift Vorschläge", "type": "text", "default": "Beliebte Fragen", "tab": "content", "group": "suggestions" },
+      "suggestions": {
+        "title": "Vorschläge",
+        "type": "array",
+        "tab": "content",
+        "group": "suggestions",
+        "items": { "text": { "title": "Frage", "type": "text", "default": "Frage" } },
+        "default": [
+          { "text": "Was kostet es nach den 12 Wochen?" },
+          { "text": "Wie voll ist es gerade im Studio?" },
+          { "text": "Wann habt ihr heute geöffnet?" },
+          { "text": "Wie läuft das Probetraining ab?" }
+        ]
+      },
+
+      "botName": { "title": "Name Assistent", "type": "text", "default": "FINN", "tab": "content", "group": "chat" },
+      "greeting": { "title": "Begrüßung", "type": "text", "default": "Hi, ich bin FINN, der digitale Assistent von Fit-Inn Trier. Was möchtest du wissen?", "tab": "content", "group": "chat" },
+      "placeholder": { "title": "Platzhalter Eingabe", "type": "text", "default": "Frag FINN …", "tab": "content", "group": "chat" },
+      "inputLabel": { "title": "Label Eingabe (Screenreader)", "type": "text", "default": "Nachricht an FINN", "tab": "content", "group": "chat" },
+      "sendLabel": { "title": "Button Senden", "type": "text", "default": "Senden", "tab": "content", "group": "chat" },
+      "typingLabel": { "title": "Tippt-Text", "type": "text", "default": "FINN schreibt …", "tab": "content", "group": "chat" },
+      "resetLabel": { "title": "Neu starten Text", "type": "text", "default": "Neu starten", "tab": "content", "group": "chat" },
+      "confirmLabel": { "title": "Button Bestätigen", "type": "text", "default": "Ja, bestätigen", "tab": "content", "group": "chat" },
+      "declineLabel": { "title": "Button Abbrechen", "type": "text", "default": "Abbrechen", "tab": "content", "group": "chat" },
+
+      "bookLabel": { "title": "Button Probetraining buchen", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "booking" },
+      "bookIntro": { "title": "Text Tag wählen", "type": "text", "default": "Super! Wähl einen Tag für dein kostenloses Probetraining (rund 90 Minuten):", "tab": "content", "group": "booking" },
+      "bookTimeText": { "title": "Text Uhrzeit wählen", "type": "text", "default": "Und welche Uhrzeit passt dir?", "tab": "content", "group": "booking" },
+      "bookFormText": { "title": "Text Formular", "type": "text", "default": "Fast geschafft! Diese Angaben brauchen wir für deinen Termin:", "tab": "content", "group": "booking" },
+      "bookLoading": { "title": "Text lädt", "type": "text", "default": "Freie Termine werden geladen …", "tab": "content", "group": "booking" },
+      "bookNoSlots": { "title": "Text keine Termine", "type": "text", "default": "Online sind gerade keine Termine frei. Ruf uns gern an:", "tab": "content", "group": "booking" },
+      "bookError": { "title": "Text Buchungsfehler", "type": "text", "default": "Die Buchung hat leider nicht geklappt. Versuch es bitte nochmal oder ruf uns an:", "tab": "content", "group": "booking" },
+      "bookValidation": { "title": "Text Pflichtfelder", "type": "text", "default": "Bitte fülle alle Felder aus und bestätige den Datenschutzhinweis. Das Probetraining ist ab 18 Jahren.", "tab": "content", "group": "booking" },
+      "bookSuccess": { "title": "Text Erfolg (vor Termin)", "type": "text", "default": "Geschafft! Dein kostenloses Probetraining ist gebucht:", "tab": "content", "group": "booking" },
+      "bookSuccessAfter": { "title": "Text Erfolg (nach Termin)", "type": "text", "default": "Du bekommst gleich eine Bestätigung per E-Mail. Wir freuen uns auf dich!", "tab": "content", "group": "booking" },
+      "bookBack": { "title": "Button Zurück", "type": "text", "default": "Zurück", "tab": "content", "group": "booking" },
+      "bookCancel": { "title": "Button Abbrechen", "type": "text", "default": "Abbrechen", "tab": "content", "group": "booking" },
+      "bookSubmit": { "title": "Button Buchen", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "booking" },
+      "bookSending": { "title": "Button beim Senden", "type": "text", "default": "Wird gebucht …", "tab": "content", "group": "booking" },
+      "trainerLabel": { "title": "Label Begleitung", "type": "text", "default": "Begleitung", "tab": "styles", "group": "bookingFields" },
+      "withTrainer": { "title": "Mit Trainer", "type": "text", "default": "Mit Trainer", "tab": "styles", "group": "bookingFields" },
+      "withoutTrainer": { "title": "Ohne Trainer", "type": "text", "default": "Ohne Trainer", "tab": "styles", "group": "bookingFields" },
+      "firstNameLabel": { "title": "Label Vorname", "type": "text", "default": "Vorname", "tab": "content", "group": "bookingFields" },
+      "lastNameLabel": { "title": "Label Nachname", "type": "text", "default": "Nachname", "tab": "content", "group": "bookingFields" },
+      "genderLabel": { "title": "Label Geschlecht", "type": "text", "default": "Geschlecht", "tab": "content", "group": "bookingFields" },
+      "femaleLabel": { "title": "Weiblich", "type": "text", "default": "Weiblich", "tab": "content", "group": "bookingFields" },
+      "maleLabel": { "title": "Männlich", "type": "text", "default": "Männlich", "tab": "content", "group": "bookingFields" },
+      "dobLabel": { "title": "Label Geburtsdatum", "type": "text", "default": "Geburtsdatum", "tab": "content", "group": "bookingFields" },
+      "emailLabel": { "title": "Label E-Mail", "type": "text", "default": "E-Mail", "tab": "content", "group": "bookingFields" },
+      "phoneFieldLabel": { "title": "Label Handynummer", "type": "text", "default": "Handynummer", "tab": "content", "group": "bookingFields" },
+      "streetLabel": { "title": "Label Straße", "type": "text", "default": "Straße", "tab": "styles", "group": "bookingFields" },
+      "houseNoLabel": { "title": "Label Hausnummer", "type": "text", "default": "Nr.", "tab": "styles", "group": "bookingFields" },
+      "zipLabel": { "title": "Label PLZ", "type": "text", "default": "PLZ", "tab": "styles", "group": "bookingFields" },
+      "cityLabel": { "title": "Label Ort", "type": "text", "default": "Ort", "tab": "styles", "group": "bookingFields" },
+      "consentNote": { "title": "Datenschutz-Bestätigung", "type": "text", "default": "Meine Angaben werden zur Terminbuchung direkt an die Systeme von Fit-Inn Trier (Magicline und unsere Kundenverwaltung) übermittelt – nicht an FINN. Die Datenschutzhinweise habe ich gelesen.", "tab": "settings", "group": "bookingFields" },
+      "marketingText": { "title": "Marketing-Einwilligung (optional)", "type": "text", "default": "Ja, Fit-Inn Trier darf mich per E-Mail und Telefon über Angebote informieren. Jederzeit widerrufbar.", "tab": "settings", "group": "bookingFields" },
+      "apiBaseUrl": { "title": "Magicline API Base-URL", "type": "text", "default": "https://fit-inn-trier.api.magicline.com/connect/v1", "tab": "settings", "group": "magicline" },
+      "studioId": { "title": "Magicline Studio-ID", "type": "number", "default": 1210005460, "tab": "settings", "group": "magicline" },
+      "bookingWindowDays": { "title": "Buchungsfenster (Tage)", "type": "number-slider", "default": 21, "min": 7, "max": 60, "step": 7, "tab": "settings", "group": "magicline" },
+      "crmFormId": { "title": "Onepage-CRM Formular-ID (zusätzlich)", "type": "text", "default": "d1c1e2bf-64b0-48aa-814a-5dd80185dfb8", "tab": "settings", "group": "magicline" },
+      "crmSource": { "title": "CRM: Quelle", "type": "text", "default": "FINN-Chat (Oktober-Aktion)", "tab": "settings", "group": "magicline" },
+
+      "launcherLabel": { "title": "Chat-Button (Desktop)", "type": "text", "default": "Frag FINN", "tab": "content", "group": "popup" },
+      "closeLabel": { "title": "Schließen (Screenreader)", "type": "text", "default": "Chat schließen", "tab": "content", "group": "popup" },
+      "nudgeCloseLabel": { "title": "Hinweis schließen (Screenreader)", "type": "text", "default": "Hinweis schließen", "tab": "content", "group": "popup" },
+      "showLauncher": { "title": "Chat-Button unten rechts (Desktop)", "type": "checkbox", "default": true, "tab": "content", "group": "popup" },
+      "maxNudges": { "title": "Max. Hinweise pro Besuch", "type": "number-slider", "min": 0, "max": 4, "step": 1, "default": 2, "tab": "settings", "group": "nudges" },
+      "nudgesSpar": {
+        "title": "Hinweis-Trigger",
+        "type": "array",
+        "tab": "settings",
+        "group": "nudges",
+        "items": {
+          "mode": { "title": "Auslöser", "type": "select", "default": "time", "options": [
+            { "value": "time", "label": "Nach X Sekunden auf der Seite" },
+            { "value": "section", "label": "Beim Erreichen einer Sektion (Anker-ID)" },
+            { "value": "idle", "label": "Nach X Sekunden ohne Aktivität" },
+            { "value": "exit", "label": "Beim Verlassen (Desktop, Maus nach oben)" }
+          ] },
+          "value": { "title": "Sekunden oder Anker-ID", "type": "text", "default": "20" },
+          "text": { "title": "Nachricht", "type": "text", "default": "Hinweis" },
+          "ask": { "title": "Vorgeschlagene Frage (optional)", "type": "text", "default": "" },
+          "book": { "title": "Direkt Buchung anbieten", "type": "checkbox", "default": false }
+        },
+        "default": [
+          { "mode": "section", "value": "angebot", "text": "Basic oder Premium – was passt besser zu dir? Frag mich einfach.", "ask": "Was ist der Unterschied zwischen Basic und Premium?", "book": false },
+          { "mode": "section", "value": "geraete", "text": "Lange nicht trainiert? Ich erklär dir, wie der Einstieg bei uns läuft.", "ask": "Ich war lange nicht im Studio – wie fange ich an?", "book": false },
+          { "mode": "time", "value": "35", "text": "Hi, ich bin FINN! Wusstest du: Jeder Tag früher spart dir rund 1 €. Fragen? Ich helfe dir gern.", "ask": "Wie viel spare ich, wenn ich heute starte?", "book": false },
+          { "mode": "idle", "value": "45", "text": "Noch unentschlossen? Ich such dir direkt einen freien Probetraining-Termin raus.", "ask": "", "book": true },
+          { "mode": "exit", "value": "", "text": "Bevor du gehst: Das Probetraining ist kostenlos und unverbindlich. Soll ich dir einen Termin zeigen?", "ask": "", "book": true }
+        ]
+      },
+
+      "yesLabel": { "title": "Antwort: Ja", "type": "text", "default": "Ja, gerne", "tab": "content", "group": "answers" },
+      "noLabel": { "title": "Antwort: Nein", "type": "text", "default": "Nein, danke", "tab": "content", "group": "answers" },
+      "bookYesLabel": { "title": "Antwort: Ja, Termin", "type": "text", "default": "Ja, Termin raussuchen", "tab": "content", "group": "answers" },
+      "bookChoice": { "title": "Antwort: Probetraining buchen", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "answers" },
+      "priceChoiceSpar": { "title": "Antwort: Preis-Frage", "type": "text", "default": "Wie viel spare ich, wenn ich heute starte?", "tab": "content", "group": "answers" },
+      "inclChoice": { "title": "Antwort: Inklusive-Frage", "type": "text", "default": "Was ist alles inklusive?", "tab": "content", "group": "answers" },
+      "busyChoice": { "title": "Antwort: Auslastung", "type": "text", "default": "Wie voll ist es gerade?", "tab": "content", "group": "answers" },
+      "otherChoice": { "title": "Antwort: Andere Frage", "type": "text", "default": "Ich hab noch eine Frage", "tab": "content", "group": "answers" },
+
+      "errorGeneric": { "title": "Fehler allgemein", "type": "text", "default": "Gerade keine Verbindung zu FINN. Ruf uns gern an:", "tab": "content", "group": "errors" },
+      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "errors" },
+      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "errors" },
+      "maxChars": { "title": "Max. Zeichen pro Nachricht", "type": "number", "default": 800, "tab": "settings", "group": "errors" }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "suggestions": { "title": "Vorschläge" },
+      "chat": { "title": "Chat" },
+      "errors": { "title": "Fehler & Kontakt" },
+      "booking": { "title": "Probetraining-Buchung" },
+      "bookingFields": { "title": "Buchung: Felder" },
+      "magicline": { "title": "Magicline" },
+      "popup": { "title": "Chat-Fenster & Button" },
+      "answers": { "title": "Antwort-Buttons" },
+      "nudges": { "title": "Hinweis-Trigger" }
+    }
+  }
+}

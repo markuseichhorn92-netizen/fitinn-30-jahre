@@ -1,0 +1,36 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-black)", "tab": "settings", "group": "root" },
+      "logo": { "title": "Logo", "type": "media", "default": { "src": "media/77c4274d-cac5-4f25-88b1-15387b0fa6b9", "name": "fitinn-logo-white.png" }, "tab": "content", "group": "contact" },
+      "brand": { "title": "Name", "type": "text", "default": "Fit-Inn Trier", "tab": "content", "group": "contact" },
+      "tagline": { "title": "Zusatz", "type": "text", "default": "Familiengeführt seit 1996. Kein Franchise.", "tab": "content", "group": "contact" },
+      "address": { "title": "Adresse", "type": "text", "default": "Auf Hirtenberg 8 · 54296 Trier", "tab": "content", "group": "contact" },
+      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "contact" },
+      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "contact" },
+      "email": { "title": "E-Mail", "type": "text", "default": "info@fit-inn-trier.de", "tab": "content", "group": "contact" },
+      "links": {
+        "title": "Links",
+        "type": "array",
+        "tab": "content",
+        "group": "links",
+        "items": {
+          "label": { "title": "Text", "type": "text", "default": "Link" },
+          "href": { "title": "URL", "type": "text", "default": "#" }
+        },
+        "default": [
+          { "label": "Impressum", "href": "https://fit-inn-trier.de/impressum-fit-inn-trier" },
+          { "label": "Datenschutz", "href": "https://fit-inn-trier.de/datenschutz-fit-inn-trier" },
+          { "label": "AGB", "href": "https://fit-inn-trier.de/agbs-fit-inn-trier" },
+          { "label": "Hausordnung", "href": "https://fit-inn-trier.de/hausordnung" }
+        ]
+      },
+      "copyright": { "title": "Copyright", "type": "text", "default": "© 2026 Fit-Inn Trier", "tab": "content", "group": "links" }
+    },
+    "group": {
+      "contact": { "title": "Kontakt" },
+      "links": { "title": "Links" }
+    }
+  }
+}

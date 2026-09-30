@@ -1,0 +1,147 @@
+{
+  "mode": "widget",
+  "anchorId": "chat",
+  "bgColor": "var(--color-kit-black)",
+  "finnApi": "https://mitglieder.fit-inn-trier.de/api/finn/public",
+  "badge": "KI-Assistent",
+  "headline": "Noch Fragen? Frag FINN.",
+  "introText": "FINN ist unser digitaler Assistent. Er kennt das Studio, nennt dir die aktuellen Öffnungszeiten und die Auslastung live – und wenn du magst, gibt er dein Anliegen direkt an unser Team weiter.",
+  "disclosure": "FINN ist ein KI-Assistent von Fit-Inn Trier, kein Mensch. Antworten können Fehler enthalten – verbindlich sind die Angaben unseres Teams. Bitte gib keine Gesundheits- oder Vertragsdaten ein. Die Verarbeitung erfolgt über Amazon Bedrock in Frankfurt.",
+  "privacyLabel": "Datenschutz",
+  "privacyHref": "https://fit-inn-trier.de/datenschutz-fit-inn-trier",
+  "suggestionsLabel": "Beliebte Fragen",
+  "suggestions": [
+    {
+      "text": "Was kostet es nach den 12 Wochen?"
+    },
+    {
+      "text": "Wie voll ist es gerade im Studio?"
+    },
+    {
+      "text": "Wann habt ihr heute geöffnet?"
+    },
+    {
+      "text": "Wie läuft das Probetraining ab?"
+    }
+  ],
+  "botName": "FINN",
+  "greeting": "Hi, ich bin FINN, der digitale Assistent von Fit-Inn Trier. Was möchtest du wissen?",
+  "placeholder": "Frag FINN …",
+  "inputLabel": "Nachricht an FINN",
+  "sendLabel": "Senden",
+  "typingLabel": "FINN schreibt …",
+  "resetLabel": "Neu starten",
+  "confirmLabel": "Ja, bestätigen",
+  "declineLabel": "Abbrechen",
+  "bookLabel": "Probetraining buchen",
+  "bookIntro": "Super! Wähl einen Tag für dein kostenloses Probetraining (rund 90 Minuten):",
+  "bookTimeText": "Und welche Uhrzeit passt dir?",
+  "bookFormText": "Fast geschafft! Diese Angaben brauchen wir für deinen Termin:",
+  "bookLoading": "Freie Termine werden geladen …",
+  "bookNoSlots": "Online sind gerade keine Termine frei. Ruf uns gern an:",
+  "bookError": "Die Buchung hat leider nicht geklappt. Versuch es bitte nochmal oder ruf uns an:",
+  "bookValidation": "Bitte fülle alle Felder aus und bestätige den Datenschutzhinweis. Das Probetraining ist ab 18 Jahren.",
+  "bookSuccess": "Geschafft! Dein kostenloses Probetraining ist gebucht:",
+  "bookSuccessAfter": "Du bekommst gleich eine Bestätigung per E-Mail. Wir freuen uns auf dich!",
+  "bookBack": "Zurück",
+  "bookCancel": "Abbrechen",
+  "bookSubmit": "Probetraining buchen",
+  "bookSending": "Wird gebucht …",
+  "trainerLabel": "Begleitung",
+  "withTrainer": "Mit Trainer",
+  "withoutTrainer": "Ohne Trainer",
+  "firstNameLabel": "Vorname",
+  "lastNameLabel": "Nachname",
+  "genderLabel": "Geschlecht",
+  "femaleLabel": "Weiblich",
+  "maleLabel": "Männlich",
+  "dobLabel": "Geburtsdatum",
+  "emailLabel": "E-Mail",
+  "phoneFieldLabel": "Handynummer",
+  "streetLabel": "Straße",
+  "houseNoLabel": "Nr.",
+  "zipLabel": "PLZ",
+  "cityLabel": "Ort",
+  "consentNote": "Meine Angaben werden zur Terminbuchung direkt an die Systeme von Fit-Inn Trier (Magicline und unsere Kundenverwaltung) übermittelt – nicht an FINN. Die Datenschutzhinweise habe ich gelesen.",
+  "marketingText": "Ja, Fit-Inn Trier darf mich per E-Mail und Telefon über Angebote informieren. Jederzeit widerrufbar.",
+  "apiBaseUrl": "https://fit-inn-trier.api.magicline.com/connect/v1",
+  "studioId": 1210005460,
+  "bookingWindowDays": 21,
+  "crmFormId": "d1c1e2bf-64b0-48aa-814a-5dd80185dfb8",
+  "crmSource": "FINN-Chat (Oktober-Aktion)",
+  "launcherLabel": "Frag FINN",
+  "closeLabel": "Chat schließen",
+  "nudgeCloseLabel": "Hinweis schließen",
+  "showLauncher": true,
+  "maxNudges": 2,
+  "nudgesSpar": [
+    {
+      "mode": "section",
+      "value": "angebot",
+      "text": "Basic oder Premium – was passt besser zu dir? Frag mich einfach.",
+      "ask": "Was ist der Unterschied zwischen Basic und Premium?",
+      "book": false
+    },
+    {
+      "mode": "section",
+      "value": "geraete",
+      "text": "Lange nicht trainiert? Ich erklär dir, wie der Einstieg bei uns läuft.",
+      "ask": "Ich war lange nicht im Studio – wie fange ich an?",
+      "book": false
+    },
+    {
+      "mode": "time",
+      "value": "35",
+      "text": "Hi, ich bin FINN! Wusstest du: Jeder Tag früher spart dir rund 1 €. Fragen? Ich helfe dir gern.",
+      "ask": "Wie viel spare ich, wenn ich heute starte?",
+      "book": false
+    },
+    {
+      "mode": "idle",
+      "value": "45",
+      "text": "Noch unentschlossen? Ich such dir direkt einen freien Probetraining-Termin raus.",
+      "ask": "",
+      "book": true
+    },
+    {
+      "mode": "exit",
+      "value": "",
+      "text": "Bevor du gehst: Das Probetraining ist kostenlos und unverbindlich. Soll ich dir einen Termin zeigen?",
+      "ask": "",
+      "book": true
+    }
+  ],
+  "yesLabel": "Ja, gerne",
+  "noLabel": "Nein, danke",
+  "bookYesLabel": "Ja, Termin raussuchen",
+  "bookChoice": "Probetraining buchen",
+  "priceChoiceSpar": "Wie viel spare ich, wenn ich heute starte?",
+  "inclChoice": "Was ist alles inklusive?",
+  "busyChoice": "Wie voll ist es gerade?",
+  "otherChoice": "Ich hab noch eine Frage",
+  "errorGeneric": "Gerade keine Verbindung zu FINN. Ruf uns gern an:",
+  "phoneLabel": "0651 493 688 19",
+  "phoneHref": "tel:+4965149368819",
+  "maxChars": 800,
+  "disclosureShort": "KI-Assistent, kein Mensch. Antworten können Fehler enthalten.",
+  "disclosureMore": "Mehr",
+  "disclosureLess": "Weniger",
+  "hoursChoice": "Wann habt ihr geöffnet?",
+  "trialInfoChoice": "Wie läuft das Probetraining ab?",
+  "tariffChoice": "Basic oder Premium – was passt?",
+  "startChoices": [
+    {
+      "text": "Probetraining buchen"
+    },
+    {
+      "text": "Wie viel spare ich, wenn ich heute starte?"
+    },
+    {
+      "text": "Was ist alles inklusive?"
+    },
+    {
+      "text": "Wann habt ihr geöffnet?"
+    }
+  ],
+  "maxChoices": 4
+}

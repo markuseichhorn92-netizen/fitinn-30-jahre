@@ -1,0 +1,39 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "chat", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-black)", "tab": "settings", "group": "root" },
+      "badge": { "title": "KI-Label", "type": "text", "default": "KI-Assistent", "tab": "content", "group": "intro" },
+      "headline": { "title": "Headline", "type": "text", "default": "Noch Fragen? Frag FINN.", "tab": "content", "group": "intro" },
+      "introText": { "title": "Text", "type": "text", "default": "FINN ist unser digitaler Assistent. Er kennt das Studio, nennt dir die aktuellen Öffnungszeiten und die Auslastung live – und bucht dir auf Wunsch direkt dein kostenloses Probetraining.", "tab": "content", "group": "intro" },
+      "openLabel": { "title": "Button Chat öffnen", "type": "text", "default": "Chat mit FINN starten", "tab": "content", "group": "intro" },
+      "note": { "title": "Hinweis unter dem Button", "type": "text", "default": "FINN ist ein KI-Assistent, kein Mensch. Bitte keine Gesundheits- oder Vertragsdaten eingeben.", "tab": "content", "group": "intro" },
+      "suggestionsLabel": { "title": "Überschrift Vorschläge", "type": "text", "default": "Oder direkt fragen", "tab": "content", "group": "suggestions" },
+      "bookLabel": { "title": "Chip Probetraining buchen", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "suggestions" },
+      "fragenChips": {
+        "title": "Vorschläge",
+        "type": "array",
+        "tab": "content",
+        "group": "suggestions",
+        "items": { "text": { "title": "Frage", "type": "text", "default": "Frage" } },
+        "default": [
+          { "text": "Wie viel spare ich, wenn ich heute starte?" },
+          { "text": "Was kostet es ab Januar?" },
+          { "text": "Wie voll ist es gerade im Studio?" },
+          { "text": "Wann habt ihr heute geöffnet?" },
+          { "text": "Wie läuft das Probetraining ab?" }
+        ]
+      },
+      "previewQuestion": { "title": "Vorschau: Frage", "type": "text", "default": "Ich war ewig nicht im Studio. Ist das okay?", "tab": "content", "group": "preview" },
+      "previewAnswer": { "title": "Vorschau: Antwort", "type": "text", "default": "Klar! Viele starten bei uns nach langer Pause. Du bekommst eine Einweisung an jedem Gerät – soll ich dir einen Probetraining-Termin raussuchen?", "tab": "content", "group": "preview" },
+      "botName": { "title": "Name Assistent", "type": "text", "default": "FINN", "tab": "content", "group": "preview" },
+      "previewLabel": { "title": "Vorschau-Kennzeichnung", "type": "text", "default": "Beispiel", "tab": "content", "group": "preview" }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "suggestions": { "title": "Vorschläge" },
+      "preview": { "title": "Chat-Vorschau" }
+    }
+  }
+}

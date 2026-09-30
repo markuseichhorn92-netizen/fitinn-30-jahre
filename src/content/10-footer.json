@@ -1,0 +1,32 @@
+{
+  "bgColor": "var(--color-kit-black)",
+  "logo": {
+    "src": "media/77c4274d-cac5-4f25-88b1-15387b0fa6b9",
+    "name": "fitinn-logo-white.png"
+  },
+  "brand": "Fit-Inn Trier",
+  "tagline": "Familiengeführt seit 1996. Kein Franchise.",
+  "address": "Auf Hirtenberg 8 · 54296 Trier",
+  "phoneLabel": "0651 493 688 19",
+  "phoneHref": "tel:+4965149368819",
+  "email": "info@fit-inn-trier.de",
+  "links": [
+    {
+      "label": "Impressum",
+      "href": "https://fit-inn-trier.de/impressum-fit-inn-trier"
+    },
+    {
+      "label": "Datenschutz",
+      "href": "https://fit-inn-trier.de/datenschutz-fit-inn-trier"
+    },
+    {
+      "label": "AGB",
+      "href": "https://fit-inn-trier.de/agbs-fit-inn-trier"
+    },
+    {
+      "label": "Hausordnung",
+      "href": "https://fit-inn-trier.de/hausordnung"
+    }
+  ],
+  "copyright": "© 2026 Fit-Inn Trier"
+}

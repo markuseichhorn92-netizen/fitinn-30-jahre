@@ -1,27 +1,42 @@
-import type { Metadata } from 'next'
-import { AktionsSeite } from '@/components/aktion5/AktionsSeite'
-import { ab50 } from '@/components/aktion5/varianten'
-import { Abgelaufen } from '@/components/kampagne/Abgelaufen'
-import { aktionLaeuft } from '@/components/kampagne/aktionsstand'
+import FinnWidget from '@/sections/00-finn-widget';
+import Hero from '@/sections/01-hero';
+import Trainingsbereiche from '@/sections/02-trainingsbereiche';
+import Angebot from '@/sections/03-angebot';
+import Haus from '@/sections/04-haus';
+import Stimmen from '@/sections/05-stimmen';
+import Rundgang from '@/sections/06-rundgang';
+import FinnTeaser from '@/sections/07-finn-teaser';
+import Faq from '@/sections/08-faq';
+import Booking from '@/sections/09-booking';
+import Footer from '@/sections/10-footer';
 
-// Startseite: 5-Euro-Aktion, Ansprache ab 50.
-// Ab dem 01.09.2026 zeigt die Route stattdessen den Hinweis auf das Ende der
-// Aktion und verweist auf fit-inn-trier.de.
-// Next verlangt hier einen festen Wert, keine importierte Konstante:
-// alle zehn Minuten neu erzeugen, damit die Umschaltung am 01.09. greift.
-export const revalidate = 600
+import finnWidget from '@/content/00-finn-widget.json';
+import hero from '@/content/01-hero.json';
+import trainingsbereiche from '@/content/02-trainingsbereiche.json';
+import angebot from '@/content/03-angebot.json';
+import haus from '@/content/04-haus.json';
+import stimmen from '@/content/05-stimmen.json';
+import rundgang from '@/content/06-rundgang.json';
+import finnTeaser from '@/content/07-finn-teaser.json';
+import faq from '@/content/08-faq.json';
+import booking from '@/content/09-booking.json';
+import footer from '@/content/10-footer.json';
 
-export function generateMetadata(): Metadata {
-  if (aktionLaeuft()) return {}
-  // Nach Ablauf soll die Seite nicht mehr mit dem Angebot in der Suche stehen.
-  return {
-    title: 'Die 5-Euro-Aktion ist beendet — FIT-INN Trier',
-    description: 'Die Aktion ist abgelaufen. Aktuelle Angebote und ein kostenloses Probetraining findest du auf fit-inn-trier.de.',
-    robots: { index: false, follow: true },
-  }
-}
-
-export default function Home() {
-  if (!aktionLaeuft()) return <Abgelaufen />
-  return <AktionsSeite variante={ab50} />
+// Reihenfolge wie auf Onepage. Texte stehen in src/content/*.json.
+export default function Page() {
+  return (
+    <main>
+      <FinnWidget {...finnWidget} />
+      <Hero {...hero} />
+      <Trainingsbereiche {...trainingsbereiche} />
+      <Angebot {...angebot} />
+      <Haus {...haus} />
+      <Stimmen {...stimmen} />
+      <Rundgang {...rundgang} />
+      <FinnTeaser {...finnTeaser} />
+      <Faq {...faq} />
+      <Booking {...booking} />
+      <Footer {...footer} />
+    </main>
+  );
 }

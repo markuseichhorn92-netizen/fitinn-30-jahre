@@ -1,0 +1,113 @@
+{
+  "dependencies": {},
+  "onepage": {
+    "control": {
+      "fullHeight": { "title": "Full height", "type": "checkbox", "default": false, "tab": "layout", "group": "root" },
+      "anchorId": { "title": "Anker-ID", "type": "text", "default": "angebot", "tab": "settings", "group": "root" },
+      "bgColor": { "title": "Hintergrund", "type": "color", "default": "var(--color-kit-dark)", "tab": "settings", "group": "root" },
+
+      "eyebrow": { "title": "Kicker", "type": "text", "default": "Das Angebot", "tab": "content", "group": "intro" },
+      "headlineSpar": { "title": "Headline", "type": "text", "default": "Je früher du startest, desto mehr sparst du.", "tab": "content", "group": "intro" },
+      "textSpar": { "title": "Text", "type": "text", "default": "Zahl ab deinem Vertragsbeginn bis 31.12.2026 nur 5 € pro Woche – in beiden Tarifen. Ab dem 01.01.2027 gilt dein regulärer Wochenbeitrag. Jeder Tag, den du wartest, ist ein 5-€-Tag weniger. Und: Nur die ersten 25 Neuanmeldungen bekommen das Angebot.", "tab": "content", "group": "intro" },
+      "ctaLabel": { "title": "Button Text", "type": "text", "default": "Erst mal Probetraining buchen", "tab": "content", "group": "intro" },
+      "ctaHref": { "title": "Button Link", "type": "text", "default": "#anmeldung", "tab": "content", "group": "intro" },
+
+      "sparLabel": { "title": "Überschrift", "type": "text", "default": "Wer heute abschließt, spart bis zu", "tab": "content", "group": "spar" },
+      "currencySign": { "title": "Währung", "type": "text", "default": "€", "tab": "content", "group": "spar" },
+      "tomorrowText": { "title": "Text darunter ({morgen}, {ende})", "type": "text", "default": "Morgen nur noch {morgen} €. Jeder Tag Warten kostet dich rund 1 €.", "tab": "content", "group": "spar" },
+      "lastDayText": { "title": "Text am letzten Tag", "type": "text", "default": "Heute ist der letzte Tag zum 5-€-Preis.", "tab": "content", "group": "spar" },
+      "limitText": { "title": "Limit-Hinweis", "type": "text", "default": "Limitiert: Nur die ersten 25 Neuanmeldungen bekommen das Angebot.", "tab": "content", "group": "spar" },
+      "todayMarker": { "title": "Markierung Heute", "type": "text", "default": "Heute", "tab": "content", "group": "spar" },
+      "chartAria": { "title": "Diagramm-Beschreibung (Screenreader)", "type": "text", "default": "Die Ersparnis sinkt jeden Tag um rund 1 €: von {max} € bei Start am 1. Oktober bis auf {min} € am 31. Dezember. Heute: {heute} €.", "tab": "content", "group": "spar" },
+      "expiredText": { "title": "Text nach Ablauf", "type": "text", "default": "Die Aktion ist beendet. Frag gern nach unserem aktuellen Angebot.", "tab": "content", "group": "spar" },
+      "promoStart": { "title": "Aktionsstart (JJJJ-MM-TT)", "type": "text", "default": "2026-10-01", "tab": "settings", "group": "spar" },
+      "priceUntil": { "title": "5-€-Preis gilt bis (JJJJ-MM-TT)", "type": "text", "default": "2026-12-31", "tab": "settings", "group": "spar" },
+      "signupUntil": { "title": "Abschluss spätestens bis (JJJJ-MM-TT)", "type": "text", "default": "2026-12-31", "tab": "settings", "group": "spar" },
+
+      "promoPrice": { "title": "Aktionspreis (Anzeige)", "type": "text", "default": "5 €", "tab": "content", "group": "tariffs" },
+      "promoLabelSpar": { "title": "Aktionspreis Label", "type": "text", "default": "pro Woche bis 31.12.2026", "tab": "content", "group": "tariffs" },
+      "afterLabelSpar": { "title": "Label danach", "type": "text", "default": "ab 01.01.2027 pro Woche", "tab": "content", "group": "tariffs" },
+      "tarifSaveText": { "title": "Ersparnis-Zeile ({x})", "type": "text", "default": "Abschluss heute: {x} € gespart", "tab": "content", "group": "tariffs" },
+      "promoWeekly": { "title": "Aktionspreis pro Woche (Zahl, für Berechnung)", "type": "number", "default": 5, "tab": "content", "group": "tariffs" },
+      "tarife": {
+        "title": "Tarife",
+        "type": "array",
+        "tab": "content",
+        "group": "tariffs",
+        "items": {
+          "name": { "title": "Tarifname", "type": "text", "default": "Basic" },
+          "term": { "title": "Laufzeit", "type": "text", "default": "52 Wochen Laufzeit" },
+          "after": { "title": "Preis danach (Anzeige)", "type": "text", "default": "12 €" },
+          "highlight": { "title": "Hervorhebung (leer = keine)", "type": "text", "default": "" },
+          "regular": { "title": "Preis danach (Zahl, für Berechnung)", "type": "number", "default": 12 },
+          "weeks": { "title": "Laufzeit in Wochen (Zahl)", "type": "number", "default": 52 }
+        },
+        "default": [
+          { "name": "Basic", "term": "52 Wochen Laufzeit", "after": "12 €", "highlight": "Meiste Ersparnis", "regular": 12, "weeks": 52 },
+          { "name": "Premium", "term": "104 Wochen Laufzeit", "after": "9 €", "highlight": "Günstigste Woche", "regular": 9, "weeks": 104 }
+        ]
+      },
+
+      "inclTitle": { "title": "Überschrift Inklusive", "type": "text", "default": "In jeder Mitgliedschaft enthalten", "tab": "content", "group": "incl" },
+      "included": {
+        "title": "Inklusivleistungen",
+        "type": "array",
+        "tab": "content",
+        "group": "incl",
+        "items": {
+          "icon": { "title": "Icon", "type": "select", "default": "club", "options": [
+            { "value": "club", "label": "Studio" },
+            { "value": "screen", "label": "Bildschirm" },
+            { "value": "drink", "label": "Getränk" },
+            { "value": "plan", "label": "Plan" },
+            { "value": "app", "label": "App" },
+            { "value": "wifi", "label": "WLAN" },
+            { "value": "heart", "label": "Gesundheit" },
+            { "value": "person", "label": "Person" }
+          ] },
+          "title": { "title": "Titel", "type": "text", "default": "Leistung" },
+          "text": { "title": "Text", "type": "text", "default": "Beschreibung" }
+        },
+        "default": [
+          { "icon": "club", "title": "Komplette Clubnutzung", "text": "Über 100 Geräte auf zwei Etagen: Kraft, Cardio und Powerbereich unter einem Dach." },
+          { "icon": "heart", "title": "Gesundheits-Check-up", "text": "Mit Körperanalyse, damit du weißt, wo du startest." },
+          { "icon": "person", "title": "Einweisung an jedem Gerät", "text": "Persönlich, von Menschen, die dich beim Namen kennen." },
+          { "icon": "plan", "title": "Trainingspläne", "text": "Individuell erstellt und digital gespeichert." },
+          { "icon": "app", "title": "TechnoGym App", "text": "Dein Plan und jede Einheit immer auf dem Handy." },
+          { "icon": "screen", "title": "Cardio-Entertainment", "text": "Bildschirme an den Cardio-Geräten." },
+          { "icon": "drink", "title": "Mineralgetränke", "text": "So viel du beim Training brauchst." },
+          { "icon": "wifi", "title": "WLAN, Duschen, Umkleiden", "text": "Alles da, alles gepflegt." }
+        ]
+      },
+
+      "hinweise": {
+        "title": "Fußnoten",
+        "type": "array",
+        "tab": "content",
+        "group": "legal",
+        "items": { "text": { "title": "Text", "type": "text", "default": "Hinweis" } },
+        "default": [
+          { "text": "Der 5-€-Preis gilt ab Vertragsbeginn bis 31.12.2026. Vertragsbeginn ist der Tag des Abschlusses." },
+          { "text": "Einmalige Aufnahmegebühr 39 €. Einzug in 14-tägigen Intervallen per SEPA-Lastschrift." },
+          { "text": "Nur für die ersten 25 Neuanmeldungen, nur für Neumitglieder ab 18 Jahren." }
+        ]
+      },
+      "legalToggle": { "title": "Rechtshinweis Aufklapp-Text", "type": "text", "default": "Alle Bedingungen lesen", "tab": "content", "group": "legal" },
+      "rechtstext": { "title": "Rechtshinweis", "type": "text", "default": "Das Angebot gilt für die ersten 25 Mitgliedschaftsverträge, die ab dem 01.10.2026 neu abgeschlossen werden, längstens bis zum 31.12.2026. Vertragsbeginn ist der Tag des Abschlusses. Vom Vertragsbeginn bis einschließlich 31.12.2026 beträgt der Beitrag 5 € pro Woche. Ab dem 01.01.2027 beträgt der Beitrag 12 € pro Woche bei einer Laufzeit von 52 Wochen bzw. 9 € pro Woche bei einer Laufzeit von 104 Wochen. Der Aktionszeitraum ist Teil der vereinbarten Laufzeit und verlängert diese nicht; die Laufzeit beginnt mit dem Vertragsbeginn. Je früher der Abschluss, desto länger gilt der Aktionspreis. Alle Preise verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Hinzu kommt eine einmalige Aufnahmegebühr von 39 €. Der Einzug erfolgt in 14-tägigen Intervallen per SEPA-Lastschrift. Nach Ablauf der vereinbarten Laufzeit verlängert sich die Mitgliedschaft auf unbestimmte Zeit und kann jederzeit mit einer Frist von einem Monat gekündigt werden. Zum Ende der Erstlaufzeit ist eine Kündigung mit einer Frist von 4 Wochen möglich. Das Angebot gilt nur für Neumitglieder, ist nicht mit anderen Aktionen oder Rabatten kombinierbar und nicht auf bestehende Verträge übertragbar. Mindestalter 18 Jahre.", "tab": "content", "group": "legal" },
+      "totalText": { "title": "Gesamtbetrag-Satz ({basic}, {premium})", "type": "text", "default": "Bei Abschluss heute ergibt sich rechnerisch ein Gesamtbetrag von {basic} € über 52 Wochen (Basic) bzw. {premium} € über 104 Wochen (Premium), jeweils zzgl. Aufnahmegebühr.", "tab": "content", "group": "legal" },
+      "agbIntro": { "title": "Einleitung AGB", "type": "text", "default": "Es gelten unsere", "tab": "settings", "group": "legal" },
+      "agbLabel": { "title": "AGB Linktext", "type": "text", "default": "Allgemeinen Geschäftsbedingungen", "tab": "settings", "group": "legal" },
+      "agbHref": { "title": "AGB Link", "type": "text", "default": "https://fit-inn-trier.de/agbs-fit-inn-trier", "tab": "settings", "group": "legal" },
+      "andLabel": { "title": "Verbindungswort", "type": "text", "default": "und unsere", "tab": "settings", "group": "legal" },
+      "houseLabel": { "title": "Hausordnung Linktext", "type": "text", "default": "Hausordnung", "tab": "settings", "group": "legal" },
+      "houseHref": { "title": "Hausordnung Link", "type": "text", "default": "https://fit-inn-trier.de/hausordnung", "tab": "settings", "group": "legal" }
+    },
+    "group": {
+      "intro": { "title": "Einleitung" },
+      "spar": { "title": "Spar-Uhr" },
+      "tariffs": { "title": "Tarife" },
+      "incl": { "title": "Inklusive" },
+      "legal": { "title": "Rechtliches" }
+    }
+  }
+}

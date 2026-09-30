@@ -1,0 +1,23 @@
+{
+  "fullHeight": false,
+  "anchorId": "stimmen",
+  "bgColor": "var(--color-kit-black)",
+  "eyebrow": "Google-Bewertungen",
+  "title": "Nicht wir sagen das.",
+  "source": "Wörtlich aus öffentlichen Google-Bewertungen",
+  "quotes": [
+    {
+      "quote": "Ich bin von der Ausstattung, den Geräten und den Mitarbeitern maximal überzeugt.",
+      "author": "Gisela T."
+    },
+    {
+      "quote": "Super gepflegte Geräte, nette Leute, angenehme Atmosphäre, Duschen + Getränke top.",
+      "author": "Jana Thielen"
+    },
+    {
+      "quote": "Angenehmes Training, nette Menschen. Die neuen Geräte von Technogym sind super.",
+      "author": "Thomas Müller"
+    }
+  ],
+  "stars": true
+}

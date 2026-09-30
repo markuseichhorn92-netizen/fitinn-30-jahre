@@ -1,0 +1,15 @@
+{
+  "fullHeight": false,
+  "anchorId": "rundgang",
+  "bgColor": "var(--color-kit-dark)",
+  "videoId": "C3CuSfV57jE",
+  "poster": {
+    "src": "media/833da1bc-191f-4c62-a865-5783d332fd28",
+    "name": "fitinn-studio-1.avif"
+  },
+  "eyebrow": "Rundgang",
+  "title": "Schau dich um, bevor du kommst.",
+  "playLabel": "Rundgang abspielen",
+  "consentNote": "Beim Abspielen wird das Video von YouTube geladen. Dabei werden Daten an Google übertragen.",
+  "iframeTitle": "Rundgang durch das Fit-Inn Trier"
+}
