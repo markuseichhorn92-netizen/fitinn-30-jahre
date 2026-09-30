@@ -1,11 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
 import Badge from '@siteui/badge';
 import Button from '@siteui/button';
 import styles from './styles.module.css';
 
+const ease = [0.22, 1, 0.36, 1] as any;
 const DAY = 86400000;
 
 function dayTs(s: string): number {
@@ -111,9 +113,9 @@ export default function Angebot(props: any) {
               <>
                 <span className={styles.meterLabel}>{sparLabel}</span>
                 <div className={styles.meterValue} aria-live="polite">
-                  <span key={today}>
+                  <motion.span key={today} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease }}>
                     {today}
-                  </span>
+                  </motion.span>
                   <span className={styles.meterCur}>{currencySign}</span>
                 </div>
                 <p className={styles.meterNext}>
@@ -126,13 +128,17 @@ export default function Angebot(props: any) {
                       const v = maxSave(ts);
                       const state = ts < signupTs ? styles.past : ts === signupTs ? styles.now : styles.future;
                       return (
-                        <span
+                        <motion.span
                           key={ts}
                           className={`${styles.bar} ${state}`}
                           style={{ height: `${Math.max(8, (v / top) * 100)}%`, transformOrigin: 'bottom' }}
+                          initial={{ scaleY: 0 }}
+                          whileInView={{ scaleY: 1 }}
+                          viewport={{ once: true, margin: '0px 0px 80px 0px' }}
+                          transition={{ duration: 0.35, delay: Math.min(i * 0.005, 0.45), ease }}
                         >
                           {ts === signupTs ? <span className={`${styles.nowTag} ${i < barCount * 0.15 ? styles.nowTagLeft : ''} ${i > barCount * 0.85 ? styles.nowTagRight : ''}`}>{todayMarker}</span> : null}
-                        </span>
+                        </motion.span>
                       );
                     })}
                   </div>
@@ -154,9 +160,13 @@ export default function Angebot(props: any) {
 
         <div className={styles.tariffs}>
           {list.map((t: any, i: number) => (
-            <article
+            <motion.article
               key={i}
               className={`${styles.tariff} ${t.highlight ? styles.hot : ''}`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '0px 0px 120px 0px' }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease }}
             >
               {t.highlight ? <span className={styles.flag}>{t.highlight}</span> : null}
               <div className={styles.tHead}>
@@ -177,7 +187,7 @@ export default function Angebot(props: any) {
                 <span>{afterLabelSpar}</span>
                 <strong>{t.after}</strong>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
 
@@ -185,9 +195,13 @@ export default function Angebot(props: any) {
           <Title as="h3" size="md" className={styles.inclTitle}>{inclTitle}</Title>
           <ul className={styles.inclGrid}>
             {(included || []).map((it: any, i: number) => (
-              <li
+              <motion.li
                 key={i}
                 className={styles.inclItem}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '0px 0px 120px 0px' }}
+                transition={{ duration: 0.4, delay: (i % 4) * 0.05, ease }}
               >
                 <span className={styles.icon} aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -198,7 +212,7 @@ export default function Angebot(props: any) {
                   <strong>{it.title}</strong>
                   <span>{it.text}</span>
                 </span>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>

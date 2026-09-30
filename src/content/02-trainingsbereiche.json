@@ -14,23 +14,23 @@
   "bereiche": [
     {
       "tag": "Biocircuit",
-      "title": "Ganzkörper in 30 Minuten",
-      "text": ""
+      "title": "Ganzkörpertraining in 30 Minuten",
+      "text": "Geführter Gerätezirkel: Die Geräte stellen sich automatisch auf dich ein. Ideal für den Einstieg und wenig Zeit."
     },
     {
       "tag": "Biostrength",
-      "title": "Kraft, die mitdenkt",
-      "text": ""
+      "title": "Krafttraining, das mitdenkt",
+      "text": "Du wählst dein Ziel – Straffung, Kraft oder Muskelaufbau – und das Gerät führt dich durch die Übung."
     },
     {
       "tag": "Cardio",
-      "title": "Mit HD-Bildschirm",
-      "text": ""
+      "title": "Ausdauer, die nicht langweilt",
+      "text": "Laufband, Crosstrainer & Co. mit Bildschirm: virtueller Coach, Strecken, Serien und Playlists."
     },
     {
       "tag": "Powerbereich",
-      "title": "Freie Gewichte",
-      "text": ""
+      "title": "Frei trainieren",
+      "text": "Freihanteln, Kraftstationen und Kabelzug für alle, die ihr eigenes Programm machen."
     }
   ]
 }

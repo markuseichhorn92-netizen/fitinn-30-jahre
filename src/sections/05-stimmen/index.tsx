@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
 import Badge from '@siteui/badge';
@@ -16,6 +17,8 @@ function Stars() {
   );
 }
 
+const ease = [0.22, 1, 0.36, 1] as any;
+
 export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title, source, quotes, stars }: any) {
   return (
     <section id={anchorId} className={`${styles.sec} ${fullHeight ? styles.full : ''}`} style={{ background: bgColor }}>
@@ -26,9 +29,13 @@ export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title,
         </div>
         <div className={styles.stack}>
           {(quotes || []).map((q: any, i: number) => (
-            <figure
+            <motion.figure
               key={i}
               className={`${styles.quote} ${styles['q' + (i % 3)]}`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '0px 0px 120px 0px' }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease }}
             >
               <span className={styles.mark} aria-hidden="true">„</span>
               <blockquote className={styles.text}>{q.quote}</blockquote>
@@ -36,7 +43,7 @@ export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title,
                 {stars ? <Stars /> : null}
                 <span>{q.author}</span>
               </figcaption>
-            </figure>
+            </motion.figure>
           ))}
         </div>
         <Text size="sm" muted className={styles.source}>{source}</Text>

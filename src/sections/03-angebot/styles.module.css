@@ -160,14 +160,14 @@
   .save svg { display: none; }
   .after { flex-direction: column; align-items: flex-start; gap: 2px; padding-top: 10px; font-size: 13px; }
   .after strong { font-size: 24px; }
-  /* Inklusivleistungen als Chips */
+  /* Inklusivleistungen: 2 Spalten, Icon + Titel */
   .incl { margin-top: 32px; }
   .inclTitle { margin-bottom: 14px; font-size: 20px; }
-  .inclGrid { display: flex; flex-wrap: wrap; gap: 8px; }
-  .inclItem { flex-direction: row; align-items: center; gap: 8px; padding: 7px 12px 7px 7px; border-radius: 999px; }
-  .icon { width: 28px; height: 28px; border-radius: 50%; }
-  .icon svg { width: 16px; height: 16px; }
-  .inclText strong { font-size: 14px; font-weight: 600; }
+  .inclGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .inclItem { flex-direction: row; align-items: center; gap: 10px; padding: 12px 12px; border-radius: 16px; }
+  .icon { flex: none; width: 36px; height: 36px; border-radius: 11px; }
+  .icon svg { width: 18px; height: 18px; }
+  .inclText strong { font-size: 14px; line-height: 1.25; font-weight: 700; }
   .inclText span { display: none; }
   .foot { margin-top: 28px; gap: 20px; }
   .notes { font-size: 15px; gap: 6px; }

@@ -90,7 +90,7 @@ export default function FitInnBookingForm(props: any) {
           obs.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0, rootMargin: '0px 0px 120px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
