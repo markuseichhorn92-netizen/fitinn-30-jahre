@@ -105,7 +105,7 @@ export default function FinnChat(props: any) {
     launcherLabel, closeLabel, nudgeCloseLabel, showLauncher, maxNudges, nudgesSpar: nudges, mode,
     yesLabel, noLabel, bookYesLabel, bookChoice, priceChoiceSpar: priceChoice, inclChoice, busyChoice, otherChoice,
     errorGeneric, phoneLabel, phoneHref, maxChars,
-    disclosureShort, disclosureMore, disclosureLess, hoursChoice, trialInfoChoice, tariffChoice, fitChoice, contractChoice, startChoices, maxChoices,
+    disclosureShort, disclosureMore, disclosureLess, hoursChoice, trialInfoChoice, tariffChoice, fitChoice, contractChoice, startChoices, maxChoices, launcherSub,
     smartNudges, aiNudge, aiNudgePrompt,
   } = props;
   const [moreInfo, setMoreInfo] = useState(false);
@@ -178,7 +178,10 @@ export default function FinnChat(props: any) {
   }, [overlay]);
 
   useEffect(() => {
-    const onScroll = () => setLauncherOn(window.scrollY > 520);
+    // Launcher: nach kurzem Moment oder sobald etwas gescrollt wurde (mobil übernimmt später die Sticky-Leiste)
+    let timed = false;
+    const onScroll = () => setLauncherOn(timed || window.scrollY > 200);
+    const t = setTimeout(() => { timed = true; onScroll(); }, 2500);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     const target = document.getElementById('anmeldung');
@@ -187,7 +190,7 @@ export default function FinnChat(props: any) {
       o = new IntersectionObserver(([e]) => { bookingVisibleRef.current = e.isIntersecting; }, { threshold: 0.05 });
       o.observe(target);
     }
-    return () => { window.removeEventListener('scroll', onScroll); if (o) o.disconnect(); };
+    return () => { clearTimeout(t); window.removeEventListener('scroll', onScroll); if (o) o.disconnect(); };
   }, []);
 
   useEffect(() => {
@@ -777,8 +780,19 @@ export default function FinnChat(props: any) {
       {overlay ? <div className={styles.backdrop} onClick={() => setOverlay(false)} aria-hidden="true" /> : null}
 
       {showLauncher && !overlay ? (
-        <button type="button" className={`${styles.launcher} ${launcherOn ? styles.launcherOn : ''}`} onClick={() => openChat()} tabIndex={launcherOn ? 0 : -1} aria-hidden={!launcherOn} aria-label={launcherLabel} title={launcherLabel}>
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /></svg>
+        <button type="button" className={`${styles.launcher} ${launcherOn ? styles.launcherOn : ''}`} onClick={() => openChat()} tabIndex={launcherOn ? 0 : -1} aria-hidden={!launcherOn} aria-label={launcherLabel}>
+          <span className={styles.launcherRing} aria-hidden="true" />
+          <span className={styles.launcherAvatar} aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" /></svg>
+            <span className={styles.launcherDot} />
+          </span>
+          <span className={styles.launcherText}>
+            <strong>{launcherLabel}</strong>
+            <span>{launcherSub}</span>
+          </span>
+          <span className={styles.launcherChat} aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" /></svg>
+          </span>
         </button>
       ) : null}
 

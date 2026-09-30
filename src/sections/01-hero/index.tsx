@@ -36,6 +36,7 @@ export default function Hero({
   const saveMax = saveAt(startTs) || 1;
   const promoOver = todayTs !== null && todayTs > untilTs;
   const [stickyOn, setStickyOn] = useState(false);
+  useEffect(() => { document.body.classList.toggle('fi-sticky-on', stickyOn); return () => document.body.classList.remove('fi-sticky-on'); }, [stickyOn]);
   const heroRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!showSticky) return;
@@ -166,7 +167,7 @@ export default function Hero({
           <span className={styles.stickyNote}>{fill(stickyNoteSpar, { x: saveToday })}</span>
           <a className={styles.stickyBtn} href={stickyHref} tabIndex={stickyOn ? 0 : -1} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'sticky' } })); }}>{stickyLabel}</a>
           <button type="button" className={styles.stickyPhone} aria-label={stickyChatLabel} tabIndex={stickyOn ? 0 : -1} onClick={() => window.dispatchEvent(new CustomEvent('finn:open'))}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" /></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" /></svg>
             <span className={styles.stickyDot} aria-hidden="true" />
           </button>
         </div>

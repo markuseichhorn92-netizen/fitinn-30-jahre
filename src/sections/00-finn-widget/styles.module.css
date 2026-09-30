@@ -493,3 +493,45 @@
   .overlay .disclosure { padding: 8px 14px calc(8px + env(safe-area-inset-bottom, 0px)); }
   .window .actionRow > button { font-size: 14px; min-height: 40px; padding: 8px 14px; }
 }
+
+/* ---------- Launcher mit Präsenz: Pille mit Avatar, Text, Online-Punkt ---------- */
+.launcher {
+  width: auto; height: auto; min-height: 64px; padding: 8px 18px 8px 8px; gap: 12px;
+  justify-content: flex-start; border-radius: 999px;
+  background: var(--color-kit-key2, #3BC9E0); color: var(--color-kit-black, #05090B);
+  box-shadow: 0 18px 44px -10px #3BC9E0cc, 0 0 0 1px #ffffff26;
+  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.2s ease;
+}
+.launcher:hover { background: var(--color-kit-key2, #3BC9E0); box-shadow: 0 22px 54px -10px #3BC9E0ee, 0 0 0 1px #ffffff40; }
+.launcherOn { animation: launcherIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both, launcherNudge 1.1s ease 3s 2; }
+.launcherRing {
+  position: absolute; inset: -4px; border-radius: 999px; pointer-events: none;
+  box-shadow: 0 0 0 0 #3BC9E0aa; animation: ring 2.4s ease-out 0.4s 4;
+}
+.launcherAvatar {
+  position: relative; flex: none; width: 48px; height: 48px; border-radius: 999px;
+  background: var(--color-kit-black, #05090B); color: var(--color-kit-key2, #3BC9E0);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.launcherDot {
+  position: absolute; right: -1px; bottom: -1px; width: 14px; height: 14px; border-radius: 50%;
+  background: #22C55E; box-shadow: 0 0 0 3px var(--color-kit-key2, #3BC9E0);
+}
+.launcherText { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; text-align: left; }
+.launcherText strong { font-size: 17px; font-weight: 800; }
+.launcherText span { font-size: 13px; font-weight: 600; opacity: 0.75; }
+.launcherChat { flex: none; width: 36px; height: 36px; border-radius: 999px; background: #05090B1a; display: inline-flex; align-items: center; justify-content: center; margin-left: 2px; }
+@keyframes launcherIn { from { transform: translateY(30px) scale(0.9); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes launcherNudge { 0%, 100% { transform: none; } 15% { transform: translateY(-6px) rotate(-2deg); } 30% { transform: translateY(0) rotate(2deg); } 45% { transform: translateY(-3px) rotate(0); } }
+@keyframes ring { 0% { box-shadow: 0 0 0 0 #3BC9E0aa; } 100% { box-shadow: 0 0 0 22px #3BC9E000; } }
+
+@media (max-width: 767px) {
+  .launcher { display: inline-flex; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); min-height: 56px; padding: 6px 14px 6px 6px; gap: 10px; }
+  .launcherAvatar { width: 44px; height: 44px; }
+  .launcherText strong { font-size: 15px; }
+  .launcherText span { font-size: 12px; }
+  .launcherChat { display: none; }
+  /* Sobald die Sticky-Leiste da ist, übernimmt ihr FINN-Knopf */
+  :global(body.fi-sticky-on) .launcher { animation: none; transform: translateY(140%); opacity: 0; pointer-events: none; visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) { .launcherOn { animation: none; } .launcherRing { animation: none; } }
