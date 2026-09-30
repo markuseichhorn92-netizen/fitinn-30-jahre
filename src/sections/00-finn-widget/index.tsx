@@ -197,9 +197,13 @@ export default function FinnChat(props: any) {
     const list = Array.isArray(nudges) ? nudges : [];
     const max = Number(maxNudges);
     if (!list.length || !(max > 0)) return;
-    if (!consentStats) return; // personalisierte Hinweise nur mit Einwilligung
+    // Neutraler Hinweis läuft immer; personalisiert (Interessenprofil, FINN-Text) nur mit Einwilligung.
+    // Zähler: max. 1 je Seitenaufruf, nach 30 Minuten wieder erlaubt (sonst sieht ein Wiederbesucher nie etwas).
     let shown = 0;
-    try { shown = Number(window.sessionStorage.getItem('finn_nudges') || 0); } catch { shown = 0; }
+    try {
+      const raw = JSON.parse(window.sessionStorage.getItem('finn_nudges') || 'null');
+      if (raw && typeof raw === 'object' && Date.now() - Number(raw.at || 0) < 30 * 60000) shown = Number(raw.n || 0);
+    } catch { shown = 0; }
     const seen = new Set<number>();
     let lastAt = 0;
     const timers: any[] = [];
@@ -213,10 +217,10 @@ export default function FinnChat(props: any) {
       seen.add(i);
       shown += 1;
       lastAt = Date.now();
-      try { window.sessionStorage.setItem('finn_nudges', String(shown)); } catch { /* egal */ }
+      try { window.sessionStorage.setItem('finn_nudges', JSON.stringify({ n: shown, at: Date.now() })); } catch { /* egal */ }
       const base = list[i];
-      const topic = interest.topTopic();
-      const smart = smartNudges && smartNudges[topic] ? smartNudges[topic] : null;
+      const topic = consentStats ? interest.topTopic() : 'default';
+      const smart = consentStats && smartNudges && smartNudges[topic] ? smartNudges[topic] : null;
       const chosen = smart ? { ...base, ...smart, topic } : { ...base, topic: 'static' };
       const show = (n: any) => {
         nudgeRef.current = n;
@@ -225,7 +229,7 @@ export default function FinnChat(props: any) {
         clearTimeout(hideTimer);
         hideTimer = setTimeout(() => { nudgeRef.current = null; setNudge(null); }, 16000);
       };
-      if (smart && aiNudge && finnApi) {
+      if (smart && aiNudge && finnApi && consentStats) {
         // FINN formuliert die Ansprache passend zum Profil; bei Zögern oder Unsinn bleibt der feste Text
         const ctrl = new AbortController();
         const to = setTimeout(() => ctrl.abort(), 4000);

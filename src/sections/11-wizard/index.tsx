@@ -12,8 +12,8 @@ import styles from './styles.module.css';
 // Der Trainer-Hinweis (ggf. gesundheitsbezogen) geht NUR in die Magicline-Notiz, nie an FINN.
 
 type Slot = { startDateTime: string; endDateTime?: string };
-type Step = 'slot' | 'goal' | 'experience' | 'name' | 'contact' | 'address' | 'confirm' | 'hint' | 'done';
-const ORDER: Step[] = ['slot', 'goal', 'experience', 'name', 'contact', 'address', 'confirm', 'hint'];
+type Step = 'slot' | 'goal' | 'experience' | 'focus' | 'name' | 'contact' | 'address' | 'confirm' | 'hint' | 'done';
+const ORDER: Step[] = ['slot', 'goal', 'experience', 'focus', 'name', 'contact', 'address', 'confirm', 'hint'];
 const ease = [0.22, 1, 0.36, 1] as any;
 const pad = (n: number) => String(n).padStart(2, '0');
 const dayKey = (iso: string) => { const d = new Date(iso); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
@@ -29,12 +29,25 @@ function getVid() { try { return window.localStorage.getItem('finn_vid') || 'wiz
 
 const EMPTY = { firstname: '', lastname: '', gender: '', dob: '', email: '', phone: '', street: '', houseNumber: '', zip: '', city: '', consent: false, marketing: false };
 
+function OptIcon({ kind }: { kind?: string }) {
+  const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  const k = String(kind || '');
+  if (k === 'flame') return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><path d="M12 3c1 3 4 4 4 8a4 4 0 0 1-8 0c0-1 .3-2 1-3 0 2 1 3 2 3 0-3-1-5 1-8z" /><path d="M8 14a6 6 0 1 0 8 0" /></svg>;
+  if (k === 'dumbbell') return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12" /></svg>;
+  if (k === 'heart') return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z" /></svg>;
+  if (k === 'spine') return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><path d="M12 3v18M8 7h8M8 12h8M8 17h8" /></svg>;
+  if (k === 'leaf') return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><path d="M4 20c0-8 6-14 16-14-1 9-6 14-14 14z" /><path d="M4 20c4-4 8-7 12-9" /></svg>;
+  if (k === 'restart') return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>;
+  return <svg width="20" height="20" viewBox="0 0 24 24" {...P}><circle cx="12" cy="12" r="8" /></svg>;
+}
+
 export default function Wizard(props: any) {
   const {
     apiBaseUrl, studioId, bookingWindowDays, finnApi, crmFormId,
     title, closeLabel, backLabel, nextLabel, skipLabel, stepLabel, steps,
     slotTitle, slotText, loadingText, noSlotsText, errorSlotsText, moreDaysLabel, dayLabel, timeLabel, pickTimeLabel,
     goalTitle, goalText, goals, expTitle, expText, experiences, finnIntro, finnPrompt,
+    focusTitle, focusText, focusMax, focusByGoal, finnFocus, planTitle, planNote, trainerRecommended, trainerFree,
     trainerLabel, withTrainer, withoutTrainer,
     contactTitle, contactText, firstNameLabel, lastNameLabel, genderLabel, femaleLabel, maleLabel, dobLabel, emailLabel, phoneLabel,
     streetLabel, houseNoLabel, zipLabel, cityLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
@@ -56,6 +69,7 @@ export default function Wizard(props: any) {
   const [showAllDays, setShowAllDays] = useState(false);
   const [goal, setGoal] = useState<any>(null);
   const [exp, setExp] = useState<any>(null);
+  const [focus, setFocus] = useState<any[]>([]);
   const [trainer, setTrainer] = useState(true);
   const [finnLine, setFinnLine] = useState('');
   const [form, setForm] = useState({ ...EMPTY });
@@ -66,7 +80,7 @@ export default function Wizard(props: any) {
   const [failed, setFailed] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const reset = () => { setStep('slot'); setDay(null); setSlot(null); setShowAllDays(false); setGoal(null); setExp(null); setTrainer(true); setFinnLine(''); setForm({ ...EMPTY }); setHint(''); setHintOk(false); setInvalid(false); setFailed(false); };
+  const reset = () => { setStep('slot'); setDay(null); setSlot(null); setShowAllDays(false); setGoal(null); setExp(null); setFocus([]); setTrainer(true); setFinnLine(''); setForm({ ...EMPTY }); setHint(''); setHintOk(false); setInvalid(false); setFailed(false); };
 
   // Öffnen per Event, Termine laden
   useEffect(() => {
@@ -118,7 +132,7 @@ export default function Wizard(props: any) {
     setFinnLine(fallback);
     if (!finnApi) return;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 4500);
-    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnPrompt, { ziel: goal.label, erfahrung: exp.label }), history: [], visitorId: getVid() }) })
+    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnPrompt, { ziel: goal.label, erfahrung: exp.label, fokus: focusStr || 'nicht angegeben' }), history: [], visitorId: getVid() }) })
       .then((r) => r.json()).then((d: any) => { clearTimeout(to); const t = d && typeof d.answer === 'string' ? d.answer.replace(/\*\*|__|#/g, '').replace(/\s+/g, ' ').trim() : ''; if (t.length >= 25 && t.length <= 220 && !/http|\d\s?€|€\s?\d|diagnos|arzt|schmerz/i.test(t)) setFinnLine(t); })
       .catch(() => clearTimeout(to));
     return () => { clearTimeout(to); ctrl.abort(); };
@@ -126,9 +140,29 @@ export default function Wizard(props: any) {
 
   const vorname = form.firstname.trim() || 'du';
   const terminStr = slot ? fmtFull(slot.startDateTime) : '';
+  const focusOptions: any[] = (focusByGoal && (focusByGoal[goal?.key] || focusByGoal._default)) || [];
+  const focusStr = focus.map((f) => f.label).join(', ');
+  // Empfehlung aus Ziel + Erfahrung + Fokus (regelbasiert; FINN formuliert den Satz dazu)
+  const plan = useMemo(() => {
+    const items: string[] = [];
+    const fk = new Set(focus.map((f) => f.key));
+    const g = goal?.key; const e = exp?.key;
+    if (e === 'neu' || e === 'pause' || fk.has('begleitung') || fk.has('schonend') || fk.has('sanft')) items.push('Einweisung an jedem Gerät mit Trainer');
+    if (g === 'ruecken' || g === 'stress' || fk.has('zirkel') || fk.has('ruhig') || fk.has('schonend')) items.push('Biocircuit: geführter 30-Minuten-Zirkel');
+    if (g === 'muskeln' || fk.has('kraft') || fk.has('ganzkoerper') || fk.has('oberkoerper') || fk.has('beine') || fk.has('haltung')) items.push('Biostrength: Krafttraining, das sich auf dich einstellt');
+    if (g === 'abnehmen' || fk.has('cardio') || fk.has('ausdauer') || fk.has('auspowern')) items.push('Cardio-Check mit virtuellem Coach');
+    if (fk.has('frei') || (g === 'muskeln' && e === 'regelmaessig')) items.push('Powerbereich: Freihanteln und Kabelzug');
+    if (fk.has('mobil') || fk.has('alltag')) items.push('Mobilität und Alltagsbewegungen');
+    if (fk.has('ernaehrung')) items.push('Kurzer Ernährungs-Tipp vom Trainer');
+    if (fk.has('plan') || fk.has('routine') || fk.has('motivation') || fk.has('abwechslung')) items.push('Erster Trainingsplan, der in deinen Alltag passt');
+    if (!items.length) items.push('Gespräch zu deinem Ziel', 'Einweisung an den passenden Geräten');
+    const rec = e === 'regelmaessig' && !fk.has('begleitung') ? false : true;
+    return { items: items.slice(0, 3), trainer: rec };
+  }, [goal, exp, focus]);
   const stepLine = (): string => {
     if (step === 'goal') return slot ? fill(finnSlot, { termin: terminStr }) : '';
     if (step === 'experience') return goal ? goal.finn : '';
+    if (step === 'focus') return goal ? fill(finnFocus, { ziel: goal.label }) : (exp ? exp.finn : '');
     if (step === 'name') return finnLine || finnName;
     if (step === 'contact') return fill(finnContact, { vorname });
     if (step === 'address') return finnAddress;
@@ -141,7 +175,7 @@ export default function Wizard(props: any) {
   useEffect(() => {
     if (step !== 'done' || !finnApi) return;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 5000);
-    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnDonePrompt, { vorname, ziel: goal?.label || 'nicht angegeben', erfahrung: exp?.label || 'nicht angegeben', termin: terminStr }), history: [], visitorId: getVid() }) })
+    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnDonePrompt, { vorname, ziel: goal?.label || 'nicht angegeben', erfahrung: exp?.label || 'nicht angegeben', fokus: focusStr || 'nicht angegeben', termin: terminStr }), history: [], visitorId: getVid() }) })
       .then((r) => r.json()).then((d: any) => { clearTimeout(to); const t = d && typeof d.answer === 'string' ? d.answer.replace(/\*\*|__|#/g, '').replace(/\s+/g, ' ').trim() : ''; if (t.length >= 25 && t.length <= 260 && !/http|\d\s?€|€\s?\d|diagnos|arzt|schmerz/i.test(t)) setDoneLine(t); })
       .catch(() => clearTimeout(to));
     return () => { clearTimeout(to); ctrl.abort(); };
@@ -158,7 +192,8 @@ export default function Wizard(props: any) {
     const hintText = hint.trim() && hintOk ? hint.trim().slice(0, 300) : '';
     const note = [
       (noteSource && noteSource[source]) || noteSource?.form || 'Gebucht über Aktionsseite',
-      goal ? `Ziel: ${goal.label}` : '', exp ? `Erfahrung: ${exp.label}` : '',
+      goal ? `Ziel: ${goal.label}` : '', exp ? `Erfahrung: ${exp.label}` : '', focusStr ? `Wichtig: ${focusStr}` : '',
+      plan.items.length ? `Vorbereitung: ${plan.items.join(', ')}` : '',
       `Begleitung: ${trainer ? 'mit Trainer' : 'ohne Trainer'}`,
       interest.interestNote(),
       hintText ? `Hinweis für Trainer: ${hintText}` : '',
@@ -179,7 +214,7 @@ export default function Wizard(props: any) {
       try {
         window.sessionStorage.setItem('fi_booking', JSON.stringify({
           v: 1, vorname: form.firstname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '',
-          trainer, ziel: goal?.label || '', erfahrung: exp?.label || '', at: Date.now(),
+          trainer, ziel: goal?.label || '', erfahrung: exp?.label || '', fokus: focusStr, at: Date.now(),
         }));
         saved = true;
       } catch { /* privater Modus */ }
@@ -269,7 +304,10 @@ export default function Wizard(props: any) {
                 <p className={styles.p}>{goalText}</p>
                 <div className={styles.options}>
                   {(goals || []).map((g: any) => (
-                    <button key={g.key} type="button" className={`${styles.option} ${goal?.key === g.key ? styles.optionOn : ''}`} aria-pressed={goal?.key === g.key} onClick={() => { setGoal(g); interest.signal('goal', g.label); setTimeout(next, 180); }}>{g.label}</button>
+                    <button key={g.key} type="button" className={`${styles.option} ${styles.optionRich} ${goal?.key === g.key ? styles.optionOn : ''}`} aria-pressed={goal?.key === g.key} onClick={() => { setGoal(g); setFocus([]); interest.signal('goal', g.label); setTimeout(next, 180); }}>
+                      <span className={styles.optIcon} aria-hidden="true"><OptIcon kind={g.icon} /></span>
+                      <span className={styles.optText}><strong>{g.label}</strong>{g.sub ? <small>{g.sub}</small> : null}</span>
+                    </button>
                   ))}
                 </div>
               </>
@@ -281,9 +319,37 @@ export default function Wizard(props: any) {
                 <p className={styles.p}>{expText}</p>
                 <div className={styles.options}>
                   {(experiences || []).map((x: any) => (
-                    <button key={x.key} type="button" className={`${styles.option} ${exp?.key === x.key ? styles.optionOn : ''}`} aria-pressed={exp?.key === x.key} onClick={() => { setExp(x); setTrainer(!!x.trainer); interest.signal('experience', x.label); setTimeout(next, 180); }}>{x.label}</button>
+                    <button key={x.key} type="button" className={`${styles.option} ${styles.optionRich} ${exp?.key === x.key ? styles.optionOn : ''}`} aria-pressed={exp?.key === x.key} onClick={() => { setExp(x); setTrainer(!!x.trainer); interest.signal('experience', x.label); setTimeout(next, 180); }}>
+                      <span className={styles.optText}><strong>{x.label}</strong>{x.sub ? <small>{x.sub}</small> : null}</span>
+                    </button>
                   ))}
                 </div>
+              </>
+            ) : null}
+
+            {step === 'focus' ? (
+              <>
+                <h2 className={styles.h}>{focusTitle}</h2>
+                <p className={styles.p}>{focusText}</p>
+                <div className={styles.options}>
+                  {focusOptions.map((f: any) => {
+                    const on = focus.some((x) => x.key === f.key);
+                    return (
+                      <button key={f.key} type="button" className={`${styles.option} ${styles.optionRich} ${on ? styles.optionOn : ''}`} aria-pressed={on}
+                        onClick={() => { const max = Number(focusMax) || 2; setFocus((cur) => on ? cur.filter((x) => x.key !== f.key) : (cur.length >= max ? [...cur.slice(1), f] : [...cur, f])); interest.signal('focus', f.label); }}>
+                        <span className={styles.optText}><strong>{f.label}</strong>{f.sub ? <small>{f.sub}</small> : null}</span>
+                        <span className={`${styles.tick} ${on ? styles.tickOn : ''}`} aria-hidden="true" />
+                      </button>
+                    );
+                  })}
+                </div>
+                {focus.length ? (
+                  <div className={styles.plan}>
+                    <span className={styles.planTitle}>{planTitle}</span>
+                    <ul>{plan.items.map((it) => <li key={it}>{it}</li>)}</ul>
+                    <span className={styles.planRec}>{plan.trainer ? trainerRecommended : trainerFree}</span>
+                  </div>
+                ) : null}
               </>
             ) : null}
 
@@ -374,6 +440,7 @@ export default function Wizard(props: any) {
               {idx > 0 ? <button type="button" className={styles.ghost} onClick={back} disabled={sending}>{backLabel}</button> : <span />}
               {step === 'slot' ? <button type="button" className={styles.primary} disabled={!slot} onClick={next}>{slot ? <>{nextLabel}<span className={styles.btnSub}>{fmtShort(slot.startDateTime)} Uhr</span></> : (pickTimeLabel || 'Uhrzeit wählen')}</button> : null}
               {step === 'goal' || step === 'experience' ? <button type="button" className={styles.ghost} onClick={next}>{skipLabel}</button> : null}
+              {step === 'focus' ? (focus.length ? <button type="button" className={styles.primary} onClick={() => { setTrainer(plan.trainer); next(); }}>{nextLabel}</button> : <button type="button" className={styles.ghost} onClick={next}>{skipLabel}</button>) : null}
               {step === 'name' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validName) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'contact' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validContact) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'address' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validAddress) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}

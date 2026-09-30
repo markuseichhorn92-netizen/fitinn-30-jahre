@@ -77,14 +77,14 @@
   "nudgesSpar": [
     {
       "mode": "time",
-      "value": "35",
+      "value": "20",
       "text": "Hi, ich bin FINN! Wusstest du: Jeder Tag früher spart dir bis zu 1 €. Fragen? Ich helfe dir gern.",
       "ask": "Wie viel spare ich, wenn ich heute starte?",
       "book": false
     },
     {
       "mode": "idle",
-      "value": "45",
+      "value": "40",
       "text": "Noch unentschlossen? Ich such dir direkt einen freien Probetraining-Termin raus.",
       "ask": "",
       "book": true

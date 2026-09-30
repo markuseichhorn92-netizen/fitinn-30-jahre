@@ -14,6 +14,7 @@
     "slot": "Wunschtermin",
     "goal": "Dein Ziel",
     "experience": "Deine Erfahrung",
+    "focus": "Dein Fokus",
     "name": "Dein Name",
     "contact": "Kontakt",
     "address": "Adresse",
@@ -27,31 +28,48 @@
   "errorSlotsText": "Termine konnten nicht geladen werden. Ruf uns gern an:",
   "moreDaysLabel": "Weitere Tage",
   "goalTitle": "Worum geht es dir vor allem?",
-  "goalText": "Damit dein Trainer das Probetraining passend vorbereitet.",
+  "goalText": "Wähl, was am ehesten passt – dein Trainer bereitet das Probetraining darauf vor.",
   "goals": [
     {
       "key": "abnehmen",
+      "icon": "flame",
       "label": "Abnehmen",
+      "sub": "Gewicht und Körperfett runter",
       "finn": "Fürs Abnehmen kombinieren wir Cardio mit Kraft – beim Probetraining zeigt dir der Trainer, wie du effizient startest."
     },
     {
       "key": "muskeln",
+      "icon": "dumbbell",
       "label": "Muskelaufbau",
+      "sub": "Kraft und Form",
       "finn": "Für Muskelaufbau lernst du beim Probetraining Biostrength kennen – die Geräte führen dich durch jede Übung."
     },
     {
       "key": "fit",
-      "label": "Fit bleiben",
+      "icon": "heart",
+      "label": "Fit & gesund bleiben",
+      "sub": "Ausdauer, Energie, Ausgleich",
       "finn": "Fit bleiben klappt am besten mit einem Plan, der in deinen Alltag passt – genau das besprechen wir beim Probetraining."
     },
     {
       "key": "ruecken",
+      "icon": "spine",
       "label": "Rücken & Beweglichkeit",
+      "sub": "Haltung, Verspannungen lösen",
       "finn": "Für Rücken und Beweglichkeit ist der Biocircuit ideal: geführt, gelenkschonend, stellt sich automatisch auf dich ein."
     },
     {
+      "key": "stress",
+      "icon": "leaf",
+      "label": "Stress abbauen",
+      "sub": "Kopf frei, besser schlafen",
+      "finn": "Zum Stressabbau ist der 30-Minuten-Zirkel ideal: kurz, geführt, kein Grübeln – beim Probetraining merkst du direkt, wie gut das tut."
+    },
+    {
       "key": "wiedereinstieg",
+      "icon": "restart",
       "label": "Wiedereinstieg",
+      "sub": "Nach einer Pause neu starten",
       "finn": "Nach einer Pause starten wir entspannt: Einweisung an jedem Gerät und ein Plan, der dich nicht überfordert."
     }
   ],
@@ -61,24 +79,34 @@
     {
       "key": "neu",
       "label": "Noch nie im Studio",
+      "sub": "Alles neu für mich",
       "trainer": true,
       "finn": "Dann empfehle ich dir das Probetraining mit Trainer – so ist der Einstieg entspannt und du musst nichts allein herausfinden."
     },
     {
       "key": "pause",
       "label": "Länger pausiert",
+      "sub": "Früher trainiert, jetzt wieder rein",
       "trainer": true,
       "finn": "Mit Trainer frischst du beim Probetraining alles Wichtige auf und bekommst direkt einen Plan für den Neustart."
     },
     {
+      "key": "unregelmaessig",
+      "label": "Ab und zu aktiv",
+      "sub": "Ohne festen Plan",
+      "trainer": true,
+      "finn": "Dann bringen wir Struktur rein: Beim Probetraining bekommst du einen Plan, der zu deinem Alltag passt."
+    },
+    {
       "key": "regelmaessig",
       "label": "Trainiere regelmäßig",
+      "sub": "Ich kenne mich aus",
       "trainer": false,
       "finn": "Dann schau dir beim Probetraining gern den Powerbereich und die Biostrength-Geräte an – mit oder ohne Trainer, wie du magst."
     }
   ],
   "finnIntro": "FINN meint:",
-  "finnPrompt": "Ein Interessent bucht ein Probetraining. Ziel: {ziel}. Erfahrung: {erfahrung}. Schreibe EINEN kurzen, motivierenden Satz (max. 30 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), was ihn beim Probetraining erwartet. Antworte nur mit dem Satz.",
+  "finnPrompt": "Ein Interessent bucht ein Probetraining. Ziel: {ziel}. Erfahrung: {erfahrung}. Wichtig ist ihm: {fokus}. Schreibe EINEN kurzen, motivierenden Satz (max. 30 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), was ihn beim Probetraining erwartet und wie wir darauf eingehen. Antworte nur mit dem Satz.",
   "trainerLabel": "Begleitung beim Probetraining",
   "withTrainer": "Mit Trainer (empfohlen)",
   "withoutTrainer": "Ohne Trainer",
@@ -125,7 +153,7 @@
   "finnContact": "Danke, {vorname}! Wohin dürfen wir die Bestätigung schicken?",
   "finnHint": "Danke, {vorname}! Ein letzter, freiwilliger Schritt: Wenn dein Trainer etwas wissen sollte, kannst du es hier hinterlassen.",
   "finnDone": "Willkommen, {vorname}! {termin} sehen wir uns. Dein Trainer weiß, worum es dir geht – du musst nur noch kommen.",
-  "finnDonePrompt": "Ein Interessent hat gerade ein Probetraining gebucht. Vorname: {vorname}. Ziel: {ziel}. Erfahrung: {erfahrung}. Termin: {termin}. Schreibe 1–2 kurze, herzliche Sätze (max. 40 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), die ihn willkommen heißen und bestärken, dass dieser Schritt richtig war. Antworte nur mit dem Text.",
+  "finnDonePrompt": "Ein Interessent hat gerade ein Probetraining gebucht. Vorname: {vorname}. Ziel: {ziel}. Erfahrung: {erfahrung}. Wichtig ist ihm: {fokus}. Termin: {termin}. Schreibe 1–2 kurze, herzliche Sätze (max. 40 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), die ihn willkommen heißen und auf sein Ziel eingehen. Antworte nur mit dem Text.",
   "nameTitle": "Wie heißt du?",
   "nameText": "",
   "addressTitle": "Wo wohnst du?",
@@ -142,5 +170,169 @@
   "confirmHref": "/bestaetigung",
   "dayLabel": "Tag wählen",
   "timeLabel": "Uhrzeit wählen",
-  "pickTimeLabel": "Bitte Uhrzeit wählen"
+  "pickTimeLabel": "Bitte Uhrzeit wählen",
+  "focusTitle": "Was ist dir dabei wichtig?",
+  "focusText": "Du kannst auch zwei auswählen.",
+  "focusMax": 2,
+  "focusByGoal": {
+    "abnehmen": [
+      {
+        "key": "cardio",
+        "label": "Ausdauer & Kalorien",
+        "sub": "Laufband, Crosstrainer, Rad"
+      },
+      {
+        "key": "kraft",
+        "label": "Kraft & Straffung",
+        "sub": "Geräte, die den Umsatz erhöhen"
+      },
+      {
+        "key": "zirkel",
+        "label": "Kurz & effektiv",
+        "sub": "30-Minuten-Zirkel"
+      },
+      {
+        "key": "ernaehrung",
+        "label": "Tipps zur Ernährung",
+        "sub": "Was neben dem Training zählt"
+      }
+    ],
+    "muskeln": [
+      {
+        "key": "ganzkoerper",
+        "label": "Ganzkörper",
+        "sub": "Alles gleichmäßig aufbauen"
+      },
+      {
+        "key": "oberkoerper",
+        "label": "Oberkörper",
+        "sub": "Brust, Rücken, Arme"
+      },
+      {
+        "key": "beine",
+        "label": "Beine & Po",
+        "sub": "Unterkörper im Fokus"
+      },
+      {
+        "key": "frei",
+        "label": "Freihanteln",
+        "sub": "Powerbereich kennenlernen"
+      }
+    ],
+    "fit": [
+      {
+        "key": "ausdauer",
+        "label": "Ausdauer",
+        "sub": "Herz-Kreislauf stärken"
+      },
+      {
+        "key": "kraft",
+        "label": "Kraft & Haltung",
+        "sub": "Stabil im Alltag"
+      },
+      {
+        "key": "zirkel",
+        "label": "Kurz & effektiv",
+        "sub": "30-Minuten-Zirkel"
+      },
+      {
+        "key": "abwechslung",
+        "label": "Abwechslung",
+        "sub": "Nicht immer dasselbe"
+      }
+    ],
+    "ruecken": [
+      {
+        "key": "schonend",
+        "label": "Gelenkschonend starten",
+        "sub": "Geführt, ohne Überlastung"
+      },
+      {
+        "key": "haltung",
+        "label": "Haltung verbessern",
+        "sub": "Rumpf und Rücken kräftigen"
+      },
+      {
+        "key": "mobil",
+        "label": "Beweglicher werden",
+        "sub": "Dehnung und Mobilität"
+      },
+      {
+        "key": "alltag",
+        "label": "Fit für den Alltag",
+        "sub": "Heben, Tragen, Sitzen"
+      }
+    ],
+    "stress": [
+      {
+        "key": "auspowern",
+        "label": "Richtig auspowern",
+        "sub": "Kopf frei durch Schwitzen"
+      },
+      {
+        "key": "ruhig",
+        "label": "Ruhig & geführt",
+        "sub": "Zirkel ohne Grübeln"
+      },
+      {
+        "key": "routine",
+        "label": "Feste Routine",
+        "sub": "Ein fester Termin pro Woche"
+      },
+      {
+        "key": "schlaf",
+        "label": "Besser schlafen",
+        "sub": "Ausgleich am Abend"
+      }
+    ],
+    "wiedereinstieg": [
+      {
+        "key": "sanft",
+        "label": "Sanft anfangen",
+        "sub": "Nicht gleich übertreiben"
+      },
+      {
+        "key": "plan",
+        "label": "Klarer Plan",
+        "sub": "Wissen, was ich mache"
+      },
+      {
+        "key": "begleitung",
+        "label": "Enge Begleitung",
+        "sub": "Am Anfang jemand dabei"
+      },
+      {
+        "key": "motivation",
+        "label": "Dranbleiben",
+        "sub": "Diesmal durchziehen"
+      }
+    ],
+    "_default": [
+      {
+        "key": "cardio",
+        "label": "Ausdauer",
+        "sub": "Herz-Kreislauf"
+      },
+      {
+        "key": "kraft",
+        "label": "Kraft",
+        "sub": "Geräte und Freihanteln"
+      },
+      {
+        "key": "zirkel",
+        "label": "Kurz & effektiv",
+        "sub": "30-Minuten-Zirkel"
+      },
+      {
+        "key": "begleitung",
+        "label": "Enge Begleitung",
+        "sub": "Am Anfang jemand dabei"
+      }
+    ]
+  },
+  "finnFocus": "{ziel} – gute Wahl. Eine Frage noch, dann weiß dein Trainer Bescheid.",
+  "planTitle": "So bereiten wir dein Probetraining vor",
+  "planNote": "Dein Trainer bekommt das als Vorbereitung. Ändern kannst du es vor Ort jederzeit.",
+  "trainerRecommended": "FINN empfiehlt: mit Trainer",
+  "trainerFree": "FINN empfiehlt: ganz wie du magst"
 }
