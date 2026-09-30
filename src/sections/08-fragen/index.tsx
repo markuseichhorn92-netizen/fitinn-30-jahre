@@ -64,6 +64,7 @@ export default function Fragen(props: any) {
     const f = list.find((x) => x.question === q);
     if (!f || busy) return;
     setFailed(false);
+    window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'question', value: q } }));
     setEntries((e) => [...e, { q, a: f.answer, kind: 'verified', choices: [] }]);
   };
 
@@ -73,6 +74,7 @@ export default function Fragen(props: any) {
     const known = list.find((x) => x.question.toLowerCase() === text.toLowerCase());
     if (known) { askVerified(known.question); setInput(''); return; }
     setBusy(true); setFailed(false); setInput('');
+    window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'question', value: text } }));
     const history = entries.slice(-3).flatMap((e) => [{ role: 'user', text: e.q.slice(0, 800) }, { role: 'assistant', text: e.a.slice(0, 800) }]);
     try {
       const r = await fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: text, history, visitorId: getVid() }) });

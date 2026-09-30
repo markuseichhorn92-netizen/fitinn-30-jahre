@@ -7,6 +7,7 @@ import Button from '@siteui/button';
 import Chip from '@siteui/chip';
 // Button aus @siteui wird im Widget nur noch für die Buchung genutzt
 import { crm } from '@/lib/onepage-kit';
+import * as interest from '@/lib/interest';
 import styles from './styles.module.css';
 
 type Msg = { role: 'user' | 'assistant'; text: string; kind?: 'error' | 'local' };
@@ -103,6 +104,7 @@ export default function FinnChat(props: any) {
     yesLabel, noLabel, bookYesLabel, bookChoice, priceChoiceSpar: priceChoice, inclChoice, busyChoice, otherChoice,
     errorGeneric, phoneLabel, phoneHref, maxChars,
     disclosureShort, disclosureMore, disclosureLess, hoursChoice, trialInfoChoice, tariffChoice, startChoices, maxChoices,
+    smartNudges, aiNudge, aiNudgePrompt,
   } = props;
   const [moreInfo, setMoreInfo] = useState(false);
 
@@ -197,10 +199,32 @@ export default function FinnChat(props: any) {
       shown += 1;
       lastAt = Date.now();
       try { window.sessionStorage.setItem('finn_nudges', String(shown)); } catch { /* egal */ }
-      nudgeRef.current = list[i];
-      setNudge(list[i]);
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => { nudgeRef.current = null; setNudge(null); }, 16000);
+      const base = list[i];
+      const topic = interest.topTopic();
+      const smart = smartNudges && smartNudges[topic] ? smartNudges[topic] : null;
+      const chosen = smart ? { ...base, ...smart, topic } : { ...base, topic: 'static' };
+      const show = (n: any) => {
+        nudgeRef.current = n;
+        setNudge(n);
+        interest.reportShown(String(n.topic), String(base.mode));
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => { nudgeRef.current = null; setNudge(null); }, 16000);
+      };
+      if (smart && aiNudge && finnApi) {
+        // FINN formuliert die Ansprache passend zum Profil; bei Zögern oder Unsinn bleibt der feste Text
+        const ctrl = new AbortController();
+        const to = setTimeout(() => ctrl.abort(), 4000);
+        fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal,
+          body: JSON.stringify({ message: String(aiNudgePrompt).replace('{profil}', interest.summary()), history: [], visitorId: vidRef.current || getVid() }) })
+          .then((r) => r.json()).then((d: any) => {
+            clearTimeout(to);
+            const t = d && typeof d.answer === 'string' ? cleanMd(d.answer).replace(/\s+/g, ' ').trim() : '';
+            const ok = t.length >= 30 && t.length <= 170 && !/http|€\s?\d|\d+\s?€/.test(t);
+            show(ok ? { ...chosen, text: t } : chosen);
+          }).catch(() => { clearTimeout(to); show(chosen); });
+      } else {
+        show(chosen);
+      }
     };
     list.forEach((n: any, i: number) => {
       if (n.mode === 'time') {
@@ -236,6 +260,28 @@ export default function FinnChat(props: any) {
       document.removeEventListener('mouseout', onOut);
     };
   }, [nudges, maxNudges]);
+
+  // Verweildauer je Abschnitt (Interessenprofil, nur im Speicher) + Aktionen aus den Sektionen
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
+    const secs = Array.from(document.querySelectorAll('main > section[id]')) as HTMLElement[];
+    const since: Record<string, number> = {};
+    // "Im Bild" = mind. 25 % des Abschnitts sichtbar ODER der Abschnitt füllt mind. die halbe Bildschirmhöhe
+    const o = new IntersectionObserver((ents) => {
+      const now = Date.now();
+      ents.forEach((e) => {
+        const id = (e.target as HTMLElement).id;
+        const inView = e.isIntersecting && (e.intersectionRatio >= 0.25 || e.intersectionRect.height >= window.innerHeight * 0.5);
+        if (inView && !since[id]) since[id] = now;
+        else if (!inView && since[id]) { const sec = (now - since[id]) / 1000; delete since[id]; interest.dwell(id, sec); interest.dwellReport(id, sec); }
+      });
+    }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+    secs.forEach((el) => o.observe(el));
+    const tick = setInterval(() => { const now = Date.now(); Object.keys(since).forEach((id) => { interest.dwell(id, (now - since[id]) / 1000); since[id] = now; }); }, 2000);
+    const onSignal = (e: any) => { const d = e && e.detail ? e.detail : {}; interest.signal(String(d.type || ''), String(d.value || '')); };
+    window.addEventListener('fi:signal', onSignal as any);
+    return () => { o.disconnect(); clearInterval(tick); window.removeEventListener('fi:signal', onSignal as any); };
+  }, []);
 
   useEffect(() => { vidRef.current = getVid(); }, []);
   useEffect(() => {
@@ -368,6 +414,7 @@ export default function FinnChat(props: any) {
     setConfirm(null);
     setForm({ ...EMPTY_FORM });
     setMessages((m) => [...m, { role: 'user', text: userText || bookLabel, kind: 'local' }]);
+    interest.reportBooking('start', 'chat');
     setBooking({ step: 'loading', slots: [], day: null, slot: null, invalid: false, failed: false });
     try {
       const today = new Date();
@@ -422,7 +469,7 @@ export default function FinnChat(props: any) {
           studioId: Number(studioId),
           startDateTime: slot.startDateTime,
           trainerRequired: !!form.trainer,
-          note: 'Gebucht über FINN-Chat (Oktober-Aktion)',
+          note: `Gebucht über FINN-Chat (Oktober-Aktion) · ${interest.interestNote()}`,
           leadCustomer: {
             firstname: form.firstname.trim(),
             lastname: form.lastname.trim(),
@@ -438,6 +485,7 @@ export default function FinnChat(props: any) {
         }),
       });
       if (!r.ok) throw new Error(String(r.status));
+      interest.reportBooking('success', 'chat');
       if (crmFormId) {
         // Zusätzlich ins Onepage-CRM – Magicline bleibt führend, Fehler hier stören die Buchung nicht.
         try {
@@ -711,7 +759,7 @@ export default function FinnChat(props: any) {
 
       {nudge && !overlay ? (
         <div className={styles.nudge} role="status">
-          <button type="button" className={styles.nudgeBody} onClick={() => openChat(nudge)}>
+          <button type="button" className={styles.nudgeBody} onClick={() => { interest.reportClick(String(nudge.topic || 'static')); openChat(nudge); }}>
             <span className={styles.nudgeAvatar} aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /></svg>
             </span>

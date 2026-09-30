@@ -31,6 +31,7 @@ export default function Bereiche({ anchorId, bgColor, image, kicker, headline, i
               <motion.li
                 key={i}
                 className={styles.tile}
+                onPointerDown={() => window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'tile', value: p.tag } }))}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '0px 0px 120px 0px' }}

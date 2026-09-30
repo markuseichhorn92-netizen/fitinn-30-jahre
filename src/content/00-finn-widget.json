@@ -129,5 +129,29 @@
       "text": "Wann habt ihr geöffnet?"
     }
   ],
-  "maxChoices": 4
+  "maxChoices": 4,
+  "aiNudge": true,
+  "aiNudgePrompt": "Schreibe EINEN kurzen, freundlichen Hinweis (max. 2 Sätze, Du-Form, keine Preise, keine Links, kein Gruß) für einen Website-Besucher, der sich für Folgendes interessiert: {profil}. Lade ihn ein, ein kostenloses Probetraining zu buchen oder dir eine Frage zu stellen. Antworte nur mit dem Hinweistext.",
+  "smartNudges": {
+    "price": {
+      "text": "Jeder Tag Warten kostet dich rund 1 € Ersparnis. Soll ich dir direkt einen Probetraining-Termin zeigen?",
+      "ask": "",
+      "book": true
+    },
+    "fit": {
+      "text": "Lange nicht trainiert oder unsicher? Beim Probetraining mit Trainer starten wir genau da, wo du stehst.",
+      "ask": "Wie läuft das Probetraining mit Trainer ab?",
+      "book": false
+    },
+    "geraete": {
+      "text": "Den 30-Minuten-Zirkel und die Kraftgeräte testest du beim kostenlosen Probetraining – soll ich dir einen Termin raussuchen?",
+      "ask": "",
+      "book": true
+    },
+    "hours": {
+      "text": "Du willst wissen, wann es ruhig ist? Ich zeig dir die Auslastung – und freie Probetraining-Termine.",
+      "ask": "Wie voll ist es gerade?",
+      "book": false
+    }
+  }
 }

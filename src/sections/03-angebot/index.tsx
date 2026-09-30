@@ -167,6 +167,7 @@ export default function Angebot(props: any) {
             <motion.article
               key={i}
               className={`${styles.tariff} ${t.highlight ? styles.hot : ''}`}
+              onPointerDown={() => window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'tariff', value: t.name } }))}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '0px 0px 120px 0px' }}
@@ -212,7 +213,7 @@ export default function Angebot(props: any) {
                   className={styles.inclBtn}
                   aria-expanded={openIncl === i}
                   aria-controls={`incl-${i}`}
-                  onClick={() => setOpenIncl(openIncl === i ? null : i)}
+                  onClick={() => { setOpenIncl(openIncl === i ? null : i); window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'incl', value: it.title } })); }}
                 >
                   <span className={styles.icon} aria-hidden="true">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

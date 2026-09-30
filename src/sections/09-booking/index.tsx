@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { crm } from '@/lib/onepage-kit';
 import Deco from '@siteui/deco';
+import * as interest from '@/lib/interest';
 import './styles.css';
 
 type Slot = { startDateTime: string; endDateTime: string };
@@ -154,6 +155,7 @@ export default function FitInnBookingForm(props: any) {
     }
     setIsBooking(true);
     setStatus('idle');
+    interest.reportBooking('start', 'form');
     try {
       const res = await fetch(`${apiBaseUrl}/trialsession/book`, {
         method: 'POST',
@@ -162,7 +164,7 @@ export default function FitInnBookingForm(props: any) {
           studioId: Number(studioId),
           startDateTime: selectedSlot.startDateTime,
           trainerRequired: true,
-          note,
+          note: [note.trim(), interest.interestNote()].filter(Boolean).join(' · '),
           leadCustomer: {
             firstname: firstName,
             lastname: lastName,
@@ -181,6 +183,7 @@ export default function FitInnBookingForm(props: any) {
           }
         })
       });
+      if (res.ok) interest.reportBooking('success', 'form');
       if (res.ok && crmFormId) {
         // Zusätzlich ins Onepage-CRM – Magicline bleibt führend, Fehler hier stören die Buchung nicht.
         try {
