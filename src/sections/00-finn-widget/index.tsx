@@ -609,7 +609,9 @@ export default function FinnChat(props: any) {
               <span>{badge}</span>
             </div>
             {messages.length ? (
-              <button type="button" className={styles.reset} onClick={reset} disabled={busy}>{resetLabel}</button>
+              <button type="button" className={styles.reset} onClick={reset} disabled={busy} aria-label={resetLabel} title={resetLabel}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
+              </button>
             ) : null}
             {overlay ? (
               <button type="button" className={styles.close} onClick={() => setOverlay(false)} aria-label={closeLabel}>
@@ -619,12 +621,22 @@ export default function FinnChat(props: any) {
           </div>
 
           <div className={styles.log} ref={logRef} role="log" aria-live="polite" aria-relevant="additions">
-            <div className={`${styles.msg} ${styles.bot}`}>{greeting}</div>
+            <div className={styles.group}>
+              <div className={`${styles.msg} ${styles.bot}`}>{greeting}</div>
+              <span className={styles.meta}>{botName} · KI-Assistent</span>
+            </div>
             {messages.map((m, i) => (
-              <div key={i} className={`${styles.msg} ${m.role === 'user' ? styles.user : styles.bot} ${m.kind === 'error' ? styles.err : ''}`}>
-                {m.role === 'assistant' ? renderText(m.text) : m.text}
-                {m.kind === 'error' ? <> <a href={phoneHref}>{phoneLabel}</a></> : null}
-              </div>
+              m.role === 'user' ? (
+                <div key={i} className={`${styles.msg} ${styles.user}`}>{m.text}</div>
+              ) : (
+                <div key={i} className={styles.group}>
+                  <div className={`${styles.msg} ${styles.bot} ${m.kind === 'error' ? styles.err : ''}`}>
+                    {renderText(m.text)}
+                    {m.kind === 'error' ? <> <a href={phoneHref}>{phoneLabel}</a></> : null}
+                  </div>
+                  <span className={styles.meta}>{botName} · KI-Assistent · gerade eben</span>
+                </div>
+              )
             ))}
             {busy ? (
               <div className={`${styles.msg} ${styles.bot} ${styles.typing}`}>
@@ -778,11 +790,8 @@ export default function FinnChat(props: any) {
       {overlay ? <div className={styles.backdrop} onClick={() => setOverlay(false)} aria-hidden="true" /> : null}
 
       {showLauncher && !overlay ? (
-        <button type="button" className={`${styles.launcher} ${launcherOn ? styles.launcherOn : ''}`} onClick={() => openChat()} tabIndex={launcherOn ? 0 : -1} aria-hidden={!launcherOn}>
-          <span className={styles.launcherIcon} aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /></svg>
-          </span>
-          {launcherLabel}
+        <button type="button" className={`${styles.launcher} ${launcherOn ? styles.launcherOn : ''}`} onClick={() => openChat()} tabIndex={launcherOn ? 0 : -1} aria-hidden={!launcherOn} aria-label={launcherLabel} title={launcherLabel}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /></svg>
         </button>
       ) : null}
 

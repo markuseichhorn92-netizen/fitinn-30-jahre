@@ -405,3 +405,91 @@
   .dots i { animation: none; opacity: 0.7; }
   .log { scroll-behavior: auto; }
 }
+
+/* ======================================================================
+   Intercom-Stil: helles, ruhiges Chatfenster (überschreibt die dunklen Regeln oben)
+   ====================================================================== */
+.window {
+  background: #ffffff;
+  color: #0B1215;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px -8px #05090B40, 0 0 0 1px #05090B0f;
+}
+.overlay { box-shadow: 0 24px 80px -16px #05090B80, 0 0 0 1px #05090B14; }
+.backdrop { background: #05090B33; }
+.head { gap: 12px; padding: 14px 16px; border-bottom: 1px solid #0B121512; background: #ffffff; }
+.avatar { width: 40px; height: 40px; border-radius: 12px; background: #05090B; color: #ffffff; }
+.headText strong { font-size: 16px; font-weight: 700; color: #0B1215; }
+.headText span { font-size: 13px; color: #6B7680; opacity: 1; }
+.reset, .close {
+  width: 40px; height: 40px; min-height: 0; padding: 0; border-radius: 999px;
+  background: transparent; color: #4B5560; opacity: 1;
+}
+.reset:hover, .close:hover { background: #0B12150a; color: #0B1215; }
+.reset:disabled { opacity: 0.4; }
+
+.log { padding: 18px 16px 8px; gap: 14px; background: #ffffff; }
+.group { display: flex; flex-direction: column; gap: 5px; align-self: flex-start; max-width: 88%; }
+.group .msg { max-width: none; }
+.msg { font-size: 15.5px; line-height: 1.5; padding: 12px 15px; border-radius: 16px; }
+.bot { background: #F1F2F4; color: #0B1215; border-bottom-left-radius: 16px; }
+.user { background: var(--color-kit-key1, #0F7D96); color: #ffffff; font-weight: 500; border-bottom-right-radius: 16px; }
+.meta { font-size: 12px; color: #7A848C; padding-left: 4px; }
+.err { background: #FDECEA; box-shadow: none; color: #7A1F16; }
+.err a { color: #B4271A; }
+.dots i { background: #8A939B; }
+.preview { background: #F1F2F4; box-shadow: none; color: #0B1215; }
+.window .actionRow > button {
+  background: #ffffff; color: var(--color-kit-key1, #0F7D96);
+  box-shadow: inset 0 0 0 1px #0F7D9666; font-size: 15px; min-height: 42px; padding: 9px 16px; font-weight: 600;
+}
+.window .actionRow > button:hover:not(:disabled) { background: #0F7D960d; box-shadow: inset 0 0 0 1px var(--color-kit-key1, #0F7D96); transform: none; }
+.window .linkBtn { color: var(--color-kit-key1, #0F7D96); opacity: 1; }
+.bookCard { background: #F7F8F9; box-shadow: inset 0 0 0 1px #0B121512; }
+.bookText, .bookSlot { color: #0B1215; }
+.bookSlot { color: var(--color-kit-key1, #0F7D96); }
+
+/* Eingabe als schwebende Karte */
+.form {
+  margin: 8px 12px 0; padding: 10px 10px 10px 16px; gap: 10px; align-items: center;
+  border: 1px solid #0B121514; border-top: 1px solid #0B121514; border-radius: 16px;
+  background: #ffffff; box-shadow: 0 6px 24px -12px #05090B40;
+}
+.input {
+  min-height: 40px; max-height: 120px; padding: 9px 0; border: 0; border-radius: 0;
+  background: transparent; color: #0B1215; font-size: 16px; line-height: 1.4;
+}
+.input::placeholder { color: #8A939B; }
+.input:focus { box-shadow: none; border: 0; }
+.sendBtn {
+  width: 40px; height: 40px; min-width: 40px; min-height: 40px; padding: 0; border-radius: 999px;
+  background: var(--color-kit-key1, #0F7D96); color: #ffffff;
+}
+.sendBtn:disabled { background: #E9EBEE; color: #9AA3AB; opacity: 1; }
+.sendText { display: none; }
+.disclosure { padding: 10px 16px 12px; text-align: center; font-size: 12px; color: #7A848C; opacity: 1; }
+.disclosure a, .discToggle { color: #4B5560; }
+
+/* Launcher: runder dunkler Knopf */
+.launcher {
+  width: 56px; height: 56px; min-height: 0; padding: 0; justify-content: center;
+  background: #05090B; color: #ffffff; box-shadow: 0 10px 30px -8px #05090B99; gap: 0;
+}
+.launcher:hover { background: #0C161A; }
+.launcherIcon { display: none; }
+
+/* Hinweis-Blase passend hell */
+.nudge { background: #ffffff; color: #0B1215; box-shadow: 0 16px 50px -12px #05090B66, 0 0 0 1px #05090B14; }
+.nudgeAvatar { background: #05090B; color: #ffffff; }
+.nudgeText strong { color: #0B1215; }
+.nudgeClose { color: #4B5560; }
+.nudgeClose:hover { background: #0B12150a; }
+
+@media (max-width: 767px) {
+  .overlay .head { padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px; }
+  .overlay .form { margin: 6px 10px 0; padding: 8px 8px 8px 14px; }
+  .overlay .input { min-height: 40px; padding: 9px 0; font-size: 16px; border-radius: 0; }
+  .overlay .msg { font-size: 15.5px; padding: 11px 14px; }
+  .overlay .disclosure { padding: 8px 14px calc(8px + env(safe-area-inset-bottom, 0px)); }
+  .window .actionRow > button { font-size: 14px; min-height: 40px; padding: 8px 14px; }
+}
