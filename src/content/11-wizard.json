@@ -26,18 +26,53 @@
   "goalTitle": "Worum geht es dir vor allem?",
   "goalText": "Damit dein Trainer das Probetraining passend vorbereitet.",
   "goals": [
-    { "key": "abnehmen", "label": "Abnehmen", "finn": "Fürs Abnehmen kombinieren wir Cardio mit Kraft – beim Probetraining zeigt dir der Trainer, wie du effizient startest." },
-    { "key": "muskeln", "label": "Muskelaufbau", "finn": "Für Muskelaufbau lernst du beim Probetraining Biostrength kennen – die Geräte führen dich durch jede Übung." },
-    { "key": "fit", "label": "Fit bleiben", "finn": "Fit bleiben klappt am besten mit einem Plan, der in deinen Alltag passt – genau das besprechen wir beim Probetraining." },
-    { "key": "ruecken", "label": "Rücken & Beweglichkeit", "finn": "Für Rücken und Beweglichkeit ist der Biocircuit ideal: geführt, gelenkschonend, stellt sich automatisch auf dich ein." },
-    { "key": "wiedereinstieg", "label": "Wiedereinstieg", "finn": "Nach einer Pause starten wir entspannt: Einweisung an jedem Gerät und ein Plan, der dich nicht überfordert." }
+    {
+      "key": "abnehmen",
+      "label": "Abnehmen",
+      "finn": "Fürs Abnehmen kombinieren wir Cardio mit Kraft – beim Probetraining zeigt dir der Trainer, wie du effizient startest."
+    },
+    {
+      "key": "muskeln",
+      "label": "Muskelaufbau",
+      "finn": "Für Muskelaufbau lernst du beim Probetraining Biostrength kennen – die Geräte führen dich durch jede Übung."
+    },
+    {
+      "key": "fit",
+      "label": "Fit bleiben",
+      "finn": "Fit bleiben klappt am besten mit einem Plan, der in deinen Alltag passt – genau das besprechen wir beim Probetraining."
+    },
+    {
+      "key": "ruecken",
+      "label": "Rücken & Beweglichkeit",
+      "finn": "Für Rücken und Beweglichkeit ist der Biocircuit ideal: geführt, gelenkschonend, stellt sich automatisch auf dich ein."
+    },
+    {
+      "key": "wiedereinstieg",
+      "label": "Wiedereinstieg",
+      "finn": "Nach einer Pause starten wir entspannt: Einweisung an jedem Gerät und ein Plan, der dich nicht überfordert."
+    }
   ],
   "expTitle": "Wie viel Erfahrung hast du?",
   "expText": "Keine Sorge – jede Antwort ist die richtige.",
   "experiences": [
-    { "key": "neu", "label": "Noch nie im Studio", "trainer": true, "finn": "Dann empfehle ich dir das Probetraining mit Trainer – so ist der Einstieg entspannt und du musst nichts allein herausfinden." },
-    { "key": "pause", "label": "Länger pausiert", "trainer": true, "finn": "Mit Trainer frischst du beim Probetraining alles Wichtige auf und bekommst direkt einen Plan für den Neustart." },
-    { "key": "regelmaessig", "label": "Trainiere regelmäßig", "trainer": false, "finn": "Dann schau dir beim Probetraining gern den Powerbereich und die Biostrength-Geräte an – mit oder ohne Trainer, wie du magst." }
+    {
+      "key": "neu",
+      "label": "Noch nie im Studio",
+      "trainer": true,
+      "finn": "Dann empfehle ich dir das Probetraining mit Trainer – so ist der Einstieg entspannt und du musst nichts allein herausfinden."
+    },
+    {
+      "key": "pause",
+      "label": "Länger pausiert",
+      "trainer": true,
+      "finn": "Mit Trainer frischst du beim Probetraining alles Wichtige auf und bekommst direkt einen Plan für den Neustart."
+    },
+    {
+      "key": "regelmaessig",
+      "label": "Trainiere regelmäßig",
+      "trainer": false,
+      "finn": "Dann schau dir beim Probetraining gern den Powerbereich und die Biostrength-Geräte an – mit oder ohne Trainer, wie du magst."
+    }
   ],
   "finnIntro": "FINN meint:",
   "finnPrompt": "Ein Interessent bucht ein Probetraining. Ziel: {ziel}. Erfahrung: {erfahrung}. Schreibe EINEN kurzen, motivierenden Satz (max. 30 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), was ihn beim Probetraining erwartet. Antworte nur mit dem Satz.",
@@ -76,5 +111,16 @@
   "successTitle": "Termin gebucht!",
   "successText": "Du bekommst gleich eine Bestätigung per E-Mail. Wir freuen uns auf dich.",
   "successClose": "Fertig",
-  "noteSource": { "form": "Gebucht über Aktionsseite", "chat": "Gebucht über FINN-Chat", "sticky": "Gebucht über Aktionsseite (Leiste)", "nudge": "Gebucht über FINN-Hinweis" }
+  "noteSource": {
+    "form": "Gebucht über Aktionsseite",
+    "chat": "Gebucht über FINN-Chat",
+    "sticky": "Gebucht über Aktionsseite (Leiste)",
+    "nudge": "Gebucht über FINN-Hinweis"
+  },
+  "finnSlot": "{termin} ist für dich reserviert. Jetzt noch zwei kurze Fragen, damit dein Trainer sich auf dich vorbereiten kann.",
+  "finnGoal": "{ziel} – gutes Ziel. Damit dein Probetraining passt, noch eine Frage zu deiner Erfahrung.",
+  "finnContact": "Fast geschafft – ich brauche nur noch ein paar Angaben für deinen Termin.",
+  "finnHint": "Danke, {vorname}! Ein letzter, freiwilliger Schritt: Wenn dein Trainer etwas wissen sollte, kannst du es hier hinterlassen.",
+  "finnDone": "Willkommen, {vorname}! {termin} sehen wir uns. Dein Trainer weiß, worum es dir geht – du musst nur noch kommen.",
+  "finnDonePrompt": "Ein Interessent hat gerade ein Probetraining gebucht. Vorname: {vorname}. Ziel: {ziel}. Erfahrung: {erfahrung}. Termin: {termin}. Schreibe 1–2 kurze, herzliche Sätze (max. 40 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), die ihn willkommen heißen und bestärken, dass dieser Schritt richtig war. Antworte nur mit dem Text."
 }

@@ -37,7 +37,9 @@ export default function Wizard(props: any) {
     streetLabel, houseNoLabel, zipLabel, cityLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
     hintTitle, hintText, hintPlaceholder, hintConsent, hintThanks,
     submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
+    finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt,
   } = props;
+  const [doneLine, setDoneLine] = useState('');
 
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState('form');
@@ -110,6 +112,26 @@ export default function Wizard(props: any) {
     return () => { clearTimeout(to); ctrl.abort(); };
   }, [step, goal, exp, finnApi, finnPrompt]);
 
+  const vorname = form.firstname.trim() || 'du';
+  const terminStr = slot ? fmtFull(slot.startDateTime) : '';
+  const stepLine = (): string => {
+    if (step === 'goal') return slot ? fill(finnSlot, { termin: terminStr }) : '';
+    if (step === 'experience') return goal ? fill(finnGoal, { ziel: goal.label }) : '';
+    if (step === 'contact') return finnLine || finnContact;
+    if (step === 'hint') return fill(finnHint, { vorname });
+    if (step === 'done') return doneLine || fill(finnDone, { vorname, termin: terminStr });
+    return '';
+  };
+  // Persönliche Begrüßung zum Abschluss (FINN, Rückfall: fester Text)
+  useEffect(() => {
+    if (step !== 'done' || !finnApi) return;
+    const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 5000);
+    fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal, body: JSON.stringify({ message: fill(finnDonePrompt, { vorname, ziel: goal?.label || 'nicht angegeben', erfahrung: exp?.label || 'nicht angegeben', termin: terminStr }), history: [], visitorId: getVid() }) })
+      .then((r) => r.json()).then((d: any) => { clearTimeout(to); const t = d && typeof d.answer === 'string' ? d.answer.replace(/\*\*|__|#/g, '').replace(/\s+/g, ' ').trim() : ''; if (t.length >= 25 && t.length <= 260 && !/http|\d\s?€|€\s?\d|diagnos|arzt|schmerz/i.test(t)) setDoneLine(t); })
+      .catch(() => clearTimeout(to));
+    return () => { clearTimeout(to); ctrl.abort(); };
+  }, [step]);
+
   const setF = (k: string, v: any) => setForm((f) => ({ ...f, [k]: v }));
   const formValid = form.firstname.trim().length > 1 && form.lastname.trim().length > 1 && (form.gender === 'FEMALE' || form.gender === 'MALE') && isAdult(form.dob) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && form.street.trim().length > 1 && form.houseNumber.trim().length > 0 && /^\d{4,5}$/.test(form.zip.trim()) && form.city.trim().length > 1 && form.consent;
 
@@ -159,6 +181,12 @@ export default function Wizard(props: any) {
 
         <AnimatePresence mode="wait" initial={false}>
           <motion.div key={step} className={styles.body} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.28, ease }}>
+            {stepLine() ? (
+              <motion.div className={styles.finn} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.15, ease }}>
+                <span className={styles.finnAvatar} aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /></svg></span>
+                <div><span className={styles.finnLabel}>{finnIntro}</span><p key={stepLine()}>{stepLine()}</p></div>
+              </motion.div>
+            ) : null}
 
             {step === 'slot' ? (
               <>
@@ -213,12 +241,6 @@ export default function Wizard(props: any) {
 
             {step === 'contact' ? (
               <>
-                {finnLine ? (
-                  <div className={styles.finn}>
-                    <span className={styles.finnAvatar} aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /></svg></span>
-                    <div><span className={styles.finnLabel}>{finnIntro}</span><p>{finnLine}</p></div>
-                  </div>
-                ) : null}
                 <h2 className={styles.h}>{contactTitle}</h2>
                 <p className={styles.p}>{contactText}</p>
                 {slot ? <p className={styles.recap}>{fmtFull(slot.startDateTime)}</p> : null}
