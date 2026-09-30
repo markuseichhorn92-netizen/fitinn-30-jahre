@@ -14,23 +14,23 @@
   "bereiche": [
     {
       "tag": "Biocircuit",
-      "title": "Ganzkörpertraining in rund 30 Minuten",
-      "text": "Ein geführter Zirkel an vernetzten TechnoGym-Geräten für alle großen Muskelgruppen. Die Geräte stellen sich automatisch auf dich ein – ideal für den Einstieg und für alle mit wenig Zeit."
+      "title": "Ganzkörper in 30 Minuten",
+      "text": ""
     },
     {
       "tag": "Biostrength",
-      "title": "Krafttraining, das mitdenkt",
-      "text": "Programme für Straffung, Kraft oder Muskelaufbau mit verschiedenen Widerstandsarten. Du wählst dein Ziel, das Gerät führt dich durch die Einheit."
+      "title": "Kraft, die mitdenkt",
+      "text": ""
     },
     {
       "tag": "Cardio",
-      "title": "Ausdauer, die nicht langweilt",
-      "text": "TechnoGym-Cardiogeräte mit HD-Bildschirm: virtueller Coach, Outdoor-Strecken, Serien und deine Playlists – die Zeit vergeht wie im Flug."
+      "title": "Mit HD-Bildschirm",
+      "text": ""
     },
     {
       "tag": "Powerbereich",
-      "title": "Für alle, die frei trainieren",
-      "text": "Zwei Freihantelzonen, olympische Kraftstationen, Plate-Loaded-Geräte von Life Fitness und ein elektromotorisch gesteuerter Kabelzug."
+      "title": "Freie Gewichte",
+      "text": ""
     }
   ]
 }

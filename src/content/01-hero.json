@@ -21,10 +21,10 @@
   "stickyNoteSpar": "Bis zu {x} € sparen",
   "stickyChatLabel": "Chat mit FINN öffnen",
   "showSticky": true,
-  "eyebrowSpar": "Nur für die ersten 25 · Trier-Feyen seit 1996",
+  "eyebrowSpar": "Trier-Feyen · familiengeführt seit 1996",
   "hlTopSpar": "Fünf Euro pro Woche.",
   "hlAccentSpar": "Bis Silvester.",
-  "sublineSpar": "Bis 31.12.2026 zahlst du nur 5 € pro Woche – je früher du startest, desto mehr sparst du. Mit computergesteuerten TechnoGym-Geräten und Trainern, die deinen Namen kennen.",
+  "sublineSpar": "Bis 31.12. nur 5 € pro Woche – je früher du startest, desto mehr sparst du.",
   "primaryLabel": "Kostenloses Probetraining",
   "primaryHref": "#anmeldung",
   "secondaryLabel": "Angebot ansehen",
@@ -55,8 +55,8 @@
   "priceNote": "Zzgl. einmalig 39 € Aufnahmegebühr. Nur für Neumitglieder ab 18 Jahren.",
   "features": [
     {
-      "strong": "1996",
-      "text": "in Familienhand"
+      "strong": "Seit 1996",
+      "text": "familiengeführt"
     },
     {
       "strong": "7.000+",

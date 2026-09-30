@@ -135,20 +135,41 @@
   .inclGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 767px) {
-  .sec { padding: 80px 16px; }
-  .tariffs { grid-template-columns: 1fr; gap: 36px; }
-  .tariff { padding: 30px 22px; }
-  .promoPrice { font-size: 76px; }
-  .inclGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .inclItem { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 14px; border-radius: 18px; }
-  .inclText strong { font-size: 17px; }
+  .sec { padding: 64px 16px; }
+  .head { margin-bottom: 28px; gap: 24px; }
+  .headCopy { gap: 14px; }
+  .meter { padding: 20px 16px 16px; }
+  .meterValue > span:first-child { font-size: 76px; }
+  .meterCur { font-size: 32px; padding-top: 8px; }
+  .meterNext { margin-bottom: 14px; font-size: 16px; }
+  .bars { height: 80px; gap: 1px; }
+  .limit { margin-top: 16px; padding: 12px 14px; font-size: 15px; }
+  /* Tarife nebeneinander, kompakt */
+  .tariffs { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+  .tariff { padding: 26px 14px 14px; border-radius: 20px; gap: 12px; }
+  .flag { top: -12px; left: 12px; right: auto; padding: 5px 10px; font-size: 11px; letter-spacing: 0.04em; }
+  .tHead { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .tHead h3 { font-size: 20px; }
+  .term { font-size: 13px; }
+  .promo { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .promoPrice { font-size: 48px; }
+  .promoLabel { font-size: 14px; max-width: none; padding: 0; }
+  .save { padding: 8px 10px; font-size: 14px; gap: 6px; border-radius: 10px; align-items: flex-start; }
+  .save svg { display: none; }
+  .after { flex-direction: column; align-items: flex-start; gap: 2px; padding-top: 10px; font-size: 13px; }
+  .after strong { font-size: 24px; }
+  /* Inklusivleistungen als Chips */
+  .incl { margin-top: 32px; }
+  .inclTitle { margin-bottom: 14px; font-size: 20px; }
+  .inclGrid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .inclItem { flex-direction: row; align-items: center; gap: 8px; padding: 7px 12px 7px 7px; border-radius: 999px; }
+  .icon { width: 28px; height: 28px; border-radius: 50%; }
+  .icon svg { width: 16px; height: 16px; }
+  .inclText strong { font-size: 14px; font-weight: 600; }
   .inclText span { display: none; }
-  .incl { margin-top: 48px; }
-  .icon { flex: none; width: 40px; height: 40px; border-radius: 12px; }
-  .head { margin-bottom: 40px; }
-  .meter { padding: 22px 18px 18px; }
-  .meterValue > span:first-child { font-size: 84px; }
-  .meterCur { font-size: 36px; }
-  .bars { height: 96px; gap: 1px; }
+  .foot { margin-top: 28px; gap: 20px; }
+  .notes { font-size: 15px; gap: 6px; }
   .foot > .cta, .foot > .cta > * { width: 100%; }
+  .legal { margin-top: 20px; }
 }
+

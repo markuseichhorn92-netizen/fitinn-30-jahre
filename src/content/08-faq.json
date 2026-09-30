@@ -3,44 +3,29 @@
   "anchorId": "fragen",
   "bgColor": "var(--color-kit-white)",
   "eyebrow": "Fragen",
-  "title": "Passt das zu mir?",
+  "title": "Kurz gefragt",
   "text": "Deine Frage ist nicht dabei? Ruf uns an, wir nehmen uns Zeit.",
   "phoneLabel": "0651 493 688 19",
   "phoneHref": "tel:+4965149368819",
   "fragen": [
     {
-      "question": "Bin ich zu alt oder zu unfit dafür?",
-      "answer": "Nein. Viele unserer Mitglieder fangen nach Jahren ohne Sport wieder an, manche zum ersten Mal überhaupt. Wir beginnen da, wo du stehst – ohne Wettbewerb, ohne Publikum.",
-      "open": true
-    },
-    {
       "question": "Wie funktioniert das mit den 5 €?",
-      "answer": "Ab deinem Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis – jeder Tag Warten kostet dich rund 1 € Ersparnis.",
+      "answer": "Ab Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis. Nur für die ersten 25 Neuanmeldungen.",
       "open": false
     },
     {
       "question": "Was kostet es ab Januar?",
-      "answer": "Ab 01.01.2027 zahlst du 12 € pro Woche bei 52 Wochen Laufzeit oder 9 € pro Woche bei 104 Wochen. Die Aktionswochen zählen zur Laufzeit und verlängern sie nicht. Einmalig kommt die Aufnahmegebühr von 39 € dazu.",
+      "answer": "12 € pro Woche (Basic, 52 Wochen) oder 9 € pro Woche (Premium, 104 Wochen). Die Aktionswochen zählen zur Laufzeit. Einmalig 39 € Aufnahmegebühr.",
       "open": false
     },
     {
       "question": "Wie läuft das Probetraining ab?",
-      "answer": "Kostenlos und unverbindlich, rund 90 Minuten – wahlweise mit oder ohne Trainer. Du lernst die Geräte kennen, stellst deine Fragen und entscheidest danach in Ruhe. Ab 18 Jahren.",
+      "answer": "Kostenlos und unverbindlich, rund 90 Minuten, mit oder ohne Trainer. Ab 18 Jahren.",
       "open": false
     },
     {
-      "question": "Werde ich eingewiesen?",
-      "answer": "Ja. Jede Mitgliedschaft beginnt mit einem Gespräch und einer Einweisung an jedem Gerät, das du benutzen wirst.",
-      "open": false
-    },
-    {
-      "question": "Was ist Coach Premium?",
-      "answer": "Trainingspläne, Anleitungen und Auswertungen in der App – also Inhalte auf deinem Telefon. Persönliches Training mit einem Trainer vor Ort ist damit nicht gemeint.",
-      "open": false
-    },
-    {
-      "question": "Wer bekommt das Angebot?",
-      "answer": "Nur die ersten 25 Neuanmeldungen. Es gilt für Neumitglieder ab 18 Jahren und ist nicht mit anderen Aktionen kombinierbar.",
+      "question": "Bin ich zu alt oder zu unfit dafür?",
+      "answer": "Nein. Viele fangen bei uns nach Jahren ohne Sport wieder an. Du bekommst eine Einweisung an jedem Gerät.",
       "open": false
     }
   ]

@@ -263,6 +263,23 @@
   .priceValue { font-size: 132px; }
   .ring { width: 320px; height: 320px; }
   .ctas > * { width: 100%; }
+  .ctas > *:nth-child(2) { display: none; }
+  .copy { gap: 18px; }
+  .container { gap: 16px; }
+  .priceWrap { padding: 12px 0 0; }
+  .ring { display: none; }
+  .priceCard { padding: 30px 20px 20px; }
+  .priceValue { font-size: 112px; }
+  .currency { font-size: 44px; }
+  .duration { margin-top: 6px; font-size: 20px; }
+  .incl { display: none; }
+  .saveBox { margin: 14px 0 12px; }
+  .note { font-size: 13px; }
+  .facts { padding-top: 18px; }
+  .factsLabel { display: none; }
+  .factList { gap: 12px 16px; }
+  .fact strong { font-size: 18px; }
+  .fact span { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ring { animation: none; }

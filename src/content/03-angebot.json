@@ -4,8 +4,8 @@
   "bgColor": "var(--color-kit-dark)",
   "eyebrow": "Das Angebot",
   "headlineSpar": "Je früher du startest, desto mehr sparst du.",
-  "textSpar": "Zahl ab deinem Vertragsbeginn bis 31.12.2026 nur 5 € pro Woche – in beiden Tarifen. Ab dem 01.01.2027 gilt dein regulärer Wochenbeitrag. Jeder Tag, den du wartest, ist ein 5-€-Tag weniger. Und: Nur die ersten 25 Neuanmeldungen bekommen das Angebot.",
-  "ctaLabel": "Erst mal Probetraining buchen",
+  "textSpar": "Ab Vertragsbeginn bis 31.12. nur 5 € pro Woche, danach dein regulärer Tarif. Jeder Tag Warten kostet Ersparnis.",
+  "ctaLabel": "Kostenloses Probetraining buchen",
   "ctaHref": "#anmeldung",
   "sparLabel": "Wer heute abschließt, spart bis zu",
   "currencySign": "€",
@@ -19,8 +19,8 @@
   "priceUntil": "2026-12-31",
   "signupUntil": "2026-12-31",
   "promoPrice": "5 €",
-  "promoLabelSpar": "pro Woche bis 31.12.2026",
-  "afterLabelSpar": "ab 01.01.2027 pro Woche",
+  "promoLabelSpar": "pro Woche bis 31.12.",
+  "afterLabelSpar": "ab 2027 pro Woche",
   "tarifSaveText": "Abschluss heute: {x} € gespart",
   "promoWeekly": 5,
   "tarife": [
@@ -86,13 +86,10 @@
   ],
   "hinweise": [
     {
-      "text": "Der 5-€-Preis gilt ab Vertragsbeginn bis 31.12.2026. Vertragsbeginn ist der Tag des Abschlusses."
+      "text": "Einmalig 39 € Aufnahmegebühr, Einzug 14-täglich per SEPA."
     },
     {
-      "text": "Einmalige Aufnahmegebühr 39 €. Einzug in 14-tägigen Intervallen per SEPA-Lastschrift."
-    },
-    {
-      "text": "Nur für die ersten 25 Neuanmeldungen, nur für Neumitglieder ab 18 Jahren."
+      "text": "Nur die ersten 25 Neuanmeldungen, Neumitglieder ab 18 Jahren."
     }
   ],
   "legalToggle": "Alle Bedingungen lesen",
