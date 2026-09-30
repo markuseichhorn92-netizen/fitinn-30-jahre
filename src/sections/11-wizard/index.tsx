@@ -12,8 +12,8 @@ import styles from './styles.module.css';
 // Der Trainer-Hinweis (ggf. gesundheitsbezogen) geht NUR in die Magicline-Notiz, nie an FINN.
 
 type Slot = { startDateTime: string; endDateTime?: string };
-type Step = 'slot' | 'goal' | 'experience' | 'contact' | 'hint' | 'done';
-const ORDER: Step[] = ['slot', 'goal', 'experience', 'contact', 'hint'];
+type Step = 'slot' | 'goal' | 'experience' | 'name' | 'contact' | 'address' | 'confirm' | 'hint' | 'done';
+const ORDER: Step[] = ['slot', 'goal', 'experience', 'name', 'contact', 'address', 'confirm', 'hint'];
 const ease = [0.22, 1, 0.36, 1] as any;
 const pad = (n: number) => String(n).padStart(2, '0');
 const dayKey = (iso: string) => { const d = new Date(iso); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
@@ -38,6 +38,8 @@ export default function Wizard(props: any) {
     hintTitle, hintText, hintPlaceholder, hintConsent, hintThanks,
     submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
     finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt,
+    nameTitle, nameText, addressTitle, addressText, confirmTitle, confirmText, finnName, finnAddress, finnConfirm,
+    validationName, validationContact, validationAddress, validationConfirm,
   } = props;
   const [doneLine, setDoneLine] = useState('');
 
@@ -101,8 +103,8 @@ export default function Wizard(props: any) {
 
   // FINN-Satz nach Ziel + Erfahrung (Rückfall: feste Sätze aus dem Inhalt)
   useEffect(() => {
-    if (step !== 'contact' || !goal || !exp) return;
-    const fallback = `${exp.finn} ${goal.finn}`;
+    if (step !== 'name' || !goal || !exp) return;
+    const fallback = exp.finn;
     setFinnLine(fallback);
     if (!finnApi) return;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 4500);
@@ -116,8 +118,11 @@ export default function Wizard(props: any) {
   const terminStr = slot ? fmtFull(slot.startDateTime) : '';
   const stepLine = (): string => {
     if (step === 'goal') return slot ? fill(finnSlot, { termin: terminStr }) : '';
-    if (step === 'experience') return goal ? fill(finnGoal, { ziel: goal.label }) : '';
-    if (step === 'contact') return finnLine || finnContact;
+    if (step === 'experience') return goal ? goal.finn : '';
+    if (step === 'name') return finnLine || finnName;
+    if (step === 'contact') return fill(finnContact, { vorname });
+    if (step === 'address') return finnAddress;
+    if (step === 'confirm') return fill(finnConfirm, { vorname, termin: terminStr });
     if (step === 'hint') return fill(finnHint, { vorname });
     if (step === 'done') return doneLine || fill(finnDone, { vorname, termin: terminStr });
     return '';
@@ -133,6 +138,9 @@ export default function Wizard(props: any) {
   }, [step]);
 
   const setF = (k: string, v: any) => setForm((f) => ({ ...f, [k]: v }));
+  const validName = form.firstname.trim().length > 1 && form.lastname.trim().length > 1 && (form.gender === 'FEMALE' || form.gender === 'MALE');
+  const validContact = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && isAdult(form.dob);
+  const validAddress = form.street.trim().length > 1 && form.houseNumber.trim().length > 0 && /^\d{4,5}$/.test(form.zip.trim()) && form.city.trim().length > 1;
   const formValid = form.firstname.trim().length > 1 && form.lastname.trim().length > 1 && (form.gender === 'FEMALE' || form.gender === 'MALE') && isAdult(form.dob) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && form.street.trim().length > 1 && form.houseNumber.trim().length > 0 && /^\d{4,5}$/.test(form.zip.trim()) && form.city.trim().length > 1 && form.consent;
 
   const submit = async () => {
@@ -180,7 +188,7 @@ export default function Wizard(props: any) {
         {step !== 'done' ? <div className={styles.progress} aria-hidden="true"><span style={{ width: `${((idx + 1) / total) * 100}%` }} /></div> : null}
 
         <AnimatePresence mode="wait" initial={false}>
-          <motion.div key={step} className={styles.body} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.28, ease }}>
+          <motion.div key={step} className={styles.body} onKeyDown={(e) => { if (e.key === 'Enter' && (e.target as HTMLElement).tagName === 'INPUT') { e.preventDefault(); (document.querySelector('[data-next]') as HTMLButtonElement | null)?.click(); } }} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.28, ease }}>
             {stepLine() ? (
               <motion.div className={styles.finn} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.15, ease }}>
                 <span className={styles.finnAvatar} aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /></svg></span>
@@ -239,37 +247,58 @@ export default function Wizard(props: any) {
               </>
             ) : null}
 
-            {step === 'contact' ? (
+            {step === 'name' ? (
               <>
-                <h2 className={styles.h}>{contactTitle}</h2>
-                <p className={styles.p}>{contactText}</p>
-                {slot ? <p className={styles.recap}>{fmtFull(slot.startDateTime)}</p> : null}
-                <fieldset className={styles.seg}><legend>{trainerLabel}</legend>
-                  <button type="button" aria-pressed={trainer} className={trainer ? styles.segOn : ''} onClick={() => setTrainer(true)}>{withTrainer}</button>
-                  <button type="button" aria-pressed={!trainer} className={!trainer ? styles.segOn : ''} onClick={() => setTrainer(false)}>{withoutTrainer}</button>
-                </fieldset>
-                <div className={styles.row2}>
-                  <label className={styles.field}><span>{firstNameLabel}</span><input type="text" autoComplete="given-name" value={form.firstname} onChange={(e) => setF('firstname', e.target.value)} /></label>
-                  <label className={styles.field}><span>{lastNameLabel}</span><input type="text" autoComplete="family-name" value={form.lastname} onChange={(e) => setF('lastname', e.target.value)} /></label>
-                </div>
+                <h2 className={styles.h}>{nameTitle}</h2>
+                {nameText ? <p className={styles.p}>{nameText}</p> : null}
+                <label className={styles.field}><span>{firstNameLabel}</span><input type="text" autoComplete="given-name" autoFocus value={form.firstname} onChange={(e) => setF('firstname', e.target.value)} /></label>
+                <label className={styles.field}><span>{lastNameLabel}</span><input type="text" autoComplete="family-name" value={form.lastname} onChange={(e) => setF('lastname', e.target.value)} /></label>
                 <fieldset className={styles.seg}><legend>{genderLabel}</legend>
                   <button type="button" aria-pressed={form.gender === 'FEMALE'} className={form.gender === 'FEMALE' ? styles.segOn : ''} onClick={() => setF('gender', 'FEMALE')}>{femaleLabel}</button>
                   <button type="button" aria-pressed={form.gender === 'MALE'} className={form.gender === 'MALE' ? styles.segOn : ''} onClick={() => setF('gender', 'MALE')}>{maleLabel}</button>
                 </fieldset>
-                <label className={styles.field}><span>{dobLabel}</span><input type="date" autoComplete="bday" max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; })()} min="1920-01-01" value={form.dob} onChange={(e) => setF('dob', e.target.value)} /></label>
-                <label className={styles.field}><span>{emailLabel}</span><input type="email" inputMode="email" autoComplete="email" value={form.email} onChange={(e) => setF('email', e.target.value)} /></label>
+                {invalid ? <p className={styles.alert} role="alert">{validationName}</p> : null}
+              </>
+            ) : null}
+
+            {step === 'contact' ? (
+              <>
+                <h2 className={styles.h}>{contactTitle}</h2>
+                <p className={styles.p}>{contactText}</p>
+                <label className={styles.field}><span>{emailLabel}</span><input type="email" inputMode="email" autoComplete="email" autoFocus value={form.email} onChange={(e) => setF('email', e.target.value)} /></label>
                 <label className={styles.field}><span>{phoneLabel}</span><input type="tel" inputMode="tel" autoComplete="tel" value={form.phone} onChange={(e) => setF('phone', e.target.value)} /></label>
+                <label className={styles.field}><span>{dobLabel}</span><input type="date" autoComplete="bday" max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; })()} min="1920-01-01" value={form.dob} onChange={(e) => setF('dob', e.target.value)} /></label>
+                {invalid ? <p className={styles.alert} role="alert">{validationContact}</p> : null}
+              </>
+            ) : null}
+
+            {step === 'address' ? (
+              <>
+                <h2 className={styles.h}>{addressTitle}</h2>
+                <p className={styles.p}>{addressText}</p>
                 <div className={styles.row31}>
-                  <label className={styles.field}><span>{streetLabel}</span><input type="text" autoComplete="address-line1" value={form.street} onChange={(e) => setF('street', e.target.value)} /></label>
+                  <label className={styles.field}><span>{streetLabel}</span><input type="text" autoComplete="address-line1" autoFocus value={form.street} onChange={(e) => setF('street', e.target.value)} /></label>
                   <label className={styles.field}><span>{houseNoLabel}</span><input type="text" value={form.houseNumber} onChange={(e) => setF('houseNumber', e.target.value)} /></label>
                 </div>
                 <div className={styles.row12}>
                   <label className={styles.field}><span>{zipLabel}</span><input type="text" inputMode="numeric" maxLength={5} autoComplete="postal-code" value={form.zip} onChange={(e) => setF('zip', e.target.value)} /></label>
                   <label className={styles.field}><span>{cityLabel}</span><input type="text" autoComplete="address-level2" value={form.city} onChange={(e) => setF('city', e.target.value)} /></label>
                 </div>
+                {invalid ? <p className={styles.alert} role="alert">{validationAddress}</p> : null}
+              </>
+            ) : null}
+
+            {step === 'confirm' ? (
+              <>
+                <h2 className={styles.h}>{confirmTitle}</h2>
+                {confirmText ? <p className={styles.p}>{confirmText}</p> : null}
+                <fieldset className={styles.seg}><legend>{trainerLabel}</legend>
+                  <button type="button" aria-pressed={trainer} className={trainer ? styles.segOn : ''} onClick={() => setTrainer(true)}>{withTrainer}</button>
+                  <button type="button" aria-pressed={!trainer} className={!trainer ? styles.segOn : ''} onClick={() => setTrainer(false)}>{withoutTrainer}</button>
+                </fieldset>
                 <label className={styles.check}><input type="checkbox" checked={form.consent} onChange={(e) => setF('consent', e.target.checked)} /><span>{consentText} <a href={privacyHref} target="_blank" rel="noopener noreferrer">{privacyLabel}</a></span></label>
                 <label className={styles.check}><input type="checkbox" checked={form.marketing} onChange={(e) => setF('marketing', e.target.checked)} /><span>{marketingText}</span></label>
-                {invalid ? <p className={styles.alert} role="alert">{validationText}</p> : null}
+                {invalid ? <p className={styles.alert} role="alert">{validationConfirm}</p> : null}
               </>
             ) : null}
 
@@ -305,7 +334,10 @@ export default function Wizard(props: any) {
               {idx > 0 ? <button type="button" className={styles.ghost} onClick={back} disabled={sending}>{backLabel}</button> : <span />}
               {step === 'slot' ? <button type="button" className={styles.primary} disabled={!slot} onClick={next}>{nextLabel}</button> : null}
               {step === 'goal' || step === 'experience' ? <button type="button" className={styles.ghost} onClick={next}>{skipLabel}</button> : null}
-              {step === 'contact' ? <button type="button" className={styles.primary} onClick={() => { if (!formValid) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
+              {step === 'name' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validName) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
+              {step === 'contact' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validContact) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
+              {step === 'address' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validAddress) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
+              {step === 'confirm' ? <button type="button" className={styles.primary} onClick={() => { if (!form.consent) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'hint' ? <button type="button" className={styles.primary} disabled={sending || (!!hint.trim() && !hintOk)} onClick={submit}>{sending ? sendingLabel : submitLabel}</button> : null}
             </>
           )}
