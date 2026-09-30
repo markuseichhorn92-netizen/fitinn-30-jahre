@@ -18,6 +18,9 @@ const ease = [0.22, 1, 0.36, 1] as any;
 const pad = (n: number) => String(n).padStart(2, '0');
 const dayKey = (iso: string) => { const d = new Date(iso); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
 const fmtDay = (key: string) => { const [y, m, d] = key.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit' }); };
+const dayParts = (key: string) => { const [y, m, d] = key.split('-').map(Number); const dt = new Date(y, m - 1, d); return { wd: dt.toLocaleDateString('de-DE', { weekday: 'short' }).replace('.', ''), d: pad(d), mon: dt.toLocaleDateString('de-DE', { month: 'short' }).replace('.', '') }; };
+const daypart = (iso: string) => { const h = new Date(iso).getHours(); return h < 12 ? 'Vormittags' : h < 17 ? 'Nachmittags' : 'Abends'; };
+const fmtShort = (iso: string) => new Date(iso).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit' }) + ', ' + fmtTime(iso);
 const fmtTime = (iso: string) => new Date(iso).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 const fmtFull = (iso: string) => new Date(iso).toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' }) + ', ' + fmtTime(iso) + ' Uhr';
 const fill = (t: string, v: Record<string, string | number>) => String(t).replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ''));
@@ -30,7 +33,7 @@ export default function Wizard(props: any) {
   const {
     apiBaseUrl, studioId, bookingWindowDays, finnApi, crmFormId,
     title, closeLabel, backLabel, nextLabel, skipLabel, stepLabel, steps,
-    slotTitle, slotText, loadingText, noSlotsText, errorSlotsText, moreDaysLabel,
+    slotTitle, slotText, loadingText, noSlotsText, errorSlotsText, moreDaysLabel, dayLabel, timeLabel, pickTimeLabel,
     goalTitle, goalText, goals, expTitle, expText, experiences, finnIntro, finnPrompt,
     trainerLabel, withTrainer, withoutTrainer,
     contactTitle, contactText, firstNameLabel, lastNameLabel, genderLabel, femaleLabel, maleLabel, dobLabel, emailLabel, phoneLabel,
@@ -96,6 +99,13 @@ export default function Wizard(props: any) {
 
   const days = useMemo(() => Array.from(new Set(slots.map((s) => dayKey(s.startDateTime)))), [slots]);
   const timesForDay = day ? slots.filter((s) => dayKey(s.startDateTime) === day) : [];
+  const countForDay = (d: string) => slots.filter((s) => dayKey(s.startDateTime) === d).length;
+  const timeGroups = useMemo(() => {
+    const g: Record<string, Slot[]> = {};
+    timesForDay.forEach((s) => { const k = daypart(s.startDateTime); (g[k] = g[k] || []).push(s); });
+    return ['Vormittags', 'Nachmittags', 'Abends'].filter((k) => g[k]).map((k) => ({ label: k, items: g[k] }));
+  }, [day, slots]);
+  useEffect(() => { if (open && step === 'slot' && !day && days.length) setDay(days[0]); }, [open, step, day, days]);
   const idx = ORDER.indexOf(step === 'done' ? 'hint' : step);
   const goTo = (s: Step) => { setInvalid(false); setFailed(false); setStep(s); };
   const next = () => goTo(ORDER[Math.min(idx + 1, ORDER.length - 1)]);
@@ -209,24 +219,44 @@ export default function Wizard(props: any) {
             {step === 'slot' ? (
               <>
                 <h2 className={styles.h}>{slotTitle}</h2>
-                <p className={styles.p}>{slotText}</p>
+                <ul className={styles.perks}>
+                  {String(slotText || '').replace(/\.$/, '').split(/,\s*/).filter(Boolean).map((t) => <li key={t}>{t}</li>)}
+                </ul>
                 {slotState === 'loading' ? <p className={styles.muted}>{loadingText}</p> : null}
                 {slotState === 'empty' ? <p className={styles.alert}>{noSlotsText} <a href={phoneHref}>{phoneDisplay}</a></p> : null}
                 {slotState === 'error' ? <p className={styles.alert}>{errorSlotsText} <a href={phoneHref}>{phoneDisplay}</a></p> : null}
                 {slotState === 'ok' ? (
                   <>
-                    <div className={styles.chips}>
-                      {(showAllDays ? days : days.slice(0, 6)).map((d) => (
-                        <button key={d} type="button" className={`${styles.chip} ${day === d ? styles.chipOn : ''}`} aria-pressed={day === d} onClick={() => { setDay(d); setSlot(null); }}>{fmtDay(d)}</button>
-                      ))}
-                      {!showAllDays && days.length > 6 ? <button type="button" className={styles.chipMore} onClick={() => setShowAllDays(true)}>{moreDaysLabel}</button> : null}
+                    <span className={styles.slotLabel}>{dayLabel || 'Tag'}</span>
+                    <div className={styles.dayStrip} role="listbox" aria-label={dayLabel || 'Tag'}>
+                      {days.map((d) => {
+                        const dp = dayParts(d); const on = day === d;
+                        return (
+                          <button key={d} type="button" role="option" aria-selected={on} className={`${styles.dayCard} ${on ? styles.dayOn : ''}`} onClick={() => { setDay(d); setSlot(null); }}>
+                            <span className={styles.dWd}>{dp.wd}</span>
+                            <span className={styles.dNum}>{dp.d}</span>
+                            <span className={styles.dMon}>{dp.mon}</span>
+                            <span className={styles.dCount}>{countForDay(d)} frei</span>
+                          </button>
+                        );
+                      })}
                     </div>
                     {day ? (
-                      <div className={styles.times}>
-                        {timesForDay.map((s) => (
-                          <button key={s.startDateTime} type="button" className={`${styles.time} ${slot?.startDateTime === s.startDateTime ? styles.timeOn : ''}`} aria-pressed={slot?.startDateTime === s.startDateTime} onClick={() => setSlot(s)}>{fmtTime(s.startDateTime)}</button>
-                        ))}
-                      </div>
+                      <>
+                        <span className={styles.slotLabel}>{timeLabel || 'Uhrzeit'}</span>
+                        <div className={styles.timeGroups}>
+                          {timeGroups.map((g) => (
+                            <div key={g.label} className={styles.timeGroup}>
+                              <span className={styles.groupLabel}>{g.label}</span>
+                              <div className={styles.times}>
+                                {g.items.map((s) => (
+                                  <button key={s.startDateTime} type="button" className={`${styles.time} ${slot?.startDateTime === s.startDateTime ? styles.timeOn : ''}`} aria-pressed={slot?.startDateTime === s.startDateTime} onClick={() => setSlot(s)}>{fmtTime(s.startDateTime)}</button>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </>
                     ) : null}
                   </>
                 ) : null}
@@ -342,7 +372,7 @@ export default function Wizard(props: any) {
           ) : (
             <>
               {idx > 0 ? <button type="button" className={styles.ghost} onClick={back} disabled={sending}>{backLabel}</button> : <span />}
-              {step === 'slot' ? <button type="button" className={styles.primary} disabled={!slot} onClick={next}>{nextLabel}</button> : null}
+              {step === 'slot' ? <button type="button" className={styles.primary} disabled={!slot} onClick={next}>{slot ? <>{nextLabel}<span className={styles.btnSub}>{fmtShort(slot.startDateTime)} Uhr</span></> : (pickTimeLabel || 'Uhrzeit wählen')}</button> : null}
               {step === 'goal' || step === 'experience' ? <button type="button" className={styles.ghost} onClick={next}>{skipLabel}</button> : null}
               {step === 'name' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validName) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'contact' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validContact) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}

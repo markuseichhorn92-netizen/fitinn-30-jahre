@@ -21,7 +21,7 @@
     "hint": "Hinweis für den Trainer"
   },
   "slotTitle": "Wann passt es dir?",
-  "slotText": "Kostenlos, unverbindlich, rund 90 Minuten.",
+  "slotText": "Kostenlos, Unverbindlich, Rund 90 Minuten",
   "loadingText": "Freie Termine werden geladen …",
   "noSlotsText": "Online sind gerade keine Termine frei. Ruf uns gern an:",
   "errorSlotsText": "Termine konnten nicht geladen werden. Ruf uns gern an:",
@@ -139,5 +139,8 @@
   "validationContact": "Bitte gültige E-Mail, Handynummer und Geburtsdatum angeben (ab 18 Jahren).",
   "validationAddress": "Bitte Straße, Hausnummer, PLZ und Ort angeben.",
   "validationConfirm": "Bitte den Datenschutzhinweis bestätigen.",
-  "confirmHref": "/bestaetigung"
+  "confirmHref": "/bestaetigung",
+  "dayLabel": "Tag wählen",
+  "timeLabel": "Uhrzeit wählen",
+  "pickTimeLabel": "Bitte Uhrzeit wählen"
 }
