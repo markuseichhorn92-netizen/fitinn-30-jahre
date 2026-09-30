@@ -1,12 +1,10 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
 import Badge from '@siteui/badge';
 import styles from './styles.module.css';
 
-const ease = [0.22, 1, 0.36, 1] as any;
 
 function Stars() {
   return (
@@ -28,13 +26,9 @@ export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title,
         </div>
         <div className={styles.stack}>
           {(quotes || []).map((q: any, i: number) => (
-            <motion.figure
+            <figure
               key={i}
               className={`${styles.quote} ${styles['q' + (i % 3)]}`}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease }}
             >
               <span className={styles.mark} aria-hidden="true">„</span>
               <blockquote className={styles.text}>{q.quote}</blockquote>
@@ -42,7 +36,7 @@ export default function Stimmen({ fullHeight, anchorId, bgColor, eyebrow, title,
                 {stars ? <Stars /> : null}
                 <span>{q.author}</span>
               </figcaption>
-            </motion.figure>
+            </figure>
           ))}
         </div>
         <Text size="sm" muted className={styles.source}>{source}</Text>

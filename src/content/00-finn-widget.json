@@ -73,22 +73,8 @@
   "closeLabel": "Chat schließen",
   "nudgeCloseLabel": "Hinweis schließen",
   "showLauncher": true,
-  "maxNudges": 2,
+  "maxNudges": 1,
   "nudgesSpar": [
-    {
-      "mode": "section",
-      "value": "angebot",
-      "text": "Basic oder Premium – was passt besser zu dir? Frag mich einfach.",
-      "ask": "Was ist der Unterschied zwischen Basic und Premium?",
-      "book": false
-    },
-    {
-      "mode": "section",
-      "value": "geraete",
-      "text": "Lange nicht trainiert? Ich erklär dir, wie der Einstieg bei uns läuft.",
-      "ask": "Ich war lange nicht im Studio – wie fange ich an?",
-      "book": false
-    },
     {
       "mode": "time",
       "value": "35",

@@ -51,10 +51,11 @@
   .sec { padding: 96px 24px; }
   .head { margin-bottom: 36px; }
   .grid { grid-template-columns: 1.1fr 1fr; gap: 20px; align-items: stretch; }
-  .img { height: 100%; aspect-ratio: auto; min-height: 320px; }
+  .img { height: 100%; aspect-ratio: 4 / 3; }
   .photo { border-radius: 28px; }
   .tiles { gap: 16px; }
-  .tile { padding: 24px 22px; justify-content: flex-end; min-height: 150px; }
+  .tile { padding: 22px 22px; justify-content: flex-start; min-height: 0; }
+  .tiles { align-content: stretch; }
   .num { font-size: 40px; }
   .title { font-size: 20px; }
 }

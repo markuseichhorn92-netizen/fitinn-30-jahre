@@ -23,9 +23,6 @@
   grid-template-columns: 1fr 1.1fr;
   gap: 64px;
   align-items: start;
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .fi-cta__inner.is-visible { opacity: 1; transform: translateY(0); }
 .fi-cta__eyebrow {

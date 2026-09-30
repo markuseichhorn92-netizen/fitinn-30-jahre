@@ -24,7 +24,7 @@
   "eyebrowSpar": "Trier-Feyen · familiengeführt seit 1996",
   "hlTopSpar": "Fünf Euro pro Woche.",
   "hlAccentSpar": "Bis Silvester.",
-  "sublineSpar": "Bis 31.12. nur 5 € pro Woche – je früher du startest, desto mehr sparst du.",
+  "sublineSpar": "Bis Silvester für 5 € pro Woche trainieren – an computergesteuerten TechnoGym-Geräten, mit Trainern, die deinen Namen kennen.",
   "primaryLabel": "Kostenloses Probetraining",
   "primaryHref": "#anmeldung",
   "secondaryLabel": "Angebot ansehen",
@@ -36,7 +36,7 @@
   "priceUnit": "pro Woche",
   "durationSpar": "bis 31.12.2026",
   "heroSaveText": "Start heute: bis zu {x} € gespart",
-  "heroSaveHint": "Morgen nur noch {morgen} € – jeden Tag weniger.",
+  "heroSaveHint": "",
   "priceListSpar": [
     {
       "text": "Ab 01.01.2027: 12 € pro Woche bei 52 Wochen"

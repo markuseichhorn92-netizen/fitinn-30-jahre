@@ -25,7 +25,7 @@ interface Props {
 }
 
 const Image: React.FC<Props> = ({ src, alt, className }) => (
-  <img src={mediaUrl(src)} alt={alt} loading="lazy" decoding="async" className={styles.image + ' ' + (className || '')} />
+  <img src={mediaUrl(src)} alt={alt} decoding="async" className={styles.image + ' ' + (className || '')} />
 );
 
 export default Image;

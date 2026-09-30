@@ -150,7 +150,7 @@ export default function Hero({
                 <span className={styles.saveTrack} aria-hidden="true">
                   <motion.span className={styles.saveFill} initial={{ width: '100%' }} animate={{ width: `${Math.max(3, (saveToday / saveMax) * 100)}%` }} transition={{ duration: 1.4, delay: 0.6, ease }} />
                 </span>
-                <span className={styles.saveHint}>{fill(heroSaveHint, { morgen: saveTomorrow })}</span>
+                {heroSaveHint ? <span className={styles.saveHint}>{fill(heroSaveHint, { morgen: saveTomorrow })}</span> : null}
               </div>
             ) : null}
             <ul className={styles.incl}>
