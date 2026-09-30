@@ -37,9 +37,8 @@ export default function ConsentBanner() {
           <div className={styles.box}>
             <p id="fi-consent-title" className={styles.title}>Kurz zu Cookies 🍪</p>
             <p className={styles.text}>
-              Notwendiges läuft immer (z. B. deine Buchung und der FINN-Chat). Mit deiner Zustimmung messen wir anonym,
-              wie die Seite genutzt wird, und zeigen passende Hinweise – außerdem kann die Google-Karte geladen werden.
-              Du kannst das jederzeit im Footer ändern. <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Datenschutz</a> · <a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a>
+              Notwendiges (Buchung, FINN-Chat) läuft immer. Anonyme Statistik, passende Tipps und Google Maps nur mit deinem Okay.{' '}
+              <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Datenschutz</a> · <a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a>
             </p>
             {details ? (
               <div className={styles.opts}>

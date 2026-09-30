@@ -89,26 +89,26 @@ export default function Hero({
 
       <div className={styles.container}>
         <div className={styles.copy}>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
+          <div className={`${styles.in}`} style={{ ['--d' as any]: '0s', ['--y' as any]: '16px', ['--t' as any]: '0.6s' }}>
             <Badge tone="accent" dot>{eyebrowSpar}</Badge>
-          </motion.div>
+          </div>
 
-          <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease }}>
+          <div className={`${styles.in}`} style={{ ['--d' as any]: '0.1s', ['--y' as any]: '28px', ['--t' as any]: '0.8s' }}>
             <Title as="h1" size="xxl" className={styles.headline}>
               {hlTopSpar} <em className={styles.accentLine}>{hlAccentSpar}</em>
             </Title>
-          </motion.div>
+          </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.22, ease }}>
+          <div className={`${styles.in}`} style={{ ['--d' as any]: '0.22s', ['--y' as any]: '20px', ['--t' as any]: '0.7s' }}>
             <Text size="lg" muted className={styles.sub}>{sublineSpar}</Text>
-          </motion.div>
+          </div>
 
-          <motion.div className={styles.ctas} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.32, ease }}>
+          <div className={`${styles.in} ${styles.ctas}`} style={{ ['--d' as any]: '0.32s', ['--y' as any]: '20px', ['--t' as any]: '0.7s' }}>
             <Button href={primaryHref} size="lg" onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'hero' } })); }}>{primaryLabel}</Button>
             {showSecondary ? <Button href={secondaryHref} size="lg" variant="ghost">{secondaryLabel}</Button> : null}
-          </motion.div>
+          </div>
 
-          <motion.div className={styles.facts} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}>
+          <div className={`${styles.in} ${styles.facts}`} style={{ ['--d' as any]: '0.5s', ['--y' as any]: '0px', ['--t' as any]: '0.8s' }}>
             <span className={styles.factsLabel}>{factsLabel}</span>
             <ul className={styles.factList}>
               {(features || []).map((f: any, i: number) => (
@@ -118,7 +118,7 @@ export default function Hero({
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
         <motion.div

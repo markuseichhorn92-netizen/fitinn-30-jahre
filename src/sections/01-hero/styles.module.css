@@ -355,3 +355,8 @@
   @keyframes dotPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
   .stickyBtn:focus-visible, .stickyPhone:focus-visible { outline: 3px solid var(--color-kit-white, #F4FAFB); outline-offset: 2px; }
 }
+
+/* Einblenden per CSS: startet mit dem ersten Bild, ohne auf JavaScript zu warten (schneller LCP) */
+.in { animation: heroIn var(--t, 0.7s) cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+@keyframes heroIn { from { opacity: 0.001; transform: translateY(var(--y, 16px)); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .in { animation: none; } }
