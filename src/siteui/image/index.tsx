@@ -5,8 +5,8 @@ import styles from './styles.module.css';
 // Ersatz für die Onepage-CDN-Anbindung: Bilder liegen lokal unter /public/media.
 // Gespeicherte Werte haben die Form 'media/<uuid>'; die Dateiendung steht in MEDIA.
 const MEDIA: Record<string, string> = {
-  '833da1bc-191f-4c62-a865-5783d332fd28': '/media/833da1bc-191f-4c62-a865-5783d332fd28.avif',
-  '1266cf3a-3b28-4752-ab90-ed9fc97d5583': '/media/1266cf3a-3b28-4752-ab90-ed9fc97d5583.avif',
+  '833da1bc-191f-4c62-a865-5783d332fd28': '/media/833da1bc-191f-4c62-a865-5783d332fd28.jpg',
+  '1266cf3a-3b28-4752-ab90-ed9fc97d5583': '/media/1266cf3a-3b28-4752-ab90-ed9fc97d5583.jpg',
   '77c4274d-cac5-4f25-88b1-15387b0fa6b9': '/media/77c4274d-cac5-4f25-88b1-15387b0fa6b9.png',
 };
 
