@@ -138,5 +138,6 @@
   "validationName": "Bitte Vor- und Nachname sowie Anrede angeben.",
   "validationContact": "Bitte gültige E-Mail, Handynummer und Geburtsdatum angeben (ab 18 Jahren).",
   "validationAddress": "Bitte Straße, Hausnummer, PLZ und Ort angeben.",
-  "validationConfirm": "Bitte den Datenschutzhinweis bestätigen."
+  "validationConfirm": "Bitte den Datenschutzhinweis bestätigen.",
+  "confirmHref": "/bestaetigung"
 }

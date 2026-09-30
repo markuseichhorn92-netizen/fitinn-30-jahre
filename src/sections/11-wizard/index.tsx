@@ -37,7 +37,7 @@ export default function Wizard(props: any) {
     streetLabel, houseNoLabel, zipLabel, cityLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
     hintTitle, hintText, hintPlaceholder, hintConsent, hintThanks,
     submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
-    finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt,
+    finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt, confirmHref,
     nameTitle, nameText, addressTitle, addressText, confirmTitle, confirmText, finnName, finnAddress, finnConfirm,
     validationName, validationContact, validationAddress, validationConfirm,
   } = props;
@@ -164,6 +164,16 @@ export default function Wizard(props: any) {
       interest.reportBooking('success', source);
       if (crmFormId) { try { crm.submitForm({ formId: String(crmFormId), data: { name: { firstName: form.firstname.trim(), lastName: form.lastname.trim() }, email: form.email.trim(), phone: form.phone.trim(), termin: fmtFull(slot.startDateTime), trainer: trainer ? 'Mit Trainer' : 'Ohne Trainer', note: [goal?.label, exp?.label].filter(Boolean).join(' / '), marketing: form.marketing, quelle: source } }).catch(() => {}); } catch { /* optional */ } }
       window.dispatchEvent(new CustomEvent('fi:booked', { detail: { startDateTime: slot.startDateTime, source } }));
+      // Bestätigungsseite: Daten nur im sessionStorage (nie in der URL), keine Gesundheitsangaben
+      let saved = false;
+      try {
+        window.sessionStorage.setItem('fi_booking', JSON.stringify({
+          v: 1, vorname: form.firstname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '',
+          trainer, ziel: goal?.label || '', erfahrung: exp?.label || '', at: Date.now(),
+        }));
+        saved = true;
+      } catch { /* privater Modus */ }
+      if (saved && confirmHref) { window.location.assign(String(confirmHref)); return; }
       setStep('done');
     } catch { setFailed(true); } finally { setSending(false); }
   };

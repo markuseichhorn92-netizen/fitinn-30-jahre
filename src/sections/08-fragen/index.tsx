@@ -34,7 +34,7 @@ export default function Fragen(props: any) {
   const {
     anchorId, bgColor, bgDeco, kicker, headline, intro, finnApi, maxChars, botName,
     verifiedLabel, aiLabel, followLabel, inputLabel, inputPlaceholder, sendLabel, thinkingLabel, errorText,
-    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen,
+    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context,
   } = props;
   const list: Array<{ question: string; answer: string }> = Array.isArray(fragen) ? fragen : [];
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -77,7 +77,7 @@ export default function Fragen(props: any) {
     window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'question', value: text } }));
     const history = entries.slice(-3).flatMap((e) => [{ role: 'user', text: e.q.slice(0, 800) }, { role: 'assistant', text: e.a.slice(0, 800) }]);
     try {
-      const r = await fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: text, history, visitorId: getVid() }) });
+      const r = await fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: context ? `${String(context)}\n\nFrage: ${text}` : text, history, visitorId: getVid() }) });
       const d: any = await r.json().catch(() => null);
       if (!d || typeof d.answer !== 'string' || !d.answer.trim()) throw new Error('empty');
       const choices = Array.isArray(d.choices) ? d.choices.map((c: any) => String(c && c.label ? c.label : '')).filter(Boolean).slice(0, 2) : [];
@@ -159,7 +159,7 @@ export default function Fragen(props: any) {
                           {[...e.choices, ...followUps(e.q)].slice(0, 3).map((c) => (
                             <Chip key={c} onClick={() => onChoice(c)} disabled={busy}>{c}</Chip>
                           ))}
-                          <a className={styles.bookLink} href={bookHref} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'fragen' } })); }}>{bookLabel}</a>
+                          {bookLabel ? <a className={styles.bookLink} href={bookHref} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'fragen' } })); }}>{bookLabel}</a> : null}
                         </div>
                       </div>
                     ) : null}
@@ -208,7 +208,7 @@ export default function Fragen(props: any) {
           </p>
           <div className={styles.footActions}>
             {entries.length ? <button type="button" className={styles.linkBtn} onClick={() => { setEntries([]); setFailed(false); }}>{clearLabel}</button> : null}
-            <button type="button" className={styles.linkBtn} onClick={continueInChat}>{continueLabel}</button>
+            {continueLabel ? <button type="button" className={styles.linkBtn} onClick={continueInChat}>{continueLabel}</button> : null}
           </div>
         </div>
       </div>
