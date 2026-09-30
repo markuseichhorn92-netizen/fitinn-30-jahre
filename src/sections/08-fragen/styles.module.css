@@ -66,7 +66,7 @@
 .tag { display: inline-flex; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 .tagOk { background: #0F7D9620; color: var(--color-kit-key1, #0F7D96); }
 .tagAi { background: #3BC9E026; color: var(--color-kit-key2, #3BC9E0); }
-.a { margin: 0; font-size: 17px; line-height: 1.55; white-space: pre-line; }
+.a { margin: 0; font-size: 17px; line-height: 1.55; }
 .follow { margin-top: 6px; display: flex; flex-direction: column; gap: 8px; }
 .followLabel { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; }
 .followRow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -165,4 +165,4 @@
 }
 /* eingebettet: Antwort feste Maximalhöhe, lange Antworten scrollen innen */
 .embed .panel { min-height: 0; }
-.embed .card .a { max-height: 190px; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
+.embed .card .a { max-height: 320px; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }

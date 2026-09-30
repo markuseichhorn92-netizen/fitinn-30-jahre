@@ -535,3 +535,5 @@
   :global(body.fi-sticky-on) .launcher { animation: none; transform: translateY(140%); opacity: 0; pointer-events: none; visibility: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .launcherOn { animation: none; } .launcherRing { animation: none; } }
+.log { position: relative; }
+.bot { max-width: 92%; }

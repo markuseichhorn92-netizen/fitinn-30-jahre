@@ -11,6 +11,8 @@ import * as interest from '@/lib/interest';
 import { pickChoices, detectTopic } from '@/lib/choices';
 import { hasConsent, CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
+import { RichText } from '@/lib/richText';
+import rt from '@/lib/richText.module.css';
 
 type Msg = { role: 'user' | 'assistant'; text: string; kind?: 'error' | 'local' };
 type Confirm = { id: string; preview?: string } | null;
@@ -26,24 +28,6 @@ type Booking = {
 
 const VID_KEY = 'finn_vid';
 
-// FINN antwortet teils mit Markdown (**fett**, __fett__, # Ueberschrift).
-// Fettes wird als <strong> gezeigt, alle uebrigen Markdown-Zeichen entfernt. Kein HTML.
-function cleanMd(s: string): string {
-  return s
-    .replace(/^#{1,6}\s+/gm, '')
-    .replace(/\*\*|__/g, '')
-    .replace(/^\s*[*]\s+/gm, '• ');
-}
-
-function renderText(text: string): React.ReactNode {
-  const src = String(text).replace(/__([^_\n]+)__/g, '**$1**');
-  const parts = src.split(/(\*\*[^*\n]+?\*\*)/g);
-  return parts.map((p, i) =>
-    p.length > 4 && p.startsWith('**') && p.endsWith('**')
-      ? <strong key={i}>{p.slice(2, -2)}</strong>
-      : <React.Fragment key={i}>{cleanMd(p)}</React.Fragment>
-  );
-}
 
 function makeVid(): string {
   const raw = typeof crypto !== 'undefined' && (crypto as any).randomUUID
@@ -237,7 +221,7 @@ export default function FinnChat(props: any) {
           body: JSON.stringify({ message: String(aiNudgePrompt).replace('{profil}', interest.summary()), history: [], visitorId: vidRef.current || getVid() }) })
           .then((r) => r.json()).then((d: any) => {
             clearTimeout(to);
-            const t = d && typeof d.answer === 'string' ? cleanMd(d.answer).replace(/\s+/g, ' ').trim() : '';
+            const t = d && typeof d.answer === 'string' ? d.answer.replace(/^#{1,6}\s+/gm, '').replace(/\*\*|__/g, '').replace(/\s+/g, ' ').trim() : '';
             const ok = t.length >= 30 && t.length <= 170 && !/http|€\s?\d|\d+\s?€/.test(t);
             show(ok ? { ...chosen, text: t } : chosen);
           }).catch(() => { clearTimeout(to); show(chosen); });
@@ -305,7 +289,18 @@ export default function FinnChat(props: any) {
   useEffect(() => { vidRef.current = getVid(); }, []);
   useEffect(() => {
     const el = logRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
+    if (!el) return;
+    // Lange Antwort: an ihren Anfang scrollen (mit der Frage darüber), damit man von oben liest
+    const bots = el.querySelectorAll('[data-bot]');
+    const lastBot = bots[bots.length - 1] as HTMLElement | undefined;
+    const lastMsg = messages[messages.length - 1];
+    if (!busy && lastBot && lastMsg && lastMsg.role !== 'user' && lastBot.offsetHeight > el.clientHeight * 0.55) {
+      const prev = lastBot.previousElementSibling as HTMLElement | null;
+      const top = (prev && !prev.hasAttribute('data-bot') ? prev.offsetTop : lastBot.offsetTop) - 12;
+      el.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      return;
+    }
+    el.scrollTop = el.scrollHeight;
   }, [messages, busy, choices, confirm, booking && booking.step]);
 
   // ---------- FINN ----------
@@ -623,9 +618,9 @@ export default function FinnChat(props: any) {
               m.role === 'user' ? (
                 <div key={i} className={`${styles.msg} ${styles.user}`}>{m.text}</div>
               ) : (
-                <div key={i} className={styles.group}>
+                <div key={i} className={styles.group} data-bot="">
                   <div className={`${styles.msg} ${styles.bot} ${m.kind === 'error' ? styles.err : ''}`}>
-                    {renderText(m.text)}
+                    {m.kind === 'error' ? m.text : <RichText text={m.text} cls={rt} />}
                     {m.kind === 'error' ? <> <a href={phoneHref}>{phoneLabel}</a></> : null}
                   </div>
                   <span className={styles.meta}>{botName} · KI-Assistent · gerade eben</span>

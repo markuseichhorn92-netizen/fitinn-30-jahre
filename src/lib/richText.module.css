@@ -1,0 +1,18 @@
+/* FINN-Antworten: gegliedert statt Textwand. Farben über currentColor → passt in helle und dunkle Blasen. */
+.root { display: flex; flex-direction: column; gap: 8px; white-space: normal; }
+.root > * { margin: 0; }
+.p { line-height: 1.5; }
+.p strong, .ul strong, .ol strong { font-weight: 700; }
+.h { margin-top: 4px !important; font-size: 0.78em; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; }
+.root > .h:first-child { margin-top: 0 !important; }
+.ul, .ol { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.ul li { position: relative; padding-left: 16px; line-height: 1.45; }
+.ul li::before { content: ''; position: absolute; left: 3px; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--rt-accent, #3BC9E0); }
+.ol { counter-reset: rt; }
+.ol li { counter-increment: rt; position: relative; padding-left: 30px; line-height: 1.45; min-height: 22px; }
+.ol li::before { content: counter(rt); position: absolute; left: 0; top: 0; width: 21px; height: 21px; border-radius: 7px; background: var(--rt-accent, #3BC9E0); color: #05090B; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.chips { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; }
+.chips li { position: relative; padding-left: 22px; line-height: 1.4; }
+.chips li::before { content: ''; position: absolute; left: 0; top: 0.1em; width: 15px; height: 15px; border-radius: 50%; background: var(--rt-accent, #3BC9E0) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2305090B' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 9px no-repeat; }
+.chips.wide { grid-template-columns: 1fr; }
+.ask { padding-top: 8px; border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent); opacity: 0.85; }

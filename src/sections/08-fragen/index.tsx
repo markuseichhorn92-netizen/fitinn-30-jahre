@@ -8,6 +8,8 @@ import Chip from '@siteui/chip';
 import Deco from '@siteui/deco';
 import { pickChoices, detectTopic } from '@/lib/choices';
 import styles from './styles.module.css';
+import { RichText } from '@/lib/richText';
+import rt from '@/lib/richText.module.css';
 
 type Entry = { q: string; a: string; kind: 'verified' | 'ai'; choices: string[]; next?: string[] };
 const ease = [0.22, 1, 0.36, 1] as any;
@@ -21,13 +23,6 @@ function getVid(): string {
     window.localStorage.setItem(VID_KEY, v);
     return v;
   } catch { return String(Date.now()); }
-}
-function cleanMd(s: string) { return s.replace(/^#{1,6}\s+/gm, '').replace(/\*\*|__/g, '').replace(/^\s*[*]\s+/gm, '• '); }
-function renderText(text: string): React.ReactNode {
-  const src = String(text).replace(/__([^_\n]+)__/g, '**$1**');
-  return src.split(/(\*\*[^*\n]+?\*\*)/g).map((p, i) =>
-    p.length > 4 && p.startsWith('**') && p.endsWith('**') ? <strong key={i}>{p.slice(2, -2)}</strong> : <React.Fragment key={i}>{cleanMd(p)}</React.Fragment>
-  );
 }
 const fill = (t: string, v: Record<string, string>) => String(t).replace(/\{(\w+)\}/g, (_, k) => v[k] ?? '');
 
@@ -152,7 +147,7 @@ export default function Fragen(props: any) {
                       <strong>{botName}</strong>
                       <span className={`${styles.tag} ${e.kind === 'ai' ? styles.tagAi : styles.tagOk}`}>{e.kind === 'ai' ? aiLabel : verifiedLabel}</span>
                     </span>
-                    <p className={styles.a}>{renderText(e.a)}</p>
+                    <div className={styles.a}><RichText text={e.a} cls={rt} /></div>
                     {isLast && !embed ? (
                       <div className={styles.follow}>
                         <span className={styles.followLabel}>{followLabel}</span>
