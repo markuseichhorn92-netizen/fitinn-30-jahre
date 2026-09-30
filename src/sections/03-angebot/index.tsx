@@ -240,7 +240,7 @@ export default function Angebot(props: any) {
             ))}
           </ul>
           <div className={styles.cta}>
-            <Button href={ctaHref} size="lg">{ctaLabel}</Button>
+            <Button href={ctaHref} size="lg" onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'angebot' } })); }}>{ctaLabel}</Button>
           </div>
         </div>
 

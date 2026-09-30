@@ -159,7 +159,7 @@ export default function Fragen(props: any) {
                           {[...e.choices, ...followUps(e.q)].slice(0, 3).map((c) => (
                             <Chip key={c} onClick={() => onChoice(c)} disabled={busy}>{c}</Chip>
                           ))}
-                          <a className={styles.bookLink} href={bookHref}>{bookLabel}</a>
+                          <a className={styles.bookLink} href={bookHref} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'fragen' } })); }}>{bookLabel}</a>
                         </div>
                       </div>
                     ) : null}

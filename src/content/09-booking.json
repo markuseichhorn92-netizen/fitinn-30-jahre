@@ -47,5 +47,8 @@
   "crmSource": "Landingpage-Formular (Oktober-Aktion)",
   "crmTrainerValue": "Mit Trainer",
   "bgColor": "var(--color-kit-key1)",
-  "bgDeco": "calendar"
+  "bgDeco": "calendar",
+  "quickTitle": "Nächste freie Termine",
+  "quickButton": "Alle Termine & buchen",
+  "ctaLabel": "Probetraining buchen"
 }

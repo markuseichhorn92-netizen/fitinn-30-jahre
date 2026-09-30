@@ -293,3 +293,12 @@
 }
 @media (max-width: 1023px) { .fi-cta__bgword { width: 340px; height: 340px; right: -70px; } }
 @media (max-width: 767px) { .fi-cta__bgword { width: 230px; height: 230px; top: -10px; right: -50px; } }
+
+/* Schnellwahl der nächsten Termine (Einstieg in die Vollbild-Buchung) */
+.fi-quick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+.fi-quick__slot { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 60px; padding: 10px 14px; border-radius: 14px; border: 0; background: #ffffff0f; box-shadow: inset 0 0 0 1px #3BC9E055; color: #F4FAFB; font-family: inherit; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+.fi-quick__slot:hover { background: #3BC9E026; transform: translateY(-1px); }
+.fi-quick__slot:focus-visible { outline: 3px solid #3BC9E0; outline-offset: 2px; }
+.fi-quick__slot strong { font-size: 15px; }
+.fi-quick__slot span { font-size: 17px; font-weight: 700; color: #3BC9E0; }
+@media (min-width: 768px) { .fi-quick { grid-template-columns: repeat(4, 1fr); } }

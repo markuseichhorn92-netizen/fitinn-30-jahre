@@ -409,6 +409,24 @@ export default function FinnChat(props: any) {
 
   // ---------- Probetraining-Buchung (Magicline) ----------
   const startBooking = async (userText?: string) => {
+    if (busy) return;
+    setChoices([]); setConfirm(null);
+    setMessages((m) => [...m, { role: 'user', text: userText || bookLabel, kind: 'local' }]);
+    setOverlay(false);
+    window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'chat' } }));
+  };
+  // Erfolg aus der Buchungsstrecke im Chat bestätigen
+  useEffect(() => {
+    const onBooked = (e: any) => {
+      const iso = e?.detail?.startDateTime; if (!iso) return;
+      setBooking(null);
+      setMessages((m) => [...m, { role: 'assistant', text: `${bookSuccess}\n**${fmtFull(String(iso))}**\n${bookSuccessAfter}`, kind: 'local' }]);
+      setChoices([inclChoice, otherChoice]);
+    };
+    window.addEventListener('fi:booked', onBooked as any);
+    return () => window.removeEventListener('fi:booked', onBooked as any);
+  }, [bookSuccess, bookSuccessAfter, inclChoice, otherChoice]);
+  const startBookingOld = async (userText?: string) => {
     if (busy || booking) return;
     setChoices([]);
     setConfirm(null);

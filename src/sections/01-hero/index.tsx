@@ -110,7 +110,7 @@ export default function Hero({
           </motion.div>
 
           <motion.div className={styles.ctas} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.32, ease }}>
-            <Button href={primaryHref} size="lg">{primaryLabel}</Button>
+            <Button href={primaryHref} size="lg" onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'hero' } })); }}>{primaryLabel}</Button>
             {showSecondary ? <Button href={secondaryHref} size="lg" variant="ghost">{secondaryLabel}</Button> : null}
           </motion.div>
 
@@ -170,7 +170,7 @@ export default function Hero({
       {showSticky ? (
         <div className={`${styles.sticky} ${stickyOn ? styles.stickyOn : ''}`} aria-hidden={!stickyOn}>
           <span className={styles.stickyNote}>{fill(stickyNoteSpar, { x: saveToday })}</span>
-          <a className={styles.stickyBtn} href={stickyHref} tabIndex={stickyOn ? 0 : -1}>{stickyLabel}</a>
+          <a className={styles.stickyBtn} href={stickyHref} tabIndex={stickyOn ? 0 : -1} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'sticky' } })); }}>{stickyLabel}</a>
           <button type="button" className={styles.stickyPhone} aria-label={stickyChatLabel} tabIndex={stickyOn ? 0 : -1} onClick={() => window.dispatchEvent(new CustomEvent('finn:open'))}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" /></svg>
             <span className={styles.stickyDot} aria-hidden="true" />
