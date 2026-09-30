@@ -64,6 +64,7 @@ export default function Angebot(props: any) {
   } = props;
 
   const now = useNow();
+  const [openIncl, setOpenIncl] = useState<number | null>(null);
   const startTs = dayTs(promoStart);
   const untilTs = dayTs(priceUntil);
   const lastSignupTs = dayTs(signupUntil);
@@ -197,21 +198,32 @@ export default function Angebot(props: any) {
             {(included || []).map((it: any, i: number) => (
               <motion.li
                 key={i}
-                className={styles.inclItem}
+                className={`${styles.inclItem} ${openIncl === i ? styles.inclOpen : ''}`}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '0px 0px 120px 0px' }}
                 transition={{ duration: 0.4, delay: (i % 4) * 0.05, ease }}
               >
-                <span className={styles.icon} aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    {ICONS[it.icon] || ICONS.club}
-                  </svg>
-                </span>
-                <span className={styles.inclText}>
-                  <strong>{it.title}</strong>
-                  <span>{it.text}</span>
-                </span>
+                <button
+                  type="button"
+                  className={styles.inclBtn}
+                  aria-expanded={openIncl === i}
+                  aria-controls={`incl-${i}`}
+                  onClick={() => setOpenIncl(openIncl === i ? null : i)}
+                >
+                  <span className={styles.icon} aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      {ICONS[it.icon] || ICONS.club}
+                    </svg>
+                  </span>
+                  <span className={styles.inclText}>
+                    <strong>{it.title}</strong>
+                    <span id={`incl-${i}`}>{it.text}</span>
+                  </span>
+                  <span className={styles.inclChevron} aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+                  </span>
+                </button>
               </motion.li>
             ))}
           </ul>

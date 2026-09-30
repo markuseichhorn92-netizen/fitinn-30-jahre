@@ -118,6 +118,8 @@
   background: #3BC9E01f;
   color: var(--color-kit-key2, #3BC9E0);
 }
+.inclBtn { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; width: 100%; padding: 0; margin: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: default; }
+.inclChevron { display: none; }
 .inclText { display: flex; flex-direction: column; gap: 6px; }
 .inclText strong { font-family: var(--font-kit-header-font); font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; }
 .inclText span { font-size: 17px; line-height: 1.5; opacity: 0.75; }
@@ -163,12 +165,22 @@
   /* Inklusivleistungen: 2 Spalten, Icon + Titel */
   .incl { margin-top: 32px; }
   .inclTitle { margin-bottom: 14px; font-size: 20px; }
-  .inclGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .inclItem { flex-direction: row; align-items: center; gap: 10px; padding: 12px 12px; border-radius: 16px; }
-  .icon { flex: none; width: 36px; height: 36px; border-radius: 11px; }
+  .inclGrid { grid-template-columns: 1fr; gap: 8px; }
+  .inclItem { padding: 0; border-radius: 14px; transition: background 0.2s ease, box-shadow 0.2s ease; }
+  .inclBtn { flex-direction: row; align-items: center; gap: 12px; padding: 9px 10px 9px 10px; cursor: pointer; min-height: 52px; }
+  .inclBtn:focus-visible { outline: 3px solid var(--color-kit-key2, #3BC9E0); outline-offset: 2px; border-radius: 16px; }
+  .icon { flex: none; width: 34px; height: 34px; border-radius: 10px; }
   .icon svg { width: 18px; height: 18px; }
-  .inclText strong { font-size: 14px; line-height: 1.25; font-weight: 700; }
-  .inclText span { display: none; }
+  .inclText { flex: 1; min-width: 0; gap: 4px; }
+  .inclText strong { font-size: 15px; line-height: 1.25; font-weight: 700; }
+  .inclText span { display: none; font-size: 14px; line-height: 1.45; opacity: 0.8; }
+  .inclChevron { display: inline-flex; flex: none; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 50%; background: #ffffff10; color: var(--color-kit-key2, #3BC9E0); transition: transform 0.25s ease; }
+  .inclOpen { background: #3BC9E014; box-shadow: inset 0 0 0 1px #3BC9E055; }
+  .inclOpen .inclBtn { align-items: flex-start; }
+  .inclOpen .icon { margin-top: 2px; }
+  .inclOpen .inclText strong { font-size: 15px; }
+  .inclOpen .inclText span { display: block; }
+  .inclOpen .inclChevron { transform: rotate(180deg); }
   .foot { margin-top: 28px; gap: 20px; }
   .notes { font-size: 15px; gap: 6px; }
   .foot > .cta, .foot > .cta > * { width: 100%; }
