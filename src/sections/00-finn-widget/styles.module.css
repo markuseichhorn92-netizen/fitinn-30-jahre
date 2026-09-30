@@ -208,7 +208,31 @@
 }
 .input::placeholder { color: #F4FAFB80; }
 .input:focus { outline: none; border-color: var(--color-kit-key2, #3BC9E0); box-shadow: 0 0 0 3px #3BC9E033; }
-.disclosure { margin: 0; padding: 0 20px 18px; font-size: 14px; line-height: 1.5; opacity: 0.7; }
+.disclosure { margin: 0; padding: 0 20px 14px; font-size: 13px; line-height: 1.45; opacity: 0.7; }
+.discToggle { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--color-kit-key2, #3BC9E0); text-decoration: underline; cursor: pointer; min-height: 24px; }
+.discToggle:focus-visible { outline: 2px solid var(--color-kit-key2, #3BC9E0); outline-offset: 2px; border-radius: 4px; }
+.sendBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  min-width: 52px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--color-kit-key2, #3BC9E0);
+  color: var(--color-kit-black, #05090B);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.sendBtn:hover { transform: translateY(-1px); }
+.sendBtn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.sendBtn:focus-visible { outline: 3px solid var(--color-kit-white, #F4FAFB); outline-offset: 2px; }
 .disclosure a { color: var(--color-kit-key2, #3BC9E0); }
 .widget {
   position: relative;
@@ -344,7 +368,19 @@
     border-radius: 0;
   }
   .overlay .head { padding-top: calc(14px + env(safe-area-inset-top, 0px)); }
-  .overlay .disclosure { padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 13px; }
+  .overlay .disclosure { padding: 0 14px calc(10px + env(safe-area-inset-bottom, 0px)); font-size: 12px; line-height: 1.4; }
+  .overlay .form { padding: 10px 12px; gap: 8px; }
+  .overlay .input { min-height: 48px; padding: 11px 14px; font-size: 17px; border-radius: 14px; }
+  .sendBtn { min-height: 48px; min-width: 48px; width: 48px; padding: 0; border-radius: 50%; }
+  .sendText { display: none; }
+  .overlay .head { padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; gap: 10px; }
+  .overlay .headText strong { font-size: 16px; }
+  .overlay .headText span { font-size: 12px; }
+  .overlay .reset { font-size: 14px; padding: 6px 10px; }
+  .overlay .log { padding: 14px 12px; }
+  .overlay .msg { font-size: 16px; padding: 11px 14px; }
+  .actionRow { gap: 6px; }
+  .actionRow > button { font-size: 14px; padding: 9px 14px; min-height: 40px; }
   .launcher { display: none; }
   .nudge { left: 10px; right: 10px; width: auto; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 }

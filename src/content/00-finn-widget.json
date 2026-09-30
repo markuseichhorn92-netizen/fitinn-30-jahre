@@ -122,5 +122,26 @@
   "errorGeneric": "Gerade keine Verbindung zu FINN. Ruf uns gern an:",
   "phoneLabel": "0651 493 688 19",
   "phoneHref": "tel:+4965149368819",
-  "maxChars": 800
+  "maxChars": 800,
+  "disclosureShort": "KI-Assistent, kein Mensch. Antworten können Fehler enthalten.",
+  "disclosureMore": "Mehr",
+  "disclosureLess": "Weniger",
+  "hoursChoice": "Wann habt ihr geöffnet?",
+  "trialInfoChoice": "Wie läuft das Probetraining ab?",
+  "tariffChoice": "Basic oder Premium – was passt?",
+  "startChoices": [
+    {
+      "text": "Probetraining buchen"
+    },
+    {
+      "text": "Wie viel spare ich, wenn ich heute starte?"
+    },
+    {
+      "text": "Was ist alles inklusive?"
+    },
+    {
+      "text": "Wann habt ihr geöffnet?"
+    }
+  ],
+  "maxChoices": 4
 }

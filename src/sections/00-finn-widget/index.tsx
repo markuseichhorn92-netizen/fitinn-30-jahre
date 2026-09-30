@@ -5,6 +5,7 @@ import Text from '@siteui/text';
 import Badge from '@siteui/badge';
 import Button from '@siteui/button';
 import Chip from '@siteui/chip';
+// Button aus @siteui wird im Widget nur noch für die Buchung genutzt
 import { crm } from '@/lib/onepage-kit';
 import styles from './styles.module.css';
 
@@ -101,7 +102,9 @@ export default function FinnChat(props: any) {
     launcherLabel, closeLabel, nudgeCloseLabel, showLauncher, maxNudges, nudgesSpar: nudges, mode,
     yesLabel, noLabel, bookYesLabel, bookChoice, priceChoiceSpar: priceChoice, inclChoice, busyChoice, otherChoice,
     errorGeneric, phoneLabel, phoneHref, maxChars,
+    disclosureShort, disclosureMore, disclosureLess, hoursChoice, trialInfoChoice, tariffChoice, startChoices, maxChoices,
   } = props;
+  const [moreInfo, setMoreInfo] = useState(false);
 
   const [messages, setMessages] = useState<Msg[]>([]);
   const [choices, setChoices] = useState<string[]>([]);
@@ -306,31 +309,36 @@ export default function FinnChat(props: any) {
 
   sendRef.current = send;
 
-  // Immer genau zwei passende Antwort-Buttons: FINNs eigene Vorschläge zuerst,
-  // sonst aus der Antwort abgeleitet (Ja/Nein-Frage, Thema Preis, Probetraining ...).
+  // Situationsabhängige Antwort-Buttons: FINNs eigene Vorschläge zuerst, dann passende
+  // Anschlussfragen zum Thema der Antwort. Ja/Nein-Fragen bekommen Ja/Nein (+ Alternative).
   function smartChoices(answer: string, finn: string[]): string[] {
+    const limit = Math.max(2, Number(maxChoices) || 4);
     const a = answer.toLowerCase();
     const t = answer.trim();
     const cut = Math.max(t.lastIndexOf('. ', t.length - 2), t.lastIndexOf('! ', t.length - 2), t.lastIndexOf('\n', t.length - 2));
     const lastQ = t.slice(cut + 1).trim();
     const isQuestion = lastQ.endsWith('?');
-    const yesNo = isQuestion && /^(soll|möchtest|willst|magst|darf|kann ich|hast du|bist du|würdest|wollen wir|sollen wir|interessiert)/i.test(lastQ);
-    const aboutTrial = /probetraining|termin/i.test(lastQ) || /probetraining/.test(a);
+    const yesNo = isQuestion && /^(soll|möchtest|willst|magst|darf|kann ich|hast du|bist du|würdest|wollen wir|sollen wir|interessiert|passt|brauchst)/i.test(lastQ);
     const out: string[] = [];
-    const add = (c: string) => { if (c && !out.includes(c) && out.length < 2) out.push(c); };
+    const add = (c: string) => { if (c && !out.includes(c) && out.length < limit) out.push(c); };
     if (yesNo) {
       if (/probetraining|termin|vorbei/i.test(lastQ)) { add(bookYesLabel); add(otherChoice); }
       else { add(yesLabel); add(noLabel); }
       return out;
     }
     finn.forEach((c) => add(/^probetraining$/i.test(c) ? bookChoice : c));
-    if (out.length < 2) {
-      if (aboutTrial) { add(bookChoice); add(priceChoice); }
-      else if (/€|preis|kost|tarif|beitrag|woche/.test(a)) { add(inclChoice); add(bookChoice); }
-      else if (/öffnungs|geöffnet|uhr|auslastung|voll/.test(a)) { add(busyChoice); add(bookChoice); }
-      else { add(bookChoice); add(priceChoice); }
-    }
-    return out.slice(0, 2);
+    const topics: Array<[RegExp, string[]]> = [
+      [/probetraining|schnupper/, [bookChoice, trialInfoChoice, priceChoice]],
+      [/€|preis|kost|tarif|beitrag|woche|spar/, [inclChoice, tariffChoice, bookChoice]],
+      [/basic|premium|laufzeit/, [priceChoice, inclChoice, bookChoice]],
+      [/öffnungs|geöffnet|uhr|auslastung|voll/, [busyChoice, bookChoice, priceChoice]],
+      [/gerät|technogym|biocircuit|cardio|kraft/, [trialInfoChoice, inclChoice, bookChoice]],
+      [/kündig|vertrag|agb|frist/, [tariffChoice, bookChoice, otherChoice]],
+    ];
+    const hit = topics.find(([re]) => re.test(a));
+    (hit ? hit[1] : [bookChoice, priceChoice, hoursChoice]).forEach(add);
+    if (out.length < 3) add(otherChoice);
+    return out.slice(0, limit);
   }
 
   const handleChoice = (c: string) => {
@@ -654,7 +662,7 @@ export default function FinnChat(props: any) {
             ) : null}
             {!busy && !booking && !confirm && (messages.length === 0 || choices.length) ? (
               <div className={styles.actionRow}>
-                {(messages.length === 0 ? [bookChoice, priceChoice] : choices).slice(0, 2).map((c, i) => (
+                {(messages.length === 0 ? (startChoices || []).map((s: any) => String(s.text)) : choices).map((c, i) => (
                   <Chip key={i} onClick={() => handleChoice(c)}>{c}</Chip>
                 ))}
               </div>
@@ -676,10 +684,16 @@ export default function FinnChat(props: any) {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKey}
             />
-            <Button type="submit" disabled={busy || !!booking || !input.trim()}>{sendLabel}</Button>
+            <button type="submit" className={styles.sendBtn} disabled={busy || !!booking || !input.trim()} aria-label={sendLabel}>
+              <span className={styles.sendText}>{sendLabel}</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </button>
           </form>)}
           <p className={styles.disclosure}>
-            {disclosure} <a href={privacyHref} target="_blank" rel="noopener noreferrer">{privacyLabel}</a>
+            <span className={styles.discShort}>{moreInfo ? disclosure : disclosureShort}</span>{' '}
+            <a href={privacyHref} target="_blank" rel="noopener noreferrer">{privacyLabel}</a>
+            {' · '}
+            <button type="button" className={styles.discToggle} onClick={() => setMoreInfo((v) => !v)} aria-expanded={moreInfo}>{moreInfo ? disclosureLess : disclosureMore}</button>
           </p>
         </div>)}
       </div>
