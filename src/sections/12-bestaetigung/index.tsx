@@ -173,7 +173,7 @@ export default function Bestaetigung(props: any) {
 
           <motion.div {...rise(2)}>
             {fragen ? (
-              <Fragen {...fragen} variant="embed" leadLabel={finnLabel} lead={finnLine || finnFallback} intro={chatIntro} context={fragenContext} />
+              <Fragen {...fragen} variant="embed" booked leadLabel={finnLabel} lead={finnLine || finnFallback} intro={chatIntro} context={fragenContext} />
             ) : null}
           </motion.div>
         </div>

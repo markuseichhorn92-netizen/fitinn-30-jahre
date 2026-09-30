@@ -129,7 +129,7 @@
       "text": "Wann habt ihr geöffnet?"
     }
   ],
-  "maxChoices": 4,
+  "maxChoices": 3,
   "aiNudge": true,
   "aiNudgePrompt": "Schreibe EINEN kurzen, freundlichen Hinweis (max. 2 Sätze, Du-Form, keine Preise, keine Links, kein Gruß) für einen Website-Besucher, der sich für Folgendes interessiert: {profil}. Lade ihn ein, ein kostenloses Probetraining zu buchen oder dir eine Frage zu stellen. Antworte nur mit dem Hinweistext.",
   "smartNudges": {
@@ -153,5 +153,7 @@
       "ask": "Wie voll ist es gerade?",
       "book": false
     }
-  }
+  },
+  "fitChoice": "Bin ich zu alt oder zu unfit dafür?",
+  "contractChoice": "Wie lange läuft der Vertrag?"
 }

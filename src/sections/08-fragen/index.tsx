@@ -6,9 +6,10 @@ import Text from '@siteui/text';
 import Badge from '@siteui/badge';
 import Chip from '@siteui/chip';
 import Deco from '@siteui/deco';
+import { pickChoices, detectTopic } from '@/lib/choices';
 import styles from './styles.module.css';
 
-type Entry = { q: string; a: string; kind: 'verified' | 'ai'; choices: string[] };
+type Entry = { q: string; a: string; kind: 'verified' | 'ai'; choices: string[]; next?: string[] };
 const ease = [0.22, 1, 0.36, 1] as any;
 const VID_KEY = 'finn_vid'; // gleicher Besucher wie im schwebenden Chat
 
@@ -34,7 +35,7 @@ export default function Fragen(props: any) {
   const {
     anchorId, bgColor, bgDeco, kicker, headline, intro, finnApi, maxChars, botName,
     verifiedLabel, aiLabel, followLabel, inputLabel, inputPlaceholder, sendLabel, thinkingLabel, errorText,
-    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context, variant, leadLabel, lead,
+    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context, variant, leadLabel, lead, booked,
   } = props;
   const embed = variant === 'embed';
   const list: Array<{ question: string; answer: string }> = Array.isArray(fragen) ? fragen : [];
@@ -46,8 +47,15 @@ export default function Fragen(props: any) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const asked = new Set(entries.map((e) => e.q));
-  const openQuestions = list.filter((f) => !asked.has(f.question)).map((f) => f.question);
-  const followUps = (exclude: string) => openQuestions.filter((q) => q !== exclude).slice(0, 2);
+  const pool = list.map((f) => ({ label: f.question, topic: detectTopic(f.question) }));
+  // Anschluss-Buttons beim Anlegen eines Eintrags festlegen (gemeinsame Trichter-Logik)
+  const withNext = (prevEntries: Entry[], entry: Entry): Entry => ({
+    ...entry,
+    next: pickChoices({
+      question: entry.q, answer: entry.a, finn: entry.choices, asked: [...prevEntries.map((x) => x.q), entry.q],
+      previous: prevEntries.length ? prevEntries[prevEntries.length - 1].next || [] : [], candidates: pool, booked: !!booked, limit: 3,
+    }),
+  });
 
   const [expanded, setExpanded] = useState<number | null>(null);
   useEffect(() => { setExpanded(null); }, [entries.length]);
@@ -66,7 +74,7 @@ export default function Fragen(props: any) {
     if (!f || busy) return;
     setFailed(false);
     window.dispatchEvent(new CustomEvent('fi:signal', { detail: { type: 'question', value: q } }));
-    setEntries((e) => [...e, { q, a: f.answer, kind: 'verified', choices: [] }]);
+    setEntries((e) => [...e, withNext(e, { q, a: f.answer, kind: 'verified', choices: [] })]);
   };
 
   const askFinn = async (raw: string) => {
@@ -82,7 +90,7 @@ export default function Fragen(props: any) {
       const d: any = await r.json().catch(() => null);
       if (!d || typeof d.answer !== 'string' || !d.answer.trim()) throw new Error('empty');
       const choices = Array.isArray(d.choices) ? d.choices.map((c: any) => String(c && c.label ? c.label : '')).filter(Boolean).slice(0, 2) : [];
-      setEntries((e) => [...e, { q: text, a: d.answer, kind: 'ai', choices }]);
+      setEntries((e) => [...e, withNext(e, { q: text, a: d.answer, kind: 'ai', choices })]);
     } catch {
       setFailed(true);
     } finally {
@@ -149,7 +157,7 @@ export default function Fragen(props: any) {
                       <div className={styles.follow}>
                         <span className={styles.followLabel}>{followLabel}</span>
                         <div className={styles.followRow}>
-                          {[...e.choices, ...followUps(e.q)].slice(0, 3).map((c) => (
+                          {(e.next || []).map((c) => (
                             <Chip key={c} onClick={() => onChoice(c)} disabled={busy}>{c}</Chip>
                           ))}
                           {bookLabel ? <a className={styles.bookLink} href={bookHref} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'fragen' } })); }}>{bookLabel}</a> : null}

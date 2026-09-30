@@ -8,6 +8,7 @@ import Chip from '@siteui/chip';
 // Button aus @siteui wird im Widget nur noch für die Buchung genutzt
 import { crm } from '@/lib/onepage-kit';
 import * as interest from '@/lib/interest';
+import { pickChoices, detectTopic } from '@/lib/choices';
 import { hasConsent, CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
 
@@ -104,7 +105,7 @@ export default function FinnChat(props: any) {
     launcherLabel, closeLabel, nudgeCloseLabel, showLauncher, maxNudges, nudgesSpar: nudges, mode,
     yesLabel, noLabel, bookYesLabel, bookChoice, priceChoiceSpar: priceChoice, inclChoice, busyChoice, otherChoice,
     errorGeneric, phoneLabel, phoneHref, maxChars,
-    disclosureShort, disclosureMore, disclosureLess, hoursChoice, trialInfoChoice, tariffChoice, startChoices, maxChoices,
+    disclosureShort, disclosureMore, disclosureLess, hoursChoice, trialInfoChoice, tariffChoice, fitChoice, contractChoice, startChoices, maxChoices,
     smartNudges, aiNudge, aiNudgePrompt,
   } = props;
   const [moreInfo, setMoreInfo] = useState(false);
@@ -366,36 +367,21 @@ export default function FinnChat(props: any) {
 
   sendRef.current = send;
 
-  // Situationsabhängige Antwort-Buttons: FINNs eigene Vorschläge zuerst, dann passende
-  // Anschlussfragen zum Thema der Antwort. Ja/Nein-Fragen bekommen Ja/Nein (+ Alternative).
+  // Antwort-Buttons: gemeinsame Trichter-Logik (src/lib/choices.ts) für alle Chats der Seite
+  const bookedRef = useRef(false);
+  const prevChoicesRef = useRef<string[]>([]);
   function smartChoices(answer: string, finn: string[]): string[] {
-    const limit = Math.max(2, Number(maxChoices) || 4);
-    const a = answer.toLowerCase();
-    const t = answer.trim();
-    const cut = Math.max(t.lastIndexOf('. ', t.length - 2), t.lastIndexOf('! ', t.length - 2), t.lastIndexOf('\n', t.length - 2));
-    const lastQ = t.slice(cut + 1).trim();
-    const isQuestion = lastQ.endsWith('?');
-    const yesNo = isQuestion && /^(soll|möchtest|willst|magst|darf|kann ich|hast du|bist du|würdest|wollen wir|sollen wir|interessiert|passt|brauchst)/i.test(lastQ);
-    const out: string[] = [];
-    const add = (c: string) => { if (c && !out.includes(c) && out.length < limit) out.push(c); };
-    if (yesNo) {
-      if (/probetraining|termin|vorbei/i.test(lastQ)) { add(bookYesLabel); add(otherChoice); }
-      else { add(yesLabel); add(noLabel); }
-      return out;
-    }
-    finn.forEach((c) => add(/^probetraining$/i.test(c) ? bookChoice : c));
-    const topics: Array<[RegExp, string[]]> = [
-      [/probetraining|schnupper/, [bookChoice, trialInfoChoice, priceChoice]],
-      [/€|preis|kost|tarif|beitrag|woche|spar/, [inclChoice, tariffChoice, bookChoice]],
-      [/basic|premium|laufzeit/, [priceChoice, inclChoice, bookChoice]],
-      [/öffnungs|geöffnet|uhr|auslastung|voll/, [busyChoice, bookChoice, priceChoice]],
-      [/gerät|technogym|biocircuit|cardio|kraft/, [trialInfoChoice, inclChoice, bookChoice]],
-      [/kündig|vertrag|agb|frist/, [tariffChoice, bookChoice, otherChoice]],
-    ];
-    const hit = topics.find(([re]) => re.test(a));
-    (hit ? hit[1] : [bookChoice, priceChoice, hoursChoice]).forEach(add);
-    if (out.length < 3) add(otherChoice);
-    return out.slice(0, limit);
+    const pool = [priceChoice, tariffChoice, inclChoice, hoursChoice, busyChoice, trialInfoChoice, fitChoice, contractChoice]
+      .filter(Boolean).map((label: string) => ({ label, topic: detectTopic(label) }));
+    const askedAll = messages.filter((m) => m.role === 'user').map((m) => m.text);
+    const lastQ = askedAll[askedAll.length - 1] || '';
+    const out = pickChoices({
+      question: lastQ, answer, finn, asked: askedAll, previous: prevChoicesRef.current, candidates: pool,
+      booked: bookedRef.current, book: bookChoice, other: otherChoice, yes: yesLabel, no: noLabel, bookYes: bookYesLabel,
+      limit: Number(maxChoices) || 3,
+    });
+    prevChoicesRef.current = out;
+    return out;
   }
 
   const handleChoice = (c: string) => {
@@ -431,8 +417,9 @@ export default function FinnChat(props: any) {
     const onBooked = (e: any) => {
       const iso = e?.detail?.startDateTime; if (!iso) return;
       setBooking(null);
+      bookedRef.current = true;
       setMessages((m) => [...m, { role: 'assistant', text: `${bookSuccess}\n**${fmtFull(String(iso))}**\n${bookSuccessAfter}`, kind: 'local' }]);
-      setChoices([inclChoice, otherChoice]);
+      setChoices([trialInfoChoice, hoursChoice, otherChoice].filter(Boolean));
     };
     window.addEventListener('fi:booked', onBooked as any);
     return () => window.removeEventListener('fi:booked', onBooked as any);
