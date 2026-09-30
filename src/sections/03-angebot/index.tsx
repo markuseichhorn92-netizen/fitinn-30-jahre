@@ -248,7 +248,7 @@ export default function Angebot(props: any) {
           <summary>{legalToggle}</summary>
           <p>
             {rechtstext}{' '}
-            {!over && totals.length >= 2 ? <>{fill(totalText, { basic: eur(totals[0]), premium: eur(totals[1]) })}{' '}</> : null}
+            {!over && totals.length >= 2 ? <>{fill(totalText, { basic: String(Math.round(totals[0])), premium: String(Math.round(totals[1])) })}{' '}</> : null}
             {agbIntro} <a href={agbHref} target="_blank" rel="noopener noreferrer">{agbLabel}</a> {andLabel}{' '}
             <a href={houseHref} target="_blank" rel="noopener noreferrer">{houseLabel}</a>.
           </p>

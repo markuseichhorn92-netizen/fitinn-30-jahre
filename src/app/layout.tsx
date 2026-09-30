@@ -7,6 +7,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 const grotesk = Space_Grotesk({ subsets: ['latin'], weight: ['500', '700'], variable: '--font-space-grotesk', display: 'swap' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://angebot.fit-inn-trier.de'),
+  alternates: { canonical: '/' },
   title: '5 € pro Woche bis Silvester – nur für die ersten 25 | Fit-Inn Trier',
   description:
     'Fit-Inn Trier: Bis 31.12.2026 nur 5 € pro Woche – je früher du startest, desto mehr sparst du. Nur für die ersten 25 Neuanmeldungen. Familiengeführt seit 1996, TechnoGym-Geräte. Probetraining kostenlos buchen.',

@@ -498,7 +498,7 @@ export default function FinnChat(props: any) {
           studioId: Number(studioId),
           startDateTime: slot.startDateTime,
           trainerRequired: !!form.trainer,
-          note: `Gebucht über FINN-Chat (Oktober-Aktion) · ${interest.interestNote()}`,
+          note: `Gebucht über FINN-Chat (5-€-Aktion) · ${interest.interestNote()}`,
           leadCustomer: {
             firstname: form.firstname.trim(),
             lastname: form.lastname.trim(),

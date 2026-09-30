@@ -12,7 +12,7 @@
   "suggestionsLabel": "Beliebte Fragen",
   "suggestions": [
     {
-      "text": "Was kostet es nach den 12 Wochen?"
+      "text": "Was kostet es ab Januar?"
     },
     {
       "text": "Wie voll ist es gerade im Studio?"
@@ -68,7 +68,7 @@
   "studioId": 1210005460,
   "bookingWindowDays": 21,
   "crmFormId": "d1c1e2bf-64b0-48aa-814a-5dd80185dfb8",
-  "crmSource": "FINN-Chat (Oktober-Aktion)",
+  "crmSource": "FINN-Chat (5-€-Aktion)",
   "launcherLabel": "Frag FINN",
   "closeLabel": "Chat schließen",
   "nudgeCloseLabel": "Hinweis schließen",
@@ -78,7 +78,7 @@
     {
       "mode": "time",
       "value": "35",
-      "text": "Hi, ich bin FINN! Wusstest du: Jeder Tag früher spart dir rund 1 €. Fragen? Ich helfe dir gern.",
+      "text": "Hi, ich bin FINN! Wusstest du: Jeder Tag früher spart dir bis zu 1 €. Fragen? Ich helfe dir gern.",
       "ask": "Wie viel spare ich, wenn ich heute starte?",
       "book": false
     },
@@ -134,7 +134,7 @@
   "aiNudgePrompt": "Schreibe EINEN kurzen, freundlichen Hinweis (max. 2 Sätze, Du-Form, keine Preise, keine Links, kein Gruß) für einen Website-Besucher, der sich für Folgendes interessiert: {profil}. Lade ihn ein, ein kostenloses Probetraining zu buchen oder dir eine Frage zu stellen. Antworte nur mit dem Hinweistext.",
   "smartNudges": {
     "price": {
-      "text": "Jeder Tag Warten kostet dich rund 1 € Ersparnis. Soll ich dir direkt einen Probetraining-Termin zeigen?",
+      "text": "Jeder Tag Warten kostet dich bis zu 1 € Ersparnis. Soll ich dir direkt einen Probetraining-Termin zeigen?",
       "ask": "",
       "book": true
     },

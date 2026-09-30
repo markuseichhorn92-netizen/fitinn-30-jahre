@@ -21,7 +21,7 @@ export default function FitInnBooking(props: any) {
       .then((r) => r.json()).then((d: any) => { const now = Date.now(); const arr = (Array.isArray(d.slots) ? d.slots : []).filter((s: Slot) => new Date(s.startDateTime).getTime() > now); setSlots(arr.slice(0, 4)); setState(arr.length ? 'ok' : 'empty'); })
       .catch(() => setState('empty'));
   }, [apiBaseUrl, studioId, bookingWindowDays]);
-  const telHref = 'tel:' + String(contactPhone).replace(/\s/g, '');
+  const telHref = 'tel:+49' + String(contactPhone).replace(/\s/g, '').replace(/^0/, '');
   return (
     <section id="anmeldung" className="fi-cta" style={{ background: bgColor }}>
       {bgDeco ? <Deco kind={String(bgDeco)} className="fi-cta__bgword" /> : null}
