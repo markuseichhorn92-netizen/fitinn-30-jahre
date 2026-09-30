@@ -11,7 +11,7 @@
 .badge { color: var(--color-kit-key1, #0F7D96); background: #0F7D9614; box-shadow: inset 0 0 0 1px #0F7D9640; }
 .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 .photo { border-radius: 22px; overflow: hidden; }
-.img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
 .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
 .tile {
   position: relative;
