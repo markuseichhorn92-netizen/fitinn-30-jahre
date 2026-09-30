@@ -48,11 +48,17 @@ export default function Fragen(props: any) {
   const openQuestions = list.filter((f) => !asked.has(f.question)).map((f) => f.question);
   const followUps = (exclude: string) => openQuestions.filter((q) => q !== exclude).slice(0, 2);
 
+  const [expanded, setExpanded] = useState<number | null>(null);
+  useEffect(() => { setExpanded(null); }, [entries.length]);
+  // Neueste Antwort ins Bild holen
   useEffect(() => {
-    if (!entries.length || !panelRef.current) return;
-    const last = panelRef.current.lastElementChild as HTMLElement | null;
+    const el = panelRef.current;
+    if (!el || !entries.length) return;
+    const last = el.lastElementChild as HTMLElement | null;
     if (last && typeof last.scrollIntoView === 'function') last.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }, [entries.length]);
+  const MAX_OLD = 3;
+  const visible = entries.slice(-(MAX_OLD + 1));
 
   const askVerified = (q: string) => {
     const f = list.find((x) => x.question === q);
@@ -115,13 +121,23 @@ export default function Fragen(props: any) {
 
         <div className={styles.panel} ref={panelRef} aria-live="polite">
           <AnimatePresence initial={false}>
-            {entries.map((e, i) => (
+            {visible.map((e, vi) => {
+              const i = entries.length - visible.length + vi;
+              const isLast = i === entries.length - 1;
+              const age = entries.length - 1 - i; // 1 = direkt davor
+              const compact = !isLast && expanded !== i;
+              return (
               <motion.article
                 key={i + e.q}
-                className={`${styles.card} ${e.kind === 'ai' ? styles.cardAi : ''}`}
+                className={`${styles.card} ${e.kind === 'ai' ? styles.cardAi : ''} ${compact ? styles.cardOld : ''} ${compact ? styles['age' + Math.min(age, 3)] : ''}`}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease }}
+                onClick={compact ? () => setExpanded(i) : undefined}
+                role={compact ? 'button' : undefined}
+                tabIndex={compact ? 0 : undefined}
+                onKeyDown={compact ? (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setExpanded(i); } } : undefined}
+                aria-expanded={!isLast ? !compact : undefined}
               >
                 <p className={styles.q}>{e.q}</p>
                 <div className={styles.aRow}>
@@ -134,7 +150,7 @@ export default function Fragen(props: any) {
                       <span className={`${styles.tag} ${e.kind === 'ai' ? styles.tagAi : styles.tagOk}`}>{e.kind === 'ai' ? aiLabel : verifiedLabel}</span>
                     </span>
                     <p className={styles.a}>{renderText(e.a)}</p>
-                    {i === entries.length - 1 ? (
+                    {isLast ? (
                       <div className={styles.follow}>
                         <span className={styles.followLabel}>{followLabel}</span>
                         <div className={styles.followRow}>
@@ -148,7 +164,8 @@ export default function Fragen(props: any) {
                   </div>
                 </div>
               </motion.article>
-            ))}
+              );
+            })}
           </AnimatePresence>
           {busy ? (
             <div className={`${styles.card} ${styles.cardAi}`}>
