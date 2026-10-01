@@ -1,0 +1,294 @@
+{
+  "abnehmen": {
+    "label": "Abnehmen",
+    "presetGoal": "abnehmen",
+    "deco": "euro",
+    "meta": {
+      "title": "Abnehmen mit Plan in Trier | 5 € pro Woche im Fit-Inn",
+      "description": "Körperanalyse, Trainingsplan aus Kraft und Ausdauer und Trainer, die dich kennen. Bis Silvester für 5 € pro Woche im Fit-Inn Trier. Jetzt kostenloses Probetraining buchen."
+    },
+    "hero": {
+      "eyebrowSpar": "Abnehmen in Trier · Fit-Inn seit 1996",
+      "hlTopSpar": "Abnehmen mit Plan.",
+      "hlAccentSpar": "Für 5 € pro Woche.",
+      "sublineSpar": "Kein Rätselraten, keine Crash-Diät: Du startest mit einer Körperanalyse, bekommst einen Plan aus Kraft und Ausdauer und Trainer an deiner Seite – bis Silvester für 5 € pro Woche."
+    },
+    "section": {
+      "problemKicker": "Kennst du das?",
+      "problemTitle": "Viel versucht. Wenig ist geblieben.",
+      "problemText": "Abnehmen scheitert selten am Willen – meistens fehlt ein Plan, der zu deinem Alltag passt.",
+      "pains": [
+        "Diäten, die nach ein paar Wochen wieder vorbei sind",
+        "Du weißt nicht, welches Training dich wirklich weiterbringt",
+        "Allein ins Studio? Die Motivation ist schnell wieder weg"
+      ],
+      "solutionKicker": "Unsere Lösung",
+      "solutionTitle": "So gehen wir es mit dir an",
+      "solutions": [
+        {
+          "tag": "Check-up",
+          "title": "Wissen, wo du startest",
+          "text": "Gesundheits-Check-up mit Körperanalyse: Du siehst, wo du stehst – und kannst Veränderungen später vergleichen."
+        },
+        {
+          "tag": "Kraft + Cardio",
+          "title": "Ein Plan, der beides verbindet",
+          "text": "Biostrength für die Kraft, Cardio-Geräte mit Bildschirm für die Ausdauer. Dein Trainingsplan kombiniert beides."
+        },
+        {
+          "tag": "Ernährung",
+          "title": "Essen gehört dazu",
+          "text": "Erste Tipps bekommst du von deinem Trainer. Für die Ernährung arbeiten wir außerdem mit unserem Partner Upfit zusammen."
+        },
+        {
+          "tag": "App",
+          "title": "Dein Plan immer dabei",
+          "text": "In der TechnoGym App siehst du deinen Plan und jede Einheit – so behältst du den Überblick."
+        }
+      ],
+      "note": "Wie schnell sich etwas verändert, ist bei jedem anders. Wir versprechen dir keine Kilos – aber einen Plan, Begleitung und ein Studio, in dem du gern trainierst.",
+      "medicalNote": "",
+      "ctaLabel": "Gratis Probetraining buchen",
+      "ctaHint": "Kostenlos, unverbindlich, rund 90 Minuten – mit oder ohne Trainer."
+    },
+    "bereicheOrder": [
+      "Cardio",
+      "Biostrength",
+      "Biocircuit",
+      "Powerbereich"
+    ],
+    "fragen": [
+      {
+        "question": "Wie oft sollte ich zum Abnehmen trainieren?",
+        "answer": "Für den Start sind zwei bis drei Einheiten pro Woche ein guter Rhythmus. Beim Probetraining schaut dein Trainer mit dir, was realistisch in deinen Alltag passt."
+      },
+      {
+        "question": "Gibt es Unterstützung bei der Ernährung?",
+        "answer": "Ja. Erste Tipps bekommst du direkt von deinem Trainer. Für die Ernährung arbeiten wir außerdem mit unserem Partner Upfit zusammen – Details dazu bekommst du vor Ort."
+      },
+      {
+        "question": "Muss ich schon fit sein, um anzufangen?",
+        "answer": "Nein. Du bekommst eine Einweisung an jedem Gerät und startest da, wo du gerade stehst. Beim Probetraining lernst du alles in Ruhe kennen."
+      }
+    ]
+  },
+  "ruecken": {
+    "label": "Starker Rücken",
+    "presetGoal": "ruecken",
+    "deco": "check",
+    "meta": {
+      "title": "Rückentraining in Trier | Starker Rücken für 5 € pro Woche",
+      "description": "Geführtes Training für Rumpf und Rücken an TechnoGym-Geräten, mit Einweisung an jedem Gerät. Bis Silvester für 5 € pro Woche im Fit-Inn Trier. Kostenloses Probetraining buchen."
+    },
+    "hero": {
+      "eyebrowSpar": "Rückentraining in Trier · Fit-Inn seit 1996",
+      "hlTopSpar": "Stark im Rücken.",
+      "hlAccentSpar": "Für 5 € pro Woche.",
+      "sublineSpar": "Viel Sitzen, wenig Bewegung? Im geführten Biocircuit trainierst du Rumpf und Rücken kontrolliert und Schritt für Schritt – mit Einweisung an jedem Gerät, bis Silvester für 5 € pro Woche."
+    },
+    "section": {
+      "problemKicker": "Kennst du das?",
+      "problemTitle": "Dein Rücken meldet sich öfter?",
+      "problemText": "Wer viel sitzt, merkt es irgendwann. Die gute Nachricht: Eine kräftige Rumpfmuskulatur kannst du gezielt trainieren.",
+      "pains": [
+        "Den ganzen Tag sitzen – im Büro, im Auto, auf dem Sofa",
+        "Unsicher, welche Übungen dir guttun und welche nicht",
+        "Die Sorge, beim Training etwas falsch zu machen"
+      ],
+      "solutionKicker": "Unsere Lösung",
+      "solutionTitle": "So gehen wir es mit dir an",
+      "solutions": [
+        {
+          "tag": "Biocircuit",
+          "title": "Geführt statt geraten",
+          "text": "Im Gerätezirkel stellen sich die Geräte automatisch auf dich ein und führen dich durch die Bewegung. Ein Durchgang dauert rund 30 Minuten."
+        },
+        {
+          "tag": "Biostrength",
+          "title": "Rumpf und Haltung stärken",
+          "text": "Das Gerät führt dich durch jede Übung – du konzentrierst dich auf eine saubere Ausführung."
+        },
+        {
+          "tag": "Einweisung",
+          "title": "Jemand zeigt dir, wie es geht",
+          "text": "An jedem Gerät bekommst du eine persönliche Einweisung. Sag deinem Trainer, worauf er achten soll."
+        },
+        {
+          "tag": "Check-up",
+          "title": "Wissen, wo du startest",
+          "text": "Der Gesundheits-Check-up mit Körperanalyse zeigt dir deinen Ausgangspunkt."
+        }
+      ],
+      "note": "Wir versprechen keine Beschwerdefreiheit – jeder Rücken ist anders. Was wir dir bieten: geführtes Training, Trainer, die hinschauen, und einen Plan, den du durchhältst.",
+      "medicalNote": "Training ersetzt keine ärztliche Behandlung. Bei akuten Beschwerden, nach Verletzungen oder Operationen kläre dein Training bitte vorher mit deinem Arzt oder Physiotherapeuten ab.",
+      "ctaLabel": "Gratis Probetraining buchen",
+      "ctaHint": "Kostenlos, unverbindlich, rund 90 Minuten – mit oder ohne Trainer."
+    },
+    "bereicheOrder": [
+      "Biocircuit",
+      "Biostrength",
+      "Cardio",
+      "Powerbereich"
+    ],
+    "fragen": [
+      {
+        "question": "Ich habe Rückenbeschwerden – kann ich trotzdem trainieren?",
+        "answer": "Das hängt von deiner Situation ab. Bei akuten Beschwerden, nach Verletzungen oder Operationen kläre das Training bitte vorher mit deinem Arzt oder Physiotherapeuten ab. Beim Probetraining sagst du deinem Trainer einfach, worauf er achten soll."
+      },
+      {
+        "question": "Was ist der Biocircuit?",
+        "answer": "Ein geführter Gerätezirkel von TechnoGym: Die Geräte stellen sich automatisch auf dich ein und führen dich durch die Übungen. Ein Durchgang dauert rund 30 Minuten – ideal für den Einstieg und wenig Zeit."
+      },
+      {
+        "question": "Kann ich nach der Physiotherapie bei euch weitertrainieren?",
+        "answer": "Sprich das am besten mit deinem Physiotherapeuten ab. Beim Probetraining zeigt dir dein Trainer, welche Geräte und Übungen infrage kommen."
+      }
+    ]
+  },
+  "neustart": {
+    "label": "Neustart",
+    "presetGoal": "wiedereinstieg",
+    "deco": "check",
+    "meta": {
+      "title": "Wieder mit Sport anfangen in Trier | Neustart für 5 € pro Woche",
+      "description": "Lange Pause oder noch nie im Studio? Einweisung an jedem Gerät, geführter Einstieg und Trainer, die dich kennen. Bis Silvester für 5 € pro Woche im Fit-Inn Trier."
+    },
+    "hero": {
+      "eyebrowSpar": "Neustart in Trier · Fit-Inn seit 1996",
+      "hlTopSpar": "Neu anfangen.",
+      "hlAccentSpar": "Für 5 € pro Woche.",
+      "sublineSpar": "Lange raus oder noch nie im Studio? Bei uns zeigt dir jemand jedes Gerät, und du startest genau da, wo du gerade stehst – bis Silvester für 5 € pro Woche."
+    },
+    "section": {
+      "problemKicker": "Kennst du das?",
+      "problemTitle": "Der erste Schritt ist der schwerste.",
+      "problemText": "Viele wollen wieder anfangen – und zögern. Nicht wegen des Trainings, sondern wegen allem drumherum.",
+      "pains": [
+        "Lange Pause – und keine Ahnung, wo du anfangen sollst",
+        "Die Sorge, im Studio fehl am Platz zu sein",
+        "Zu viele Geräte, zu viele Fragen"
+      ],
+      "solutionKicker": "Unsere Lösung",
+      "solutionTitle": "So machen wir dir den Einstieg leicht",
+      "solutions": [
+        {
+          "tag": "Einweisung",
+          "title": "Jedes Gerät erklärt",
+          "text": "Du bekommst an jedem Gerät eine persönliche Einweisung – von Menschen, die dich beim Namen kennen."
+        },
+        {
+          "tag": "Biocircuit",
+          "title": "Einfach mitmachen",
+          "text": "Der geführte 30-Minuten-Zirkel stellt sich automatisch auf dich ein. Du musst dir nichts merken."
+        },
+        {
+          "tag": "Trainingsplan",
+          "title": "Ein Plan für deinen Alltag",
+          "text": "Individuell erstellt und digital gespeichert – damit du weißt, was du heute machst."
+        },
+        {
+          "tag": "Familiengeführt",
+          "title": "Kein anonymes Studio",
+          "text": "Seit 1996 familiengeführt in Trier-Feyen. Bei uns fragt man nach, wie es dir geht."
+        }
+      ],
+      "note": "Ob du nach zehn Jahren Pause kommst oder zum ersten Mal: Du bekommst Zeit, Erklärungen und keinen Druck. Den Rest entscheidest du.",
+      "medicalNote": "",
+      "ctaLabel": "Gratis Probetraining buchen",
+      "ctaHint": "Kostenlos, unverbindlich, rund 90 Minuten – mit oder ohne Trainer."
+    },
+    "bereicheOrder": [
+      "Biocircuit",
+      "Biostrength",
+      "Cardio",
+      "Powerbereich"
+    ],
+    "fragen": [
+      {
+        "question": "Was, wenn ich mich mit den Geräten nicht auskenne?",
+        "answer": "Musst du nicht. Du bekommst an jedem Gerät eine persönliche Einweisung, und im Biocircuit stellen sich die Geräte automatisch auf dich ein."
+      },
+      {
+        "question": "Muss ich nach dem Probetraining direkt abschließen?",
+        "answer": "Nein. Das Probetraining ist kostenlos und unverbindlich. Du entscheidest danach ganz in Ruhe – den 5-€-Deal kannst du, wenn du willst, direkt vor Ort abschließen."
+      },
+      {
+        "question": "Kann ich das Probetraining mit Trainer machen?",
+        "answer": "Ja, du kannst wählen: mit oder ohne Trainer. Für den Wiedereinstieg empfehlen wir die Variante mit Trainer."
+      }
+    ]
+  },
+  "fit-ab-50": {
+    "label": "Fit ab 50",
+    "presetGoal": "",
+    "deco": "check",
+    "meta": {
+      "title": "Fitnessstudio ab 50 in Trier | Fit bleiben für 5 € pro Woche",
+      "description": "Kraft erhalten, beweglich bleiben, sicher trainieren: geführte TechnoGym-Geräte, Gesundheits-Check-up und Trainer, die dich kennen. Bis Silvester für 5 € pro Woche im Fit-Inn Trier."
+    },
+    "hero": {
+      "eyebrowSpar": "Fit ab 50 in Trier · Fit-Inn seit 1996",
+      "hlTopSpar": "Fit bleiben ab 50.",
+      "hlAccentSpar": "Für 5 € pro Woche.",
+      "sublineSpar": "Kraft erhalten, beweglich bleiben, sicher trainieren: an Geräten, die sich automatisch auf dich einstellen, und mit Trainern, die dich kennen – bis Silvester für 5 € pro Woche."
+    },
+    "section": {
+      "problemKicker": "Kennst du das?",
+      "problemTitle": "Manches fällt schwerer als früher?",
+      "problemText": "Mit den Jahren lohnt sich Krafttraining umso mehr – wenn es zu dir passt und jemand dabei ist.",
+      "pains": [
+        "Treppen, Gartenarbeit, Einkäufe tragen – manches kostet mehr Kraft",
+        "Unsicher, wie viel Belastung dir guttut",
+        "Keine Lust auf ein Studio, in dem dich niemand kennt"
+      ],
+      "solutionKicker": "Unsere Lösung",
+      "solutionTitle": "So gehen wir es mit dir an",
+      "solutions": [
+        {
+          "tag": "Check-up",
+          "title": "Erst schauen, dann trainieren",
+          "text": "Gesundheits-Check-up mit Körperanalyse – damit du und dein Trainer wissen, wo du startest."
+        },
+        {
+          "tag": "Biocircuit",
+          "title": "Geräte, die sich auf dich einstellen",
+          "text": "Im geführten Zirkel stellen sich die Geräte automatisch ein und führen dich durch die Bewegung."
+        },
+        {
+          "tag": "Biostrength",
+          "title": "Kraft erhalten",
+          "text": "Du wählst dein Ziel, das Gerät führt dich durch die Übung – in deinem Tempo."
+        },
+        {
+          "tag": "Familiengeführt",
+          "title": "Menschen, die dich kennen",
+          "text": "Seit 1996 familiengeführt. Einweisung an jedem Gerät und Trainer, die nachfragen."
+        }
+      ],
+      "note": "Wir versprechen keine Wunder – aber ein Training, das zu dir passt, und Menschen, die sich Zeit für dich nehmen.",
+      "medicalNote": "Training ersetzt keine ärztliche Behandlung. Bei akuten Beschwerden, nach Verletzungen oder Operationen kläre dein Training bitte vorher mit deinem Arzt oder Physiotherapeuten ab.",
+      "ctaLabel": "Gratis Probetraining buchen",
+      "ctaHint": "Kostenlos, unverbindlich, rund 90 Minuten – mit oder ohne Trainer."
+    },
+    "bereicheOrder": [
+      "Biocircuit",
+      "Biostrength",
+      "Cardio",
+      "Powerbereich"
+    ],
+    "fragen": [
+      {
+        "question": "Bin ich mit über 50 nicht zu alt fürs Studio?",
+        "answer": "Nein, ein Höchstalter gibt es nicht. Du bekommst eine Einweisung an jedem Gerät und startest da, wo du gerade stehst."
+      },
+      {
+        "question": "Sollte ich vorher zum Arzt gehen?",
+        "answer": "Wenn du Vorerkrankungen hast, Medikamente nimmst oder lange keinen Sport gemacht hast, sprich das Training am besten vorher mit deinem Arzt ab. Beim Probetraining sagst du deinem Trainer, worauf er achten soll."
+      },
+      {
+        "question": "Kann ich mit meinem Partner oder meiner Partnerin kommen?",
+        "answer": "Ja, gern! Bring einfach mit, wer dich begleiten möchte – am besten sagst du uns vorher kurz Bescheid."
+      }
+    ]
+  }
+}

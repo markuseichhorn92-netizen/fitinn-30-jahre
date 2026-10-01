@@ -55,8 +55,11 @@ export default function Wizard(props: any) {
     submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
     finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt, confirmHref,
     nameTitle, nameText, addressTitle, addressText, confirmTitle, confirmText, finnName, finnAddress, finnConfirm,
-    validationName, validationContact, validationAddress, validationConfirm,
+    validationName, validationContact, validationAddress, validationConfirm, presetGoal,
   } = props;
+  // Themenseite: Ziel steht schon fest → Ziel-Schritt entfällt
+  const preset = useMemo(() => (presetGoal && Array.isArray(goals) ? goals.find((g: any) => g.key === presetGoal) || null : null), [presetGoal, goals]);
+  const STEPS: Step[] = useMemo(() => (preset ? ORDER.filter((s) => s !== 'goal') : ORDER), [preset]);
   const [doneLine, setDoneLine] = useState('');
 
   const [open, setOpen] = useState(false);
@@ -80,7 +83,7 @@ export default function Wizard(props: any) {
   const [failed, setFailed] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const reset = () => { setStep('slot'); setDay(null); setSlot(null); setShowAllDays(false); setGoal(null); setExp(null); setFocus([]); setTrainer(true); setFinnLine(''); setForm({ ...EMPTY }); setHint(''); setHintOk(false); setInvalid(false); setFailed(false); };
+  const reset = () => { setStep('slot'); setDay(null); setSlot(null); setShowAllDays(false); setGoal(preset); setExp(null); setFocus([]); setTrainer(true); setFinnLine(''); setForm({ ...EMPTY }); setHint(''); setHintOk(false); setInvalid(false); setFailed(false); };
 
   // Öffnen per Event, Termine laden
   useEffect(() => {
@@ -99,7 +102,7 @@ export default function Wizard(props: any) {
     };
     window.addEventListener('fi:book', onOpen as any);
     return () => window.removeEventListener('fi:book', onOpen as any);
-  }, [apiBaseUrl, studioId, bookingWindowDays]);
+  }, [apiBaseUrl, studioId, bookingWindowDays, preset]);
 
   // Seite hinter dem Fenster einfrieren, Esc schließt
   useEffect(() => {
@@ -120,10 +123,10 @@ export default function Wizard(props: any) {
     return ['Vormittags', 'Nachmittags', 'Abends'].filter((k) => g[k]).map((k) => ({ label: k, items: g[k] }));
   }, [day, slots]);
   useEffect(() => { if (open && step === 'slot' && !day && days.length) setDay(days[0]); }, [open, step, day, days]);
-  const idx = ORDER.indexOf(step === 'done' ? 'hint' : step);
+  const idx = STEPS.indexOf(step === 'done' ? 'hint' : step);
   const goTo = (s: Step) => { setInvalid(false); setFailed(false); setStep(s); };
-  const next = () => goTo(ORDER[Math.min(idx + 1, ORDER.length - 1)]);
-  const back = () => goTo(ORDER[Math.max(idx - 1, 0)]);
+  const next = () => goTo(STEPS[Math.min(idx + 1, STEPS.length - 1)]);
+  const back = () => goTo(STEPS[Math.max(idx - 1, 0)]);
 
   // FINN-Satz nach Ziel + Erfahrung (Rückfall: feste Sätze aus dem Inhalt)
   useEffect(() => {
@@ -161,7 +164,7 @@ export default function Wizard(props: any) {
   }, [goal, exp, focus]);
   const stepLine = (): string => {
     if (step === 'goal') return slot ? fill(finnSlot, { termin: terminStr }) : '';
-    if (step === 'experience') return goal ? goal.finn : '';
+    if (step === 'experience') return goal ? (preset && slot ? `${fill(finnSlot, { termin: terminStr })} ${goal.finn}` : goal.finn) : '';
     if (step === 'focus') return goal ? fill(finnFocus, { ziel: goal.label }) : (exp ? exp.finn : '');
     if (step === 'name') return finnLine || finnName;
     if (step === 'contact') return fill(finnContact, { vorname });
@@ -225,7 +228,7 @@ export default function Wizard(props: any) {
   };
 
   if (!open) return null;
-  const total = ORDER.length;
+  const total = STEPS.length;
   const stepTitle = step === 'done' ? successTitle : steps[step];
 
   return (
