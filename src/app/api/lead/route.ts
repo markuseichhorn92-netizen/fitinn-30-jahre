@@ -31,6 +31,8 @@ export async function POST(req: Request) {
   const from = process.env.LEAD_EMAIL_FROM;
   if (!key || !to || !from) return NextResponse.json({ ok: true, sent: false });
 
+  // kind 'rescue' = Magicline-Buchung im Formular ist fehlgeschlagen → Rückruf nötig (siehe 11-wizard)
+  const rescue = body.kind === 'rescue';
   const name = fmt('name', data.name);
   const rows = ['name', 'termin', 'trainer', 'email', 'phone', 'gender', 'dateOfBirth', 'address', 'note', 'marketing', 'quelle']
     .map((k) => `<tr><td style="padding:4px 12px 4px 0;color:#555">${esc(k === 'name' ? 'Name' : k === 'address' ? 'Adresse' : LABELS[k] || k)}</td><td style="padding:4px 0"><b>${esc(fmt(k, data[k]))}</b></td></tr>`)
@@ -42,8 +44,12 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       from,
       to: to.split(',').map((s) => s.trim()).filter(Boolean),
-      subject: `Neues Probetraining (Aktion): ${name} – ${fmt('termin', data.termin)}`,
-      html: `<p>Neue Probetraining-Buchung über die Aktionsseite (bereits in Magicline eingetragen):</p><table>${rows}</table>`,
+      subject: rescue
+        ? `⚠️ Probetraining NICHT eingetragen – bitte zurückrufen: ${name} – ${fmt('termin', data.termin)}`
+        : `Neues Probetraining (Aktion): ${name} – ${fmt('termin', data.termin)}`,
+      html: rescue
+        ? `<p><b>Die automatische Buchung in Magicline ist fehlgeschlagen.</b> Die Person hat das Formular komplett ausgefüllt und den Wunschtermin unten gewählt. Bitte heute zurückrufen, Termin festmachen und in Magicline eintragen (Lead anlegen).</p><table>${rows}</table>`
+        : `<p>Neue Probetraining-Buchung über die Aktionsseite (bereits in Magicline eingetragen):</p><table>${rows}</table>`,
     }),
   });
   return NextResponse.json({ ok: r.ok, sent: r.ok }, { status: r.ok ? 200 : 502 });

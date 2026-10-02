@@ -2,6 +2,7 @@
 // Abschnitte und Aktionen erhöhen Punkte je Thema; daraus wird der passende Hinweis gewählt.
 import { track } from '@vercel/analytics';
 import { hasConsent } from './consent';
+import { funnel, funnelReset } from './funnel';
 
 export type Topic = 'price' | 'fit' | 'geraete' | 'hours' | 'default';
 type Score = Record<Exclude<Topic, 'default'>, number>;
@@ -85,4 +86,8 @@ export function interestNote(): string {
 
 export function reportShown(topic: string, source: string) { send('nudge_shown', { topic, source }); }
 export function reportClick(topic: string) { send('nudge_click', { topic }); }
-export function reportBooking(stage: 'start' | 'success', source: string) { send('booking_' + stage, { source, topic: topTopic() }); }
+export function reportBooking(stage: 'start' | 'success', source: string) {
+  // Anonymer Trichter läuft immer (ohne Profil/Thema), das ausführliche Event nur mit Einwilligung.
+  if (stage === 'start') { funnelReset(); funnel('open', source); } else funnel('ok', source);
+  send('booking_' + stage, { source, topic: topTopic() });
+}

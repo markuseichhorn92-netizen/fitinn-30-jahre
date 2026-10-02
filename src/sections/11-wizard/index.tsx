@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as interest from '@/lib/interest';
 import { crm } from '@/lib/onepage-kit';
+import { funnel } from '@/lib/funnel';
 import styles from './styles.module.css';
 
 // Vollbild-Buchungsstrecke für das Probetraining. Öffnen per window-Event:
@@ -52,7 +53,7 @@ export default function Wizard(props: any) {
     contactTitle, contactText, firstNameLabel, lastNameLabel, genderLabel, femaleLabel, maleLabel, dobLabel, emailLabel, phoneLabel,
     streetLabel, houseNoLabel, zipLabel, cityLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
     hintTitle, hintText, hintPlaceholder, hintConsent, hintThanks,
-    submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
+    submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource, rescueText,
     finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt, confirmHref,
     nameTitle, nameText, addressTitle, addressText, confirmTitle, confirmText, finnName, finnAddress, finnConfirm,
     validationName, validationContact, validationAddress, validationConfirm, presetGoal,
@@ -81,9 +82,13 @@ export default function Wizard(props: any) {
   const [invalid, setInvalid] = useState(false);
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [rescued, setRescued] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const reset = () => { setStep('slot'); setDay(null); setSlot(null); setShowAllDays(false); setGoal(preset); setExp(null); setFocus([]); setTrainer(true); setFinnLine(''); setForm({ ...EMPTY }); setHint(''); setHintOk(false); setInvalid(false); setFailed(false); };
+  // Anonymer Trichter: welcher Formularschritt wurde erreicht (je Durchgang einmal)
+  useEffect(() => { if (open && step !== 'done') funnel(`s_${step}`, source); }, [open, step, source]);
+
+  const reset = () => { setRescued(false); setStep('slot'); setDay(null); setSlot(null); setShowAllDays(false); setGoal(preset); setExp(null); setFocus([]); setTrainer(true); setFinnLine(''); setForm({ ...EMPTY }); setHint(''); setHintOk(false); setInvalid(false); setFailed(false); };
 
   // Öffnen per Event, Termine laden
   useEffect(() => {
@@ -124,7 +129,7 @@ export default function Wizard(props: any) {
   }, [day, slots]);
   useEffect(() => { if (open && step === 'slot' && !day && days.length) setDay(days[0]); }, [open, step, day, days]);
   const idx = STEPS.indexOf(step === 'done' ? 'hint' : step);
-  const goTo = (s: Step) => { setInvalid(false); setFailed(false); setStep(s); };
+  const goTo = (s: Step) => { setInvalid(false); setFailed(false); setRescued(false); setStep(s); };
   const next = () => goTo(STEPS[Math.min(idx + 1, STEPS.length - 1)]);
   const back = () => goTo(STEPS[Math.max(idx - 1, 0)]);
 
@@ -201,7 +206,8 @@ export default function Wizard(props: any) {
       interest.interestNote(),
       hintText ? `Hinweis für Trainer: ${hintText}` : '',
     ].filter(Boolean).join(' · ');
-    setSending(true); setFailed(false);
+    setSending(true); setFailed(false); setRescued(false);
+    funnel('submit', source);
     try {
       const r = await fetch(`${apiBaseUrl}/trialsession/book`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
         studioId: Number(studioId), startDateTime: slot.startDateTime, trainerRequired: trainer, note,
@@ -224,7 +230,26 @@ export default function Wizard(props: any) {
       } catch { /* privater Modus */ }
       if (saved && confirmHref) { window.location.assign(String(confirmHref)); return; }
       setStep('done');
-    } catch { setFailed(true); } finally { setSending(false); }
+    } catch {
+      // Magicline hat nicht gebucht (Termin weg, Verbindung, abgelehnte Angabe): Anfrage trotzdem ans Team,
+      // damit niemand verloren geht. Nur Kontakt + Wunschtermin + Einstieg – der Trainer-Hinweis bleibt draußen.
+      funnel('fail', source);
+      setFailed(true);
+      try {
+        const r = await fetch('/api/lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+          body: JSON.stringify({ kind: 'rescue', data: {
+            name: { firstName: form.firstname.trim(), lastName: form.lastname.trim() },
+            email: form.email.trim(), phone: form.phone.trim(),
+            termin: fmtFull(slot.startDateTime), trainer: trainer ? 'Mit Trainer' : 'Ohne Trainer',
+            marketing: form.marketing, quelle: `${source} · ${typeof window !== 'undefined' ? window.location.pathname : ''}`,
+            note: [goal?.label, exp?.label].filter(Boolean).join(' / '),
+          } }),
+        });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok && j && j.sent) { setRescued(true); funnel('rescue', source); }
+      } catch { /* bleibt bei der Fehlermeldung mit Telefonnummer */ }
+    } finally { setSending(false); }
   };
 
   if (!open) return null;
@@ -427,7 +452,14 @@ export default function Wizard(props: any) {
                   <label className={styles.check}><input type="checkbox" checked={hintOk} onChange={(e) => setHintOk(e.target.checked)} /><span>{hintConsent}</span></label>
                 ) : null}
                 {hint.trim() && hintOk ? <p className={styles.thanks}>{hintThanks}</p> : null}
-                {failed ? <p className={styles.alert} role="alert">{bookErrorText} <a href={phoneHref}>{phoneDisplay}</a></p> : null}
+                {failed && rescued ? (
+                  <p className={styles.rescue} role="status">{fill(rescueText || 'Danke, {vorname}! Deine Anfrage ist bei uns angekommen. Wir melden uns heute noch, um deinen Termin festzumachen. Lieber selbst anrufen?', { vorname: form.firstname.trim() })} <a href={phoneHref}>{phoneDisplay}</a></p>
+                ) : null}
+                {failed && !rescued ? (
+                  <p className={styles.alert} role="alert">{bookErrorText} <a href={phoneHref}>{phoneDisplay}</a>{' '}
+                    <button type="button" className={styles.inlineLink} onClick={() => goTo('slot')}>Anderen Termin wählen</button>
+                  </p>
+                ) : null}
               </>
             ) : null}
 
@@ -443,7 +475,7 @@ export default function Wizard(props: any) {
         </AnimatePresence>
 
         <div className={styles.foot}>
-          {step === 'done' ? (
+          {step === 'done' || rescued ? (
             <button type="button" className={styles.primary} onClick={() => setOpen(false)}>{successClose}</button>
           ) : (
             <>

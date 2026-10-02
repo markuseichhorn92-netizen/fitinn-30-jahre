@@ -137,6 +137,7 @@
   "submitLabel": "Probetraining verbindlich buchen",
   "sendingLabel": "Wird gebucht …",
   "bookErrorText": "Die Buchung hat leider nicht geklappt. Versuch es bitte nochmal oder ruf uns an:",
+  "rescueText": "Danke, {vorname}! Der Termin ließ sich gerade nicht automatisch eintragen – deine Anfrage ist aber bei uns angekommen. Wir melden uns heute noch bei dir und machen den Termin fest. Lieber selbst anrufen?",
   "phoneDisplay": "0651 493 688 19",
   "phoneHref": "tel:+4965149368819",
   "successTitle": "Termin gebucht!",

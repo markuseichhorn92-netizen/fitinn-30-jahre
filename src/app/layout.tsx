@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import ConsentBanner from '@/components/ConsentBanner';
+import FunnelView from '@/components/FunnelView';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="de" className={`${inter.variable} ${grotesk.variable}`}>
       <body>
         {children}
+        <FunnelView />
         <ConsentBanner />
       </body>
     </html>
