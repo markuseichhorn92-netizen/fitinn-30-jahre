@@ -149,6 +149,4 @@
   .slotGrid .time { min-height: 44px; }
 }
 @media (max-width: 899px) { .slotGrid, .slotDays, .slotTimes { display: contents; } }
-.rescue { margin: 0; padding: 12px 14px; border-radius: 12px; background: #3BC9E01f; box-shadow: inset 0 0 0 1px #3BC9E055; font-size: 15px; line-height: 1.5; }
-.rescue a { color: inherit; font-weight: 700; }
 .inlineLink { display: inline; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }

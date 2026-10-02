@@ -4,11 +4,11 @@
 //
 // Schritte: view (Seite geladen) · open (Buchung geöffnet) · s_<schritt> (Formularschritt erreicht:
 // slot, goal, experience, focus, name, contact, address, confirm, hint) · submit (Absenden gedrückt) ·
-// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen) · rescue (Ersatz-Anfrage ans Team zugestellt).
+// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen).
 import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
-const STEPS = /^(view|open|submit|ok|fail|rescue|s_(slot|goal|experience|focus|name|contact|address|confirm|hint))$/;
+const STEPS = /^(view|open|submit|ok|fail|s_(slot|goal|experience|focus|name|contact|address|confirm|hint))$/;
 const PAGE = /^\/[a-z0-9\-/]{0,60}$/;
 const SRC = /^[a-z0-9-]{0,24}$/;
 
