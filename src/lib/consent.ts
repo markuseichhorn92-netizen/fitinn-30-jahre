@@ -1,7 +1,9 @@
 // Einwilligungen (TTDSG § 25 / DSGVO). Gespeichert wird nur die Entscheidung selbst (technisch notwendig).
 // stats  = Vercel Analytics + Speed Insights, anonyme Seiten-Events, Interessen-Hinweise (Personalisierung)
 // media  = externe Inhalte (Google Maps)
-export type Consent = { v: 1; stats: boolean; media: boolean; ts: number };
+// marketing = Meta Pixel (Reichweitenmessung der Anzeigen, Ereignis „Lead“ nach erfolgreicher Buchung)
+// Ältere Einwilligungen ohne „marketing“ gelten als „nein“.
+export type Consent = { v: 1; stats: boolean; media: boolean; marketing?: boolean; ts: number };
 const KEY = 'fi_consent';
 export const CONSENT_EVENT = 'fi:consent';
 export const CONSENT_OPEN_EVENT = 'fi:consent-open';
@@ -17,12 +19,12 @@ export function readConsent(): Consent | null {
   } catch { /* ignore */ }
   return null;
 }
-export function hasConsent(cat: 'stats' | 'media'): boolean {
+export function hasConsent(cat: 'stats' | 'media' | 'marketing'): boolean {
   const c = readConsent();
   return !!(c && c[cat]);
 }
-export function saveConsent(stats: boolean, media: boolean) {
-  const c: Consent = { v: 1, stats, media, ts: Date.now() };
+export function saveConsent(stats: boolean, media: boolean, marketing = false) {
+  const c: Consent = { v: 1, stats, media, marketing, ts: Date.now() };
   try { window.localStorage.setItem(KEY, JSON.stringify(c)); } catch { /* privater Modus: gilt nur für diese Seite */ }
   (window as any).__fiConsent = c;
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: c }));
