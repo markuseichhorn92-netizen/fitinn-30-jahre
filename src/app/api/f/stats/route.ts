@@ -9,7 +9,8 @@ export const dynamic = 'force-dynamic';
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 export async function GET(req: Request) {
-  const want = process.env.FUNNEL_STATS_KEY || '';
+  // „UNNEL_STATS_KEY“: so wurde die Variable in Vercel angelegt (Name dort nicht mehr änderbar)
+  const want = process.env.FUNNEL_STATS_KEY || process.env.UNNEL_STATS_KEY || '';
   const got = (req.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
   if (!want || got !== want) return new NextResponse(null, { status: 401 });
   if (!kvEnabled) return NextResponse.json({ error: 'kein KV verbunden' }, { status: 503 });
