@@ -51,7 +51,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!z) notFound();
   const order = z.bereicheOrder as string[];
   const bereiche = [...trainingsbereiche.bereiche].sort((a, b) => order.indexOf(a.tag) - order.indexOf(b.tag));
-  const fragenZiel = { ...fragen, fragen: [...z.fragen, ...fragen.fragen] };
+  // Feste Fragen (Aktion, ab 18, nur Neumitglieder) stehen überall vorn, danach die Themen-Fragen.
+  const fest = fragen.fragen.filter((f) => (f as { fest?: boolean }).fest);
+  const rest = fragen.fragen.filter((f) => !(f as { fest?: boolean }).fest);
+  const fragenZiel = { ...fragen, fragen: [...fest, ...z.fragen, ...rest] };
   const context = `Kontext (nicht wiederholen): Der Besucher kam über die Themenseite „${z.label}“. Gehe, wo es passt, auf dieses Thema ein. Keine Heil- oder Ergebnisversprechen, keine medizinischen Aussagen.`;
   const note = { ...(wizard as any).noteSource };
   Object.keys(note).forEach((k) => { note[k] = `${note[k]} (Themenseite ${z.label})`; });

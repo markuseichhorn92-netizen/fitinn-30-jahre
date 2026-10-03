@@ -1,7 +1,7 @@
 // Anonymer Trichter-Zähler (ohne Einwilligung gedacht – vor Livegang mit Datenschutz abstimmen):
 // nur Schrittname + Seitenpfad + Einstieg (z. B. „hero"). Keine Kennung, nichts im Browser gespeichert,
 // kein Cookie, keine Personendaten. Jeder Schritt zählt je Seitenaufruf höchstens einmal.
-// Auswertung: Vercel-Logs nach „[funnel]" (siehe src/app/api/f/route.ts).
+// Gezählt wird pro Tag in Vercel KV, Auswertung über /api/f/stats (siehe src/app/api/f/route.ts).
 const sent = new Set<string>();
 
 export function funnel(step: string, src = '') {

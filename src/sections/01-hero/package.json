@@ -55,7 +55,7 @@
       "priceUntil": { "title": "5-€-Preis gilt bis (JJJJ-MM-TT)", "type": "text", "default": "2026-12-31", "tab": "settings", "group": "calc" },
       "promoWeekly": { "title": "Aktionspreis pro Woche (Zahl)", "type": "number", "default": 5, "tab": "settings", "group": "calc" },
       "regularMax": { "title": "Höchster Regelpreis pro Woche (Zahl)", "type": "number", "default": 12, "tab": "settings", "group": "calc" },
-      "priceNote": { "title": "Kleingedrucktes", "type": "text", "default": "Zzgl. einmalig 39 € Aufnahmegebühr. Nur für Neumitglieder ab 18 Jahren.", "tab": "content", "group": "price" },
+      "priceNote": { "title": "Kleingedrucktes", "type": "text", "default": "Zzgl. einmalig 39 € Aktivierungsgebühr. Nur für Neumitglieder ab 18 Jahren.", "tab": "content", "group": "price" },
 
       "features": {
         "title": "Kennzahlen",

@@ -29,11 +29,22 @@
   "fragen": [
     {
       "question": "Wie funktioniert das mit den 5 €?",
-      "answer": "Ab deinem Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche – in beiden Tarifen. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis. Nur für die ersten 25 Neuanmeldungen."
+      "answer": "Ab deinem Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche – in beiden Tarifen. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis. Nur für die ersten 25 Neuanmeldungen.",
+      "fest": true
+    },
+    {
+      "question": "Ab welchem Alter kann ich bei euch trainieren?",
+      "answer": "Ab 18 Jahren. Neue Mitgliedschaften und das Probetraining gibt es erst ab 18, auch mit Trainer.",
+      "fest": true
+    },
+    {
+      "question": "Gilt die Aktion auch für bestehende Mitglieder?",
+      "answer": "Nein, die 5 € pro Woche gibt es nur für Neumitglieder, und nur für die ersten 25 Neuanmeldungen. Die Aktion ist nicht auf bestehende Verträge übertragbar und nicht mit anderen Aktionen kombinierbar.",
+      "fest": true
     },
     {
       "question": "Was kostet es ab Januar?",
-      "answer": "Ab 01.01.2027 zahlst du 12 € pro Woche (Basic, 52 Wochen Laufzeit) oder 9 € pro Woche (Premium, 104 Wochen). Die Aktionswochen zählen zur Laufzeit. Einmalig kommen 39 € Aufnahmegebühr dazu."
+      "answer": "Ab 01.01.2027 zahlst du 12 € pro Woche (Basic, 52 Wochen Laufzeit) oder 9 € pro Woche (Premium, 104 Wochen). Die Aktionswochen zählen zur Laufzeit. Einmalig kommen 39 € Aktivierungsgebühr dazu."
     },
     {
       "question": "Basic oder Premium – was passt zu mir?",
@@ -50,10 +61,6 @@
     {
       "question": "Wann habt ihr geöffnet?",
       "answer": "Mo–Fr 09:30–13:00 und 15:00–21:30 Uhr, Sa 13:00–18:00 Uhr, So 09:00–15:00 Uhr. An Feiertagen können die Zeiten abweichen. Die aktuellen Zeiten und wie voll es gerade ist, weiß FINN – frag ihn einfach."
-    },
-    {
-      "question": "Kann ich die Aktion als bestehendes Mitglied nutzen?",
-      "answer": "Nein, das Angebot gilt nur für Neumitglieder und ist nicht auf bestehende Verträge übertragbar. Es ist auch nicht mit anderen Aktionen kombinierbar."
     }
   ]
 }
