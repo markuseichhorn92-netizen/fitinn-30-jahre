@@ -3,6 +3,7 @@
 import { track } from '@vercel/analytics';
 import { hasConsent } from './consent';
 import { metaLead } from './metaPixel';
+import { newEventId, sendLeadToCapi, type LeadPerson } from './metaCapi';
 import { funnel, funnelReset } from './funnel';
 
 export type Topic = 'price' | 'fit' | 'geraete' | 'hours' | 'default';
@@ -87,8 +88,14 @@ export function interestNote(): string {
 
 export function reportShown(topic: string, source: string) { send('nudge_shown', { topic, source }); }
 export function reportClick(topic: string) { send('nudge_click', { topic }); }
-export function reportBooking(stage: 'start' | 'success', source: string) {
+export function reportBooking(stage: 'start' | 'success', source: string, person?: LeadPerson) {
   // Anonymer Trichter läuft immer (ohne Profil/Thema), das ausführliche Event nur mit Einwilligung.
-  if (stage === 'start') { funnelReset(); funnel('open', source); } else { funnel('ok', source); metaLead(source); }
+  if (stage === 'start') { funnelReset(); funnel('open', source); } else {
+    funnel('ok', source);
+    // Browser-Pixel und Conversions API bekommen dieselbe event_id (Deduplizierung); beide nur mit Marketing-Einwilligung.
+    const eventId = newEventId();
+    metaLead(source, eventId);
+    if (person) sendLeadToCapi(eventId, source, person);
+  }
   send('booking_' + stage, { source, topic: topTopic() });
 }

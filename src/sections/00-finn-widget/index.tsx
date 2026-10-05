@@ -503,7 +503,7 @@ export default function FinnChat(props: any) {
         }),
       });
       if (!r.ok) throw new Error(String(r.status));
-      interest.reportBooking('success', 'chat');
+      interest.reportBooking('success', 'chat', { email: form.email.trim(), phone: form.phone.trim(), firstName: form.firstname.trim(), lastName: form.lastname.trim(), zip: form.zip.trim() });
       if (crmFormId) {
         // Zusätzlich ins Onepage-CRM – Magicline bleibt führend, Fehler hier stören die Buchung nicht.
         try {

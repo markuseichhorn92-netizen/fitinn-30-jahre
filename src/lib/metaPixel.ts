@@ -32,8 +32,9 @@ export function metaPageView() {
 }
 
 // Erfolgreich gebuchtes Probetraining. Keine Personendaten, nur Seite und Einstieg.
-export function metaLead(source: string) {
+// eventId = gleiche ID wie beim serverseitigen Event (Conversions API) → Meta dedupliziert.
+export function metaLead(source: string, eventId?: string) {
   if (!hasConsent('marketing')) return;
   loadMetaPixel();
-  fbq('track', 'Lead', { content_name: 'Probetraining', content_category: window.location.pathname, source: String(source).slice(0, 24) });
+  fbq('track', 'Lead', { content_name: 'Probetraining', content_category: window.location.pathname, source: String(source).slice(0, 24) }, eventId ? { eventID: eventId } : undefined);
 }

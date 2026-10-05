@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { hasConsent, CONSENT_EVENT } from '@/lib/consent';
 import { loadMetaPixel, metaPageView } from '@/lib/metaPixel';
+import { captureAttribution } from '@/lib/metaCapi';
 
 export default function MetaPixel() {
   const pathname = usePathname();
@@ -20,6 +21,7 @@ export default function MetaPixel() {
     if (!on) return;
     loadMetaPixel();
     metaPageView();
+    captureAttribution(); // UTM/fbclid der Anzeige für das serverseitige Lead-Event merken
   }, [on, pathname]);
 
   return null;
