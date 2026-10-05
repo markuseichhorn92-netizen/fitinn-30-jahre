@@ -13,8 +13,8 @@ import styles from './styles.module.css';
 // Der Trainer-Hinweis (ggf. gesundheitsbezogen) geht NUR in die Magicline-Notiz, nie an FINN.
 
 type Slot = { startDateTime: string; endDateTime?: string };
-type Step = 'slot' | 'goal' | 'experience' | 'focus' | 'name' | 'contact' | 'address' | 'confirm' | 'hint' | 'done';
-const ORDER: Step[] = ['slot', 'goal', 'experience', 'focus', 'name', 'contact', 'address', 'confirm', 'hint'];
+type Step = 'slot' | 'goal' | 'experience' | 'focus' | 'name' | 'contact' | 'confirm' | 'hint' | 'done';
+const ORDER: Step[] = ['slot', 'goal', 'experience', 'focus', 'name', 'contact', 'confirm', 'hint'];
 const ease = [0.22, 1, 0.36, 1] as any;
 const pad = (n: number) => String(n).padStart(2, '0');
 const dayKey = (iso: string) => { const d = new Date(iso); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
@@ -28,7 +28,7 @@ const fill = (t: string, v: Record<string, string | number>) => String(t).replac
 function isAdult(dob: string) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dob); if (!m) return false; const b = new Date(+m[1], +m[2] - 1, +m[3]); const l = new Date(); l.setFullYear(l.getFullYear() - 18); return b <= l && +m[1] > 1900; }
 function getVid() { try { return window.localStorage.getItem('finn_vid') || 'wizard'; } catch { return 'wizard'; } }
 
-const EMPTY = { firstname: '', lastname: '', gender: '', dob: '', email: '', phone: '', street: '', houseNumber: '', zip: '', city: '', consent: false, marketing: false };
+const EMPTY = { firstname: '', lastname: '', gender: '', dob: '', email: '', phone: '', zip: '', consent: false, marketing: false };
 
 function OptIcon({ kind }: { kind?: string }) {
   const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
@@ -51,12 +51,12 @@ export default function Wizard(props: any) {
     focusTitle, focusText, focusMax, focusByGoal, finnFocus, planTitle, planNote, trainerRecommended, trainerFree,
     trainerLabel, withTrainer, withoutTrainer,
     contactTitle, contactText, firstNameLabel, lastNameLabel, genderLabel, femaleLabel, maleLabel, dobLabel, emailLabel, phoneLabel,
-    streetLabel, houseNoLabel, zipLabel, cityLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
+    zipLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
     hintTitle, hintText, hintPlaceholder, hintConsent, hintThanks,
     submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
     finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt, confirmHref,
-    nameTitle, nameText, addressTitle, addressText, confirmTitle, confirmText, finnName, finnAddress, finnConfirm,
-    validationName, validationContact, validationAddress, validationConfirm, presetGoal,
+    nameTitle, nameText, confirmTitle, confirmText, finnName, finnConfirm,
+    validationName, validationContact, validationConfirm, presetGoal,
   } = props;
   // Themenseite: Ziel steht schon fest → Ziel-Schritt entfällt
   const preset = useMemo(() => (presetGoal && Array.isArray(goals) ? goals.find((g: any) => g.key === presetGoal) || null : null), [presetGoal, goals]);
@@ -172,7 +172,6 @@ export default function Wizard(props: any) {
     if (step === 'focus') return goal ? fill(finnFocus, { ziel: goal.label }) : (exp ? exp.finn : '');
     if (step === 'name') return finnLine || finnName;
     if (step === 'contact') return fill(finnContact, { vorname });
-    if (step === 'address') return finnAddress;
     if (step === 'confirm') return fill(finnConfirm, { vorname, termin: terminStr });
     if (step === 'hint') return fill(finnHint, { vorname });
     if (step === 'done') return doneLine || fill(finnDone, { vorname, termin: terminStr });
@@ -190,9 +189,8 @@ export default function Wizard(props: any) {
 
   const setF = (k: string, v: any) => setForm((f) => ({ ...f, [k]: v }));
   const validName = form.firstname.trim().length > 1 && form.lastname.trim().length > 1 && (form.gender === 'FEMALE' || form.gender === 'MALE');
-  const validContact = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && isAdult(form.dob);
-  const validAddress = form.street.trim().length > 1 && form.houseNumber.trim().length > 0 && /^\d{4,5}$/.test(form.zip.trim()) && form.city.trim().length > 1;
-  const formValid = form.firstname.trim().length > 1 && form.lastname.trim().length > 1 && (form.gender === 'FEMALE' || form.gender === 'MALE') && isAdult(form.dob) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && form.street.trim().length > 1 && form.houseNumber.trim().length > 0 && /^\d{4,5}$/.test(form.zip.trim()) && form.city.trim().length > 1 && form.consent;
+  const validContact = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && isAdult(form.dob) && /^\d{5}$/.test(form.zip.trim());
+  const formValid = form.firstname.trim().length > 1 && form.lastname.trim().length > 1 && (form.gender === 'FEMALE' || form.gender === 'MALE') && isAdult(form.dob) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.replace(/\D/g, '').length >= 6 && /^\d{5}$/.test(form.zip.trim()) && form.consent;
 
   const submit = async () => {
     if (!slot) return;
@@ -211,7 +209,7 @@ export default function Wizard(props: any) {
       const r = await fetch(`${apiBaseUrl}/trialsession/book`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
         studioId: Number(studioId), startDateTime: slot.startDateTime, trainerRequired: trainer, note,
         leadCustomer: { firstname: form.firstname.trim(), lastname: form.lastname.trim(), email: form.email.trim(), phone: form.phone.trim(), gender: form.gender, dateOfBirth: form.dob,
-          address: { street: form.street.trim(), houseNumber: form.houseNumber.trim(), zip: form.zip.trim(), city: form.city.trim(), country: 'DE' },
+          address: { zip: form.zip.trim(), country: 'DE' },
           privacyConfiguration: { email: form.marketing, phone: form.marketing, letter: false, textMessage: form.marketing, mySportsMessage: false } } }) });
       if (!r.ok) throw new Error(String(r.status));
       interest.reportBooking('success', source);
@@ -390,23 +388,8 @@ export default function Wizard(props: any) {
                 <label className={styles.field}><span>{emailLabel}</span><input type="email" inputMode="email" autoComplete="email" autoFocus value={form.email} onChange={(e) => setF('email', e.target.value)} /></label>
                 <label className={styles.field}><span>{phoneLabel}</span><input type="tel" inputMode="tel" autoComplete="tel" value={form.phone} onChange={(e) => setF('phone', e.target.value)} /></label>
                 <label className={styles.field}><span>{dobLabel}</span><input type="date" autoComplete="bday" max={(() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; })()} min="1920-01-01" value={form.dob} onChange={(e) => setF('dob', e.target.value)} /></label>
+                <label className={styles.field}><span>{zipLabel}</span><input type="text" inputMode="numeric" maxLength={5} autoComplete="postal-code" value={form.zip} onChange={(e) => setF('zip', e.target.value)} /></label>
                 {invalid ? <p className={styles.alert} role="alert">{validationContact}</p> : null}
-              </>
-            ) : null}
-
-            {step === 'address' ? (
-              <>
-                <h2 className={styles.h}>{addressTitle}</h2>
-                <p className={styles.p}>{addressText}</p>
-                <div className={styles.row31}>
-                  <label className={styles.field}><span>{streetLabel}</span><input type="text" autoComplete="address-line1" autoFocus value={form.street} onChange={(e) => setF('street', e.target.value)} /></label>
-                  <label className={styles.field}><span>{houseNoLabel}</span><input type="text" value={form.houseNumber} onChange={(e) => setF('houseNumber', e.target.value)} /></label>
-                </div>
-                <div className={styles.row12}>
-                  <label className={styles.field}><span>{zipLabel}</span><input type="text" inputMode="numeric" maxLength={5} autoComplete="postal-code" value={form.zip} onChange={(e) => setF('zip', e.target.value)} /></label>
-                  <label className={styles.field}><span>{cityLabel}</span><input type="text" autoComplete="address-level2" value={form.city} onChange={(e) => setF('city', e.target.value)} /></label>
-                </div>
-                {invalid ? <p className={styles.alert} role="alert">{validationAddress}</p> : null}
               </>
             ) : null}
 
@@ -463,7 +446,6 @@ export default function Wizard(props: any) {
               {step === 'focus' ? (focus.length ? <button type="button" className={styles.primary} onClick={() => { setTrainer(plan.trainer); next(); }}>{nextLabel}</button> : <button type="button" className={styles.ghost} onClick={next}>{skipLabel}</button>) : null}
               {step === 'name' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validName) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'contact' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validContact) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
-              {step === 'address' ? <button type="button" data-next className={styles.primary} onClick={() => { if (!validAddress) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'confirm' ? <button type="button" className={styles.primary} onClick={() => { if (!form.consent) { setInvalid(true); return; } next(); }}>{nextLabel}</button> : null}
               {step === 'hint' ? <button type="button" className={styles.primary} disabled={sending || (!!hint.trim() && !hintOk)} onClick={submit}>{sending ? sendingLabel : submitLabel}</button> : null}
             </>

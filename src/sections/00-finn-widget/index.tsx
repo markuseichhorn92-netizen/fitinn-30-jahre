@@ -72,7 +72,7 @@ function isAdult(dob: string): boolean {
 
 const EMPTY_FORM = {
   firstname: '', lastname: '', gender: '', dob: '', email: '', phone: '',
-  street: '', houseNumber: '', zip: '', city: '', trainer: true, consent: false, marketing: false,
+  zip: '', trainer: true, consent: false, marketing: false,
 };
 
 export default function FinnChat(props: any) {
@@ -84,7 +84,7 @@ export default function FinnChat(props: any) {
     bookLabel, bookIntro, bookTimeText, bookFormText, bookLoading, bookNoSlots, bookError, bookValidation,
     bookSuccess, bookSuccessAfter, bookBack, bookCancel, bookSubmit, bookSending,
     trainerLabel, withTrainer, withoutTrainer, firstNameLabel, lastNameLabel, genderLabel, femaleLabel, maleLabel,
-    dobLabel, emailLabel, phoneFieldLabel, streetLabel, houseNoLabel, zipLabel, cityLabel, consentNote, marketingText,
+    dobLabel, emailLabel, phoneFieldLabel, zipLabel, consentNote, marketingText,
     apiBaseUrl, studioId, bookingWindowDays, crmFormId, crmSource,
     launcherLabel, closeLabel, nudgeCloseLabel, showLauncher, maxNudges, nudgesSpar: nudges, mode,
     yesLabel, noLabel, bookYesLabel, bookChoice, priceChoiceSpar: priceChoice, inclChoice, busyChoice, otherChoice,
@@ -465,10 +465,7 @@ export default function FinnChat(props: any) {
     isAdult(form.dob) &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) &&
     form.phone.replace(/[^0-9]/g, '').length >= 6 &&
-    form.street.trim().length > 1 &&
-    form.houseNumber.trim().length > 0 &&
-    /^\d{4,5}$/.test(form.zip.trim()) &&
-    form.city.trim().length > 1 &&
+    /^\d{5}$/.test(form.zip.trim()) &&
     form.consent;
 
   const submitBooking = async () => {
@@ -495,7 +492,7 @@ export default function FinnChat(props: any) {
             phone: form.phone.trim(),
             gender: form.gender,
             dateOfBirth: form.dob,
-            address: { street: form.street.trim(), houseNumber: form.houseNumber.trim(), zip: form.zip.trim(), city: form.city.trim(), country: 'DE' },
+            address: { zip: form.zip.trim(), country: 'DE' },
             privacyConfiguration: {
               email: form.marketing, phone: form.marketing, letter: false, textMessage: form.marketing, mySportsMessage: false,
             },
@@ -515,7 +512,7 @@ export default function FinnChat(props: any) {
               phone: form.phone.trim(),
               gender: form.gender === 'FEMALE' ? femaleLabel : maleLabel,
               dateOfBirth: form.dob,
-              address: { country: 'DE', addressFirst: `${form.street.trim()} ${form.houseNumber.trim()}`, addressSecond: '', postalCode: form.zip.trim(), province: '', city: form.city.trim() },
+              address: { country: 'DE', postalCode: form.zip.trim() },
               termin: fmtFull(slot.startDateTime),
               trainer: form.trainer ? withTrainer : withoutTrainer,
               note: '',
@@ -699,14 +696,7 @@ export default function FinnChat(props: any) {
                     {field('dob', dobLabel, 'dob', 'date', 'bday', { max: maxDob, min: '1920-01-01' })}
                     {field('em', emailLabel, 'email', 'email', 'email', { inputMode: 'email' })}
                     {field('ph', phoneFieldLabel, 'phone', 'tel', 'tel', { inputMode: 'tel' })}
-                    <div className={styles.row31}>
-                      {field('st', streetLabel, 'street', 'text', 'address-line1')}
-                      {field('hn', houseNoLabel, 'houseNumber', 'text', 'off')}
-                    </div>
-                    <div className={styles.row12}>
-                      {field('zip', zipLabel, 'zip', 'text', 'postal-code', { inputMode: 'numeric', maxLength: 5 })}
-                      {field('ci', cityLabel, 'city', 'text', 'address-level2')}
-                    </div>
+                    {field('zip', zipLabel, 'zip', 'text', 'postal-code', { inputMode: 'numeric', maxLength: 5 })}
 
                     <label className={styles.check}>
                       <input type="checkbox" checked={form.consent} onChange={(e) => setField('consent', e.target.checked)} />
