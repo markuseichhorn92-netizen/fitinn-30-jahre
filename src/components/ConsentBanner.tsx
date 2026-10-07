@@ -38,18 +38,18 @@ export default function ConsentBanner() {
           <div className={styles.box}>
             <p id="fi-consent-title" className={styles.title}>Kurz zu Cookies 🍪</p>
             <p className={styles.text}>
-              Notwendiges (Buchung, FINN-Chat) läuft immer. Anonyme Statistik, passende Tipps, Maps, YouTube und die Messung unserer Meta-Anzeigen nur mit deinem Okay.{' '}
+              Notwendiges (Buchung, Lena-Chat) läuft immer. Anonyme Statistik, passende Tipps, Maps, YouTube und die Messung unserer Meta-Anzeigen nur mit deinem Okay.{' '}
               <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Datenschutz</a> · <a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a>
             </p>
             {details ? (
               <div className={styles.opts}>
                 <label className={styles.opt}>
                   <input type="checkbox" checked disabled />
-                  <span><strong>Notwendig</strong>Buchung, FINN-Chat, deine Auswahl hier. Immer aktiv.</span>
+                  <span><strong>Notwendig</strong>Buchung, Lena-Chat, deine Auswahl hier. Immer aktiv.</span>
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={stats} onChange={(e) => setStats(e.target.checked)} />
-                  <span><strong>Statistik & passende Hinweise</strong>Vercel Analytics und Speed Insights (ohne Cookies, anonym), Auswertung der besuchten Bereiche für passende Tipps von FINN.</span>
+                  <span><strong>Statistik & passende Hinweise</strong>Vercel Analytics und Speed Insights (ohne Cookies, anonym), Auswertung der besuchten Bereiche für passende Tipps von Lena.</span>
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={media} onChange={(e) => setMedia(e.target.checked)} />

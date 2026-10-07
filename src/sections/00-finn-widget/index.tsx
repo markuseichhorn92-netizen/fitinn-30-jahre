@@ -181,7 +181,7 @@ export default function FinnChat(props: any) {
     const list = Array.isArray(nudges) ? nudges : [];
     const max = Number(maxNudges);
     if (!list.length || !(max > 0)) return;
-    // Neutraler Hinweis läuft immer; personalisiert (Interessenprofil, FINN-Text) nur mit Einwilligung.
+    // Neutraler Hinweis läuft immer; personalisiert (Interessenprofil, Lena-Text) nur mit Einwilligung.
     // Zähler: max. 1 je Seitenaufruf, nach 30 Minuten wieder erlaubt (sonst sieht ein Wiederbesucher nie etwas).
     let shown = 0;
     try {
@@ -214,7 +214,7 @@ export default function FinnChat(props: any) {
         hideTimer = setTimeout(() => { nudgeRef.current = null; setNudge(null); }, 16000);
       };
       if (smart && aiNudge && finnApi && consentStats) {
-        // FINN formuliert die Ansprache passend zum Profil; bei Zögern oder Unsinn bleibt der feste Text
+        // Lena formuliert die Ansprache passend zum Profil; bei Zögern oder Unsinn bleibt der feste Text
         const ctrl = new AbortController();
         const to = setTimeout(() => ctrl.abort(), 4000);
         fetch(finnApi, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: ctrl.signal,
@@ -303,7 +303,7 @@ export default function FinnChat(props: any) {
     el.scrollTop = el.scrollHeight;
   }, [messages, busy, choices, confirm, booking && booking.step]);
 
-  // ---------- FINN ----------
+  // ---------- Lena ----------
   const call = async (body: any) => {
     if (!vidRef.current) vidRef.current = getVid();
     const res = await fetch(finnApi, {
@@ -484,7 +484,7 @@ export default function FinnChat(props: any) {
           studioId: Number(studioId),
           startDateTime: slot.startDateTime,
           trainerRequired: !!form.trainer,
-          note: `Gebucht über FINN-Chat (5-€-Aktion) · ${interest.interestNote()}`,
+          note: `Gebucht über Lena-Chat (5-€-Aktion) · ${interest.interestNote()}`,
           leadCustomer: {
             firstname: form.firstname.trim(),
             lastname: form.lastname.trim(),

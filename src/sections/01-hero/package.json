@@ -18,7 +18,7 @@
       "stickyLabel": { "title": "Leiste unten: Button", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "sticky" },
       "stickyHref": { "title": "Leiste unten: Link", "type": "text", "default": "#anmeldung", "tab": "content", "group": "sticky" },
       "stickyNoteSpar": { "title": "Leiste unten: Zusatz ({x} = Ersparnis heute)", "type": "text", "default": "Heute bis zu {x} € sparen", "tab": "content", "group": "sticky" },
-      "stickyChatLabel": { "title": "Leiste unten: Chat-Button (Screenreader)", "type": "text", "default": "Chat mit FINN öffnen", "tab": "content", "group": "sticky" },
+      "stickyChatLabel": { "title": "Leiste unten: Chat-Button (Screenreader)", "type": "text", "default": "Chat mit Lena öffnen", "tab": "content", "group": "sticky" },
       "showSticky": { "title": "Leiste unten am Handy anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "sticky" },
 
       "eyebrowSpar": { "title": "Kicker", "type": "text", "default": "Nur für die ersten 25 · Trier-Feyen seit 1996", "tab": "content", "group": "headline" },

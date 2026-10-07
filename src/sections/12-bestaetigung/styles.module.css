@@ -58,7 +58,7 @@
 .pillLight:hover { transform: translateY(-1px); }
 .pill:focus-visible, .pillLight:focus-visible, .routeBtn:focus-visible, .mapGate:focus-visible { outline: 3px solid var(--color-kit-key2, #3BC9E0); outline-offset: 2px; }
 
-/* FINN */
+/* Lena */
 .finn {
   display: flex; gap: 12px; align-items: flex-start;
   padding: 16px; border-radius: 22px;

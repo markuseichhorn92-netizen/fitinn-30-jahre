@@ -12,7 +12,7 @@
   "icsLabel": "Apple / Outlook (.ics)",
   "calTitle": "Probetraining im Fit-Inn Trier",
   "calDescription": "Kostenloses Probetraining (ca. 90 Min.). Mitbringen: Sportkleidung, saubere Trainingsschuhe, Handtuch. Fragen: 0651 493 688 19",
-  "finnLabel": "FINN",
+  "finnLabel": "Lena",
   "finnFallback": "Richtig gute Entscheidung! Dein Trainer freut sich auf dich – und du wirst sehen: Der erste Schritt ist der schwerste, der Rest macht Spaß.",
   "finnPrompt": "Ein Interessent hat gerade ein kostenloses Probetraining gebucht. Ziel: {ziel}. Erfahrung: {erfahrung}. Wichtig ist ihm: {fokus}. Schreibe 2 kurze, herzliche und motivierende Sätze (max. 45 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen, kein Name), die konkret auf sein Ziel und seinen Fokus eingehen und Vorfreude auf das Probetraining machen. Antworte nur mit dem Text.",
   "flowTitle": "So läuft dein Probetraining",
@@ -72,19 +72,19 @@
     "bgColor": "var(--color-kit-white)",
     "bgDeco": "question",
     "kicker": "Noch Fragen?",
-    "headline": "Frag FINN vor deinem Termin.",
-    "intro": "Tipp auf eine Frage oder stell deine eigene – FINN kennt deinen Termin.",
+    "headline": "Frag Lena vor deinem Termin.",
+    "intro": "Tipp auf eine Frage oder stell deine eigene – Lena kennt deinen Termin.",
     "finnApi": "https://mitglieder.fit-inn-trier.de/api/finn/public",
     "maxChars": 800,
-    "botName": "FINN",
+    "botName": "Lena",
     "verifiedLabel": "Vom Team geprüft",
     "aiLabel": "KI-Antwort",
     "followLabel": "Passt dazu",
-    "inputLabel": "Deine Frage an FINN",
+    "inputLabel": "Deine Frage an Lena",
     "inputPlaceholder": "Deine Frage …",
     "sendLabel": "Fragen",
-    "thinkingLabel": "FINN überlegt …",
-    "errorText": "Gerade keine Verbindung zu FINN. Ruf uns gern an:",
+    "thinkingLabel": "Lena überlegt …",
+    "errorText": "Gerade keine Verbindung zu Lena. Ruf uns gern an:",
     "phoneLabel": "0651 493 688 19",
     "phoneHref": "tel:+4965149368819",
     "continueLabel": "",
@@ -92,7 +92,7 @@
     "bookLabel": "",
     "bookHref": "",
     "clearLabel": "Antworten ausblenden",
-    "disclosure": "FINN ist ein KI-Assistent, kein Mensch. Geprüfte Antworten stammen vom Team; KI-Antworten können Fehler enthalten. Keine Gesundheitsdaten im Chat eingeben.",
+    "disclosure": "Lena ist eine KI-Assistentin, kein Mensch. Geprüfte Antworten stammen vom Team; KI-Antworten können Fehler enthalten. Keine Gesundheitsdaten im Chat eingeben.",
     "privacyLabel": "Datenschutz",
     "privacyHref": "https://fit-inn-trier.de/datenschutz-fit-inn-trier",
     "fragen": [
@@ -127,7 +127,7 @@
     ]
   },
   "heroBg": "glow",
-  "chatIntro": "Noch Fragen vor deinem Termin? Tipp an oder frag FINN direkt.",
+  "chatIntro": "Noch Fragen vor deinem Termin? Tipp an oder frag Lena direkt.",
   "planTitle": "So bereitet dein Trainer dein Probetraining vor",
   "planFocusLabel": "Dir ist wichtig",
   "planNote": "Dein Trainer hat deine Angaben schon – du musst nichts erklären.",
@@ -197,7 +197,7 @@
       "faq": [
         {
           "question": "Wann ist es im Studio am ruhigsten?",
-          "answer": "Meist ist es vormittags und am frühen Nachmittag ruhiger. Die aktuelle Auslastung kann FINN dir live sagen – frag einfach."
+          "answer": "Meist ist es vormittags und am frühen Nachmittag ruhiger. Die aktuelle Auslastung kann Lena dir live sagen – frag einfach."
         }
       ]
     },

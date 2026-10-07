@@ -10,8 +10,8 @@ import styles from './styles.module.css';
 // Vollbild-Buchungsstrecke für das Probetraining. Öffnen per window-Event:
 //   window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'chat' } }))
 // Nach Erfolg: window-Event 'fi:booked' mit { startDateTime }.
-// Ziel/Erfahrung gehen an FINN (Motivationssatz) und in die Magicline-Notiz.
-// Der Trainer-Hinweis (ggf. gesundheitsbezogen) geht NUR in die Magicline-Notiz, nie an FINN.
+// Ziel/Erfahrung gehen an Lena (Motivationssatz) und in die Magicline-Notiz.
+// Der Trainer-Hinweis (ggf. gesundheitsbezogen) geht NUR in die Magicline-Notiz, nie an Lena.
 
 type Slot = { startDateTime: string; endDateTime?: string };
 type Step = 'slot' | 'goal' | 'experience' | 'focus' | 'name' | 'contact' | 'confirm' | 'hint' | 'done';
@@ -133,7 +133,7 @@ export default function Wizard(props: any) {
   const next = () => goTo(STEPS[Math.min(idx + 1, STEPS.length - 1)]);
   const back = () => goTo(STEPS[Math.max(idx - 1, 0)]);
 
-  // FINN-Satz nach Ziel + Erfahrung (Rückfall: feste Sätze aus dem Inhalt)
+  // Lena-Satz nach Ziel + Erfahrung (Rückfall: feste Sätze aus dem Inhalt)
   useEffect(() => {
     if (step !== 'name' || !goal || !exp) return;
     const fallback = exp.finn;
@@ -150,7 +150,7 @@ export default function Wizard(props: any) {
   const terminStr = slot ? fmtFull(slot.startDateTime) : '';
   const focusOptions: any[] = (focusByGoal && (focusByGoal[goal?.key] || focusByGoal._default)) || [];
   const focusStr = focus.map((f) => f.label).join(', ');
-  // Empfehlung aus Ziel + Erfahrung + Fokus (regelbasiert; FINN formuliert den Satz dazu)
+  // Empfehlung aus Ziel + Erfahrung + Fokus (regelbasiert; Lena formuliert den Satz dazu)
   const plan = useMemo(() => {
     const items: string[] = [];
     const fk = new Set(focus.map((f) => f.key));
@@ -178,7 +178,7 @@ export default function Wizard(props: any) {
     if (step === 'done') return doneLine || fill(finnDone, { vorname, termin: terminStr });
     return '';
   };
-  // Persönliche Begrüßung zum Abschluss (FINN, Rückfall: fester Text)
+  // Persönliche Begrüßung zum Abschluss (Lena, Rückfall: fester Text)
   useEffect(() => {
     if (step !== 'done' || !finnApi) return;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 5000);

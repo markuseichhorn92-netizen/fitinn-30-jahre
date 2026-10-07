@@ -104,7 +104,7 @@
       "finn": "Dann schau dir beim Probetraining gern den Powerbereich und die Biostrength-Geräte an – mit oder ohne Trainer, wie du magst."
     }
   ],
-  "finnIntro": "FINN meint:",
+  "finnIntro": "Lena meint:",
   "finnPrompt": "Ein Interessent bucht ein Probetraining. Ziel: {ziel}. Erfahrung: {erfahrung}. Wichtig ist ihm: {fokus}. Schreibe EINEN kurzen, motivierenden Satz (max. 30 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen), was ihn beim Probetraining erwartet und wie wir darauf eingehen. Antworte nur mit dem Satz.",
   "trainerLabel": "Begleitung beim Probetraining",
   "withTrainer": "Mit Trainer (empfohlen)",
@@ -126,7 +126,7 @@
   "privacyHref": "https://fit-inn-trier.de/datenschutz-fit-inn-trier",
   "validationText": "Bitte fülle alle Felder aus und bestätige den Datenschutzhinweis. Das Probetraining ist ab 18 Jahren.",
   "hintTitle": "Gibt es etwas, das dein Trainer wissen sollte?",
-  "hintText": "Optional – zum Beispiel Verletzungen, Beschwerden oder was dir wichtig ist. Das liest nur dein Trainer, nicht FINN.",
+  "hintText": "Optional – zum Beispiel Verletzungen, Beschwerden oder was dir wichtig ist. Das liest nur dein Trainer, nicht Lena.",
   "hintPlaceholder": "z. B. Knieprobleme, Bandscheibe, Schwangerschaft …",
   "hintConsent": "Ich willige ein, dass Fit-Inn Trier diese Angabe (auch gesundheitsbezogen) speichert, um mein Probetraining vorzubereiten. Widerruf jederzeit möglich.",
   "hintThanks": "Danke – dein Trainer bekommt den Hinweis und geht beim Probetraining darauf ein.",
@@ -140,9 +140,9 @@
   "successClose": "Fertig",
   "noteSource": {
     "form": "Gebucht über Aktionsseite",
-    "chat": "Gebucht über FINN-Chat",
+    "chat": "Gebucht über Lena-Chat",
     "sticky": "Gebucht über Aktionsseite (Leiste)",
-    "nudge": "Gebucht über FINN-Hinweis"
+    "nudge": "Gebucht über Lena-Hinweis"
   },
   "finnSlot": "{termin} ist für dich reserviert. Jetzt noch zwei kurze Fragen, damit dein Trainer sich auf dich vorbereiten kann.",
   "finnGoal": "{ziel} – gutes Ziel. Damit dein Probetraining passt, noch eine Frage zu deiner Erfahrung.",
@@ -325,8 +325,8 @@
   "finnFocus": "{ziel} – gute Wahl. Eine Frage noch, dann weiß dein Trainer Bescheid.",
   "planTitle": "So bereiten wir dein Probetraining vor",
   "planNote": "Dein Trainer bekommt das als Vorbereitung. Ändern kannst du es vor Ort jederzeit.",
-  "trainerRecommended": "FINN empfiehlt: mit Trainer",
-  "trainerFree": "FINN empfiehlt: ganz wie du magst",
+  "trainerRecommended": "Lena empfiehlt: mit Trainer",
+  "trainerFree": "Lena empfiehlt: ganz wie du magst",
   "whatsappBase": "https://wa.me/4951328533010",
   "whatsappAsk": "Lieber erst eine Frage stellen?",
   "whatsappLink": "Schreib uns auf WhatsApp"

@@ -20,7 +20,7 @@ import booking from '@/content/09-booking.json';
 import footer from '@/content/10-footer.json';
 import wizard from '@/content/11-wizard.json';
 
-// Anzeigen-Version: kurz, Buchung früh. (Haus, FINN-Teaser bleiben im Repo, sind aber nicht eingebunden.) Texte stehen in src/content/*.json.
+// Anzeigen-Version: kurz, Buchung früh. (Haus, Lena-Teaser bleiben im Repo, sind aber nicht eingebunden.) Texte stehen in src/content/*.json.
 export default function Page() {
   return (
     <main>

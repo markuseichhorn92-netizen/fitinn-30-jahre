@@ -1,5 +1,5 @@
 // Gemeinsame Logik für die Antwort-Buttons in allen Chats der Aktionsseite
-// (FINN-Widget, Sektion „Frag einfach", Chat auf der Bestätigungsseite).
+// (Lena-Widget, Sektion „Frag einfach", Chat auf der Bestätigungsseite).
 //
 // Idee: Der Besucher wird entlang eines kleinen Trichters geführt
 //   Angebot verstehen → Preis/Tarif → Leistungen/Geräte → Zweifel ausräumen → Probetraining
@@ -59,7 +59,7 @@ const NEXT: Record<Topic, Topic[]> = {
 export type PickOptions = {
   question: string;           // zuletzt gestellte Frage
   answer: string;             // Antwort darauf
-  finn?: string[];            // Vorschläge, die FINN selbst mitgeschickt hat
+  finn?: string[];            // Vorschläge, die Lena selbst mitgeschickt hat
   asked: string[];            // alle bisher gestellten Fragen/Buttons
   previous?: string[];        // zuletzt angezeigte Buttons (nicht 1:1 wiederholen)
   candidates: Candidate[];    // Pool möglicher Fragen mit Thema
@@ -90,7 +90,7 @@ export function pickChoices(o: PickOptions): string[] {
   const seen = new Set<string>();
   const add = (c?: string) => { const n = norm(c || ''); if (!n || seen.has(n) || out.length >= limit) return; seen.add(n); out.push(String(c)); };
 
-  // 1) Rückfrage von FINN → Ja/Nein
+  // 1) Rückfrage von Lena → Ja/Nein
   const yn = endsWithYesNo(o.answer);
   if (yn.yesNo) {
     if (yn.aboutTrial && !o.booked) { add(o.bookYes || o.book); add(o.no); }

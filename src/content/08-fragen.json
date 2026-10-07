@@ -4,18 +4,18 @@
   "bgDeco": "question",
   "kicker": "Frag einfach",
   "headline": "Deine Frage. Sofort beantwortet.",
-  "intro": "Tipp auf eine Frage oder stell deine eigene – FINN, unser digitaler Assistent, antwortet direkt hier.",
+  "intro": "Tipp auf eine Frage oder stell deine eigene – Lena, unsere digitale Assistentin, antwortet direkt hier.",
   "finnApi": "https://mitglieder.fit-inn-trier.de/api/finn/public",
   "maxChars": 800,
-  "botName": "FINN",
+  "botName": "Lena",
   "verifiedLabel": "Vom Team geprüft",
   "aiLabel": "KI-Antwort",
   "followLabel": "Passt dazu",
-  "inputLabel": "Deine Frage an FINN",
+  "inputLabel": "Deine Frage an Lena",
   "inputPlaceholder": "Deine Frage …",
   "sendLabel": "Fragen",
-  "thinkingLabel": "FINN überlegt …",
-  "errorText": "Gerade keine Verbindung zu FINN. Ruf uns gern an:",
+  "thinkingLabel": "Lena überlegt …",
+  "errorText": "Gerade keine Verbindung zu Lena. Ruf uns gern an:",
   "phoneLabel": "0651 493 688 19",
   "phoneHref": "tel:+4965149368819",
   "continueLabel": "Im Chat weitermachen",
@@ -23,7 +23,7 @@
   "bookLabel": "Probetraining buchen",
   "bookHref": "#anmeldung",
   "clearLabel": "Antworten ausblenden",
-  "disclosure": "FINN ist ein KI-Assistent, kein Mensch. Geprüfte Antworten stammen vom Team; KI-Antworten können Fehler enthalten. Keine Gesundheits- oder Vertragsdaten eingeben.",
+  "disclosure": "Lena ist eine KI-Assistentin, kein Mensch. Geprüfte Antworten stammen vom Team; KI-Antworten können Fehler enthalten. Keine Gesundheits- oder Vertragsdaten eingeben.",
   "privacyLabel": "Datenschutz",
   "privacyHref": "https://fit-inn-trier.de/datenschutz-fit-inn-trier",
   "fragen": [
@@ -60,7 +60,7 @@
     },
     {
       "question": "Wann habt ihr geöffnet?",
-      "answer": "Mo–Fr 09:30–13:00 und 15:00–21:30 Uhr, Sa 13:00–18:00 Uhr, So 09:00–15:00 Uhr. An Feiertagen können die Zeiten abweichen. Die aktuellen Zeiten und wie voll es gerade ist, weiß FINN – frag ihn einfach."
+      "answer": "Mo–Fr 09:30–13:00 und 15:00–21:30 Uhr, Sa 13:00–18:00 Uhr, So 09:00–15:00 Uhr. An Feiertagen können die Zeiten abweichen. Die aktuellen Zeiten und wie voll es gerade ist, weiß Lena – frag sie einfach."
     }
   ],
   "whatsappLabel": "Lieber per WhatsApp fragen",

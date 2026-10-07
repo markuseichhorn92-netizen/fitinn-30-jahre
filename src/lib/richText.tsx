@@ -1,5 +1,5 @@
-// Gemeinsame Darstellung der FINN-Antworten in allen Chats der Aktionsseite.
-// FINN antwortet mit leichtem Markdown (Absätze, **fett**, "- " / "1." Listen, "**Titel:**"-Zeilen).
+// Gemeinsame Darstellung der Lena-Antworten in allen Chats der Aktionsseite.
+// Lena antwortet mit leichtem Markdown (Absätze, **fett**, "- " / "1." Listen, "**Titel:**"-Zeilen).
 // Daraus werden echte Blöcke: kurze Zwischenüberschriften, Listen mit Punkten, kurze Aufzählungen
 // als kompakte Chips, Nummern als Schritte. Kein HTML aus der Antwort, nur React-Elemente.
 import React from 'react';

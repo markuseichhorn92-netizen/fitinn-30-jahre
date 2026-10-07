@@ -78,7 +78,7 @@ export default function Bestaetigung(props: any) {
     return () => window.removeEventListener(CONSENT_EVENT, upd);
   }, []);
 
-  // FINN-Motivation (Rückfall: fester Text). Nur Ziel/Erfahrung, kein Name, keine Gesundheitsdaten.
+  // Lena-Motivation (Rückfall: fester Text). Nur Ziel/Erfahrung, kein Name, keine Gesundheitsdaten.
   useEffect(() => {
     if (!b || !finnApi || !finnPrompt) return;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 6000);

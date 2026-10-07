@@ -531,7 +531,7 @@
   .launcherText strong { font-size: 15px; }
   .launcherText span { font-size: 12px; }
   .launcherChat { display: none; }
-  /* Sobald die Sticky-Leiste da ist, übernimmt ihr FINN-Knopf */
+  /* Sobald die Sticky-Leiste da ist, übernimmt ihr Lena-Knopf */
   :global(body.fi-sticky-on) .launcher { animation: none; transform: translateY(140%); opacity: 0; pointer-events: none; visibility: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .launcherOn { animation: none; } .launcherRing { animation: none; } }
