@@ -150,3 +150,7 @@
 }
 @media (max-width: 899px) { .slotGrid, .slotDays, .slotTimes { display: contents; } }
 .inlineLink { display: inline; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* WhatsApp als leiser Nebenweg bei Unsicherheit */
+.waHint { margin: 0; font-size: 14px; line-height: 1.4; opacity: 0.75; }
+.waHint a { color: inherit; font-weight: 700; text-underline-offset: 3px; }

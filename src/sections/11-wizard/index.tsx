@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as interest from '@/lib/interest';
 import { crm } from '@/lib/onepage-kit';
 import { funnel } from '@/lib/funnel';
+import { whatsappHref, countWhatsapp } from '@/lib/whatsapp';
 import styles from './styles.module.css';
 
 // Vollbild-Buchungsstrecke für das Probetraining. Öffnen per window-Event:
@@ -53,7 +54,7 @@ export default function Wizard(props: any) {
     contactTitle, contactText, firstNameLabel, lastNameLabel, genderLabel, femaleLabel, maleLabel, dobLabel, emailLabel, phoneLabel,
     zipLabel, consentText, marketingText, privacyLabel, privacyHref, validationText,
     hintTitle, hintText, hintPlaceholder, hintConsent, hintThanks,
-    submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, successTitle, successText, successClose, noteSource,
+    submitLabel, sendingLabel, bookErrorText, phoneDisplay, phoneHref, whatsappBase, whatsappAsk, whatsappLink, successTitle, successText, successClose, noteSource,
     finnSlot, finnGoal, finnContact, finnHint, finnDone, finnDonePrompt, confirmHref,
     nameTitle, nameText, confirmTitle, confirmText, finnName, finnConfirm,
     validationName, validationContact, validationConfirm, presetGoal,
@@ -270,6 +271,7 @@ export default function Wizard(props: any) {
                 {slotState === 'error' ? <p className={styles.alert}>{errorSlotsText} <a href={phoneHref}>{phoneDisplay}</a></p> : null}
                 {slotState === 'ok' ? (
                   <>
+                    {whatsappBase && whatsappLink ? <p className={styles.waHint}>{whatsappAsk} <a href={whatsappHref(whatsappBase)} target="_blank" rel="noopener noreferrer" onClick={() => countWhatsapp('wizard')}>{whatsappLink}</a></p> : null}
                     <div className={styles.slotGrid}>
                     <div className={styles.slotDays}>
                     <span className={styles.slotLabel}>{dayLabel || 'Tag'}</span>
