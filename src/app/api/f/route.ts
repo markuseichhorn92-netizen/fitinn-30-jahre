@@ -5,12 +5,12 @@
 //
 // Schritte: view (Seite geladen) · open (Buchung geöffnet) · s_<schritt> (Formularschritt erreicht:
 // slot, goal, experience, focus, name, contact, address, confirm, hint) · submit (Absenden gedrückt) ·
-// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen).
+// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen) · whatsapp (Klick auf den WhatsApp-Link; Einstieg = Ort: fragen, footer, wizard).
 import { NextResponse } from 'next/server';
 import { kvEnabled, kvPipeline } from '@/lib/kv';
 
 export const runtime = 'nodejs';
-const STEPS = /^(view|open|submit|ok|fail|s_(slot|goal|experience|focus|name|contact|address|confirm|hint))$/;
+const STEPS = /^(view|open|submit|ok|fail|whatsapp|s_(slot|goal|experience|focus|name|contact|address|confirm|hint))$/;
 const PAGE = /^\/[a-z0-9\-/]{0,60}$/;
 const SRC = /^[a-z0-9-]{0,24}$/;
 const KEEP_SECONDS = 400 * 24 * 3600;
