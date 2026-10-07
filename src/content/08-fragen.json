@@ -62,5 +62,8 @@
       "question": "Wann habt ihr geöffnet?",
       "answer": "Mo–Fr 09:30–13:00 und 15:00–21:30 Uhr, Sa 13:00–18:00 Uhr, So 09:00–15:00 Uhr. An Feiertagen können die Zeiten abweichen. Die aktuellen Zeiten und wie voll es gerade ist, weiß FINN – frag ihn einfach."
     }
-  ]
+  ],
+  "whatsappLabel": "Lieber per WhatsApp fragen",
+  "whatsappBase": "https://wa.me/4951328533010",
+  "whatsappText": "Hallo Fit-Inn, ich habe eine Frage zum Probetraining"
 }

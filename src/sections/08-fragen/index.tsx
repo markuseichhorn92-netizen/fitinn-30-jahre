@@ -10,6 +10,7 @@ import { pickChoices, detectTopic } from '@/lib/choices';
 import styles from './styles.module.css';
 import { RichText } from '@/lib/richText';
 import rt from '@/lib/richText.module.css';
+import { whatsappHref, countWhatsapp } from '@/lib/whatsapp';
 
 type Entry = { q: string; a: string; kind: 'verified' | 'ai'; choices: string[]; next?: string[] };
 const ease = [0.22, 1, 0.36, 1] as any;
@@ -30,7 +31,7 @@ export default function Fragen(props: any) {
   const {
     anchorId, bgColor, bgDeco, kicker, headline, intro, finnApi, maxChars, botName,
     verifiedLabel, aiLabel, followLabel, inputLabel, inputPlaceholder, sendLabel, thinkingLabel, errorText,
-    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context, variant, leadLabel, lead, booked,
+    phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context, variant, leadLabel, lead, booked, whatsappLabel, whatsappBase, whatsappText,
   } = props;
   const embed = variant === 'embed';
   const list: Array<{ question: string; answer: string }> = Array.isArray(fragen) ? fragen : [];
@@ -174,7 +175,7 @@ export default function Fragen(props: any) {
             </div>
           ) : null}
           {failed ? (
-            <p className={styles.error} role="alert">{errorText} <a href={phoneHref}>{phoneLabel}</a></p>
+            <p className={styles.error} role="alert">{errorText} <a href={phoneHref}>{phoneLabel}</a>{whatsappBase ? <> oder <a href={whatsappHref(whatsappBase, whatsappText)} target="_blank" rel="noopener noreferrer" onClick={() => countWhatsapp('fragen')}>schreib uns auf WhatsApp</a></> : null}</p>
           ) : null}
         </div>
 
@@ -205,6 +206,7 @@ export default function Fragen(props: any) {
           <div className={styles.footActions}>
             {entries.length ? <button type="button" className={styles.linkBtn} onClick={() => { setEntries([]); setFailed(false); }}>{clearLabel}</button> : null}
             {continueLabel ? <button type="button" className={styles.linkBtn} onClick={continueInChat}>{continueLabel}</button> : null}
+            {whatsappLabel && whatsappBase ? <a className={styles.linkBtn} href={whatsappHref(whatsappBase, whatsappText)} target="_blank" rel="noopener noreferrer" onClick={() => countWhatsapp('fragen')}>{whatsappLabel}</a> : null}
           </div>
         </div>
     </>
