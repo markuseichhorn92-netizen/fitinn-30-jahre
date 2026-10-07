@@ -4,9 +4,10 @@ import React from 'react';
 import Text from '@siteui/text';
 import { mediaUrl } from '@siteui/image';
 import { openConsent } from '@/lib/consent';
+import { whatsappHref, countWhatsapp } from '@/lib/whatsapp';
 import styles from './styles.module.css';
 
-export default function Footer({ bgColor, logo, brand, tagline, address, phoneLabel, phoneHref, email, links, copyright }: any) {
+export default function Footer({ bgColor, logo, brand, tagline, address, phoneLabel, phoneHref, email, whatsappLabel, whatsappBase, links, copyright }: any) {
   return (
     <footer className={styles.foot} style={{ background: bgColor }}>
       <div className={styles.container}>
@@ -22,6 +23,7 @@ export default function Footer({ bgColor, logo, brand, tagline, address, phoneLa
           <span>{address}</span>
           <a href={phoneHref}>{phoneLabel}</a>
           <a href={`mailto:${email}`}>{email}</a>
+          {whatsappLabel && whatsappBase ? <a href={whatsappHref(whatsappBase)} target="_blank" rel="noopener noreferrer" onClick={() => countWhatsapp('footer')}>{whatsappLabel}</a> : null}
         </address>
         <nav className={styles.links}>
           {(links || []).map((l: any, i: number) => (
