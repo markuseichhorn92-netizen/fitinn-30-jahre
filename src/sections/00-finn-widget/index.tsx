@@ -125,6 +125,14 @@ export default function FinnChat(props: any) {
     return () => window.removeEventListener(CONSENT_EVENT, upd);
   }, []);
 
+  // Erster Scroll: Launcher darf mobil wieder mit Text erscheinen (CSS body.fi-scrolled)
+  useEffect(() => {
+    const on = () => { if (window.scrollY > 40) { document.body.classList.add('fi-scrolled'); window.removeEventListener('scroll', on); } };
+    window.addEventListener('scroll', on, { passive: true });
+    on();
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+
   useEffect(() => { overlayRef.current = overlay; }, [overlay]);
   useEffect(() => { nudgeRef.current = nudge; }, [nudge]);
 

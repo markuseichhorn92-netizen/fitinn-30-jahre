@@ -5,12 +5,14 @@
 //
 // Schritte: view (Seite geladen) · open (Buchung geöffnet) · s_<schritt> (Formularschritt erreicht:
 // slot, goal, experience, focus, name, contact, address, confirm, hint) · submit (Absenden gedrückt) ·
-// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen) · whatsapp (Klick auf den WhatsApp-Link; Einstieg = Ort: fragen, footer, wizard).
+// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen) · whatsapp (Klick auf den WhatsApp-Link; Einstieg = Ort: fragen, footer, wizard) ·
+// cta_seen (Hero-Button ≥ 50 % im Sichtfeld; Einstieg free = frei, covered = von Banner/Leiste teilweise verdeckt) ·
+// consent_shown (Cookie-Banner eingeblendet) · consent_accept (Einstieg all = „Akzeptieren“, custom = eigene Auswahl) · consent_necessary (Einstieg all = „Nur notwendige“, custom = eigene Auswahl ohne Häkchen).
 import { NextResponse } from 'next/server';
 import { kvEnabled, kvPipeline } from '@/lib/kv';
 
 export const runtime = 'nodejs';
-const STEPS = /^(view|open|submit|ok|fail|whatsapp|s_(slot|goal|experience|focus|name|contact|address|confirm|hint))$/;
+const STEPS = /^(view|open|submit|ok|fail|whatsapp|cta_seen|consent_shown|consent_accept|consent_necessary|s_(slot|goal|experience|focus|name|contact|address|confirm|hint))$/;
 const PAGE = /^\/[a-z0-9\-/]{0,60}$/;
 const SRC = /^[a-z0-9-]{0,24}$/;
 const KEEP_SECONDS = 400 * 24 * 3600;

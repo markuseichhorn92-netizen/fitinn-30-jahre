@@ -531,6 +531,9 @@
   .launcherText strong { font-size: 15px; }
   .launcherText span { font-size: 12px; }
   .launcherChat { display: none; }
+  /* Bis zum ersten Scroll nur das Icon (kein Text neben dem Buchungs-Button) */
+  :global(body:not(.fi-scrolled)) .launcher { padding: 6px; gap: 0; }
+  :global(body:not(.fi-scrolled)) .launcherText { display: none; }
   /* Sobald die Sticky-Leiste da ist, übernimmt ihr Lena-Knopf */
   :global(body.fi-sticky-on) .launcher { animation: none; transform: translateY(140%); opacity: 0; pointer-events: none; visibility: hidden; }
 }

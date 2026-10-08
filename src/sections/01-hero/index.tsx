@@ -7,6 +7,8 @@ import Text from '@siteui/text';
 import Button from '@siteui/button';
 import Badge from '@siteui/badge';
 import { mediaUrl } from '@siteui/image';
+import { funnel } from '@/lib/funnel';
+import { CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
 
 const ease = [0.22, 1, 0.36, 1] as any;
@@ -18,7 +20,7 @@ export default function Hero({
   fullHeight, bgImage, overlayStrength, bgColor, showGrid,
   logo, logoAlt, logoHref, topPhoneLabel, topPhoneHref, showTopPhone,
   stickyLabel, stickyHref, stickyNoteSpar, showSticky, stickyChatLabel,
-  eyebrowSpar, hlTopSpar, hlAccentSpar, sublineSpar,
+  eyebrowSpar, hlTopSpar, hlAccentSpar, sublineSpar, sublineShort,
   primaryLabel, primaryHref, secondaryLabel, secondaryHref, showSecondary,
   ribbonSpar, priceValue, currency, priceUnit, durationSpar, heroSaveText, heroSaveHint, priceListSpar, priceNote,
   promoStart, priceUntil, promoWeekly, regularMax,
@@ -44,20 +46,36 @@ export default function Hero({
     const target = typeof document !== 'undefined' && stickyHref && stickyHref.startsWith('#')
       ? document.getElementById(stickyHref.slice(1))
       : null;
-    const hero = heroRef.current;
-    const update = () => {
-      const passed = hero ? hero.getBoundingClientRect().bottom < 120 : window.scrollY > 520;
-      setStickyOn(passed && !targetVisible);
-    };
+    // Handy: Leiste von Anfang an (nur ausgeblendet, solange das Buchungsformular im Bild ist)
+    const update = () => setStickyOn(!targetVisible);
     let obs: IntersectionObserver | null = null;
     if (target && 'IntersectionObserver' in window) {
       obs = new IntersectionObserver(([e]) => { targetVisible = e.isIntersecting; update(); }, { threshold: 0.05 });
       obs.observe(target);
     }
-    window.addEventListener('scroll', update, { passive: true });
     update();
-    return () => { window.removeEventListener('scroll', update); if (obs) obs.disconnect(); };
+    return () => { if (obs) obs.disconnect(); };
   }, [showSticky, stickyHref]);
+
+  const ctasRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const btn = ctasRef.current?.querySelector('a,button');
+    if (!btn || !('IntersectionObserver' in window)) return;
+    let visible = false;
+    const covered = () => {
+      const r = btn.getBoundingClientRect();
+      return Array.from(document.querySelectorAll('[role="dialog"] > div, section > div[class*="sticky"]')).some((el) => {
+        const b = el.getBoundingClientRect();
+        return b.height > 0 && getComputedStyle(el).visibility !== 'hidden' && b.top < r.bottom - 4 && b.bottom > r.top + 4 && b.left < r.right && b.right > r.left && getComputedStyle(el).opacity !== '0';
+      });
+    };
+    // Anonym: „Hero-Button war im Bild“ – frei oder von Banner/Leiste verdeckt (siehe src/app/api/f/route.ts)
+    const report = () => { if (visible) funnel('cta_seen', covered() ? 'covered' : 'free'); };
+    const obs = new IntersectionObserver(([e]) => { visible = e.isIntersecting; setTimeout(report, 400); }, { threshold: 0.5 });
+    obs.observe(btn);
+    window.addEventListener(CONSENT_EVENT, report);
+    return () => { obs.disconnect(); window.removeEventListener(CONSENT_EVENT, report); };
+  }, []);
 
   const overlayHex = Math.round((Number(overlayStrength) / 100) * 255).toString(16).padStart(2, '0');
   const bgStyle: React.CSSProperties = { background: bgColor };
@@ -101,10 +119,13 @@ export default function Hero({
           </div>
 
           <div className={`${styles.in}`} style={{ ['--d' as any]: '0.22s', ['--y' as any]: '20px', ['--t' as any]: '0.7s' }}>
-            <Text size="lg" muted className={styles.sub}>{sublineSpar}</Text>
+            <Text size="lg" muted className={styles.sub}>
+              <span className={styles.subLong}>{sublineSpar}</span>
+              <span className={styles.subShort}>{sublineShort || sublineSpar}</span>
+            </Text>
           </div>
 
-          <div className={`${styles.in} ${styles.ctas}`} style={{ ['--d' as any]: '0.32s', ['--y' as any]: '20px', ['--t' as any]: '0.7s' }}>
+          <div ref={ctasRef} className={`${styles.in} ${styles.ctas}`} style={{ ['--d' as any]: '0.32s', ['--y' as any]: '20px', ['--t' as any]: '0.7s' }}>
             <Button href={primaryHref} size="lg" onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'hero' } })); }}>{primaryLabel}</Button>
             {showSecondary ? <Button href={secondaryHref} size="lg" variant="ghost">{secondaryLabel}</Button> : null}
           </div>
@@ -165,7 +186,10 @@ export default function Hero({
       {showSticky ? (
         <div className={`${styles.sticky} ${stickyOn ? styles.stickyOn : ''}`} aria-hidden={!stickyOn}>
           <span className={styles.stickyNote}>{fill(stickyNoteSpar, { x: saveToday })}</span>
-          <a className={styles.stickyBtn} href={stickyHref} tabIndex={stickyOn ? 0 : -1} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'sticky' } })); }}>{stickyLabel}</a>
+          <a className={styles.stickyBtn} href={stickyHref} aria-label={stickyLabel} tabIndex={stickyOn ? 0 : -1} onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'sticky' } })); }}>
+            <span className={styles.stickyMain}>{String(stickyLabel).split(' · ')[0]}</span>
+            {String(stickyLabel).includes(' · ') ? <span className={styles.stickySub}>{String(stickyLabel).split(' · ').slice(1).join(' · ')}</span> : null}
+          </a>
           <button type="button" className={styles.stickyPhone} aria-label={stickyChatLabel} tabIndex={stickyOn ? 0 : -1} onClick={() => window.dispatchEvent(new CustomEvent('finn:open'))}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z" /><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" /></svg>
             <span className={styles.stickyDot} aria-hidden="true" />

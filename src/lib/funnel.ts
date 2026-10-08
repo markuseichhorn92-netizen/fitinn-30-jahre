@@ -18,5 +18,5 @@ export function funnel(step: string, src = '') {
 
 // Formular erneut geöffnet: Schritte dürfen wieder gezählt werden (ein Durchgang = eine Zählung je Schritt).
 export function funnelReset() {
-  for (const k of Array.from(sent)) if (!k.startsWith('view|')) sent.delete(k);
+  for (const k of Array.from(sent)) if (!/^(view|cta_seen|consent_)/.test(k)) sent.delete(k);
 }

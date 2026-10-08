@@ -295,10 +295,11 @@
     z-index: 50;
     left: 10px;
     right: 10px;
-    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    /* über dem kompakten Cookie-Banner (--fi-consent-h setzt ConsentBanner), sonst am unteren Rand */
+    bottom: calc(8px + max(var(--fi-consent-h, 0px), env(safe-area-inset-bottom, 0px)));
     align-items: center;
-    gap: 10px;
-    padding: 8px 8px 8px 14px;
+    gap: 8px;
+    padding: 6px;
     border-radius: 20px;
     background: #0C161Af2;
     box-shadow: inset 0 0 0 1px #3BC9E040, 0 20px 50px -10px #000000cc;
@@ -307,24 +308,30 @@
     transform: translateY(140%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.35s ease, opacity 0.35s ease;
+    transition: transform 0.35s ease, opacity 0.35s ease, bottom 0.25s ease;
   }
   .stickyOn { transform: translateY(0); opacity: 1; pointer-events: auto; }
-  .stickyNote { flex: 1; min-width: 0; font-size: 14px; font-weight: 700; line-height: 1.2; color: var(--color-kit-key2, #3BC9E0); }
+  .stickyNote { display: none; }
   .stickyBtn {
+    flex: 1;
+    min-width: 0;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1px;
     min-height: 48px;
-    padding: 0 16px;
+    padding: 4px 12px;
     border-radius: 999px;
     background: var(--color-kit-key2, #3BC9E0);
     color: var(--color-kit-black, #05090B);
-    font-size: 16px;
-    font-weight: 800;
     text-decoration: none;
+    text-align: center;
+    line-height: 1.15;
     white-space: nowrap;
   }
+  .stickyMain { font-size: 16px; font-weight: 800; }
+  .stickySub { font-size: 13px; font-weight: 700; opacity: 0.85; }
   .stickyPhone {
     position: relative;
     flex: none;
@@ -366,3 +373,32 @@
   .priceWrap { order: 1; }
   .ctas { order: 2; margin-top: 4px; }
 }
+
+/* Handy: Buchungs-Button im ersten Bildschirm (über Cookie-Banner und Leiste) */
+@media (max-width: 767px) {
+  .hero.full { justify-content: flex-start; min-height: 0; }
+  .hero { padding: 84px 16px 36px; }
+  .topbar { top: 18px; }
+  .container, .copy { gap: 10px; }
+  .copy { gap: 10px; }
+  .hero .headline { font-size: clamp(30px, 9.4vw, 38px); line-height: 1.04; }
+  .sub { font-size: 16px; line-height: 1.35; }
+  .subLong { display: none; }
+  .priceWrap { padding: 12px 0 0; }
+  .priceCard {
+    display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 14px;
+    padding: 24px 16px 12px; border-radius: 24px;
+  }
+  .ribbon { top: -14px; left: 20px; padding: 6px 14px; font-size: 12px; }
+  .priceValue { font-size: 78px; }
+  .currency { font-size: 32px; }
+  .priceSide { padding-top: 8px; gap: 2px; }
+  .unit { font-size: 14px; }
+  .duration { margin-top: 0; font-size: 18px; }
+  .saveBox { display: none; }
+  .note { grid-column: 1 / -1; margin: 4px 0 0; font-size: 12px; line-height: 1.35; }
+  .ctas { margin-top: 2px; }
+  .facts { padding-top: 14px; }
+}
+@media (min-width: 768px) { .subShort { display: none; } }
+@media (max-width: 767px) { .copy > div:first-child > * { font-size: 12px; letter-spacing: 0.04em; line-height: 1.25; } }

@@ -15,7 +15,7 @@
       "topPhoneHref": { "title": "Telefon oben (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
       "showTopPhone": { "title": "Telefon oben anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "topbar" },
 
-      "stickyLabel": { "title": "Leiste unten: Button", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "sticky" },
+      "stickyLabel": { "title": "Leiste unten: Button (Teil nach „ · “ steht kleiner darunter)", "type": "text", "default": "Kostenloses Probetraining · 5 €/Woche", "tab": "content", "group": "sticky" },
       "stickyHref": { "title": "Leiste unten: Link", "type": "text", "default": "#anmeldung", "tab": "content", "group": "sticky" },
       "stickyNoteSpar": { "title": "Leiste unten: Zusatz ({x} = Ersparnis heute)", "type": "text", "default": "Heute bis zu {x} € sparen", "tab": "content", "group": "sticky" },
       "stickyChatLabel": { "title": "Leiste unten: Chat-Button (Screenreader)", "type": "text", "default": "Chat mit Lena öffnen", "tab": "content", "group": "sticky" },
@@ -24,6 +24,7 @@
       "eyebrowSpar": { "title": "Kicker", "type": "text", "default": "Nur für die ersten 25 · Trier-Feyen seit 1996", "tab": "content", "group": "headline" },
       "hlTopSpar": { "title": "Headline", "type": "text", "default": "Fünf Euro pro Woche.", "tab": "content", "group": "headline" },
       "hlAccentSpar": { "title": "Headline Akzent", "type": "text", "default": "Bis Silvester.", "tab": "content", "group": "headline" },
+      "sublineShort": { "title": "Subline kurz (Handy, erster Bildschirm)", "type": "text", "default": "An computergesteuerten TechnoGym-Geräten, mit Trainern, die deinen Namen kennen.", "tab": "content", "group": "headline" },
       "sublineSpar": { "title": "Subline", "type": "text", "default": "Bis 31.12.2026 zahlst du nur 5 € pro Woche – je früher du startest, desto mehr sparst du. Mit computergesteuerten TechnoGym-Geräten und Trainern, die deinen Namen kennen.", "tab": "content", "group": "headline" },
 
       "primaryLabel": { "title": "Button 1 Text", "type": "text", "default": "Kostenloses Probetraining", "tab": "content", "group": "buttons" },
