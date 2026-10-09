@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Du wurdest eingeladen: kostenloses Probetraining | Fit-Inn Trier",
+    "description": "Ein Fit-Inn-Mitglied hat dich eingeladen. Buche dein kostenloses, unverbindliches Probetraining im Fit-Inn Trier und erfahre, wie Freunde werben funktioniert."
+  },
+  "badge": "Du wurdest eingeladen",
+  "kicker": "Kostenloses Probetraining im Fit‑Inn Trier",
+  "headline": "Lern uns kennen.",
+  "subline": "Jemand aus dem Fit-Inn hat an dich gedacht. Komm vorbei, probier die Geräte aus und lern das Team kennen – unverbindlich und ohne Kosten.",
+  "primaryLabel": "Probetraining buchen",
+  "secondaryLabel": "So funktioniert Freunde werben",
+  "heroNote": "Rund 90 Minuten · kostenlos · unverbindlich · ab 18 Jahren",
+  "pillars": [
+    {
+      "title": "Persönlich",
+      "text": "Einweisung an jedem Gerät, Trainingsplan inklusive und ein Team, das dich beim Namen kennt."
+    },
+    {
+      "title": "Familiengeführt",
+      "text": "Seit 1996 in Trier-Feyen. Kein Franchise – wir sind für dich da."
+    },
+    {
+      "title": "Gut bewertet",
+      "text": "4,8 ★ bei Google – über 250 Bewertungen von Mitgliedern."
+    }
+  ],
+  "ablaufKicker": "Freunde werben Freunde",
+  "ablaufTitle": "So funktioniert’s",
+  "ablaufIntro": "Dein Freund oder deine Freundin ist Mitglied im Fit-Inn und hat dich in der Fit-Inn-App eingeladen. So läuft es ab:",
+  "steps": [
+    { "strong": "Du wirst eingeladen", "text": "Das Mitglied trägt in der App deinen Vor- und Nachnamen und deine E-Mail-Adresse ein." },
+    { "strong": "Du buchst dein Probetraining", "text": "Such dir hier einen Termin aus. Das Probetraining ist kostenlos und unverbindlich." },
+    { "strong": "Du schließt deinen Vertrag ab", "text": "Gefällt es dir, schließt du deine Mitgliedschaft direkt im Fit-Inn ab." },
+    { "strong": "Du lädst die Fit-Inn-App und registrierst dich", "text": "Sobald dein Vertrag läuft und du in der App registriert bist, bekommt dein Freund automatisch 50 Punkte gutgeschrieben." }
+  ],
+  "importantTitle": "Wichtig: Daten wie im Vertrag",
+  "importantText": "Dein Name und deine E-Mail-Adresse müssen beim Vertragsabschluss genau so lauten wie in der Einladung (z. B. gleicher Vor- und Nachname). Nur dann können wir die Einladung zuordnen und die Punkte gutschreiben.",
+  "membersTitle": "Du bist Mitglied und willst jemanden einladen?",
+  "membersText": "Öffne in der Fit-Inn-App „Freunde werben“, trage Vorname, Nachname und E-Mail deines Freundes ein und schick ihm die Einladung. Ist die Person schon aktives Mitglied, ist keine Einladung möglich. Du bekommst 50 Punkte, sobald dein Freund Vertrag und App-Registrierung abgeschlossen hat. In der App können sich nur aktive Mitglieder anmelden.",
+  "faqKicker": "Kurz beantwortet",
+  "faqTitle": "Häufige Fragen",
+  "faq": [
+    { "q": "Kostet das Probetraining etwas?", "a": "Nein. Das Probetraining ist kostenlos und unverbindlich und dauert rund 90 Minuten, mit oder ohne Trainer." },
+    { "q": "Muss ich danach Mitglied werden?", "a": "Nein. Du entscheidest in Ruhe, ob das Fit-Inn zu dir passt." },
+    { "q": "Ab welchem Alter kann ich kommen?", "a": "Das Probetraining und neue Mitgliedschaften gibt es ab 18 Jahren." },
+    { "q": "Warum muss mein Name genau wie in der Einladung sein?", "a": "Wir ordnen deinen Vertrag anhand der Einladungsdaten zu. Stimmen Vor- und Nachname nicht überein, kann das Mitglied die Punkte nicht automatisch erhalten." },
+    { "q": "Ich bin schon Mitglied – kann ich eingeladen werden?", "a": "Nein. Eine Einladung ist nur für Personen möglich, die noch keinen aktiven Vertrag im Fit-Inn haben." },
+    { "q": "Wann kann ich die Fit-Inn-App nutzen?", "a": "In der App können sich nur aktive Mitglieder anmelden – also sobald dein Vertrag läuft." },
+    { "q": "Lieber telefonisch buchen?", "a": "Gern: 0651 493 688 19. Wir sind in Trier-Feyen, Auf Hirtenberg 8." }
+  ]
+}
