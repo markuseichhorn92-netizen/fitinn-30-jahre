@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
 import Wizard from '@/sections/11-wizard';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { FreundeHero, FreundeInfo } from '@/sections/15-freunde';
 
 import hero from '@/content/01-hero.json';
@@ -44,6 +45,7 @@ export default function Page() {
       <FreundeInfo {...freunde} />
       <Footer {...footer} />
       <Wizard {...wizard} noteSource={note} />
+      <WhatsAppFloat base={(footer as any).whatsappBase} text="Hallo Lena, ich wurde von einem Freund eingeladen und habe eine Frage zum Probetraining" place="freunde-float" />
     </main>
   );
 }
