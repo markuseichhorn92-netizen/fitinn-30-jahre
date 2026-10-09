@@ -2,7 +2,6 @@
   "fullHeight": false,
   "anchorId": "angebot",
   "bgColor": "var(--color-kit-dark)",
-  "eyebrow": "Das Angebot",
   "headlineSpar": "Deine Ersparnis sinkt jeden Tag.",
   "textSpar": "Bis 31.12. zahlst du 5 € pro Woche, ab Januar deinen regulären Tarif. Wer früher startet, hat mehr 5-€-Wochen.",
   "ctaLabel": "Kostenloses Probetraining buchen",
@@ -41,49 +40,7 @@
       "weeks": 104
     }
   ],
-  "inclTitle": "In jeder Mitgliedschaft enthalten",
-  "included": [
-    {
-      "icon": "club",
-      "title": "Komplette Clubnutzung",
-      "text": "Über 100 Geräte auf zwei Etagen: Kraft, Cardio und Powerbereich unter einem Dach."
-    },
-    {
-      "icon": "heart",
-      "title": "Gesundheits-Check-up",
-      "text": "Mit Körperanalyse, damit du weißt, wo du startest."
-    },
-    {
-      "icon": "person",
-      "title": "Einweisung an jedem Gerät",
-      "text": "Persönlich, von Menschen, die dich beim Namen kennen."
-    },
-    {
-      "icon": "plan",
-      "title": "Trainingspläne",
-      "text": "Individuell erstellt und digital gespeichert."
-    },
-    {
-      "icon": "app",
-      "title": "TechnoGym App",
-      "text": "Dein Plan und jede Einheit immer auf dem Handy."
-    },
-    {
-      "icon": "screen",
-      "title": "Cardio-Entertainment",
-      "text": "Bildschirme an den Cardio-Geräten."
-    },
-    {
-      "icon": "drink",
-      "title": "Mineralgetränke",
-      "text": "So viel du beim Training brauchst."
-    },
-    {
-      "icon": "wifi",
-      "title": "WLAN, Duschen, Umkleiden",
-      "text": "Alles da, alles gepflegt."
-    }
-  ],
+  "inclTitle": "Immer dabei",
   "hinweise": [
     {
       "text": "Einmalig 39 € Aktivierungsgebühr, Einzug 14-täglich per SEPA."
@@ -101,5 +58,5 @@
   "andLabel": "und unsere",
   "houseLabel": "Hausordnung",
   "houseHref": "https://fit-inn-trier.de/hausordnung",
-  "bgDeco": "euro"
+  "inclLine": "Komplette Clubnutzung, Gesundheits-Check-up mit Körperanalyse, Einweisung an jedem Gerät, individuelle Trainingspläne, TechnoGym App, Mineralgetränke, WLAN, Duschen und Umkleiden."
 }

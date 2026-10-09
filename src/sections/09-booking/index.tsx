@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Deco from '@siteui/deco';
 import './styles.css';
 
 // Einstieg in die Buchung: nächste freie Termine als Schnellwahl + Button. Die eigentliche
@@ -24,10 +23,8 @@ export default function FitInnBooking(props: any) {
   const telHref = 'tel:+49' + String(contactPhone).replace(/\s/g, '').replace(/^0/, '');
   return (
     <section id="anmeldung" className="fi-cta" style={{ background: bgColor }}>
-      {bgDeco ? <Deco kind={String(bgDeco)} className="fi-cta__bgword" /> : null}
       <div className="fi-cta__inner is-visible">
         <div>
-          <span className="fi-cta__eyebrow">{eyebrow}</span>
           <h2 className="fi-cta__headline">{headline}</h2>
           <p className="fi-cta__sub">{subheadline}</p>
           <div className="fi-cta__contact">

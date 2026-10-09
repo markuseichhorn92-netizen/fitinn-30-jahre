@@ -364,7 +364,7 @@
 }
 
 /* Einblenden per CSS: startet mit dem ersten Bild, ohne auf JavaScript zu warten (schneller LCP) */
-.in { animation: heroIn var(--t, 0.7s) cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+.in { animation: none; }
 @keyframes heroIn { from { opacity: 0.001; transform: translateY(var(--y, 16px)); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .in { animation: none; } }
 
@@ -401,4 +401,14 @@
   .facts { padding-top: 14px; }
 }
 @media (min-width: 768px) { .subShort { display: none; } }
-@media (max-width: 767px) { .copy > div:first-child > * { font-size: 12px; letter-spacing: 0.04em; line-height: 1.25; } }
+
+
+/* Prüfbares Vertrauen direkt unter der Überschrift, Hinweis unter dem Button */
+.trust { margin: 0; font-size: 17px; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: 0.01em; }
+a.trust:hover { text-decoration: underline; }
+.ctaNote { margin: -14px 0 0; max-width: 560px; font-size: 15px; line-height: 1.4; opacity: 0.78; }
+@media (max-width: 1023px) { .ctaNote { order: 2; margin: 0; } }
+@media (max-width: 767px) { .trust { font-size: 15px; } .ctaNote { font-size: 13px; margin-top: -4px; } }
+@media (max-width: 767px) { .ctas > * { box-sizing: border-box; padding-left: 18px; padding-right: 18px; font-size: 17px; } }
+.trust, .ctaNote { text-align: left; }
+.trustWrap, .ctaNote { align-self: stretch; }

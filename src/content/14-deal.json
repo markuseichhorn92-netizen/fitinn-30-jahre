@@ -3,20 +3,18 @@
     "title": "Der Fit-Inn Deal: 5 € pro Woche bis Silvester | Fit-Inn Trier",
     "description": "Bis 31.12.2026 für 5 € pro Woche trainieren – nur für die ersten 25 Neuanmeldungen. Kostenloses Probetraining im Fit-Inn Trier buchen."
   },
-  "badge": "Herbst-Deal · nur 25 Plätze",
   "kicker": "Der Fit-Inn Deal",
   "price": "5 €",
   "priceUnit": "pro Woche",
-  "strike": "statt 12 €",
+  "strike": "später 12 € (Basic) bzw. 9 € (Premium)",
   "until": "bis Silvester",
   "subline": "Bis 31.12.2026 trainierst du für 5 € die Woche – an TechnoGym-Geräten, mit Trainern, die deinen Namen kennen. Nur für die ersten 25 Neuanmeldungen.",
-  "primaryLabel": "Jetzt Platz sichern",
-  "secondaryLabel": "Wie funktioniert der Deal?",
-  "heroNote": "Zzgl. einmalig 39 € Aktivierungsgebühr · Neumitglieder ab 18 Jahren",
+  "primaryLabel": "Kostenloses Probetraining buchen",
+  "heroNote": "Rund 90 Minuten, kostenlos und unverbindlich. Den 5-€-Preis schließt du nach dem Probetraining vor Ort ab. Zzgl. einmalig 39 € Aktivierungsgebühr · Neumitglieder ab 18 Jahren.",
   "pillars": [
     {
       "title": "Günstig",
-      "text": "5 € pro Woche bis 31.12. – statt 12\u00a0€ bzw. 9\u00a0€. Je früher du startest, desto mehr Wochen bekommst du zum Deal-Preis."
+      "text": "5 € pro Woche bis 31.12. – danach 12 € (Basic) bzw. 9 € (Premium). Je früher du startest, desto mehr Wochen bekommst du zum Deal-Preis."
     },
     {
       "title": "Persönlich",
@@ -27,15 +25,33 @@
       "text": "Erst kostenlos probetrainieren, dann in Ruhe entscheiden. Alle Bedingungen stehen offen auf dieser Seite."
     }
   ],
-  "dealKicker": "Klartext",
+  "dealKicker": "",
   "dealTitle": "Wie funktioniert der Deal?",
   "dealSteps": [
-    { "strong": "Bis 31.12.2026: 5 € pro Woche", "text": "Ab deinem Vertragsbeginn – in beiden Tarifen." },
-    { "strong": "Ab 01.01.2027: dein regulärer Tarif", "text": "12 € pro Woche (Basic, 52 Wochen) oder 9 € pro Woche (Premium, 104 Wochen)." },
-    { "strong": "Die Aktionswochen zählen zur Laufzeit", "text": "Die Laufzeit beginnt mit dem Vertragsbeginn – es hängt nichts hinten dran." },
-    { "strong": "Abbuchung alle 14 Tage", "text": "Per SEPA-Lastschrift: bis Silvester 10 €, danach 24 € (Basic) bzw. 18 € (Premium)." },
-    { "strong": "Einmalig 39 € Aktivierungsgebühr", "text": "Sonst keine versteckten Kosten." },
-    { "strong": "Nur die ersten 25 Neuanmeldungen", "text": "Für Neumitglieder ab 18 Jahren, nicht mit anderen Aktionen kombinierbar." }
+    {
+      "strong": "Bis 31.12.2026: 5 € pro Woche",
+      "text": "Ab deinem Vertragsbeginn – in beiden Tarifen."
+    },
+    {
+      "strong": "Ab 01.01.2027: dein regulärer Tarif",
+      "text": "12 € pro Woche (Basic, 52 Wochen) oder 9 € pro Woche (Premium, 104 Wochen)."
+    },
+    {
+      "strong": "Die Aktionswochen zählen zur Laufzeit",
+      "text": "Die Laufzeit beginnt mit dem Vertragsbeginn – es hängt nichts hinten dran."
+    },
+    {
+      "strong": "Abbuchung alle 14 Tage",
+      "text": "Per SEPA-Lastschrift: bis Silvester 10 €, danach 24 € (Basic) bzw. 18 € (Premium)."
+    },
+    {
+      "strong": "Einmalig 39 € Aktivierungsgebühr",
+      "text": "Sonst keine versteckten Kosten."
+    },
+    {
+      "strong": "Nur die ersten 25 Neuanmeldungen",
+      "text": "Für Neumitglieder ab 18 Jahren, nicht mit anderen Aktionen kombinierbar."
+    }
   ],
   "inclTitle": "Immer inklusive",
   "included": [
@@ -47,8 +63,9 @@
     "Mineralgetränke",
     "WLAN, Duschen, Umkleiden"
   ],
-  "dealCta": "Jetzt Platz reservieren",
+  "dealCta": "Kostenloses Probetraining buchen",
   "dealCtaHint": "Erst kostenloses Probetraining, dann entscheiden.",
-  "stickyLabel": "Platz sichern",
-  "stickyNote": "Heute starten: bis zu {x} € sparen"
+  "stickyLabel": "Kostenloses Probetraining",
+  "stickyNote": "Heute starten: bis zu {x} € sparen",
+  "trustLine": "★ 4,8 bei Google · über 250 Bewertungen"
 }

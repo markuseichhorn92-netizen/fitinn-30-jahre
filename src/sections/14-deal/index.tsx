@@ -4,16 +4,13 @@
 // Texte in src/content/14-deal.json; Preise/Datum wie auf der Startseite (03-angebot.json).
 import NextImage from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 import Button from '@siteui/button';
 import { mediaUrl } from '@siteui/image';
 import styles from './styles.module.css';
 
-const ease = [0.22, 1, 0.36, 1] as any;
 const DAY = 86400000;
 const dayTs = (s: string) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1).getTime(); };
 const fill = (tpl: string, v: Record<string, string | number>) => String(tpl).replace(/\{(\w+)\}/g, (_, k) => (k in v ? String(v[k]) : ''));
-const rise = (i = 0) => ({ initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '0px 0px 120px 0px' }, transition: { duration: 0.45, ease, delay: i * 0.07 } });
 
 const Check = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
@@ -23,8 +20,8 @@ export default function Deal(props: any) {
   const {
     bgImage, logo, logoAlt, logoHref, phoneLabel, phoneHref, features,
     promoStart, priceUntil, promoWeekly, regularMax,
-    badge, kicker, price, priceUnit, strike, until, subline, primaryLabel, secondaryLabel, heroNote,
-    pillars, dealKicker, dealTitle, dealSteps, inclTitle, included, dealCta, dealCtaHint, stickyLabel, stickyNote,
+    kicker, trustLine, price, priceUnit, strike, until, subline, primaryLabel, heroNote,
+    pillars, dealTitle, dealSteps, inclTitle, included, dealCta, dealCtaHint, stickyLabel, stickyNote,
   } = props;
 
   // Ersparnis heute (Basic): Tage bis Silvester × (regulär − Aktion) / 7 – gleiche Rechnung wie im Hero der Startseite.
@@ -55,16 +52,15 @@ export default function Deal(props: any) {
         {bgImage?.src ? <NextImage className={styles.heroImg} src={mediaUrl(bgImage.src)} alt="" fill priority fetchPriority="high" quality={85} sizes="100vw" /> : null}
         <div className={styles.heroShade} aria-hidden="true" />
         <div className={styles.topbar}>
-          <a href={logoHref} className={styles.logoLink}>
-            {logo?.src ? <NextImage className={styles.logo} src={mediaUrl(logo.src)} alt={logoAlt} width={2917} height={486} sizes="200px" priority /> : logoAlt}
-          </a>
+          {(() => {
+            const img = logo?.src ? <NextImage className={styles.logo} src={mediaUrl(logo.src)} alt={logoAlt} width={2917} height={486} sizes="200px" priority /> : logoAlt;
+            // Während der Aktion kein Link zur Hauptseite: führt weg von der Anmeldung
+            return logoHref ? <a href={logoHref} className={styles.logoLink}>{img}</a> : <span className={styles.logoLink}>{img}</span>;
+          })()}
           {phoneLabel ? <a className={styles.phone} href={phoneHref}>{phoneLabel}</a> : null}
         </div>
         <div className={styles.heroInner}>
-          <motion.span className={styles.badge} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-            <span className={styles.pulse} aria-hidden="true" />{badge}
-          </motion.span>
-          <motion.h1 className={styles.h1} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.08 }}>
+          <h1 className={styles.h1}>
             <span className={styles.kicker}>{kicker}</span>
             <span className={styles.priceRow}>
               <span className={styles.price}>{price}</span>
@@ -74,12 +70,12 @@ export default function Deal(props: any) {
               </span>
             </span>
             <span className={styles.until}>{until}</span>
-          </motion.h1>
-          <motion.p className={styles.subline} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.16 }}>{subline}</motion.p>
-          <motion.div className={styles.ctas} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.24 }}>
+          </h1>
+          {trustLine ? <p className={styles.trust}>{trustLine}</p> : null}
+          <p className={styles.subline}>{subline}</p>
+          <div className={styles.ctas}>
             <Button href="#anmeldung" size="lg" className={styles.mainBtn} onClick={book('deal-hero')}>{primaryLabel}</Button>
-            <a className={styles.textLink} href="#deal">{secondaryLabel}</a>
-          </motion.div>
+          </div>
           <p className={styles.heroNote}>{heroNote}</p>
         </div>
       </section>
@@ -88,11 +84,10 @@ export default function Deal(props: any) {
         <div className={styles.container}>
           <ul className={styles.pillarGrid}>
             {(pillars || []).map((p: any, i: number) => (
-              <motion.li key={p.title} className={styles.pillar} {...rise(i)}>
-                <span className={styles.pillarIcon}><Check /></span>
+              <li key={p.title} className={styles.pillar}>
                 <strong className={styles.pillarTitle}>{p.title}</strong>
                 <p>{p.text}</p>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </div>
@@ -101,7 +96,6 @@ export default function Deal(props: any) {
       <section id="deal" className={styles.deal}>
         <div className={`${styles.container} ${styles.dealGrid}`}>
           <div className={styles.dealHead}>
-            <span className={styles.dealKicker}>{dealKicker}</span>
             <h2 className={styles.h2}>{dealTitle}</h2>
             <div className={styles.bigSave}>
               <span>Heute starten, bis zu</span>
@@ -112,10 +106,9 @@ export default function Deal(props: any) {
           <div className={styles.dealBody}>
             <ol className={styles.steps}>
               {(dealSteps || []).map((s: any, i: number) => (
-                <motion.li key={s.strong} {...rise(i)}>
-                  <span className={styles.stepNo}>{String(i + 1).padStart(2, '0')}</span>
+                <li key={s.strong}>
                   <span><strong>{s.strong}</strong><span className={styles.stepText}>{s.text}</span></span>
-                </motion.li>
+                </li>
               ))}
             </ol>
             <div className={styles.incl}>
@@ -136,7 +129,7 @@ export default function Deal(props: any) {
         <section className={styles.stats} aria-label="Fit-Inn in Zahlen">
           <ul className={styles.container}>
             {features.map((f: any, i: number) => (
-              <motion.li key={f.strong} {...rise(i)}><strong>{f.strong}</strong><span>{f.text}</span></motion.li>
+              <li key={f.strong}><strong>{f.strong}</strong><span>{f.text}</span></li>
             ))}
           </ul>
         </section>

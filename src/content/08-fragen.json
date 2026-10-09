@@ -1,9 +1,8 @@
 {
   "anchorId": "fragen",
   "bgColor": "var(--color-kit-white)",
-  "bgDeco": "question",
   "kicker": "Frag einfach",
-  "headline": "Deine Frage. Sofort beantwortet.",
+  "headline": "Deine Fragen, kurz beantwortet.",
   "intro": "Tipp auf eine Frage oder stell deine eigene – Lena, unsere digitale Assistentin, antwortet direkt hier.",
   "finnApi": "https://mitglieder.fit-inn-trier.de/api/finn/public",
   "maxChars": 800,
@@ -49,6 +48,10 @@
     {
       "question": "Basic oder Premium – was passt zu mir?",
       "answer": "Basic läuft 52 Wochen und kostet ab Januar 12 € pro Woche. Premium läuft 104 Wochen und ist mit 9 € pro Woche die günstigste Woche. Bis Silvester zahlst du in beiden Fällen 5 €. Wer länger dabei bleiben will, fährt mit Premium günstiger."
+    },
+    {
+      "question": "Wie lange läuft der Vertrag und wie kündige ich?",
+      "answer": "Basic läuft 52 Wochen, Premium 104 Wochen. Die Aktionswochen zählen zur Laufzeit. Danach läuft die Mitgliedschaft auf unbestimmte Zeit weiter. Kündigungsfrist: [KÜNDIGUNGSFRIST VON MARKUS BESTÄTIGEN]. Gesamtbetrag in der Erstlaufzeit inklusive 39 € Aktivierungsgebühr: [GESAMTPREIS VON MARKUS BESTÄTIGEN]."
     },
     {
       "question": "Wie läuft das Probetraining ab?",

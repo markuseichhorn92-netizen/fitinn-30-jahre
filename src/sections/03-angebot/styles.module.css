@@ -201,3 +201,6 @@
 }
 @media (max-width: 1023px) { .bgDeco { width: 340px; height: 340px; right: -70px; } }
 @media (max-width: 767px) { .bgDeco { width: 230px; height: 230px; top: -10px; right: -50px; } }
+
+.inclLine { margin: 28px 0 0; max-width: 820px; font-size: 16px; line-height: 1.55; opacity: 0.85; }
+.inclLine strong { font-weight: 700; }

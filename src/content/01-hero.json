@@ -12,7 +12,7 @@
     "name": "fitinn-logo-white.png"
   },
   "logoAlt": "Fit-Inn Trier",
-  "logoHref": "https://fit-inn-trier.de",
+  "logoHref": "",
   "topPhoneLabel": "0651 493 688 19",
   "topPhoneHref": "tel:+4965149368819",
   "showTopPhone": true,
@@ -21,16 +21,15 @@
   "stickyNoteSpar": "Bis zu {x} € sparen",
   "stickyChatLabel": "Chat mit Lena öffnen",
   "showSticky": true,
-  "eyebrowSpar": "Trier-Feyen · familiengeführt seit 1996",
-  "hlTopSpar": "Fünf Euro pro Woche.",
-  "hlAccentSpar": "Bis Silvester.",
-  "sublineShort": "An computergesteuerten TechnoGym-Geräten, mit Trainern, die deinen Namen kennen.",
-  "sublineSpar": "Bis Silvester für 5 € pro Woche trainieren – an computergesteuerten TechnoGym-Geräten, mit Trainern, die deinen Namen kennen.",
-  "primaryLabel": "Kostenloses Probetraining",
+  "hlTopSpar": "Training, das dich kennt.",
+  "hlAccentSpar": "5 € pro Woche bis Silvester.",
+  "sublineShort": "Geführtes Gerätetraining im Fit-Inn Trier. Für alle ab 18, auch nach Jahren ohne Sport.",
+  "sublineSpar": "Geführtes Gerätetraining im Fit-Inn Trier. Für alle ab 18, auch nach Jahren ohne Sport.",
+  "primaryLabel": "Kostenloses Probetraining buchen",
   "primaryHref": "#anmeldung",
   "secondaryLabel": "Angebot ansehen",
   "secondaryHref": "#angebot",
-  "showSecondary": true,
+  "showSecondary": false,
   "ribbonSpar": "Nur für die ersten 25",
   "priceValue": "5",
   "currency": "€",
@@ -60,17 +59,13 @@
       "text": "familiengeführt"
     },
     {
-      "strong": "7.000+",
-      "text": "zufriedene Kunden"
-    },
-    {
-      "strong": "4,8 ★",
-      "text": "bei Google bewertet"
-    },
-    {
       "strong": "TechnoGym",
       "text": "computergesteuert"
     }
   ],
-  "factsLabel": "Kurz erklärt"
+  "factsLabel": "",
+  "_hinweisVarianteB": "Variante B zum Testen: „Fit werden in Trier-Feyen – 5 € pro Woche bis Silvester.“ (hlTopSpar/hlAccentSpar tauschen)",
+  "trustLine": "★ 4,8 bei Google · über 250 Bewertungen",
+  "trustHref": "",
+  "primaryNote": "Rund 90 Minuten, kostenlos und unverbindlich. Den 5-€-Preis schließt du nach dem Probetraining vor Ort ab."
 }

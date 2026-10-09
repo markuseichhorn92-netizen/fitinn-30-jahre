@@ -2,7 +2,6 @@
   "fullHeight": false,
   "anchorId": "stimmen",
   "bgColor": "var(--color-kit-black)",
-  "eyebrow": "Google-Bewertungen",
   "title": "Nicht wir sagen das.",
   "source": "Wörtlich aus öffentlichen Google-Bewertungen",
   "quotes": [
@@ -19,6 +18,5 @@
       "author": "Thomas Müller"
     }
   ],
-  "stars": true,
-  "bgDeco": "stars"
+  "stars": true
 }

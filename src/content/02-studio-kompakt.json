@@ -1,0 +1,14 @@
+{
+  "fullHeight": false,
+  "anchorId": "geraete",
+  "bgColor": "var(--color-kit-white)",
+  "image": {
+    "src": "media/1266cf3a-3b28-4752-ab90-ed9fc97d5583",
+    "name": "fitinn-studio-2.avif"
+  },
+  "headline": "Über 100 Geräte auf zwei Etagen.",
+  "intro": "Kraft, Cardio und Freihantelbereich unter einem Dach. An jedem Gerät zeigt dir jemand, wie es geht.",
+  "imageAlt": "Trainingsbereich mit Geräten von TechnoGym im Fit-Inn Trier",
+  "imageCaption": "Echte Aufnahme unserer Trainingsfläche",
+  "bereicheLine": "Biocircuit · Biostrength · Cardio · Powerbereich"
+}

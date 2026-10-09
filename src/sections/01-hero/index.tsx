@@ -1,17 +1,14 @@
 'use client';
 import NextImage from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
 import Button from '@siteui/button';
-import Badge from '@siteui/badge';
 import { mediaUrl } from '@siteui/image';
 import { funnel } from '@/lib/funnel';
 import { CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
 
-const ease = [0.22, 1, 0.36, 1] as any;
 const DAY = 86400000;
 const dayTs = (s: string) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1).getTime(); };
 const fill = (tpl: string, v: Record<string, string | number>) => String(tpl).replace(/\{(\w+)\}/g, (_, k) => (k in v ? String(v[k]) : ''));
@@ -20,8 +17,8 @@ export default function Hero({
   fullHeight, bgImage, overlayStrength, bgColor, showGrid,
   logo, logoAlt, logoHref, topPhoneLabel, topPhoneHref, showTopPhone,
   stickyLabel, stickyHref, stickyNoteSpar, showSticky, stickyChatLabel,
-  eyebrowSpar, hlTopSpar, hlAccentSpar, sublineSpar, sublineShort,
-  primaryLabel, primaryHref, secondaryLabel, secondaryHref, showSecondary,
+  hlTopSpar, hlAccentSpar, trustLine, trustHref, sublineSpar, sublineShort,
+  primaryLabel, primaryHref, primaryNote, secondaryLabel, secondaryHref, showSecondary,
   ribbonSpar, priceValue, currency, priceUnit, durationSpar, heroSaveText, heroSaveHint, priceListSpar, priceNote,
   promoStart, priceUntil, promoWeekly, regularMax,
   features, factsLabel,
@@ -40,24 +37,31 @@ export default function Hero({
   const [stickyOn, setStickyOn] = useState(false);
   useEffect(() => { document.body.classList.toggle('fi-sticky-on', stickyOn); return () => document.body.classList.remove('fi-sticky-on'); }, [stickyOn]);
   const heroRef = useRef<HTMLElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!showSticky) return;
     let targetVisible = false;
+    let ctaVisible = false;
     const target = typeof document !== 'undefined' && stickyHref && stickyHref.startsWith('#')
       ? document.getElementById(stickyHref.slice(1))
       : null;
-    // Handy: Leiste von Anfang an (nur ausgeblendet, solange das Buchungsformular im Bild ist)
-    const update = () => setStickyOn(!targetVisible);
+    // Handy: Leiste erst, wenn der Hero-Button aus dem Bild ist (ein Button pro Bildschirm); weg, solange das Buchungsformular im Bild ist
+    const update = () => setStickyOn(!targetVisible && !ctaVisible);
+    const heroBtn = ctasRef.current?.querySelector('a,button');
     let obs: IntersectionObserver | null = null;
+    let obsCta: IntersectionObserver | null = null;
     if (target && 'IntersectionObserver' in window) {
       obs = new IntersectionObserver(([e]) => { targetVisible = e.isIntersecting; update(); }, { threshold: 0.05 });
       obs.observe(target);
     }
+    if (heroBtn && 'IntersectionObserver' in window) {
+      obsCta = new IntersectionObserver(([e]) => { ctaVisible = e.isIntersecting; update(); }, { threshold: 0.2 });
+      obsCta.observe(heroBtn);
+    }
     update();
-    return () => { if (obs) obs.disconnect(); };
+    return () => { if (obs) obs.disconnect(); if (obsCta) obsCta.disconnect(); };
   }, [showSticky, stickyHref]);
 
-  const ctasRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const btn = ctasRef.current?.querySelector('a,button');
     if (!btn || !('IntersectionObserver' in window)) return;
@@ -93,11 +97,13 @@ export default function Hero({
       <div className={styles.grain} aria-hidden="true" />
 
       <div className={styles.topbar}>
-        <a className={styles.logoLink} href={logoHref}>
-          {logo && logo.src ? (
+        {(() => {
+          const img = logo && logo.src ? (
             <NextImage className={styles.logo} src={mediaUrl(logo.src)} alt={logoAlt} width={2917} height={486} quality={85} sizes="240px" priority />
-          ) : null}
-        </a>
+          ) : null;
+          // Während der Aktion kein Link zur Hauptseite: führt weg von der Anmeldung
+          return logoHref ? <a className={styles.logoLink} href={logoHref}>{img}</a> : <span className={styles.logoLink}>{img}</span>;
+        })()}
         {showTopPhone ? (
           <a className={styles.topPhone} href={topPhoneHref} aria-label={topPhoneLabel}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
@@ -108,15 +114,17 @@ export default function Hero({
 
       <div className={styles.container}>
         <div className={styles.copy}>
-          <div className={`${styles.in}`} style={{ ['--d' as any]: '0s', ['--y' as any]: '16px', ['--t' as any]: '0.6s' }}>
-            <Badge tone="accent" dot>{eyebrowSpar}</Badge>
-          </div>
-
           <div className={`${styles.in}`} style={{ ['--d' as any]: '0.1s', ['--y' as any]: '28px', ['--t' as any]: '0.8s' }}>
             <Title as="h1" size="xxl" className={styles.headline}>
               {hlTopSpar} <em className={styles.accentLine}>{hlAccentSpar}</em>
             </Title>
           </div>
+
+          {trustLine ? (
+            <div className={`${styles.in} ${styles.trustWrap}`} style={{ ['--d' as any]: '0.16s', ['--y' as any]: '0px', ['--t' as any]: '0.4s' }}>
+              {trustHref ? <a className={styles.trust} href={trustHref} target="_blank" rel="noopener noreferrer">{trustLine}</a> : <p className={styles.trust}>{trustLine}</p>}
+            </div>
+          ) : null}
 
           <div className={`${styles.in}`} style={{ ['--d' as any]: '0.22s', ['--y' as any]: '20px', ['--t' as any]: '0.7s' }}>
             <Text size="lg" muted className={styles.sub}>
@@ -129,9 +137,10 @@ export default function Hero({
             <Button href={primaryHref} size="lg" onClick={(e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source: 'hero' } })); }}>{primaryLabel}</Button>
             {showSecondary ? <Button href={secondaryHref} size="lg" variant="ghost">{secondaryLabel}</Button> : null}
           </div>
+          {primaryNote ? <p className={styles.ctaNote}>{primaryNote}</p> : null}
 
           <div className={`${styles.in} ${styles.facts}`} style={{ ['--d' as any]: '0.5s', ['--y' as any]: '0px', ['--t' as any]: '0.8s' }}>
-            <span className={styles.factsLabel}>{factsLabel}</span>
+            {factsLabel ? <span className={styles.factsLabel}>{factsLabel}</span> : null}
             <ul className={styles.factList}>
               {(features || []).map((f: any, i: number) => (
                 <li key={i} className={styles.fact}>
@@ -143,12 +152,7 @@ export default function Hero({
           </div>
         </div>
 
-        <motion.div
-          className={styles.priceWrap}
-          initial={{ opacity: 0, scale: 0.92, rotate: -4 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease }}
-        >
+        <div className={styles.priceWrap}>
           <div className={styles.ring} aria-hidden="true" />
           <div className={styles.priceCard}>
             <span className={styles.ribbon}>{ribbonSpar}</span>
@@ -164,7 +168,7 @@ export default function Hero({
               <div className={styles.saveBox}>
                 <strong>{fill(heroSaveText, { x: saveToday })}</strong>
                 <span className={styles.saveTrack} aria-hidden="true">
-                  <motion.span className={styles.saveFill} initial={{ width: '100%' }} animate={{ width: `${Math.max(3, (saveToday / saveMax) * 100)}%` }} transition={{ duration: 1.4, delay: 0.6, ease }} />
+                  <span className={styles.saveFill} style={{ width: `${Math.max(3, (saveToday / saveMax) * 100)}%` }} />
                 </span>
                 {heroSaveHint ? <span className={styles.saveHint}>{fill(heroSaveHint, { morgen: saveTomorrow })}</span> : null}
               </div>
@@ -181,7 +185,7 @@ export default function Hero({
             </ul>
             <Text size="xs" muted className={styles.note}>{priceNote}</Text>
           </div>
-        </motion.div>
+        </div>
       </div>
       {showSticky ? (
         <div className={`${styles.sticky} ${stickyOn ? styles.stickyOn : ''}`} aria-hidden={!stickyOn}>

@@ -3,9 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Title from '@siteui/title';
 import Text from '@siteui/text';
-import Badge from '@siteui/badge';
 import Chip from '@siteui/chip';
-import Deco from '@siteui/deco';
 import { pickChoices, detectTopic } from '@/lib/choices';
 import styles from './styles.module.css';
 import { RichText } from '@/lib/richText';
@@ -29,7 +27,7 @@ const fill = (t: string, v: Record<string, string>) => String(t).replace(/\{(\w+
 
 export default function Fragen(props: any) {
   const {
-    anchorId, bgColor, bgDeco, kicker, headline, intro, finnApi, maxChars, botName,
+    anchorId, bgColor, kicker, headline, intro, finnApi, maxChars, botName,
     verifiedLabel, aiLabel, followLabel, inputLabel, inputPlaceholder, sendLabel, thinkingLabel, errorText,
     phoneLabel, phoneHref, continueLabel, continueIntro, bookLabel, bookHref, clearLabel, disclosure, privacyLabel, privacyHref, fragen, context, variant, leadLabel, lead, booked, whatsappLabel, whatsappBase, whatsappText,
   } = props;
@@ -232,10 +230,8 @@ export default function Fragen(props: any) {
 
   return (
     <section id={anchorId} className={styles.sec} style={{ background: bgColor }}>
-      {bgDeco ? <Deco kind={String(bgDeco)} className={styles.bgDeco} /> : null}
       <div className={styles.container}>
         <div className={styles.head}>
-          <Badge tone="accent" className={styles.badge}>{kicker}</Badge>
           <Title as="h2" size="xl">{headline}</Title>
           <Text size="lg" className={styles.intro}>{intro}</Text>
         </div>
