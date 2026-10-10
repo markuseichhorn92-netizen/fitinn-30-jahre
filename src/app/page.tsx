@@ -1,34 +1,29 @@
 import FinnWidget from '@/sections/00-finn-widget';
-import Hero from '@/sections/01-hero';
-import Studio from '@/sections/02-studio-kompakt';
-import Angebot from '@/sections/03-angebot';
-import Stimmen from '@/sections/05-stimmen';
-import Fragen from '@/sections/08-fragen';
-import Booking from '@/sections/09-booking';
+import { KompaktHero, KompaktWarum, KompaktAblauf, KompaktPreis, KompaktStimmen, KompaktFragen } from '@/sections/16-kompakt';
 import Footer from '@/sections/10-footer';
 import Wizard from '@/sections/11-wizard';
 
 import finnWidget from '@/content/00-finn-widget.json';
-import hero from '@/content/01-hero.json';
-import studio from '@/content/02-studio-kompakt.json';
+import kompakt from '@/content/16-kompakt.json';
 import angebot from '@/content/03-angebot.json';
-import stimmen from '@/content/05-stimmen.json';
-import fragen from '@/content/08-fragen.json';
-import booking from '@/content/09-booking.json';
 import footer from '@/content/10-footer.json';
 import wizard from '@/content/11-wizard.json';
 
-// Reihenfolge: Hero → Angebot → Studio (kompakt) → Bewertungen → Termine/Buchung → FAQ. Rundgang, Haus und Lena-Teaser bleiben im Repo, sind aber nicht eingebunden. Texte stehen in src/content/*.json.
+// Entschlackte Startseite (Branch entschlackt): Hero → Warum → Ablauf → Preis → Stimmen → Fragen + Schluss.
+// Der Buchungsdialog (Wizard) und der Lena-Chat bleiben unverändert; /ziel und /deal nutzen weiter die bisherigen Abschnitte.
+// Lena-Hinweis nach 20 s entfällt (nur noch Leerlauf und Abbruch), damit im Lesefluss nichts aufpoppt.
+const finn = { ...finnWidget, nudgesSpar: finnWidget.nudgesSpar.filter((n: { mode: string }) => n.mode !== 'time') };
+
 export default function Page() {
   return (
     <main>
-      <FinnWidget {...finnWidget} />
-      <Hero {...hero} />
-      <Angebot {...angebot} />
-      <Studio {...studio} />
-      <Stimmen {...stimmen} />
-      <Booking {...booking} />
-      <Fragen {...fragen} />
+      <FinnWidget {...finn} />
+      <KompaktHero hero={kompakt.hero} stickyHideId="fragen" />
+      <KompaktWarum warum={kompakt.warum} />
+      <KompaktAblauf ablauf={kompakt.ablauf} />
+      <KompaktPreis preis={kompakt.preis} legal={angebot} />
+      <KompaktStimmen stimmen={kompakt.stimmen} />
+      <KompaktFragen fragen={kompakt.fragen} id="fragen" />
       <Footer {...footer} />
       <Wizard {...wizard} />
     </main>

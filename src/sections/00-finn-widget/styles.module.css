@@ -535,6 +535,8 @@
   :global(body:not(.fi-scrolled)) .launcher { padding: 6px; gap: 0; }
   :global(body:not(.fi-scrolled)) .launcherText { display: none; }
   /* Sobald die Sticky-Leiste da ist, übernimmt ihr Lena-Knopf */
+  /* Entschlackte Startseite: im ersten Bildschirm kein Lena-Knopf (ein Weg: der Buchungs-Button) */
+  :global(body.fi-slim:not(.fi-scrolled)) .launcher { display: none; }
   :global(body.fi-sticky-on) .launcher { animation: none; transform: translateY(140%); opacity: 0; pointer-events: none; visibility: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .launcherOn { animation: none; } .launcherRing { animation: none; } }

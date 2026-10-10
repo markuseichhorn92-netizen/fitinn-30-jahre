@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "logo": { "src": "media/77c4274d-cac5-4f25-88b1-15387b0fa6b9", "name": "fitinn-logo-white.png" },
+    "logoAlt": "Fit-Inn Trier",
+    "image": { "src": "media/833da1bc-191f-4c62-a865-5783d332fd28", "name": "fitinn-studio-1.avif" },
+    "imageAlt": "Trainingsfläche mit TechnoGym-Geräten im Fit-Inn Trier",
+    "phoneLabel": "0651 493 688 19",
+    "phoneHref": "tel:+4965149368819",
+    "headlineTop": "Fitnessstudio in Trier für",
+    "headlineAccent": "5 € pro Woche",
+    "chip": "Nur die ersten 25",
+    "sub": "Bis 31.12.2026 · für Neumitglieder ab 18. TechnoGym-Geräte, Trainer, die deinen Namen kennen.",
+    "cta": "Kostenloses Probetraining buchen",
+    "note": "Rund 90 Minuten · kostenlos · unverbindlich. Den Vertrag schließt du erst danach vor Ort ab.",
+    "trustLine": "★ 4,8 bei Google · über 250 Bewertungen",
+    "trustHref": "https://www.google.com/maps/search/?api=1&query=Fit-Inn+Trier+Auf+Hirtenberg+8+54296+Trier",
+    "trustSince": "Familiengeführt seit 1996 in Trier-Feyen"
+  },
+  "warum": {
+    "headline": "Training, das dich kennt",
+    "points": [
+      "Geführtes Training an computergesteuerten TechnoGym-Geräten",
+      "Einweisung an jedem Gerät, auch nach Jahren ohne Sport",
+      "Familiengeführt seit 1996. Hier kennt man deinen Namen."
+    ],
+    "inclTitle": "Das ist in jeder Mitgliedschaft drin",
+    "inclText": "Komplette Clubnutzung, Gesundheits-Check-up mit Körperanalyse, Einweisung an jedem Gerät, individuelle Trainingspläne, TechnoGym App, Mineralgetränke, WLAN, Duschen und Umkleiden."
+  },
+  "ablauf": {
+    "headline": "In 3 Schritten zum Aktionspreis",
+    "steps": [
+      { "title": "Termin wählen", "text": "Online, dauert eine Minute. Keine Zahlungsdaten nötig." },
+      { "title": "Vorbeikommen", "text": "Ein Trainer zeigt dir das Studio. Rund 90 Minuten." },
+      { "title": "Vor Ort entscheiden", "text": "Gefällt es dir, schließt du direkt vor Ort ab." }
+    ],
+    "cta": "Kostenloses Probetraining buchen"
+  },
+  "preis": {
+    "headline": "Was du zahlst",
+    "promoStart": "2026-10-01",
+    "priceUntil": "2026-12-31",
+    "activation": 39,
+    "promoWeekly": 5,
+    "promoLabel": "pro Woche bis 31.12.2026",
+    "afterLabel": "ab 2027:",
+    "perWeek": "/Woche",
+    "tarife": [
+      { "name": "Basic", "term": "52 Wochen", "regular": 12, "weeks": 52 },
+      { "name": "Premium", "term": "104 Wochen", "regular": 9, "weeks": 104 }
+    ],
+    "feeLine": "Einmalig 39 € Aktivierungsgebühr, Einzug 14-täglich per SEPA.",
+    "totalText": "Bei Abschluss heute ergibt sich rechnerisch ein Gesamtbetrag von rund {basic} € über 52 Wochen (Basic) bzw. rund {premium} € über 104 Wochen (Premium), inklusive Aktivierungsgebühr.",
+    "daysText": "Noch {tage} Tage bis 31.12. Jeder Tag früher spart dir bis zu 1 €.",
+    "legalToggle": "Alle Bedingungen lesen",
+    "expiredText": "Die Aktion ist beendet. Frag gern nach unserem aktuellen Angebot."
+  },
+  "stimmen": {
+    "headline": "Das sagen Mitglieder",
+    "source": "Wörtlich aus öffentlichen Google-Bewertungen",
+    "quotes": [
+      { "quote": "Ich bin von der Ausstattung, den Geräten und den Mitarbeitern maximal überzeugt.", "author": "Gisela T." },
+      { "quote": "Super gepflegte Geräte, nette Leute, angenehme Atmosphäre, Duschen + Getränke top.", "author": "Jana Thielen" },
+      { "quote": "Angenehmes Training, nette Menschen. Die neuen Geräte von Technogym sind super.", "author": "Thomas Müller" }
+    ]
+  },
+  "fragen": {
+    "headline": "Noch Fragen?",
+    "items": [
+      { "q": "Wie funktioniert das mit den 5 €?", "a": "Ab deinem Vertragsbeginn zahlst du bis 31.12.2026 nur 5 € pro Woche, in beiden Tarifen. Je früher du startest, desto mehr Wochen bekommst du zum Aktionspreis. Nur für die ersten 25 Neuanmeldungen." },
+      { "q": "Was kostet es ab Januar?", "a": "Ab 01.01.2027 zahlst du 12 € pro Woche (Basic, 52 Wochen) oder 9 € pro Woche (Premium, 104 Wochen). Die Aktionswochen zählen zur Laufzeit. Einmalig kommen 39 € Aktivierungsgebühr dazu." },
+      { "q": "Wie lange läuft der Vertrag und wie kündige ich?", "a": "52 Wochen (Basic) oder 104 Wochen (Premium), danach läuft er auf unbestimmte Zeit weiter. Kündigungsfrist: [KÜNDIGUNGSFRIST VON MARKUS BESTÄTIGEN]. Alle Bedingungen stehen unter „Was du zahlst“." },
+      { "q": "Bin ich zu alt oder zu unfit dafür?", "a": "Nein. Viele fangen bei uns nach Jahren ohne Sport wieder an, manche zum ersten Mal überhaupt. Du bekommst eine Einweisung an jedem Gerät und wir beginnen da, wo du stehst." },
+      { "q": "Ab welchem Alter? Gilt es auch für Bestandsmitglieder?", "a": "Neue Mitgliedschaften und das Probetraining gibt es ab 18 Jahren. Die 5 € gelten nur für Neumitglieder und sind nicht auf bestehende Verträge übertragbar." },
+      { "q": "Wann habt ihr geöffnet?", "a": "Mo–Fr 09:30–13:00 und 15:00–21:30 Uhr, Sa 13:00–18:00 Uhr, So 09:00–15:00 Uhr. An Feiertagen können die Zeiten abweichen." }
+    ],
+    "cta": "Kostenloses Probetraining buchen",
+    "note": "Rund 90 Minuten · kostenlos · unverbindlich",
+    "lenaLabel": "Noch eine Frage? Frag Lena (KI-Assistentin)"
+  }
+}
