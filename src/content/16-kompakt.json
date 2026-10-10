@@ -6,10 +6,11 @@
     },
     "logoAlt": "Fit-Inn Trier",
     "image": {
-      "src": "/media/hell/hero.webp",
-      "name": "hero.webp"
+      "src": "/media/hell/hero-echt.webp",
+      "name": "hero-echt.webp",
+      "ki": false
     },
-    "imageAlt": "Trainerin und ein Mitglied lachen gemeinsam beim Dehnen (KI-Vorschaubild)",
+    "imageAlt": "Tom aus dem Fit-Inn-Team lächelt im Studio in Trier-Feyen",
     "phoneLabel": "0651 493 688 19",
     "phoneHref": "tel:+4965149368819",
     "headlineTop": "Fitnessstudio in Trier für",
@@ -32,8 +33,9 @@
     "inclTitle": "Das ist in jeder Mitgliedschaft drin",
     "inclText": "Komplette Clubnutzung, Gesundheits-Check-up mit Körperanalyse, Einweisung an jedem Gerät, individuelle Trainingspläne, TechnoGym App, Mineralgetränke, WLAN, Duschen und Umkleiden.",
     "image": {
-      "src": "/media/hell/warum.webp",
-      "alt": "Trainerin im Gespräch mit einem Mitglied (KI-Vorschaubild)"
+      "src": "/media/hell/warum-echt.webp",
+      "alt": "Freundlicher Mann im weißen Shirt mit Notizbuch und Daumen hoch zwischen den TechnoGym-Geräten im Fit-Inn",
+      "ki": false
     }
   },
   "ablauf": {

@@ -77,7 +77,7 @@ export function KompaktHero({ hero, kiBadge, stickyHideId }: { hero: any; kiBadg
         <div className={styles.photo}>
           <NextImage src={hero.image.src} alt={hero.imageAlt} fill priority fetchPriority="high" quality={78} sizes="(max-width: 900px) 100vw, 560px" />
           <span className={styles.chipTop}>{hero.chip}</span>
-          <KiBadge label={kiBadge} />
+          {hero.image.ki !== false && <KiBadge label={kiBadge} />}
         </div>
         <div className={styles.copy}>
           <h1 className={styles.h1}>{hero.headlineTop} <em>{hero.headlineAccent}</em></h1>
@@ -104,7 +104,7 @@ export function KompaktWarum({ warum, kiBadge }: { warum: any; kiBadge: string }
         <h2 className={styles.h2}>{warum.headline}</h2>
         <div className={styles.warumPhoto}>
           <NextImage src={warum.image.src} alt={warum.image.alt} fill quality={78} sizes="(max-width: 700px) 100vw, 640px" />
-          <KiBadge label={kiBadge} />
+          {warum.image.ki !== false && <KiBadge label={kiBadge} />}
         </div>
         <ul className={styles.why}>
           {warum.points.map((p: string) => <li key={p}>{p}</li>)}
