@@ -6,11 +6,11 @@
     },
     "logoAlt": "Fit-Inn Trier",
     "image": {
-      "src": "/media/hell/hero-studio.webp",
-      "name": "hero-studio.webp",
+      "src": "/media/hell/hero-markus.webp",
+      "name": "hero-markus.webp",
       "ki": false
     },
-    "imageAlt": "Heller Trainingsbereich im Fit-Inn Trier mit Rack, Hantelscheiben und Bank",
+    "imageAlt": "Heller Geräteraum im Fit-Inn Trier mit TechnoGym-Kraftgeräten unter Holzdecke",
     "phoneLabel": "0651 493 688 19",
     "phoneHref": "tel:+4965149368819",
     "headlineTop": "Fitnessstudio in Trier für",

@@ -7,7 +7,7 @@
 .tel:focus-visible { outline: 3px solid var(--h-teal); outline-offset: 2px; }
 .telText { display: none; }
 .photo { position: relative; height: 340px; border-radius: 28px; overflow: hidden; background: var(--h-soft); }
-.photo img { object-fit: cover; object-position: 50% 12%; }
+.photo img { object-fit: cover; object-position: 62% 50%; }
 .chipTop { position: absolute; right: 12px; top: 12px; background: var(--h-coral); color: var(--h-ink); font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 999px; }
 .ki { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; background: var(--h-ink); color: #fff; font: 600 12px/1 var(--font-kit-text-font); border-radius: 999px; padding: 6px 11px 6px 9px; }
 .ki i { width: 7px; height: 7px; border-radius: 50%; background: var(--h-coral); }
