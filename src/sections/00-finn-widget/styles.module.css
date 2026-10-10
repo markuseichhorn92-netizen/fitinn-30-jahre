@@ -542,3 +542,14 @@
 @media (prefers-reduced-motion: reduce) { .launcherOn { animation: none; } .launcherRing { animation: none; } }
 .log { position: relative; }
 .bot { max-width: 92%; }
+
+/* Look „hell & warm“ (nur Startseite): Lena-Knopf in Petrol statt Cyan */
+:global(body:has([data-theme="hell"])) .launcher { box-shadow: 0 12px 30px -8px #0F7D9680, 0 0 0 1px #ffffff40; }
+:global(body:has([data-theme="hell"])) .launcher:hover { background: #0B6379; box-shadow: 0 14px 34px -8px #0F7D9699; }
+:global(body:has([data-theme="hell"])) .launcherRing { animation: none; box-shadow: none; }
+:global(body:has([data-theme="hell"])) .launcherAvatar { background: #fff; color: #0F7D96; }
+:global(body:has([data-theme="hell"])) .launcherText span { opacity: 1; }
+:global(body:has([data-theme="hell"])) .launcherChat { background: #ffffff2b; }
+@media (max-width: 767px) {
+  :global(body:has([data-theme="hell"])) .launcher { background: #0F7D96; color: #fff; box-shadow: 0 12px 30px -8px #0F7D9680; }
+}

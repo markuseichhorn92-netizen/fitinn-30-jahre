@@ -39,3 +39,10 @@
 }
 .consentBtn:hover { opacity: 1; color: var(--color-kit-key2, #3BC9E0); }
 .consentBtn:focus-visible { outline: 3px solid var(--color-kit-key2, #3BC9E0); outline-offset: 2px; }
+
+/* Look „hell & warm“ (nur Startseite): dunkler Petrol-Abschluss, helle Schrift */
+:global(body:has([data-theme="hell"])) .foot { background: #0B3341 !important; color: #F4FAFB; border-top: 0; }
+:global(body:has([data-theme="hell"])) .contact a, :global(body:has([data-theme="hell"])) .links a, :global(body:has([data-theme="hell"])) .consentBtn { color: #F4FAFB; opacity: 0.92; }
+:global(body:has([data-theme="hell"])) .contact a:hover, :global(body:has([data-theme="hell"])) .links a:hover, :global(body:has([data-theme="hell"])) .consentBtn:hover { color: #fff; text-decoration: underline; opacity: 1; }
+:global(body:has([data-theme="hell"])) .contact a:focus-visible, :global(body:has([data-theme="hell"])) .links a:focus-visible, :global(body:has([data-theme="hell"])) .consentBtn:focus-visible { outline-color: #fff; }
+:global(body:has([data-theme="hell"])) .bottom { opacity: 0.8; }

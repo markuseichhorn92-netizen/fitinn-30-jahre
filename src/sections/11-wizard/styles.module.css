@@ -154,3 +154,47 @@
 /* WhatsApp als leiser Nebenweg bei Unsicherheit */
 .waHint { margin: 0; font-size: 14px; line-height: 1.4; opacity: 0.75; }
 .waHint a { color: inherit; font-weight: 700; text-underline-offset: 3px; }
+
+/* Look „hell & warm“ (nur Startseite): Creme-Dialog, Petrol-Akzent */
+:global(body:has([data-theme="hell"])) .root { color: #0B3341; }
+:global(body:has([data-theme="hell"])) .backdrop { background: #0B3341a6; }
+:global(body:has([data-theme="hell"])) .box { background: #FBF8F3; }
+@media (min-width: 768px) { :global(body:has([data-theme="hell"])) .box { box-shadow: 0 40px 100px -30px #0B3341aa; } }
+:global(body:has([data-theme="hell"])) .head { background: #FBF8F3f2; border-bottom: 1px solid #E4DED4; }
+:global(body:has([data-theme="hell"])) .close { background: #0B33410f; }
+:global(body:has([data-theme="hell"])) .progress { background: #E4DED4; }
+:global(body:has([data-theme="hell"])) .progress span { background: #0F7D96; }
+:global(body:has([data-theme="hell"])) .p, :global(body:has([data-theme="hell"])) .muted { opacity: 1; color: #3E5560; }
+:global(body:has([data-theme="hell"])) .alert { background: #FDECEA; box-shadow: inset 0 0 0 1px #E0563B66; color: #7A1F16; }
+:global(body:has([data-theme="hell"])) .recap { background: #EFF6F5; }
+:global(body:has([data-theme="hell"])) .chip, :global(body:has([data-theme="hell"])) .time, :global(body:has([data-theme="hell"])) .option, :global(body:has([data-theme="hell"])) .dayCard { background: #fff; box-shadow: inset 0 0 0 1px #E4DED4; }
+:global(body:has([data-theme="hell"])) .chipMore { opacity: 1; }
+:global(body:has([data-theme="hell"])) .option:hover, :global(body:has([data-theme="hell"])) .dayCard:hover, :global(body:has([data-theme="hell"])) .time:hover { background: #EFF6F5; }
+:global(body:has([data-theme="hell"])) .chipOn, :global(body:has([data-theme="hell"])) .timeOn, :global(body:has([data-theme="hell"])) .timeOn:hover, :global(body:has([data-theme="hell"])) .dayOn, :global(body:has([data-theme="hell"])) .dayOn:hover { background: #0F7D96; color: #fff; box-shadow: none; }
+:global(body:has([data-theme="hell"])) .optionOn { background: #EFF6F5; box-shadow: inset 0 0 0 2px #0F7D96; }
+:global(body:has([data-theme="hell"])) .dayOn .dWd, :global(body:has([data-theme="hell"])) .dayOn .dMon { opacity: 0.9; }
+:global(body:has([data-theme="hell"])) .dayOn .dCount { background: #ffffff33; color: #fff; }
+:global(body:has([data-theme="hell"])) .dCount { background: #EFF6F5; }
+:global(body:has([data-theme="hell"])) .dWd, :global(body:has([data-theme="hell"])) .dMon, :global(body:has([data-theme="hell"])) .groupLabel, :global(body:has([data-theme="hell"])) .slotLabel { opacity: 1; color: #54686F; }
+:global(body:has([data-theme="hell"])) .dayOn .dWd, :global(body:has([data-theme="hell"])) .dayOn .dMon { color: #fff; }
+:global(body:has([data-theme="hell"])) .finn, :global(body:has([data-theme="hell"])) .plan { background: #EFF6F5; box-shadow: inset 0 0 0 1px #E4DED4; }
+:global(body:has([data-theme="hell"])) .finnAvatar, :global(body:has([data-theme="hell"])) .doneIcon { background: #0F7D96; color: #fff; }
+:global(body:has([data-theme="hell"])) .seg button { border-color: #CFC8BB; background: #fff; }
+:global(body:has([data-theme="hell"])) .seg .segOn { background: #EFF6F5; border-color: #0F7D96; }
+:global(body:has([data-theme="hell"])) .field input, :global(body:has([data-theme="hell"])) .textarea { border-color: #CFC8BB; background: #fff; color: #0B3341; color-scheme: light; }
+:global(body:has([data-theme="hell"])) .field input:focus, :global(body:has([data-theme="hell"])) .textarea:focus { box-shadow: 0 0 0 3px #0F7D9633; }
+:global(body:has([data-theme="hell"])) .field span, :global(body:has([data-theme="hell"])) .seg legend { opacity: 1; color: #3E5560; }
+:global(body:has([data-theme="hell"])) .check input { accent-color: #0F7D96; }
+:global(body:has([data-theme="hell"])) .foot { background: #FBF8F3f2; border-top: 1px solid #E4DED4; }
+:global(body:has([data-theme="hell"])) .primary { background: #0F7D96; color: #fff; }
+:global(body:has([data-theme="hell"])) .primary:disabled { background: #E4DED4; color: #54686F; box-shadow: none; }
+:global(body:has([data-theme="hell"])) .ghost { opacity: 1; }
+:global(body:has([data-theme="hell"])) .perks li { background: #EFF6F5; }
+:global(body:has([data-theme="hell"])) .perks li::before, :global(body:has([data-theme="hell"])) .plan li::before { background-color: #0F7D96; filter: none; }
+:global(body:has([data-theme="hell"])) .optIcon { background: #EFF6F5; }
+:global(body:has([data-theme="hell"])) .optionOn .optIcon { background: #fff; color: #0F7D96; }
+:global(body:has([data-theme="hell"])) .optText small { opacity: 1; color: #54686F; }
+:global(body:has([data-theme="hell"])) .tick { box-shadow: inset 0 0 0 2px #B9B1A2; }
+:global(body:has([data-theme="hell"])) .tickOn { background-color: #0F7D96; box-shadow: none; }
+:global(body:has([data-theme="hell"])) .slotTimes { border-left-color: #E4DED4; }
+:global(body:has([data-theme="hell"])) .waHint { opacity: 1; color: #3E5560; }

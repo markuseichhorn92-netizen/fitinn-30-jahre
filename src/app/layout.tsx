@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Barlow_Condensed, Inter, Space_Grotesk } from 'next/font/google';
 import ConsentBanner from '@/components/ConsentBanner';
 import FunnelView from '@/components/FunnelView';
 import MetaPixel from '@/components/MetaPixel';
@@ -7,6 +7,8 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const grotesk = Space_Grotesk({ subsets: ['latin'], weight: ['500', '700'], variable: '--font-space-grotesk', display: 'swap' });
+
+const barlow = Barlow_Condensed({ subsets: ['latin'], weight: ['700', '800'], variable: '--font-barlow', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://angebot.fit-inn-trier.de'),
@@ -27,7 +29,7 @@ export const viewport: Viewport = { themeColor: '#05090B', width: 'device-width'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${inter.variable} ${grotesk.variable}`}>
+    <html lang="de" className={`${inter.variable} ${grotesk.variable} ${barlow.variable}`}>
       <body>
         {children}
         <FunnelView />

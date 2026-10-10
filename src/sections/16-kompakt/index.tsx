@@ -2,7 +2,6 @@
 import NextImage from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import Button from '@siteui/button';
-import { mediaUrl } from '@siteui/image';
 import { funnel } from '@/lib/funnel';
 import { CONSENT_EVENT } from '@/lib/consent';
 import styles from './styles.module.css';
@@ -19,7 +18,12 @@ function BookButton({ source, label, className }: { source: string; label: strin
   return <Button href="#anmeldung" size="lg" className={className} onClick={(e: React.MouseEvent) => { e.preventDefault(); book(source); }}>{label}</Button>;
 }
 
-export function KompaktHero({ hero, stickyHideId }: { hero: any; stickyHideId: string }) {
+// Sichtbarer Hinweis auf KI-Bilder (Textregel: KI-Bild-Badge)
+function KiBadge({ label }: { label: string }) {
+  return <span className={styles.ki}><i aria-hidden="true" />{label}</span>;
+}
+
+export function KompaktHero({ hero, kiBadge, stickyHideId }: { hero: any; kiBadge: string; stickyHideId: string }) {
   const ctaRef = useRef<HTMLDivElement>(null);
   const [stickyOn, setStickyOn] = useState(false);
 
@@ -64,18 +68,20 @@ export function KompaktHero({ hero, stickyHideId }: { hero: any; stickyHideId: s
     <header className={styles.hero}>
       <div className={styles.heroInner}>
         <div className={styles.top}>
-          <NextImage className={styles.logo} src={mediaUrl(hero.logo.src)} alt={hero.logoAlt} width={2917} height={486} quality={85} sizes="240px" priority />
+          <NextImage className={styles.logo} src={hero.logo.src} alt={hero.logoAlt} width={1200} height={200} sizes="240px" priority />
           <a className={styles.tel} href={hero.phoneHref} aria-label={hero.phoneLabel}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
             <span className={styles.telText}>{hero.phoneLabel}</span>
           </a>
         </div>
         <div className={styles.photo}>
-          <NextImage src={mediaUrl(hero.image.src)} alt={hero.imageAlt} fill priority fetchPriority="high" quality={80} sizes="(max-width: 900px) 100vw, 560px" />
+          <NextImage src={hero.image.src} alt={hero.imageAlt} fill priority fetchPriority="high" quality={78} sizes="(max-width: 900px) 100vw, 560px" />
+          <span className={styles.chipTop}>{hero.chip}</span>
+          <KiBadge label={kiBadge} />
         </div>
         <div className={styles.copy}>
           <h1 className={styles.h1}>{hero.headlineTop} <em>{hero.headlineAccent}</em></h1>
-          <p className={styles.sub}><span className={styles.chip}>{hero.chip}</span>{hero.sub}</p>
+          <p className={styles.sub}>{hero.sub}</p>
           <div ref={ctaRef}><BookButton source="hero" label={hero.cta} className={styles.cta} /></div>
           <p className={styles.micro}>{hero.note}</p>
           <p className={styles.trust}>
@@ -91,11 +97,15 @@ export function KompaktHero({ hero, stickyHideId }: { hero: any; stickyHideId: s
   );
 }
 
-export function KompaktWarum({ warum }: { warum: any }) {
+export function KompaktWarum({ warum, kiBadge }: { warum: any; kiBadge: string }) {
   return (
-    <section className={styles.sec}>
+    <section className={`${styles.sec} ${styles.secSoft}`}>
       <div className={styles.wrap}>
         <h2 className={styles.h2}>{warum.headline}</h2>
+        <div className={styles.warumPhoto}>
+          <NextImage src={warum.image.src} alt={warum.image.alt} fill quality={78} sizes="(max-width: 700px) 100vw, 640px" />
+          <KiBadge label={kiBadge} />
+        </div>
         <ul className={styles.why}>
           {warum.points.map((p: string) => <li key={p}>{p}</li>)}
         </ul>
@@ -110,7 +120,7 @@ export function KompaktWarum({ warum }: { warum: any }) {
 
 export function KompaktAblauf({ ablauf }: { ablauf: any }) {
   return (
-    <section className={`${styles.sec} ${styles.secDark}`}>
+    <section className={styles.sec}>
       <div className={styles.wrap}>
         <h2 className={styles.h2}>{ablauf.headline}</h2>
         <ol className={styles.steps}>
@@ -174,7 +184,7 @@ export function KompaktPreis({ preis, legal }: { preis: any; legal: any }) {
 
 export function KompaktStimmen({ stimmen }: { stimmen: any }) {
   return (
-    <section className={`${styles.sec} ${styles.secLight}`}>
+    <section className={`${styles.sec} ${styles.secSoft}`}>
       <div className={styles.wrap}>
         <h2 className={styles.h2}>{stimmen.headline}</h2>
         <div className={styles.quotes} tabIndex={0} role="region" aria-label={stimmen.headline}>

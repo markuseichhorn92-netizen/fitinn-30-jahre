@@ -24,3 +24,23 @@ body {
 }
 h1, h2, h3, h4 { font-family: var(--font-kit-header-font); font-weight: 700; line-height: 1.2; }
 img { max-width: 100%; }
+
+/* Look „hell & warm“ (Branch hell-a): gilt nur, wenn die Seite data-theme="hell" trägt (Startseite).
+   Die Kit-Farben werden umbelegt, damit Buchungsdialog, Cookie-Banner, Lena-Knopf und Button mitziehen.
+   /deal, /ziel, /freunde bleiben unverändert dunkel. Kontraste: Ink #0B3341 auf Creme #FBF8F3 ≈ 11:1, Teal #0F7D96 auf Creme ≈ 4,6:1, Weiß auf Teal ≈ 4,9:1. */
+body:has([data-theme="hell"]) {
+  --h-bg: #FBF8F3;
+  --h-ink: #0B3341;
+  --h-teal: #0F7D96;
+  --h-soft: #EFF6F5;
+  --h-line: #E4DED4;
+  --h-coral: #F78C7A;
+  --h-text2: #3E5560;
+  --h-text3: #54686F;
+  --color-kit-key2: #0F7D96;
+  --color-kit-white: #0B3341;
+  --color-kit-black: #FFFFFF;
+  --font-kit-header-font: var(--font-barlow), 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  background: var(--h-bg);
+  color: var(--h-ink);
+}
