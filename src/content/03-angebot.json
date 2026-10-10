@@ -58,5 +58,6 @@
   "andLabel": "und unsere",
   "houseLabel": "Hausordnung",
   "houseHref": "https://fit-inn-trier.de/hausordnung",
-  "inclLine": "Komplette Clubnutzung, Gesundheits-Check-up mit Körperanalyse, Einweisung an jedem Gerät, individuelle Trainingspläne, TechnoGym App, Mineralgetränke, WLAN, Duschen und Umkleiden."
+  "inclLine": "Komplette Clubnutzung, Gesundheits-Check-up mit Körperanalyse, Einweisung an jedem Gerät, individuelle Trainingspläne, TechnoGym App, Mineralgetränke, WLAN, Duschen und Umkleiden.",
+  "daysText": "Noch {tage} Tage bis zum 31.12. Jeder Tag früher spart dir bis zu 1 €."
 }

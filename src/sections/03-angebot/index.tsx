@@ -16,9 +16,9 @@ function addDays(ts: number, n: number): number {
   const d = new Date(ts);
   return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n).getTime();
 }
+// Heutiges Datum in Europe/Berlin (unabhängig von der Zeitzone des Geräts)
 function startOfToday(): number {
-  const n = new Date();
-  return new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime();
+  return dayTs(new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()));
 }
 // Anzahl Tage zum Aktionspreis, wenn am Tag `signup` abgeschlossen wird (inkl. Abschlusstag und Enddatum)
 function promoDays(signup: number, until: number): number {
@@ -46,7 +46,7 @@ export default function Angebot(props: any) {
     promoStart, priceUntil, signupUntil,
     promoPrice, promoLabelSpar, afterLabelSpar, tarifSaveText, promoWeekly, tarife,
     inclTitle, inclLine,
-    hinweise, legalToggle, rechtstext, totalText, agbIntro, agbLabel, agbHref, andLabel, houseLabel, houseHref,
+    hinweise, daysText, legalToggle, rechtstext, totalText, agbIntro, agbLabel, agbHref, andLabel, houseLabel, houseHref,
   } = props;
 
   const now = useNow();
@@ -67,6 +67,7 @@ export default function Angebot(props: any) {
   const today = maxSave(signupTs);
   const tomorrow = maxSave(addDays(signupTs, 1));
   const lastDay = maxSave(lastSignupTs);
+  const daysLeft = Math.round((untilTs - signupTs) / DAY);
   const isLastDay = signupTs >= lastSignupTs;
 
   const barCount = Math.max(1, Math.round((lastSignupTs - startTs) / DAY) + 1);
@@ -106,6 +107,8 @@ export default function Angebot(props: any) {
                 <p className={styles.meterNext}>
                   {isLastDay ? lastDayText : fill(tomorrowText, { morgen: tomorrow, ende: lastDay })}
                 </p>
+
+                {daysText && daysLeft > 0 ? <p className={styles.meterDays}>{fill(daysText, { tage: daysLeft })}</p> : null}
 
                 <div className={styles.chart} role="img" aria-label={fill(chartAria, { max: top, min: lastDay, heute: today })}>
                   <div className={styles.bars}>

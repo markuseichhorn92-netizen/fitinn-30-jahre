@@ -36,7 +36,7 @@
   "priceUnit": "pro Woche",
   "durationSpar": "bis 31.12.2026",
   "heroSaveText": "Start heute: bis zu {x} € gespart",
-  "heroSaveHint": "",
+  "heroSaveHint": "Noch {tage} Tage bis 31.12. · morgen {morgen} €",
   "priceListSpar": [
     {
       "text": "Ab 01.01.2027: 12 € pro Woche bei 52 Wochen"
@@ -66,6 +66,20 @@
   "factsLabel": "",
   "_hinweisVarianteB": "Variante B zum Testen: „Fit werden in Trier-Feyen – 5 € pro Woche bis Silvester.“ (hlTopSpar/hlAccentSpar tauschen)",
   "trustLine": "★ 4,8 bei Google · über 250 Bewertungen",
-  "trustHref": "",
-  "primaryNote": "Rund 90 Minuten, kostenlos und unverbindlich. Den 5-€-Preis schließt du nach dem Probetraining vor Ort ab."
+  "trustHref": "https://www.google.com/maps/search/?api=1&query=Fit-Inn+Trier+Auf+Hirtenberg+8+54296+Trier",
+  "primaryNote": "Rund 90 Minuten, kostenlos und unverbindlich. Keine Zahlungsdaten nötig.",
+  "steps": [
+    {
+      "title": "Termin wählen.",
+      "text": "Freie Termine siehst du direkt online."
+    },
+    {
+      "title": "Vorbeikommen.",
+      "text": "Dein Trainer zeigt dir das Studio und die Geräte."
+    },
+    {
+      "title": "Vor Ort entscheiden.",
+      "text": "Der Vertrag wird erst nach dem Probetraining im Studio abgeschlossen."
+    }
+  ]
 }

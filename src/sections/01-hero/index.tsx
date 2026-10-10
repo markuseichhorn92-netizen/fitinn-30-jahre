@@ -11,20 +11,22 @@ import styles from './styles.module.css';
 
 const DAY = 86400000;
 const dayTs = (s: string) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1).getTime(); };
+// Heutiges Datum in Europe/Berlin (unabhängig von der Zeitzone des Geräts)
+const berlinToday = () => dayTs(new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()));
 const fill = (tpl: string, v: Record<string, string | number>) => String(tpl).replace(/\{(\w+)\}/g, (_, k) => (k in v ? String(v[k]) : ''));
 
 export default function Hero({
   fullHeight, bgImage, overlayStrength, bgColor, showGrid,
   logo, logoAlt, logoHref, topPhoneLabel, topPhoneHref, showTopPhone,
   stickyLabel, stickyHref, stickyNoteSpar, showSticky, stickyChatLabel,
-  hlTopSpar, hlAccentSpar, trustLine, trustHref, sublineSpar, sublineShort,
+  hlTopSpar, hlAccentSpar, steps, trustLine, trustHref, sublineSpar, sublineShort,
   primaryLabel, primaryHref, primaryNote, secondaryLabel, secondaryHref, showSecondary,
   ribbonSpar, priceValue, currency, priceUnit, durationSpar, heroSaveText, heroSaveHint, priceListSpar, priceNote,
   promoStart, priceUntil, promoWeekly, regularMax,
   features, factsLabel,
 }: any) {
   const [todayTs, setTodayTs] = useState<number | null>(null);
-  useEffect(() => { const n = new Date(); setTodayTs(new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime()); }, []);
+  useEffect(() => { setTodayTs(berlinToday()); }, []);
   const startTs = dayTs(promoStart);
   const untilTs = dayTs(priceUntil);
   const perDay = (Number(regularMax) - Number(promoWeekly)) / 7;
@@ -33,6 +35,7 @@ export default function Hero({
   const saveToday = saveAt(signupTs);
   const saveTomorrow = saveAt(new Date(new Date(signupTs).getFullYear(), new Date(signupTs).getMonth(), new Date(signupTs).getDate() + 1).getTime());
   const saveMax = saveAt(startTs) || 1;
+  const daysLeft = Math.round((untilTs - signupTs) / DAY);
   const promoOver = todayTs !== null && todayTs > untilTs;
   const [stickyOn, setStickyOn] = useState(false);
   useEffect(() => { document.body.classList.toggle('fi-sticky-on', stickyOn); return () => document.body.classList.remove('fi-sticky-on'); }, [stickyOn]);
@@ -139,6 +142,17 @@ export default function Hero({
           </div>
           {primaryNote ? <p className={styles.ctaNote}>{primaryNote}</p> : null}
 
+          {Array.isArray(steps) && steps.length ? (
+            <ol className={styles.steps} aria-label="So läuft es ab">
+              {steps.map((st: any, i: number) => (
+                <li key={i} className={styles.step}>
+                  <span className={styles.stepNo} aria-hidden="true">{i + 1}</span>
+                  <span><strong>{st.title}</strong> {st.text}</span>
+                </li>
+              ))}
+            </ol>
+          ) : null}
+
           <div className={`${styles.in} ${styles.facts}`} style={{ ['--d' as any]: '0.5s', ['--y' as any]: '0px', ['--t' as any]: '0.8s' }}>
             {factsLabel ? <span className={styles.factsLabel}>{factsLabel}</span> : null}
             <ul className={styles.factList}>
@@ -170,7 +184,7 @@ export default function Hero({
                 <span className={styles.saveTrack} aria-hidden="true">
                   <span className={styles.saveFill} style={{ width: `${Math.max(3, (saveToday / saveMax) * 100)}%` }} />
                 </span>
-                {heroSaveHint ? <span className={styles.saveHint}>{fill(heroSaveHint, { morgen: saveTomorrow })}</span> : null}
+                {heroSaveHint && daysLeft > 0 ? <span className={styles.saveHint}>{fill(heroSaveHint, { morgen: saveTomorrow, tage: daysLeft })}</span> : null}
               </div>
             ) : null}
             <ul className={styles.incl}>

@@ -412,3 +412,10 @@ a.trust:hover { text-decoration: underline; }
 @media (max-width: 767px) { .ctas > * { box-sizing: border-box; padding-left: 18px; padding-right: 18px; font-size: 17px; } }
 .trust, .ctaNote { text-align: left; }
 .trustWrap, .ctaNote { align-self: stretch; }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 560px; align-self: stretch; }
+.step { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.4; color: rgba(255,255,255,0.86); }
+.step strong { color: #fff; }
+.stepNo { flex: none; width: 24px; height: 24px; border-radius: 50%; background: #FFB54F; color: #14252D; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+@media (max-width: 1023px) { .steps { order: 3; } }
+@media (max-width: 767px) { .steps { gap: 6px; } .step { font-size: 13px; } .stepNo { width: 20px; height: 20px; font-size: 11px; } }
