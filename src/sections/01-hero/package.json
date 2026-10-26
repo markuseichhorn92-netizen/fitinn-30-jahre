@@ -11,8 +11,8 @@
       "logo": { "title": "Logo", "type": "media", "default": { "src": "media/77c4274d-cac5-4f25-88b1-15387b0fa6b9", "name": "fitinn-logo-white.png" }, "tab": "content", "group": "topbar" },
       "logoAlt": { "title": "Logo Alt-Text", "type": "text", "default": "Fit-Inn Trier", "tab": "content", "group": "topbar" },
       "logoHref": { "title": "Logo Link", "type": "text", "default": "https://fit-inn-trier.de", "tab": "content", "group": "topbar" },
-      "topPhoneLabel": { "title": "Telefon oben (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
-      "topPhoneHref": { "title": "Telefon oben (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
+      "topPhoneLabel": { "title": "Telefon oben (Anzeige)", "type": "text", "default": "0651 603 443 42", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
+      "topPhoneHref": { "title": "Telefon oben (Link)", "type": "text", "default": "tel:+4965160344342", "tab": "content", "group": "topbar", "hideWhen": "!showTopPhone" },
       "showTopPhone": { "title": "Telefon oben anzeigen", "type": "checkbox", "default": true, "tab": "content", "group": "topbar" },
 
       "stickyLabel": { "title": "Leiste unten: Button (Teil nach „ · “ steht kleiner darunter)", "type": "text", "default": "Kostenloses Probetraining · 5 €/Woche", "tab": "content", "group": "sticky" },

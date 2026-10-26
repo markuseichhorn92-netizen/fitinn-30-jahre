@@ -39,7 +39,7 @@
       "successText": { "title": "Erfolg Text", "type": "text", "default": "Wir freuen uns auf dich. Du erhältst eine Bestätigung per E-Mail.", "tab": "content", "group": "messages" },
       "privacyNote": { "title": "Datenschutz-Hinweis", "type": "text", "default": "Mit dem Absenden stimmst du der Verarbeitung deiner Daten gemäß unserer Datenschutzerklärung zu.", "tab": "content", "group": "messages" },
       "contactIntro": { "title": "Kontakt-Intro", "type": "text", "default": "Lieber anrufen?", "tab": "content", "group": "contact" },
-      "contactPhone": { "title": "Telefon", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "contact" },
+      "contactPhone": { "title": "Telefon", "type": "text", "default": "0651 603 443 42", "tab": "content", "group": "contact" },
       "contactInstagram": { "title": "Instagram Handle", "type": "text", "default": "@fit_inn_trier", "tab": "content", "group": "contact" },
       "contactInstagramHref": { "title": "Instagram Link", "type": "text", "default": "https://www.instagram.com/fit_inn_trier", "tab": "content", "group": "contact" },
       "contactAddress": { "title": "Adresse", "type": "text", "default": "Auf Hirtenberg 8 · 54296 Trier-Feyen", "tab": "content", "group": "contact" },

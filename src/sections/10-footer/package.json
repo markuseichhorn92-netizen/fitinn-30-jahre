@@ -7,8 +7,8 @@
       "brand": { "title": "Name", "type": "text", "default": "Fit-Inn Trier", "tab": "content", "group": "contact" },
       "tagline": { "title": "Zusatz", "type": "text", "default": "Familiengeführt seit 1996. Kein Franchise.", "tab": "content", "group": "contact" },
       "address": { "title": "Adresse", "type": "text", "default": "Auf Hirtenberg 8 · 54296 Trier", "tab": "content", "group": "contact" },
-      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "contact" },
-      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "contact" },
+      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 603 443 42", "tab": "content", "group": "contact" },
+      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965160344342", "tab": "content", "group": "contact" },
       "email": { "title": "E-Mail", "type": "text", "default": "info@fit-inn-trier.de", "tab": "content", "group": "contact" },
       "links": {
         "title": "Links",

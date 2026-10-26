@@ -117,8 +117,8 @@
       "otherChoice": { "title": "Antwort: Andere Frage", "type": "text", "default": "Ich hab noch eine Frage", "tab": "content", "group": "answers" },
 
       "errorGeneric": { "title": "Fehler allgemein", "type": "text", "default": "Gerade keine Verbindung zu Lena. Ruf uns gern an:", "tab": "content", "group": "errors" },
-      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 493 688 19", "tab": "content", "group": "errors" },
-      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965149368819", "tab": "content", "group": "errors" },
+      "phoneLabel": { "title": "Telefon (Anzeige)", "type": "text", "default": "0651 603 443 42", "tab": "content", "group": "errors" },
+      "phoneHref": { "title": "Telefon (Link)", "type": "text", "default": "tel:+4965160344342", "tab": "content", "group": "errors" },
       "maxChars": { "title": "Max. Zeichen pro Nachricht", "type": "number", "default": 800, "tab": "settings", "group": "errors" }
     },
     "group": {

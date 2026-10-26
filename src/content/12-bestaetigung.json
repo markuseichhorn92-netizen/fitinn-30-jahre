@@ -11,7 +11,7 @@
   "googleCalLabel": "Google Kalender",
   "icsLabel": "Apple / Outlook (.ics)",
   "calTitle": "Probetraining im Fit-Inn Trier",
-  "calDescription": "Kostenloses Probetraining (ca. 90 Min.). Mitbringen: Sportkleidung, saubere Trainingsschuhe, Handtuch. Fragen: 0651 493 688 19",
+  "calDescription": "Kostenloses Probetraining (ca. 90 Min.). Mitbringen: Sportkleidung, saubere Trainingsschuhe, Handtuch. Fragen: 0651 603 443 42",
   "finnLabel": "Lena",
   "finnFallback": "Richtig gute Entscheidung! Dein Trainer freut sich auf dich – und du wirst sehen: Der erste Schritt ist der schwerste, der Rest macht Spaß.",
   "finnPrompt": "Ein Interessent hat gerade ein kostenloses Probetraining gebucht. Ziel: {ziel}. Erfahrung: {erfahrung}. Wichtig ist ihm: {fokus}. Schreibe 2 kurze, herzliche und motivierende Sätze (max. 45 Wörter, Du-Form, keine Preise, keine Links, keine medizinischen Aussagen, kein Name), die konkret auf sein Ziel und seinen Fokus eingehen und Vorfreude auf das Probetraining machen. Antworte nur mit dem Text.",
@@ -58,8 +58,8 @@
   "mapNote": "Beim Anzeigen wird die Karte von Google geladen. Dabei werden Daten an Google übertragen.",
   "changeTitle": "Termin verschieben oder absagen?",
   "changeText": "Kein Problem – sag uns einfach kurz Bescheid. Am schnellsten per Anruf, per E-Mail oder über den Link in deiner Bestätigungsmail.",
-  "phoneLabel": "0651 493 688 19",
-  "phoneHref": "tel:+4965149368819",
+  "phoneLabel": "0651 603 443 42",
+  "phoneHref": "tel:+4965160344342",
   "emailLabel": "info@fit-inn-trier.de",
   "emailHref": "mailto:info@fit-inn-trier.de?subject=Probetraining%20verschieben",
   "noBookingTitle": "Kein Termin gefunden",
@@ -85,8 +85,8 @@
     "sendLabel": "Fragen",
     "thinkingLabel": "Lena überlegt …",
     "errorText": "Gerade keine Verbindung zu Lena. Ruf uns gern an:",
-    "phoneLabel": "0651 493 688 19",
-    "phoneHref": "tel:+4965149368819",
+    "phoneLabel": "0651 603 443 42",
+    "phoneHref": "tel:+4965160344342",
     "continueLabel": "",
     "continueIntro": "",
     "bookLabel": "",
@@ -106,7 +106,7 @@
       },
       {
         "question": "Kann ich den Termin verschieben?",
-        "answer": "Klar. Ruf uns an (0651 493 688 19), schreib an info@fit-inn-trier.de oder nutz den Link in deiner Bestätigungsmail."
+        "answer": "Klar. Ruf uns an (0651 603 443 42), schreib an info@fit-inn-trier.de oder nutz den Link in deiner Bestätigungsmail."
       },
       {
         "question": "Darf ich jemanden mitbringen?",
