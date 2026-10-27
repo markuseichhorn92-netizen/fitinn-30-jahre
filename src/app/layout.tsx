@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Barlow_Condensed, Inter, Space_Grotesk } from 'next/font/google';
 import ConsentBanner from '@/components/ConsentBanner';
 import FunnelView from '@/components/FunnelView';
+import HideOn from '@/components/HideOn';
 import MetaPixel from '@/components/MetaPixel';
 import './globals.css';
 
@@ -33,8 +34,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <FunnelView />
-        <MetaPixel />
-        <ConsentBanner />
+        {/* /start (Studio-QR „Apps & WLAN“): bewusst ohne Cookie-Banner und Meta Pixel */}
+        <HideOn paths={['/start']}>
+          <MetaPixel />
+          <ConsentBanner />
+        </HideOn>
       </body>
     </html>
   );
