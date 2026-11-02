@@ -49,3 +49,14 @@
 :global(body:has([data-theme="hell"])) .btn:first-child { background: #fff; color: #0B3341; box-shadow: inset 0 0 0 1.5px #0B3341; }
 :global(body:has([data-theme="hell"])) .btn:focus-visible, :global(body:has([data-theme="hell"])) .link:focus-visible { outline-color: #0B3341; }
 :global(body:has([data-theme="hell"])) .link { color: #0B3341; opacity: 1; }
+
+/* Look C (nur /freunde, Website-Entwurf Prototyp C): Eisblau/Weiß, Petrol-Akzent – abgeleitet vom „hell“-Look */
+:global(body:has([data-theme="c"])) .box { background: #fff; color: #14252D; box-shadow: 0 -10px 40px -12px #14252D59, inset 0 0 0 1px #CFE5EA; }
+:global(body:has([data-theme="c"])) .text a { color: #0A4958; }
+:global(body:has([data-theme="c"])) .text { opacity: 1; color: #475467; }
+:global(body:has([data-theme="c"])) .opt { background: #E6F2F5; }
+:global(body:has([data-theme="c"])) .opt input { accent-color: #0A4958; }
+:global(body:has([data-theme="c"])) .btn { background: #0A4958; color: #fff; }
+:global(body:has([data-theme="c"])) .btn:first-child { background: #fff; color: #14252D; box-shadow: inset 0 0 0 1.5px #14252D; }
+:global(body:has([data-theme="c"])) .btn:focus-visible, :global(body:has([data-theme="c"])) .link:focus-visible { outline-color: #14252D; }
+:global(body:has([data-theme="c"])) .link { color: #14252D; opacity: 1; }

@@ -46,3 +46,12 @@
 :global(body:has([data-theme="hell"])) .contact a:hover, :global(body:has([data-theme="hell"])) .links a:hover, :global(body:has([data-theme="hell"])) .consentBtn:hover { color: #fff; text-decoration: underline; opacity: 1; }
 :global(body:has([data-theme="hell"])) .contact a:focus-visible, :global(body:has([data-theme="hell"])) .links a:focus-visible, :global(body:has([data-theme="hell"])) .consentBtn:focus-visible { outline-color: #fff; }
 :global(body:has([data-theme="hell"])) .bottom { opacity: 0.8; }
+
+/* Look C (nur /freunde, Website-Entwurf Prototyp C): heller Abschluss, Petrol-Schrift */
+:global(body:has([data-theme="c"])) .foot { background: #fff !important; color: #14252D; border-top: 1px solid rgba(20, 37, 45, .09); }
+:global(body:has([data-theme="c"])) .contact a, :global(body:has([data-theme="c"])) .links a, :global(body:has([data-theme="c"])) .consentBtn { color: #14252D; opacity: 1; }
+:global(body:has([data-theme="c"])) .contact a:hover, :global(body:has([data-theme="c"])) .links a:hover, :global(body:has([data-theme="c"])) .consentBtn:hover { color: #0C6478; text-decoration: underline; }
+:global(body:has([data-theme="c"])) .contact a:focus-visible, :global(body:has([data-theme="c"])) .links a:focus-visible, :global(body:has([data-theme="c"])) .consentBtn:focus-visible { outline-color: #0C6478; }
+:global(body:has([data-theme="c"])) .bottom { opacity: 1; color: #475467; border-top-color: rgba(20, 37, 45, .09); }
+/* weißes Logo auf hellem Grund → Petrol (#0A4958) per Filter */
+:global(body:has([data-theme="c"])) .logo { filter: brightness(0) invert(21%) sepia(35%) saturate(2300%) hue-rotate(163deg) brightness(88%); }

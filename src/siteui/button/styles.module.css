@@ -52,3 +52,9 @@
 :global(body:has([data-theme="hell"])) .primary:hover { box-shadow: 0 12px 26px #11809A55; }
 :global(body:has([data-theme="hell"])) .arrow { background: #ffffff33; }
 :global(body:has([data-theme="hell"])) .btn:focus-visible { outline-color: var(--h-ink); }
+
+/* Look C (nur /freunde, Website-Entwurf Prototyp C): Eisblau/Weiß, Petrol-Akzent – abgeleitet vom „hell“-Look */
+:global(body:has([data-theme="c"])) .primary { box-shadow: 0 8px 20px #0A495840; }
+:global(body:has([data-theme="c"])) .primary:hover { box-shadow: 0 12px 26px #0A495855; }
+:global(body:has([data-theme="c"])) .arrow { background: #ffffff33; }
+:global(body:has([data-theme="c"])) .btn:focus-visible { outline-color: var(--h-ink); }

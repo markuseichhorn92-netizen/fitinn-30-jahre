@@ -198,3 +198,47 @@
 :global(body:has([data-theme="hell"])) .tickOn { background-color: #0F7D96; box-shadow: none; }
 :global(body:has([data-theme="hell"])) .slotTimes { border-left-color: #E4DED4; }
 :global(body:has([data-theme="hell"])) .waHint { opacity: 1; color: #3E5560; }
+
+/* Look C (nur /freunde, Website-Entwurf Prototyp C): Eisblau/Weiß, Petrol-Akzent – abgeleitet vom „hell“-Look */
+:global(body:has([data-theme="c"])) .root { color: #14252D; }
+:global(body:has([data-theme="c"])) .backdrop { background: #14252Da6; }
+:global(body:has([data-theme="c"])) .box { background: #F4FAFB; }
+@media (min-width: 768px) { :global(body:has([data-theme="c"])) .box { box-shadow: 0 40px 100px -30px #14252Daa; } }
+:global(body:has([data-theme="c"])) .head { background: #F4FAFBf2; border-bottom: 1px solid #CFE5EA; }
+:global(body:has([data-theme="c"])) .close { background: #14252D0f; }
+:global(body:has([data-theme="c"])) .progress { background: #CFE5EA; }
+:global(body:has([data-theme="c"])) .progress span { background: #0A4958; }
+:global(body:has([data-theme="c"])) .p, :global(body:has([data-theme="c"])) .muted { opacity: 1; color: #475467; }
+:global(body:has([data-theme="c"])) .alert { background: #FDECEA; box-shadow: inset 0 0 0 1px #E0563B66; color: #7A1F16; }
+:global(body:has([data-theme="c"])) .recap { background: #E6F2F5; }
+:global(body:has([data-theme="c"])) .chip, :global(body:has([data-theme="c"])) .time, :global(body:has([data-theme="c"])) .option, :global(body:has([data-theme="c"])) .dayCard { background: #fff; box-shadow: inset 0 0 0 1px #CFE5EA; }
+:global(body:has([data-theme="c"])) .chipMore { opacity: 1; }
+:global(body:has([data-theme="c"])) .option:hover, :global(body:has([data-theme="c"])) .dayCard:hover, :global(body:has([data-theme="c"])) .time:hover { background: #E6F2F5; }
+:global(body:has([data-theme="c"])) .chipOn, :global(body:has([data-theme="c"])) .timeOn, :global(body:has([data-theme="c"])) .timeOn:hover, :global(body:has([data-theme="c"])) .dayOn, :global(body:has([data-theme="c"])) .dayOn:hover { background: #0A4958; color: #fff; box-shadow: none; }
+:global(body:has([data-theme="c"])) .optionOn { background: #E6F2F5; box-shadow: inset 0 0 0 2px #0A4958; }
+:global(body:has([data-theme="c"])) .dayOn .dWd, :global(body:has([data-theme="c"])) .dayOn .dMon { opacity: 0.9; }
+:global(body:has([data-theme="c"])) .dayOn .dCount { background: #ffffff33; color: #fff; }
+:global(body:has([data-theme="c"])) .dCount { background: #E6F2F5; }
+:global(body:has([data-theme="c"])) .dWd, :global(body:has([data-theme="c"])) .dMon, :global(body:has([data-theme="c"])) .groupLabel, :global(body:has([data-theme="c"])) .slotLabel { opacity: 1; color: #475467; }
+:global(body:has([data-theme="c"])) .dayOn .dWd, :global(body:has([data-theme="c"])) .dayOn .dMon { color: #fff; }
+:global(body:has([data-theme="c"])) .finn, :global(body:has([data-theme="c"])) .plan { background: #E6F2F5; box-shadow: inset 0 0 0 1px #CFE5EA; }
+:global(body:has([data-theme="c"])) .finnAvatar, :global(body:has([data-theme="c"])) .doneIcon { background: #0A4958; color: #fff; }
+:global(body:has([data-theme="c"])) .seg button { border-color: #B7D8DF; background: #fff; }
+:global(body:has([data-theme="c"])) .seg .segOn { background: #E6F2F5; border-color: #0A4958; }
+:global(body:has([data-theme="c"])) .field input, :global(body:has([data-theme="c"])) .textarea { border-color: #B7D8DF; background: #fff; color: #14252D; color-scheme: light; }
+:global(body:has([data-theme="c"])) .field input:focus, :global(body:has([data-theme="c"])) .textarea:focus { box-shadow: 0 0 0 3px #0A495833; }
+:global(body:has([data-theme="c"])) .field span, :global(body:has([data-theme="c"])) .seg legend { opacity: 1; color: #475467; }
+:global(body:has([data-theme="c"])) .check input { accent-color: #0A4958; }
+:global(body:has([data-theme="c"])) .foot { background: #F4FAFBf2; border-top: 1px solid #CFE5EA; }
+:global(body:has([data-theme="c"])) .primary { background: #0A4958; color: #fff; }
+:global(body:has([data-theme="c"])) .primary:disabled { background: #CFE5EA; color: #475467; box-shadow: none; }
+:global(body:has([data-theme="c"])) .ghost { opacity: 1; }
+:global(body:has([data-theme="c"])) .perks li { background: #E6F2F5; }
+:global(body:has([data-theme="c"])) .perks li::before, :global(body:has([data-theme="c"])) .plan li::before { background-color: #0A4958; filter: none; }
+:global(body:has([data-theme="c"])) .optIcon { background: #E6F2F5; }
+:global(body:has([data-theme="c"])) .optionOn .optIcon { background: #fff; color: #0A4958; }
+:global(body:has([data-theme="c"])) .optText small { opacity: 1; color: #475467; }
+:global(body:has([data-theme="c"])) .tick { box-shadow: inset 0 0 0 2px #9FCBD5; }
+:global(body:has([data-theme="c"])) .tickOn { background-color: #0A4958; box-shadow: none; }
+:global(body:has([data-theme="c"])) .slotTimes { border-left-color: #CFE5EA; }
+:global(body:has([data-theme="c"])) .waHint { opacity: 1; color: #475467; }
