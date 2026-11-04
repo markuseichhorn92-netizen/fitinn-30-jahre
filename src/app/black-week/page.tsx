@@ -19,7 +19,7 @@ import bw from '@/content/17-blackweek.json';
 const outfit = localFont({ src: '../../fonts/outfit.woff', weight: '100 900', display: 'swap' });
 const caveat = localFont({ src: '../../fonts/caveat.woff', weight: '600', display: 'swap', preload: false });
 
-// /black-week – Black Week 2026 (Angebot E „0 € bis Jahresende“, 20 Plätze, 15.–30.11.2026).
+// /black-week – Black Week 2026 (Angebot E (Vertragsbeginn 01.01.2027, bis dahin kostenlos), 20 Plätze, 15.–30.11.2026).
 // Nicht im Index, nicht im Menü (solange das Angebot nicht final ist). Look „C“ wie /freunde, gleiche Magicline-Probetraining-Buchung;
 // Buchungen tragen „Black Week 2026“ im Hinweis/Quelle, Trichter-Zählung unter der Seite /black-week (siehe /api/f).
 // Zeitsteuerung (Europe/Berlin): vor 15.11. Hinweis „ab 15.11.“, nach 30.11. „Aktion beendet“ statt Buchung (siehe src/lib/blackweek.ts).

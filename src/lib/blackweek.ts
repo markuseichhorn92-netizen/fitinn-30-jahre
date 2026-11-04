@@ -1,5 +1,5 @@
 'use client';
-// Black Week 2026 (Angebot E „0 € bis Jahresende“): Zeitsteuerung der Seite /black-week.
+// Black Week 2026 (Angebot E (Vertragsbeginn 01.01.2027, bis dahin kostenlos)): Zeitsteuerung der Seite /black-week.
 // Phasen nach Berliner Kalendertag (Europe/Berlin, nicht UTC): vor 15.11. = pre, 15.–30.11. = live, ab 01.12. 00:00 = ended.
 // Die Seite ist statisch gebaut; die Phase wird erst im Browser bestimmt, vorher gilt „live“ (neutraler Text).
 import { useEffect, useState } from 'react';

@@ -1,5 +1,5 @@
 'use client';
-// /black-week – Landingpage Black Week 2026 (Angebot E „0 € bis Jahresende“). Look und Klassen wie /freunde (theme-c.css),
+// /black-week – Landingpage Black Week 2026 (Angebot E (Vertragsbeginn 01.01.2027, bis dahin kostenlos)). Look und Klassen wie /freunde (theme-c.css),
 // Zusatz-Stile in src/app/black-week/black-week.css. Texte aus src/content/17-blackweek.json.
 // Zeitsteuerung (Europe/Berlin) in src/lib/blackweek.ts: vor 15.11. Hinweis „ab 15.11.“, nach 30.11. „Aktion beendet“.
 import NextImage from 'next/image';
