@@ -1,0 +1,30 @@
+/* Zusatz-Stile für /black-week (Basis: ../freunde/theme-c.css, Look „C“). */
+.bw-pre { margin: 0 0 18px !important; padding: 12px 16px; border-radius: 18px; background: #fff; box-shadow: var(--card); font-size: 15px; line-height: 1.45; font-weight: 700; color: var(--ink); border-left: 6px solid var(--gold); max-width: 540px; }
+.bw-cd-box { margin-top: 22px; }
+.bw-cd { display: flex; gap: 10px; justify-content: center; }
+.bw-cd div { background: #fff; border-radius: 18px; padding: 10px 4px; min-width: 66px; text-align: center; box-shadow: var(--card); }
+.bw-cd b { display: block; font-size: 28px; font-weight: 800; line-height: 1; color: var(--petrol); font-variant-numeric: tabular-nums; }
+.bw-cd span { font-size: 12px; color: var(--grey); font-weight: 700; }
+.bw-cd-label { margin-top: 10px !important; font-size: 14px; color: var(--grey); text-align: center; }
+
+.bw-preis { position: relative; padding: 10px 0 30px; }
+.bw-karte { background: #fff; border-radius: var(--r); box-shadow: var(--card); padding: 22px; }
+.bw-karte > strong { font-size: 19px; font-weight: 800; }
+.bw-karte table { width: 100%; border-collapse: collapse; margin: 12px 0 6px; font-size: 16px; }
+.bw-karte th, .bw-karte td { padding: 12px 6px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+.bw-karte th { font-size: 13px; color: var(--grey); font-weight: 700; }
+.bw-karte td small { color: var(--grey); font-size: 13px; font-weight: 500; }
+.bw-preis-neu { color: var(--vio); font-weight: 800; }
+.bw-preis-neu b { font-size: 20px; }
+.bw-fuss { font-size: 14px; color: var(--grey); line-height: 1.5; margin-top: 8px !important; }
+
+.bw-klein { position: relative; z-index: 2; padding: 0 0 50px; }
+.bw-klein p { font-size: 13px; line-height: 1.55; color: var(--grey); }
+
+@media (min-width: 761px) {
+  .bw-cd { justify-content: flex-start; }
+  .bw-cd-label { text-align: left; font-size: 15px; }
+  .bw-cd b { font-size: 34px; }
+  .bw-preis { padding: 30px 0 40px; }
+  .bw-karte { padding: 30px 32px; }
+}
