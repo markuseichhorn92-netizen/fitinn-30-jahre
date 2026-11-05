@@ -28,7 +28,7 @@
       "zipLabel": { "title": "Label PLZ", "type": "text", "default": "PLZ *", "tab": "styles", "group": "fields" },
       "cityLabel": { "title": "Label Stadt", "type": "text", "default": "Stadt *", "tab": "styles", "group": "fields" },
       "noteLabel": { "title": "Label Anmerkung", "type": "text", "default": "Anmerkung (optional)", "tab": "settings", "group": "fields" },
-      "marketingConsentText": { "title": "Marketing-Einwilligung", "type": "text", "default": "Ich bin einverstanden, dass Fit-Inn Trier mich per E-Mail und Telefon über Angebote informiert. Jederzeit widerrufbar.", "tab": "settings", "group": "fields" },
+      "marketingConsentText": { "title": "Marketing-Einwilligung", "type": "text", "default": "Ich bin einverstanden, dass Fit-Inn Trier mich per Telefon, E-Mail oder WhatsApp über Angebote informiert. Jederzeit widerrufbar.", "tab": "settings", "group": "fields" },
       "backLabel": { "title": "Button Zurück", "type": "text", "default": "Zurück", "tab": "content", "group": "actions" },
       "nextLabel": { "title": "Button Weiter", "type": "text", "default": "Weiter", "tab": "content", "group": "actions" },
       "submitLabel": { "title": "Button Buchen", "type": "text", "default": "Probetraining buchen", "tab": "content", "group": "actions" },
