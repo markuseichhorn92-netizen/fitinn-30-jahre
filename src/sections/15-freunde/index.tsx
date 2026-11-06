@@ -7,6 +7,7 @@
 import NextImage from 'next/image';
 import React from 'react';
 import { mediaUrl } from '@siteui/image';
+import AppBlock from '@/components/app-block/AppBlock';
 
 const book = (source: string) => (e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('fi:book', { detail: { source } })); };
 
@@ -125,6 +126,14 @@ export function FreundeInfo(props: any) {
           </div>
         </div>
       </section>
+
+      <AppBlock
+        tag="Fit-Inn App"
+        title="Noch kein Mitglied? Dann schau dir die App an."
+        text="Dein Freund lädt dich in der Fit-Inn App ein. So sieht sie aus: einchecken, Punkte sammeln, Prämien einlösen, Ernährungsplan nutzen."
+        linkLabel="So funktioniert die App"
+        img={{ src: '/media/app/iphone-3.webp', alt: 'Startseite der Fit-Inn-App mit Einchecken und Ernährungsplan' }}
+      />
 
       <section className="fc-faq" aria-label={faqTitle}>
         <div className="fc-wrap fc-schmal">

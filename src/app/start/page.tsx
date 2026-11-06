@@ -87,6 +87,12 @@ function AppCard({ app, id }: { app: StoreApp; id: string }) {
           <span>Bei Google Play laden<small>Android</small></span>
         </a>
       </div>
+      {id === 'fitinn' ? (
+        <p className={styles.hint}>
+          Neu: Punkte sammeln, Prämien einlösen, Freunde werben.{' '}
+          <a href="/app/fitinn" data-f="start-appinfo" data-src={id}>So sieht die App aus</a>
+        </p>
+      ) : null}
     </section>
   );
 }

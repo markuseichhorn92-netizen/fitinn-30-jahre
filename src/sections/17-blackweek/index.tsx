@@ -4,6 +4,7 @@
 // Zeitsteuerung (Europe/Berlin) in src/lib/blackweek.ts: Aktion gilt ab sofort, nach 30.11. „Aktion beendet“.
 import NextImage from 'next/image';
 import React from 'react';
+import AppBlock from '@/components/app-block/AppBlock';
 import { mediaUrl } from '@siteui/image';
 import { useBwZeit } from '@/lib/blackweek';
 
@@ -222,6 +223,17 @@ export function BwInfo(props: any) {
           </div>
         </div>
       </section>
+
+      <AppBlock
+        variant="dunkel"
+        tag="Dazu als Mitglied"
+        title="Training, das dich belohnt."
+        text="Mit deinem Vertrag bekommst du die Fit-Inn App:"
+        bullets={['1 Punkt pro Check-in', 'Prämien und Partner-Gutscheine (Smilodox, Neosupps)', 'Ernährungspläne kostenlos für Mitglieder', 'Freunde werben: 50 Punkte oder 4 Wochen beitragsfrei', 'Mitgliedschaft selbst verwalten']}
+        linkLabel="So sieht die App aus"
+        note="Punkte und Prämien nur für Mitglieder, Prämienangebot kann sich ändern."
+        img={{ src: '/media/app/iphone-2.webp', alt: 'Punkte-Seite der Fit-Inn-App mit Prämien' }}
+      />
 
       <section className="fc-faq" aria-label={faqTitle}>
         <div className="fc-wrap fc-schmal">

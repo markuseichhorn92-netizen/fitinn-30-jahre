@@ -51,7 +51,7 @@ export default function Bestaetigung(props: any) {
     calendarLabel, googleCalLabel, icsLabel, calTitle, calDescription,
     finnLabel, finnFallback, finnPrompt, flowTitle, flow, bringTitle, bring, onsiteTitle, onsite,
     wayTitle, address, parkingNote, routeGoogleLabel, routeAppleLabel, routeQuery, mapLoadLabel, mapNote,
-    changeTitle, changeText, phoneLabel, phoneHref, emailLabel, emailHref,
+    changeTitle, changeText, appTitle, appText, appLinkLabel, appHref, phoneLabel, phoneHref, emailLabel, emailHref,
     noBookingTitle, noBookingText, noBookingCta, backLabel, backHref, fragen, heroBg, chatIntro,
     planTitle, planFocusLabel, planNote, goalCopy, expCopy,
   } = props;
@@ -269,6 +269,16 @@ export default function Bestaetigung(props: any) {
               <a className={styles.pillLight} href={emailHref}>{emailLabel}</a>
             </div>
           </div>
+
+          {appTitle ? (
+            <div className={styles.change}>
+              <strong>{appTitle}</strong>
+              <p>{appText}</p>
+              <div className={styles.calRow}>
+                <a className={styles.pillLight} href={appHref}>{appLinkLabel}</a>
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
