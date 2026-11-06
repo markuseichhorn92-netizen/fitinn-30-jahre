@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import { technogymApp } from '@/lib/start-config';
-import AppSteps, { stepMeta, type Step } from '../AppSteps';
+import AppShell, { stepMeta, type Step } from '../AppSteps';
+import extra from '../app.module.css';
 
 // Ziel des kleinen QR-Codes auf dem A4-Aufsteller. Studio-Link verbindet die App direkt mit dem Fit-Inn.
 export const dynamic = 'force-dynamic';
@@ -12,5 +14,25 @@ const STEPS: Step[] = [
 ];
 
 export default function Page() {
-  return <AppSteps app={technogymApp} id="technogym" title="Technogym-App" sub="Für dein Training an den Geräten" steps={STEPS} buttonStep={0} />;
+  return (
+    <AppShell
+      app={technogymApp}
+      id="technogym"
+      badge="Für dein Training"
+      title={<>Die <em>Technogym</em> App</>}
+      lead="Trainingsplan, Training und Anmeldung an den Geräten – direkt mit dem Fit-Inn verbunden."
+      steps={STEPS}
+      stepsKick="So geht’s"
+      stepsTitle="In 2 Schritten startklar"
+      buttonStep={0}
+      after={
+        <section className={extra.sec}>
+          <div className={extra.callout}>
+            <span className={extra.dot} aria-hidden="true">i</span>
+            <p>Punkte, Prämien, Check-in und Mitgliedschaft findest du in der neuen <Link href="/app/fitinn">Fit-Inn App</Link>.</p>
+          </div>
+        </section>
+      }
+    />
+  );
 }
