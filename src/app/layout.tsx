@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <FunnelView />
         {/* /start (Studio-QR „Apps & WLAN“): bewusst ohne Cookie-Banner und Meta Pixel */}
-        <HideOn paths={['/start', '/app']}>
+        <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']}>
           <MetaPixel />
           <ConsentBanner />
         </HideOn>

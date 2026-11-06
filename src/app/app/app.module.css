@@ -31,3 +31,18 @@
   line-height: 1.45;
   color: #14252D;
 }
+
+/* Schritt-Seiten (/app/fitinn, /app/technogym): Geräteerkennung serverseitig, data-os am Wrapper */
+.wrap { display: flex; flex-direction: column; gap: 16px; }
+.stepList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; counter-reset: s; }
+.stepItem { display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 1px solid #DDE6E8; border-radius: 18px; padding: 16px; }
+.stepNum { flex: none; width: 34px; height: 34px; border-radius: 50%; background: #FFB54F; color: #14252D; font-weight: 700; display: grid; place-items: center; }
+.stepBody { flex: 1; min-width: 0; }
+.stepTitle { margin: 0; font-size: 19px; font-weight: 700; line-height: 1.25; color: #14252D; }
+.stepText { margin: 4px 0 0; font-size: 16px; line-height: 1.45; color: #4A5D63; }
+.stepText a { color: #B35C00; font-weight: 700; text-underline-offset: 2px; }
+.wrap[data-os='android'] .android { order: -1; }
+.wrap[data-os='ios'] .android,
+.wrap[data-os='android'] .ios { background: #fff; color: #0A4958; }
+.wrap[data-os='ios'] .ios::after,
+.wrap[data-os='android'] .android::after { content: 'Für dein Gerät'; margin-left: auto; font-size: 12px; font-weight: 700; background: #FFB54F; color: #14252D; padding: 3px 8px; border-radius: 999px; }
