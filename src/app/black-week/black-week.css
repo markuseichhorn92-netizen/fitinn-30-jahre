@@ -1,5 +1,4 @@
 /* Zusatz-Stile für /black-week (Basis: ../freunde/theme-c.css, Look „C“). */
-.bw-pre { margin: 0 0 18px !important; padding: 12px 16px; border-radius: 18px; background: #fff; box-shadow: var(--card); font-size: 15px; line-height: 1.45; font-weight: 700; color: var(--ink); border-left: 6px solid var(--gold); max-width: 540px; }
 .bw-cd-box { margin-top: 22px; }
 .bw-cd { display: flex; gap: 10px; justify-content: center; }
 .bw-cd div { background: #fff; border-radius: 18px; padding: 10px 4px; min-width: 66px; text-align: center; box-shadow: var(--card); }

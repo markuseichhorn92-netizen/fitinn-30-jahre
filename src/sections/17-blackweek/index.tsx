@@ -1,7 +1,7 @@
 'use client';
 // /black-week – Landingpage Black Week 2026 (Angebot E (Vertragsbeginn 01.01.2027, bis dahin kostenlos)). Look und Klassen wie /freunde (theme-c.css),
 // Zusatz-Stile in src/app/black-week/black-week.css. Texte aus src/content/17-blackweek.json.
-// Zeitsteuerung (Europe/Berlin) in src/lib/blackweek.ts: vor 15.11. Hinweis „ab 15.11.“, nach 30.11. „Aktion beendet“.
+// Zeitsteuerung (Europe/Berlin) in src/lib/blackweek.ts: Aktion gilt ab sofort, nach 30.11. „Aktion beendet“.
 import NextImage from 'next/image';
 import React from 'react';
 import { mediaUrl } from '@siteui/image';
@@ -43,7 +43,7 @@ function Countdown({ rest, label }: { rest: number | null; label: string }) {
 }
 
 export function BwHero(props: any) {
-  const { bgImage, logoAlt, logoHref, phoneLabel, phoneHref, badge, badgePre, kicker, headline, subline, primaryLabel, heroNote, preHinweis, countdownLabel, countdownLabelPre, pillars, ende } = props;
+  const { bgImage, logoAlt, logoHref, phoneLabel, phoneHref, badge, kicker, headline, subline, primaryLabel, heroNote, countdownLabel, pillars, ende } = props;
   const z = useBwZeit();
   const phase = z?.phase ?? 'live';
   const ended = phase === 'ended';
@@ -62,7 +62,7 @@ export function BwHero(props: any) {
         <div className="fc-floor" aria-hidden="true" />
         <div className="fc-wrap fc-hero-grid">
           <div className="fc-hero-text">
-            <span className="fc-pill fc-badge"><span className="fc-pulse" aria-hidden="true" />{ended ? ende.badge : phase === 'pre' ? badgePre : badge}</span>
+            <span className="fc-pill fc-badge"><span className="fc-pulse" aria-hidden="true" />{ended ? ende.badge : badge}</span>
             <h1 id="fc-h1">
               <span className="fc-kicker">{kicker}</span>
               <span className="fc-headline"><Worte text={ended ? ende.headline : headline} /></span>
@@ -74,14 +74,13 @@ export function BwHero(props: any) {
               </div>
             ) : (
               <>
-                {phase === 'pre' ? <p className="bw-pre" role="note">{preHinweis}</p> : null}
                 <div className="fc-ctas">
                   <a className="fc-btn" href="#anmeldung" onClick={book('black-week-hero')}>
                     {primaryLabel}<span className="fc-dot" aria-hidden="true" data-trail="1" data-tm="1" data-mode="elbow" />
                   </a>
                 </div>
                 <p className="fc-note">{heroNote}</p>
-                <Countdown rest={z ? z.rest : null} label={phase === 'pre' ? countdownLabelPre : countdownLabel} />
+                <Countdown rest={z ? z.rest : null} label={countdownLabel} />
               </>
             )}
           </div>
@@ -102,7 +101,7 @@ export function BwHero(props: any) {
                 <li key={p.title} className="fc-row">
                   <span className="fc-ic"><Check /></span>
                   <strong>{p.title}</strong>
-                  <p>{p.text}</p>
+                  <p>{String(p.text).replace('{gratis}', z ? `${z.tage} Tage` : 'bis zu 56 Tage')}</p>
                 </li>
               ))}
             </ul>

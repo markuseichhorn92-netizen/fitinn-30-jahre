@@ -1,18 +1,15 @@
 {
   "meta": {
     "title": "Black Week bei Fit-Inn Trier – Vertragsbeginn 01.01.2027, bis dahin kostenlos trainieren",
-    "description": "Black Week 15.–30.11.2026: Vertrag vor Ort unterschreiben, Vertragsbeginn 01.01.2027, bis dahin kostenlos trainieren. 52 Wochen à 12 €, 0 € Aktivierungsgebühr. Nur die ersten 20, ab 18. Probetraining kostenlos buchen."
+    "description": "Black Week bis 30.11.2026: Vertrag vor Ort unterschreiben, Vertragsbeginn 01.01.2027, bis dahin kostenlos trainieren. 52 Wochen à 12 € oder 104 Wochen à 9 €, 0 € Aktivierungsgebühr. Nur die ersten 20, ab 18. Probetraining kostenlos buchen."
   },
-  "badge": "Black Week · 15.–30. November",
-  "badgePre": "Black Week · ab 15.11.",
+  "badge": "Black Week · bis 30. November",
   "kicker": "Fitnessstudio in Trier-Feyen",
   "headline": "Bis Silvester trainierst du kostenlos.",
   "subline": "Wer in der Black Week unterschreibt, trainiert ab Unterschrift bis 31.12.2026 kostenlos. Dein Vertrag beginnt erst am 01.01.2027, ohne Aktivierungsgebühr.",
   "primaryLabel": "Probetraining buchen",
   "heroNote": "Vertrag vor Ort nach dem Probetraining · ab 18 Jahren · nur die ersten 20",
-  "preHinweis": "Die Aktion startet am Sonntag, 15.11.2026. Dein Probetraining kannst du schon jetzt buchen.",
   "countdownLabel": "bis Mo 30.11., 23:59 Uhr · nur die ersten 20 Anmeldungen",
-  "countdownLabelPre": "bis zum Start am So 15.11. · nur die ersten 20 Anmeldungen",
   "pillars": [
     {
       "title": "Vertragsbeginn 01.01.2027",
@@ -20,7 +17,7 @@
     },
     {
       "title": "Bis dahin kostenlos trainieren",
-      "text": "Ab Unterschrift bis 31.12.2026 trainierst du ohne Beitrag. Das sind 32 bis 47 Tage."
+      "text": "Ab Unterschrift bis 31.12.2026 trainierst du ohne Beitrag. Das sind heute noch {gratis}."
     },
     {
       "title": "0 € Aktivierung",
@@ -29,7 +26,7 @@
   ],
   "preisKicker": "Ganz einfach",
   "preisTitle": "Kein Rabatt-Feuerwerk.",
-  "preisIntro": "Bis 31.12. trainierst du kostenlos. Ab 01.01.2027 läuft dein 52-Wochen-Vertrag mit 12 € pro Woche.",
+  "preisIntro": "Bis 31.12. trainierst du kostenlos. Ab 01.01.2027 läuft dein Vertrag: 52 Wochen mit 12 € pro Woche oder 104 Wochen mit 9 € pro Woche.",
   "tabelleTitel": "Dein Black-Week-Vorteil im Überblick",
   "tabelleKopf": [
     "Tarif",
@@ -44,9 +41,17 @@
       "regulaerKlein": "inkl. 39 € Aktivierung",
       "bw": "624 €",
       "bwKlein": "52 × 12 € ab Vertragsbeginn 01.01.2027"
+    },
+    {
+      "tarif": "104 Wochen",
+      "tarifKlein": "9 €/Woche",
+      "regulaer": "975 €",
+      "regulaerKlein": "inkl. 39 € Aktivierung",
+      "bw": "936 €",
+      "bwKlein": "104 × 9 € ab Vertragsbeginn 01.01.2027"
     }
   ],
-  "tabelleFuss": "Gesamtpreis 624 € für 52 Wochen ab 01.01.2027, 0 € Aktivierungsgebühr. Bis 31.12.2026 trainierst du ab Unterschrift kostenlos (32 bis 47 Tage). Die Aktion gilt nur für den 52-Wochen-Tarif.",
+  "tabelleFuss": "Gesamtpreise: 624 € für 52 Wochen, 936 € für 104 Wochen, jeweils ab Vertragsbeginn 01.01.2027 und mit 0 € Aktivierungsgebühr. Bis 31.12.2026 trainierst du ab Unterschrift kostenlos. Der 4-Wochen-Tarif ist nicht Teil der Aktion.",
   "ablaufKicker": "So läuft es ab",
   "ablaufTitle": "In drei Schritten.",
   "ablaufIntro": "Erst ausprobieren, dann entscheiden. Unterschrieben wird erst nach dem Probetraining bei uns im Studio.",
@@ -79,15 +84,15 @@
     },
     {
       "q": "Was kostet mich der Tarif?",
-      "a": "52 Wochen à 12 €, Gesamtpreis 624 €, 0 € Aktivierungsgebühr. Der Beitrag beginnt am 01.01.2027."
+      "a": "52 Wochen à 12 €, Gesamtpreis 624 €, oder 104 Wochen à 9 €, Gesamtpreis 936 €. 0 € Aktivierungsgebühr. Der Beitrag beginnt am 01.01.2027."
     },
     {
       "q": "Wie lange ist die Kündigungsfrist?",
       "a": "Die Kündigungsfrist beträgt 4 Wochen."
     },
     {
-      "q": "Gilt das auch für den 104-Wochen- oder 4-Wochen-Tarif?",
-      "a": "Nein. Die Aktion gilt nur für den 52-Wochen-Tarif."
+      "q": "Gilt das auch für den 4-Wochen-Tarif?",
+      "a": "Nein. Die Aktion gilt für den 52- und den 104-Wochen-Tarif, nicht für den 4-Wochen-Tarif."
     },
     {
       "q": "Muss ich schon beim Probetraining unterschreiben?",
@@ -98,7 +103,7 @@
       "a": "Gern: 0651 603 443 42. Wir sind in Trier-Feyen, Auf Hirtenberg 8."
     }
   ],
-  "pflichttext": "Black Week: Vertrag vor Ort nach Probetraining, Vertragsbeginn 01.01.2027, bis 31.12.2026 ab Unterschrift kostenloser Trainingszugang ohne Vertragslaufzeit. 52-Wochen-Tarif, 0 € Aktivierungsgebühr, Gesamtpreis 624 € (52 Wochen × 12 €), Beitrag ab 01.01.2027. Für Neumitglieder ab 18, nur die ersten 20, Unterschrift bis 30.11.2026. Kündigungsfrist 4 Wochen.",
+  "pflichttext": "Black Week: Vertrag vor Ort nach Probetraining, Vertragsbeginn 01.01.2027, bis 31.12.2026 ab Unterschrift kostenloser Trainingszugang ohne Vertragslaufzeit. 52-Wochen-Tarif oder 104-Wochen-Tarif, 0 € Aktivierungsgebühr, Gesamtpreis 624 € (52 Wochen × 12 €) bzw. 936 € (104 Wochen × 9 €), Beitrag ab 01.01.2027. Für Neumitglieder ab 18, nur die ersten 20, Unterschrift bis 30.11.2026. Kündigungsfrist 4 Wochen.",
   "ende": {
     "badge": "Black Week 2026",
     "headline": "Aktion beendet.",
