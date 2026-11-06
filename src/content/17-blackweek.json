@@ -27,31 +27,6 @@
   "preisKicker": "Ganz einfach",
   "preisTitle": "Kein Rabatt-Feuerwerk.",
   "preisIntro": "Bis 31.12. trainierst du kostenlos. Ab 01.01.2027 läuft dein Vertrag: 52 Wochen mit 12 € pro Woche oder 104 Wochen mit 9 € pro Woche.",
-  "tabelleTitel": "Dein Black-Week-Vorteil im Überblick",
-  "tabelleKopf": [
-    "Tarif",
-    "Regulär",
-    "Black Week"
-  ],
-  "tabelle": [
-    {
-      "tarif": "52 Wochen",
-      "tarifKlein": "12 €/Woche",
-      "regulaer": "663 €",
-      "regulaerKlein": "inkl. 39 € Aktivierung",
-      "bw": "624 €",
-      "bwKlein": "52 × 12 € ab Vertragsbeginn 01.01.2027"
-    },
-    {
-      "tarif": "104 Wochen",
-      "tarifKlein": "9 €/Woche",
-      "regulaer": "975 €",
-      "regulaerKlein": "inkl. 39 € Aktivierung",
-      "bw": "936 €",
-      "bwKlein": "104 × 9 € ab Vertragsbeginn 01.01.2027"
-    }
-  ],
-  "tabelleFuss": "Gesamtpreise: 624 € für 52 Wochen, 936 € für 104 Wochen, jeweils ab Vertragsbeginn 01.01.2027 und mit 0 € Aktivierungsgebühr. Bis 31.12.2026 trainierst du ab Unterschrift kostenlos. Der 4-Wochen-Tarif ist nicht Teil der Aktion.",
   "ablaufKicker": "So läuft es ab",
   "ablaufTitle": "In drei Schritten.",
   "ablaufIntro": "Erst ausprobieren, dann entscheiden. Unterschrieben wird erst nach dem Probetraining bei uns im Studio.",
@@ -110,5 +85,94 @@
     "text": "Die Black Week ist am 30.11.2026 zu Ende gegangen. Danke an alle, die dabei waren. Ein kostenloses Probetraining und alle aktuellen Tarife findest du auf unserer Hauptseite.",
     "label": "Zur Hauptseite",
     "href": "https://fit-inn-trier.de"
+  },
+  "preise": {
+    "zeitstrahl": [
+      {
+        "titel": "Heute: Probetraining",
+        "text": "Kostenlos buchen, Vertrag erst vor Ort."
+      },
+      {
+        "titel": "Bis 31.12.2026: 0 €",
+        "text": "Ab Unterschrift kostenlos trainieren.",
+        "gold": true
+      },
+      {
+        "titel": "Ab 01.01.2027: Vertrag",
+        "text": "Wochenbeitrag und Laufzeit starten."
+      }
+    ],
+    "umschalterLabel": "Tarif wählen",
+    "tarife": [
+      {
+        "id": "104",
+        "name": "104 Wochen",
+        "tag": "Niedrigster Wochenbeitrag",
+        "preis": "9 €",
+        "einheit": "pro Woche",
+        "stand": "ab 01.01.2027 · bis 31.12.2026 kostenlos",
+        "gesamt": "936 €",
+        "regulaer": "975 €",
+        "rechnung": "104 × 9 €, 0 € Aktivierungsgebühr (regulär 39 €)",
+        "laufzeit": "Laufzeit 104 Wochen ab 01.01.2027"
+      },
+      {
+        "id": "52",
+        "name": "52 Wochen",
+        "tag": "Kürzere Laufzeit",
+        "preis": "12 €",
+        "einheit": "pro Woche",
+        "stand": "ab 01.01.2027 · bis 31.12.2026 kostenlos",
+        "gesamt": "624 €",
+        "regulaer": "663 €",
+        "rechnung": "52 × 12 €, 0 € Aktivierungsgebühr (regulär 39 €)",
+        "laufzeit": "Laufzeit 52 Wochen ab 01.01.2027"
+      }
+    ],
+    "gesamtLabel": "Gesamtpreis über die Laufzeit",
+    "leistungen": [
+      "Technogym-Gerätetraining mit Betreuung",
+      "Bis 31.12.2026 kostenlos trainieren",
+      "0 € statt 39 € Aktivierungsgebühr"
+    ],
+    "kuendigung": "Kündigungsfrist: 4 Wochen",
+    "tabelleTitel": "Beide Tarife im Vergleich",
+    "tabelleKopf": [
+      "52 Wochen",
+      "104 Wochen"
+    ],
+    "tabelleZeilen": [
+      [
+        "Wochenbeitrag ab 01.01.2027",
+        "12 €",
+        "9 €"
+      ],
+      [
+        "Gesamtpreis",
+        "624 €",
+        "936 €"
+      ],
+      [
+        "Regulär (inkl. 39 € Aktivierung)",
+        "663 €",
+        "975 €"
+      ],
+      [
+        "Aktivierungsgebühr",
+        "0 €",
+        "0 €"
+      ],
+      [
+        "Kostenlos bis",
+        "31.12.2026",
+        "31.12.2026"
+      ],
+      [
+        "Kündigungsfrist",
+        "4 Wochen",
+        "4 Wochen"
+      ]
+    ],
+    "fuss": "Gesamtpreise (inkl. aller Gebühren): 624 € für 52 Wochen, 936 € für 104 Wochen, jeweils ab Vertragsbeginn 01.01.2027 und mit 0 € Aktivierungsgebühr (regulär 39 €). Bis 31.12.2026 trainierst du ab Unterschrift kostenlos. Der 4-Wochen-Tarif ist nicht Teil der Aktion."
   }
 }

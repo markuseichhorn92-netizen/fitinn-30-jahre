@@ -119,36 +119,77 @@ export function BwGate({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+// Preisübersicht (Entwurf B): Zeitstrahl, Umschalter 104/52 Wochen, dunkle Karte, Vergleichstabelle.
+// Umschalter nur mit CSS (Radio-Buttons, :checked): ohne JavaScript bedienbar, Pfeiltasten wechseln den Tarif, 104 Wochen ist Standard.
+function Preise({ p, primaryLabel }: { p: any; primaryLabel: string }) {
+  const tarife: any[] = p.tarife || [];
+  return (
+    <div className="bwp">
+      <ol className="bwp-line">
+        {(p.zeitstrahl || []).map((z: any) => (
+          <li key={z.titel} className={z.gold ? 'bwp-st bwp-gold' : 'bwp-st'}><b>{z.titel}</b><span>{z.text}</span></li>
+        ))}
+      </ol>
+      <div className="bwp-umschalter" role="radiogroup" aria-label={p.umschalterLabel}>
+        {tarife.map((t, i) => (
+          <input key={t.id} type="radio" name="bwp-tarif" id={`bwp-t${t.id}`} className="bwp-radio" defaultChecked={i === 0} />
+        ))}
+        <div className="bwp-seg">
+          {tarife.map((t) => (
+            <label key={t.id} htmlFor={`bwp-t${t.id}`}>{t.name}<small>{t.preis} {t.einheit}</small></label>
+          ))}
+        </div>
+        <div className="bwp-panes">
+          {tarife.map((t) => (
+            <div key={t.id} className={`bwp-pane bwp-p${t.id}`}>
+              <div className="bwp-big">
+                <span className="bwp-tag">{t.tag}</span>
+                <h3>{t.name}</h3>
+                <div className="bwp-w"><b>{t.preis}</b><span>{t.einheit}</span></div>
+                <p className="bwp-stand">{t.stand}</p>
+                <div className="bwp-tot">
+                  <small>{p.gesamtLabel}</small>
+                  <span className="bwp-sum"><s><span className="bwp-sr">statt </span>{t.regulaer}</s>{t.gesamt}</span>
+                  <div className="bwp-ex">{t.rechnung}</div>
+                </div>
+                <ul className="bwp-check">
+                  {[...(p.leistungen || []), t.laufzeit, p.kuendigung].map((l: string) => (
+                    <li key={l}><span className="bwp-hk"><Check /></span><span>{l}</span></li>
+                  ))}
+                </ul>
+                <a className="bwp-btn" href="#anmeldung" onClick={book('black-week-preise')}>{primaryLabel}<span className="bwp-dot" aria-hidden="true" /></a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <h3 className="bwp-th">{p.tabelleTitel}</h3>
+      <table className="bwp-cmp">
+        <thead><tr><th scope="col"><span className="bwp-sr">Merkmal</span></th>{(p.tabelleKopf || []).map((k: string) => <th key={k} scope="col">{k}</th>)}</tr></thead>
+        <tbody>
+          {(p.tabelleZeilen || []).map((r: string[]) => (
+            <tr key={r[0]}><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="bw-fuss">{p.fuss}</p>
+    </div>
+  );
+}
+
 export function BwInfo(props: any) {
-  const { preisKicker, preisTitle, preisIntro, tabelleTitel, tabelleKopf, tabelle, tabelleFuss, ablaufKicker, ablaufTitle, ablaufIntro, steps, importantTitle, importantText, primaryLabel, faqKicker, faqTitle, faq } = props;
+  const { preisKicker, preisTitle, preisIntro, preise, ablaufKicker, ablaufTitle, ablaufIntro, steps, importantTitle, importantText, primaryLabel, faqKicker, faqTitle, faq } = props;
   const n = (steps || []).length;
   return (
     <>
-      <section className="bw-preis" aria-label={preisTitle}>
-        <div className="fc-wrap fc-ablauf-grid">
+      <section className="bw-preis" aria-labelledby="bw-preis-h">
+        <div className="fc-wrap">
           <div className="fc-head">
             <span className="fc-hand">{preisKicker}</span>
-            <h2>{preisTitle}</h2>
+            <h2 id="bw-preis-h">{preisTitle}</h2>
             <p className="fc-intro">{preisIntro}</p>
           </div>
-          <div className="fc-body">
-            <div className="bw-karte fc-auf">
-              <strong>{tabelleTitel}</strong>
-              <table>
-                <thead><tr>{(tabelleKopf || []).map((k: string) => <th key={k} scope="col">{k}</th>)}</tr></thead>
-                <tbody>
-                  {(tabelle || []).map((r: any) => (
-                    <tr key={r.tarif}>
-                      <td>{r.tarif}<br /><small>{r.tarifKlein}</small></td>
-                      <td>{r.regulaer}<br /><small>{r.regulaerKlein}</small></td>
-                      <td className="bw-preis-neu"><b>{r.bw}</b><br /><small>{r.bwKlein}</small></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="bw-fuss">{tabelleFuss}</p>
-            </div>
-          </div>
+          <Preise p={preise} primaryLabel={primaryLabel} />
         </div>
       </section>
 
