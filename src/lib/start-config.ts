@@ -14,7 +14,7 @@ export type StoreApp = {
 
 export const technogymApp: StoreApp = {
   name: 'Technogym-App',
-  text: 'Dein Trainingsplan und deine Ergebnisse auf dem Handy.',
+  text: 'Trainingsplan, Training und Anmeldung an den Geräten.',
   ios: 'https://apps.apple.com/de/app/technogym-gym-fitness-app/id976506047',
   android: 'https://play.google.com/store/apps/details?id=com.technogym.tgapp',
 };
@@ -27,6 +27,11 @@ export const technogymApp: StoreApp = {
 //   ios: 'https://apps.apple.com/de/app/…/id…',
 //   android: 'https://play.google.com/store/apps/details?id=…',
 // };
-export const fitInnApp: StoreApp | null = null;
+export const fitInnApp: StoreApp | null = {
+  name: 'Fit-Inn-App',
+  text: 'Mitgliedschaft, Check-in, Punkte, Prämien und Termine – alles in deiner App.',
+  ios: 'https://apps.apple.com/de/app/fit-inn-trier/id6819301763',
+  android: 'https://play.google.com/store/apps/details?id=de.fitinntrier.app',
+};
 
 export const wlan = { ssid: 'Fit-Inn Mitglieder' };

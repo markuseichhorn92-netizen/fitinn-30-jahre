@@ -1,0 +1,33 @@
+/* Ergänzungen zu /start-Styles (Fit-Inn-Marke: Petrol #0A4958, Gold #FFB54F) */
+.points {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 16px;
+  color: #14252D;
+}
+.points li { position: relative; padding-left: 26px; line-height: 1.4; }
+.points li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  width: 7px;
+  height: 12px;
+  border: solid #0A4958;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
+}
+.note {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #FFF3DD;
+  border: 1px solid #FFB54F;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #14252D;
+}
