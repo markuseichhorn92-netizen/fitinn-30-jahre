@@ -95,10 +95,10 @@ export default function Page() {
             <p className={extra.vp}>Tausche deine Punkte direkt in der App, zum Beispiel gegen einen Polar-Brustgurt, einen Gratismonat oder ein Stoffwechselcoaching. Bei unseren Partnern Smilodox und Neosupps gibt es Wertgutscheine.</p>
           </div>
           <div className={extra.vcard}>
-            <span className={`${extra.tag} ${extra.tagGold}`}>Bald</span>
-            <div className={extra.big}>50<small>Punkte fürs Werben</small></div>
+            <span className={`${extra.tag} ${extra.tagGold}`}>Neu</span>
+            <div className={extra.big}>50<small>Punkte oder 4 Wochen beitragsfrei</small></div>
             <h3 className={extra.vt}>Freunde werben</h3>
-            <p className={extra.vp}>Training macht zusammen mehr Spaß. Schon bald gibt es 50 Punkte, wenn du jemanden begeisterst und die Person Mitglied wird. Wir sagen Bescheid, sobald es losgeht.</p>
+            <p className={extra.vp}>Training macht zusammen mehr Spaß. Begeisterst du jemanden fürs Fit-Inn und die Person wird Mitglied, bekommst du als Dankeschön wahlweise 50 Punkte oder 4 Wochen beitragsfrei.</p>
           </div>
           <div className={extra.vcard}>
             <span className={extra.tag}>Kostenlos</span>
