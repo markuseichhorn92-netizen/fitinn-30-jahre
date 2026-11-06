@@ -62,9 +62,10 @@ export function Phone({ src, alt, cut }: { src: string; alt: string; cut?: boole
 }
 
 // Seitenrahmen im Look C (wie /black-week, /freunde): Hero (Petrol), Inhalt, Zeitstrahl, Footer.
-export default async function AppShell({ app, id, badge, title, lead, hero, children, after, steps, stepsTitle, stepsKick, buttonStep }: {
-  app: StoreApp; id: string; badge: string; title: React.ReactNode; lead: string; hero?: React.ReactNode;
-  children?: React.ReactNode; after?: React.ReactNode; steps: Step[]; stepsTitle: string; stepsKick: string; buttonStep: number;
+// Sammelseite /app: ohne app/steps, Hero-Aktion (heroActions) ersetzt die Store-Knöpfe.
+export default async function AppShell({ app, id, badge, title, lead, hero, heroActions, children, after, steps, stepsTitle, stepsKick, buttonStep }: {
+  app?: StoreApp; id?: string; badge: string; title: React.ReactNode; lead: string; hero?: React.ReactNode; heroActions?: React.ReactNode;
+  children?: React.ReactNode; after?: React.ReactNode; steps?: Step[]; stepsTitle?: string; stepsKick?: string; buttonStep?: number;
 }) {
   const ua = (await headers()).get('user-agent') || '';
   const os = /iPhone|iPod|iPad/.test(ua) ? 'ios' : /Android/i.test(ua) ? 'android' : '';
@@ -80,12 +81,12 @@ export default async function AppShell({ app, id, badge, title, lead, hero, chil
             <span className={extra.badge}>{badge}</span>
             <h1 className={extra.h1}>{title}</h1>
             <p className={extra.lead}>{lead}</p>
-            <Stores app={app} id={`${id}-hero`} />
+            {heroActions ?? (app && id ? <Stores app={app} id={`${id}-hero`} /> : null)}
           </div>
           {hero}
         </header>
         {children}
-        <section className={extra.sec} aria-labelledby="so">
+        {steps && app && id ? <section className={extra.sec} aria-labelledby="so">
           <div className={extra.secKick}>{stepsKick}</div>
           <h2 className={extra.h2} id="so">{stepsTitle}</h2>
           <ol className={extra.line}>
@@ -100,7 +101,7 @@ export default async function AppShell({ app, id, badge, title, lead, hero, chil
               </li>
             ))}
           </ol>
-        </section>
+        </section> : null}
         {after}
       </div>
       <footer className={extra.foot}>

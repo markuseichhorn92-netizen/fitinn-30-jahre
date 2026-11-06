@@ -1,129 +1,162 @@
-import type { Metadata, Viewport } from 'next';
-import NextImage from 'next/image';
-import { fitInnApp, technogymApp, type StoreApp } from '@/lib/start-config';
-import styles from '../start/start.module.css';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { fitInnApp, technogymApp } from '@/lib/start-config';
 import extra from './app.module.css';
+import AppShell, { Phone, Stores, stepMeta } from './AppSteps';
 
-// /app – Download-Seite für beide Apps (Fit-Inn-App + Technogym-App), Ziel für Mail, WLAN-Erfolgsseite, Aushang.
-// Statisch, ohne Cookie-Banner/Pixel (siehe HideOn im Root-Layout), nicht im Index.
-// Geräteerkennung per kleinem Inline-Script: setzt <html data-os="ios|android">, CSS hebt den passenden
-// Store-Knopf hervor. Ohne JS bzw. am Rechner sind beide Knöpfe gleichwertig. Kein automatisches Weiterleiten.
-// Klicks zählen anonym im Trichter (/api/f, Schritte start-ios, start-android, Einstieg = fitinn/technogym), ohne Cookie.
+// /app – Sammelseite für beide Apps (Fit-Inn-App + Technogym-App), Ziel für Mail, WLAN-Erfolgsseite, Aushang.
+// Gleicher Look C und gleiche Bausteine wie /app/fitinn (AppSteps.tsx). Gerät wird serverseitig per User-Agent erkannt
+// (Store-Knopf hervorgehoben, beide bleiben sichtbar). Kein Cookie, nicht im Index. Klicks zählen anonym (/api/f).
+// Inhalt nur aus Rundmail/App-News (outbox/rundmail-app-update): keine Preise/Tarife.
+export const dynamic = 'force-dynamic';
+export const metadata: Metadata = stepMeta('Unsere Apps – Fit-Inn Trier', 'Fit-Inn-App und Technogym-App kostenlos laden: Mitgliedschaft, Punkte und Prämien in der Fit-Inn-App, Training in der Technogym-App.', '/app');
+export { viewport } from './AppSteps';
 
-export const dynamic = 'force-static';
-
-const TITLE = 'Unsere Apps – Fit-Inn Trier';
-const DESCRIPTION = 'Fit-Inn-App und Technogym-App kostenlos laden: Mitgliedschaft, Punkte und Prämien in der Fit-Inn-App, Training in der Technogym-App.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/app' },
-  robots: { index: false, follow: false },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: '/app', locale: 'de_DE', type: 'website' },
-};
-
-export const viewport: Viewport = { themeColor: '#0A4958', width: 'device-width', initialScale: 1 };
-
-const IMPRINT = 'https://fit-inn-trier.de/impressum-fit-inn-trier';
-const PRIVACY = 'https://fit-inn-trier.de/datenschutz-fit-inn-trier';
 const FITINN_POINTS = [
   'Mitgliedschaft verwalten und pausieren',
-  'Check-in und Check-out',
-  'Punkte sammeln, Prämien und Partner-Gutscheine',
-  'Termine buchen, Auslastung sehen',
+  'Punkte sammeln und Prämien einlösen',
+  'Ernährungspläne kostenlos',
+  'Freunde werben: 50 Punkte oder 4 Wochen beitragsfrei',
+  'Check-in, Termine und Auslastung',
 ];
 const TECHNOGYM_POINTS = ['Dein Trainingsplan', 'Dein Training', 'Anmeldung an den Geräten'];
 
-const DETECT = `(function(){try{var n=navigator,u=n.userAgent||'',d=n.userAgentData,p='';
-if(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&n.maxTouchPoints>1))p='ios';
-else if(/Android/i.test(u)||(d&&/android/i.test(d.platform||'')))p='android';
-if(p)document.documentElement.setAttribute('data-os',p);
-document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('[data-f]');if(!a||!n.sendBeacon)return;
-try{n.sendBeacon('/api/f',new Blob([JSON.stringify({step:a.getAttribute('data-f'),page:location.pathname,src:a.getAttribute('data-src')||''})],{type:'application/json'}))}catch(x){}});
-}catch(e){}})();`;
+const SHOTS = [
+  { src: '/media/app/iphone-1.webp', alt: 'Startbildschirm der Fit-Inn-App mit Einloggen und Registrieren', cap: 'Registrieren oder einloggen' },
+  { src: '/media/app/iphone-3.webp', alt: 'Startseite der Fit-Inn-App mit Einchecken, Ernährungsplan und Stoffwechselcoaching', cap: 'Einchecken und Ernährungsplan' },
+  { src: '/media/app/iphone-2.webp', alt: 'Punkte-Seite der Fit-Inn-App mit Prämien und Willkommensgutschein', cap: 'Punkte und Prämien' },
+];
 
-function PhoneIcon() {
+const FITINN_STEPS = [
+  { title: 'Alte Fit-Inn-App löschen', text: 'Die neue App ist komplett neu, ein Update ersetzt die alte nicht. iPhone: App gedrückt halten → „App entfernen“ → „App löschen“. Android: App gedrückt halten → „Deinstallieren“.' },
+  { title: 'Neue Fit-Inn-App laden', text: <>Kostenlos über die Knöpfe oben bei der <a href="#fitinn">Fit-Inn App</a>.</> },
+  { title: 'Mit der Vertrags-E-Mail registrieren', text: <>Nimm die E-Mail-Adresse, die du bei deinem Vertragsabschluss angegeben hast. Klappt das nicht? Schreib an <a href="mailto:info@fit-inn-trier.de">info@fit-inn-trier.de</a>.</> },
+  { title: 'Willkommensgutschein einlösen', text: 'Löse in der App deinen Willkommensgutschein über 5 Extra-Punkte ein.' },
+];
+const TECHNOGYM_STEPS = [
+  { title: 'Technogym-App laden', text: <>Kostenlos über die Knöpfe oben bei der <a href="#technogym">Technogym App</a>. Der Link verbindet die App gleich mit dem Fit-Inn.</> },
+];
+
+function Steps({ items }: { items: { title: string; text: React.ReactNode }[] }) {
   return (
-    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
-      <path d="M10.5 18.5h3" />
-    </svg>
+    <ol className={extra.line}>
+      {items.map((s, i) => (
+        <li key={s.title} className={extra.st}>
+          <span className={`${extra.stNum} ${i === 1 ? extra.stGold : ''}`}>{i + 1}</span>
+          <div className={extra.stBody}><h3>{s.title}</h3><p>{s.text}</p></div>
+        </li>
+      ))}
+    </ol>
   );
 }
 
-function DownloadIcon() {
+export default function Page() {
   return (
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 4v11" />
-      <path d="m7 10.5 5 5 5-5" />
-      <path d="M5 20h14" />
-    </svg>
-  );
-}
-
-function AppCard({ app, id, points }: { app: StoreApp; id: string; points: string[] }) {
-  return (
-    <section className={styles.card} aria-labelledby={`app-${id}`}>
-      <div className={styles.cardHead}>
-        <span className={styles.icon}><PhoneIcon /></span>
-        <div>
-          <h2 id={`app-${id}`} className={styles.cardTitle}>{app.name}</h2>
-          <p className={styles.cardText}>{app.text}</p>
+    <AppShell
+      badge="Zwei Apps, kostenlos"
+      title={<>Unsere <em>Apps</em></>}
+      lead="Die Fit-Inn App für Mitgliedschaft, Punkte und Prämien. Die Technogym App für dein Training. Jede mit eigener Aufgabe."
+      hero={<div className={extra.heroPhone}><Phone src="/media/app/iphone-3.webp" alt="Startseite der neuen Fit-Inn-App" cut /></div>}
+      heroActions={
+        <div className={extra.jump}>
+          <a href="#fitinn">Fit-Inn App</a>
+          <a href="#technogym">Technogym App</a>
         </div>
-      </div>
-      <ul className={extra.points}>
-        {points.map((p) => <li key={p}>{p}</li>)}
-      </ul>
-      <div className={styles.stores}>
-        <a className={`${styles.store} ${styles.ios}`} href={app.ios} data-f="start-ios" data-src={id} rel="noopener">
-          <DownloadIcon />
-          <span>Im App Store laden<small>iPhone und iPad</small></span>
-        </a>
-        <a className={`${styles.store} ${styles.android}`} href={app.android} data-f="start-android" data-src={id} rel="noopener">
-          <DownloadIcon />
-          <span>Bei Google Play laden<small>Android</small></span>
-        </a>
-      </div>
-    </section>
-  );
-}
+      }
+      after={
+        <section className={extra.sec} aria-labelledby="faq">
+          <div className={extra.secKick}>Fragen</div>
+          <h2 className={extra.h2} id="faq">Kurz beantwortet</h2>
+          <div className={extra.faq}>
+            <details>
+              <summary>Die Registrierung klappt nicht – was jetzt?</summary>
+              <p>Schreib uns kurz an <a href="mailto:info@fit-inn-trier.de">info@fit-inn-trier.de</a>. Gerade wenn du schon sehr lange bei uns trainierst, müssen wir für dich eventuell noch etwas einrichten – wir melden uns dann schnell bei dir. Du kannst uns auch einfach im Studio ansprechen.</p>
+            </details>
+            <details>
+              <summary>Kosten die Apps etwas?</summary>
+              <p>Nein, du kannst beide kostenlos im Store laden.</p>
+            </details>
+            <details>
+              <summary>Brauche ich beide Apps?</summary>
+              <p>Für dein Training bleibt alles wie gewohnt in der Technogym App. Für Punkte, Prämien, Check-in und deine Mitgliedschaft nutzt du die Fit-Inn App.</p>
+            </details>
+            <details>
+              <summary>Reicht ein normales Update der alten Fit-Inn-App?</summary>
+              <p>Nein. Die App ist komplett neu gebaut. Bitte lösche die alte App einmal und lade die neue.</p>
+            </details>
+          </div>
+        </section>
+      }
+    >
+      <section className={extra.sec}>
+        <div className={extra.callout}>
+          <span className={extra.dot} aria-hidden="true">!</span>
+          <p><b>Alte Fit-Inn-App noch auf dem Handy?</b> Bitte einmal löschen und die neue Fit-Inn-App laden. Die neue App ist komplett neu – ein normales Update ersetzt die alte nicht.</p>
+        </div>
+      </section>
 
-export default function AppPage() {
-  return (
-    <main className={styles.page}>
-      <script dangerouslySetInnerHTML={{ __html: DETECT }} />
-      <header className={styles.head}>
-        <NextImage
-          className={styles.logo}
-          src="/media/77c4274d-cac5-4f25-88b1-15387b0fa6b9.png"
-          alt="Fit-Inn Trier"
-          width={2917}
-          height={486}
-          sizes="168px"
-          priority
-        />
-        <h1 className={styles.title}>Unsere Apps</h1>
-        <p className={styles.sub}>Zwei Apps, kostenlos – jede mit eigener Aufgabe</p>
-      </header>
+      <section className={extra.sec} aria-labelledby="apps">
+        <div className={extra.secKick}>Deine zwei Apps</div>
+        <h2 className={extra.h2} id="apps">Laden, was du brauchst</h2>
+        <div className={extra.appCards}>
+          {fitInnApp ? (
+            <article className={extra.appCard} id="fitinn" aria-labelledby="t-fitinn">
+              <span className={`${extra.tag} ${extra.tagGold}`}>Neu für alle Mitglieder</span>
+              <h3 className={extra.appTitle} id="t-fitinn">Fit-Inn App</h3>
+              <p className={extra.vp}>Dein Studio in deiner Tasche: Punkte sammeln, Prämien holen, einchecken und deine Mitgliedschaft selbst verwalten.</p>
+              <ul className={extra.col}>{FITINN_POINTS.map((p) => <li key={p}>{p}</li>)}</ul>
+              <Stores app={fitInnApp} id="fitinn" light />
+              <Link className={extra.colLink} href="/app/fitinn">Ausführliche Anleitung →</Link>
+            </article>
+          ) : null}
+          <article className={extra.appCard} id="technogym" aria-labelledby="t-technogym">
+            <span className={extra.tag}>Für dein Training</span>
+            <h3 className={extra.appTitle} id="t-technogym">Technogym App</h3>
+            <p className={extra.vp}>Trainingsplan, Training und Anmeldung an den Geräten – direkt mit dem Fit-Inn verbunden.</p>
+            <ul className={extra.col}>{TECHNOGYM_POINTS.map((p) => <li key={p}>{p}</li>)}</ul>
+            <Stores app={technogymApp} id="technogym" light />
+            <Link className={extra.colLink} href="/app/technogym">Ausführliche Anleitung →</Link>
+          </article>
+        </div>
+      </section>
 
-      <div className={styles.cards}>
-        <p className={extra.note}>
-          <strong>Alte Fit-Inn-App noch auf dem Handy?</strong> Bitte einmal löschen und die neue Fit-Inn-App laden.
-          Die neue App ist komplett neu – ein normales Update ersetzt die alte nicht.
-        </p>
-        {fitInnApp ? <AppCard app={fitInnApp} id="fitinn" points={FITINN_POINTS} /> : null}
-        <AppCard app={technogymApp} id="technogym" points={TECHNOGYM_POINTS} />
+      <section className={extra.sec} aria-labelledby="warum">
+        <div className={extra.secKick}>Warum zwei Apps?</div>
+        <h2 className={extra.h2} id="warum">Jede macht, was sie am besten kann</h2>
+        <div className={extra.why}>
+          <div className={extra.card}>
+            <p className={extra.vp}>Die Technogym App gehört zu den Geräten im Studio: Dort findest du weiterhin deinen Trainingsplan, dein Training und die Anmeldung an den Geräten. Alles rund um deine Mitgliedschaft liegt in der neuen Fit-Inn App, die wir nach euren Rückmeldungen von Grund auf neu gebaut haben.</p>
+            <p className={extra.hand}>Für dein Training bleibt alles wie gewohnt.</p>
+          </div>
+          <div className={extra.callout}>
+            <span className={extra.dot} aria-hidden="true">i</span>
+            <p>Punkte sammeln, Prämien einlösen, Freunde werben: <b>nur in der Fit-Inn App.</b> Training und Geräte: <b>nur in der Technogym App.</b></p>
+          </div>
+        </div>
+      </section>
 
-      </div>
+      <section className={extra.sec} aria-labelledby="blick">
+        <div className={extra.secKick}>Ein Blick hinein</div>
+        <h2 className={extra.h2} id="blick">So sieht die Fit-Inn App aus</h2>
+        <div className={extra.shots} role="list">
+          {SHOTS.map((s) => (
+            <figure key={s.src} className={extra.shot} role="listitem" style={{ margin: 0 }}>
+              <Phone src={s.src} alt={s.alt} cut />
+              <figcaption className={extra.shotCap}>{s.cap}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
 
-      <footer className={styles.foot}>
-        <p>Fit-Inn Trier · Auf Hirtenberg 8, 54296 Trier</p>
-        <p className={styles.links}>
-          <a href={IMPRINT}>Impressum</a>
-          <a href={PRIVACY}>Datenschutz</a>
-        </p>
-      </footer>
-    </main>
+      <section className={extra.sec} aria-labelledby="so">
+        <div className={extra.secKick}>Schnellstart</div>
+        <h2 className={extra.h2} id="so">So startest du</h2>
+        <h3 className={extra.subH}>Fit-Inn App in 4 Schritten</h3>
+        <Steps items={FITINN_STEPS} />
+        <h3 className={extra.subH}>Technogym App in 1 Schritt</h3>
+        <Steps items={TECHNOGYM_STEPS} />
+        <p className={extra.p}>Mehr Details, Screens und Fragen findest du in der <Link className={extra.inlineLink} href="/app/fitinn">ausführlichen Fit-Inn-Anleitung</Link> und der <Link className={extra.inlineLink} href="/app/technogym">Technogym-Anleitung</Link>.</p>
+      </section>
+    </AppShell>
   );
 }
