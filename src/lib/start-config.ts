@@ -15,8 +15,9 @@ export type StoreApp = {
 export const technogymApp: StoreApp = {
   name: 'Technogym-App',
   text: 'Trainingsplan, Training und Anmeldung an den Geräten.',
-  ios: 'https://apps.apple.com/de/app/technogym-gym-fitness-app/id976506047',
-  android: 'https://play.google.com/store/apps/details?id=com.technogym.tgapp',
+  // Studio-Link von Technogym (verbindet die App direkt mit dem Fit-Inn), leitet selbst in den passenden Store.
+  ios: 'https://tgapp-link.mywellness.com/cc8c1dd38',
+  android: 'https://tgapp-link.mywellness.com/cc8c1dd38',
 };
 
 // Eigene Fit-Inn-App: solange null, ist die Karte auf /start unsichtbar.
