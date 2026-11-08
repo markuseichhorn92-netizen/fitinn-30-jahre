@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { funnel } from '@/lib/funnel';
 import {
   ZIELE, ERFAHRUNGEN, ZEITEN, SCHWERPUNKTE, VORSCHLAG,
-  baueBausteine, trainerEmpfohlen, rhythmus, planTitel, type Auswahl,
+  baueBausteine, trainerEmpfohlen, istErfahren, schwerpunkteFuer, fokusBereinigen, rhythmus, planTitel, type Auswahl,
 } from './plan';
 import './konfigurator.css';
 
@@ -111,7 +111,7 @@ export default function Konfigurator(props: Props) {
       const raw = window.sessionStorage.getItem(KEY);
       if (raw) {
         const s = JSON.parse(raw);
-        if (s && s.v === 1) { setZiel(s.ziel || ''); setErfahrung(s.erfahrung || ''); setZeit(s.zeit || ''); setFokus(Array.isArray(s.fokus) ? s.fokus : []); setTrainer(s.trainer !== false); if (STEPS.includes(s.step) && s.step !== 'termin' && s.step !== 'daten') setStep(s.step); }
+        if (s && s.v === 1) { setZiel(s.ziel || ''); setErfahrung(s.erfahrung || ''); setZeit(s.zeit || ''); setFokus(fokusBereinigen(Array.isArray(s.fokus) ? s.fokus : [], s.erfahrung || '', s.ziel || '')); setTrainer(istErfahren(s.erfahrung || '', s.ziel || '') ? s.trainer !== false : true); if (STEPS.includes(s.step) && s.step !== 'termin' && s.step !== 'daten') setStep(s.step); }
       }
     } catch { /* privater Modus */ }
     restored.current = true;
@@ -143,6 +143,7 @@ export default function Konfigurator(props: Props) {
   const times = day ? slots.filter((s) => dayKey(s.startDateTime) === day) : [];
   const groups = ['Vormittag', 'Nachmittag', 'Abend'].map((l) => ({ l, items: times.filter((s) => daypart(s.startDateTime) === l) })).filter((g) => g.items.length);
 
+  const erfahren = istErfahren(erfahrung, ziel);
   const auswahl: Auswahl = { ziel, erfahrung, zeit, fokus };
   const bausteine = useMemo(() => baueBausteine(auswahl), [ziel, erfahrung, zeit, fokus]); // eslint-disable-line react-hooks/exhaustive-deps
   const idx = STEPS.indexOf(step);
@@ -158,8 +159,8 @@ export default function Konfigurator(props: Props) {
   const next = () => go(STEPS[Math.min(idx + 1, STEPS.length - 1)]);
   const back = () => go(STEPS[Math.max(idx - 1, 0)]);
 
-  const waehleZiel = (k: string) => { setZiel(k); setFokus(VORSCHLAG[k] || []); setTimeout(() => go('erfahrung'), 200); };
-  const waehleErfahrung = (k: string) => { setErfahrung(k); setTrainer(trainerEmpfohlen(k)); setTimeout(() => go('zeit'), 200); };
+  const waehleZiel = (k: string) => { setZiel(k); setFokus(fokusBereinigen(VORSCHLAG[k] || [], erfahrung, k)); if (!istErfahren(erfahrung, k)) setTrainer(true); setTimeout(() => go('erfahrung'), 200); };
+  const waehleErfahrung = (k: string) => { setErfahrung(k); setTrainer(trainerEmpfohlen(k, ziel)); setFokus((c) => { const vorher = fokusBereinigen(VORSCHLAG[ziel] || [], erfahrung, ziel); const gleich = c.length === vorher.length && c.every((x, i) => x === vorher[i]); return gleich ? fokusBereinigen(VORSCHLAG[ziel] || [], k, ziel) : fokusBereinigen(c, k, ziel); }); setTimeout(() => go('zeit'), 200); };
   const waehleZeit = (k: string) => { setZeit(k); setTimeout(() => go('fokus'), 200); };
   const toggleFokus = (k: string) => setFokus((c) => c.includes(k) ? c.filter((x) => x !== k) : c.length >= 3 ? [...c.slice(1), k] : [...c, k]);
 
@@ -274,7 +275,7 @@ export default function Konfigurator(props: Props) {
         {step === 'fokus' ? (
           <>
             <div className="kf-grid">
-              {SCHWERPUNKTE.map((z) => {
+              {schwerpunkteFuer(erfahrung, ziel).map((z) => {
                 const on = fokus.includes(z.key);
                 return (
                   <button key={z.key} type="button" className={`kf-opt ${on ? 'on' : ''}`} aria-pressed={on} onClick={() => toggleFokus(z.key)}>
@@ -297,10 +298,14 @@ export default function Konfigurator(props: Props) {
               ))}
             </ol>
             {zeit ? <p className="kf-rhythm"><span>Dein Rhythmus danach</span>{rhythmus(zeit)}</p> : null}
-            <fieldset className="kf-seg"><legend>Begleitung beim Probetraining</legend>
-              <button type="button" aria-pressed={trainer} className={trainer ? 'on' : ''} onClick={() => setTrainer(true)}>Mit Trainer{trainerEmpfohlen(erfahrung) ? ' (empfohlen)' : ''}</button>
-              <button type="button" aria-pressed={!trainer} className={!trainer ? 'on' : ''} onClick={() => setTrainer(false)}>Ohne Trainer</button>
-            </fieldset>
+            {erfahren ? (
+              <fieldset className="kf-seg"><legend>Begleitung beim Probetraining</legend>
+                <button type="button" aria-pressed={trainer} className={trainer ? 'on' : ''} onClick={() => setTrainer(true)}>Mit Trainer (Standard)</button>
+                <button type="button" aria-pressed={!trainer} className={!trainer ? 'on' : ''} onClick={() => setTrainer(false)}>Ohne Trainer</button>
+              </fieldset>
+            ) : (
+              <p className="kf-rhythm"><span>Begleitung</span>Du startest mit einem Trainer an deiner Seite.</p>
+            )}
             <ul className="kf-facts"><li><Check />Rund 90 Minuten</li><li><Check />Kostenlos</li><li><Check />Unverbindlich</li></ul>
             <div className="kf-foot">
               <button type="button" className="kf-cta" onClick={next}>Termin für meinen Plan wählen</button>

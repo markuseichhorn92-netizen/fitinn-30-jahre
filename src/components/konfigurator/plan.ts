@@ -1,7 +1,7 @@
 // Inhalte und Regeln des Probetraining-Konfigurators (nur echte Fit-Inn-Angebote, keine Preise, keine Heilversprechen).
 
 export type Option = { key: string; label: string; sub?: string; icon?: string };
-export type Erfahrung = Option & { trainer: boolean };
+export type Erfahrung = Option & { trainer: boolean; erfahren?: boolean };
 
 export const ZIELE: Option[] = [
   { key: 'abnehmen', icon: 'flame', label: 'Abnehmen', sub: 'Gewicht und Körperfett runter' },
@@ -16,7 +16,7 @@ export const ERFAHRUNGEN: Erfahrung[] = [
   { key: 'neu', label: 'Noch nie im Studio', sub: 'Alles neu für mich', trainer: true },
   { key: 'pause', label: 'Länger pausiert', sub: 'Früher trainiert, jetzt wieder rein', trainer: true },
   { key: 'unregelmaessig', label: 'Ab und zu aktiv', sub: 'Ohne festen Plan', trainer: true },
-  { key: 'regelmaessig', label: 'Trainiere regelmäßig', sub: 'Ich kenne mich aus', trainer: false },
+  { key: 'regelmaessig', label: 'Trainiere regelmäßig', sub: 'Ich kenne mich aus', trainer: false, erfahren: true },
 ];
 
 export const ZEITEN: (Option & { rhythmus: string })[] = [
@@ -34,6 +34,24 @@ export const SCHWERPUNKTE: Option[] = [
   { key: 'haltung', label: 'Rücken & Haltung', sub: 'Rumpf kräftigen, Beweglichkeit' },
   { key: 'ernaehrung', label: 'Ernährungs-Tipp', sub: 'Kurzer Tipp vom Trainer' },
 ];
+
+// Freihanteln/Powerbereich und Probetraining ohne Trainer nur für Erfahrene (Einsteiger und Wiedereinsteiger nie)
+export const NUR_ERFAHRENE = ['frei'];
+
+export function istErfahren(erfahrung: string, ziel = ''): boolean {
+  if (ziel === 'wiedereinstieg') return false;
+  return ERFAHRUNGEN.find((e) => e.key === erfahrung)?.erfahren === true;
+}
+
+export function schwerpunkteFuer(erfahrung: string, ziel = ''): Option[] {
+  const ok = istErfahren(erfahrung, ziel);
+  return SCHWERPUNKTE.filter((s) => ok || !NUR_ERFAHRENE.includes(s.key));
+}
+
+export function fokusBereinigen(fokus: string[], erfahrung: string, ziel = ''): string[] {
+  const ok = istErfahren(erfahrung, ziel);
+  return fokus.filter((k) => ok || !NUR_ERFAHRENE.includes(k));
+}
 
 // Vorschläge je Ziel (werden vorgewählt, bleiben änderbar)
 export const VORSCHLAG: Record<string, string[]> = {
@@ -63,13 +81,13 @@ export function baueBausteine(a: Auswahl): PlanItem[] {
   const keys: string[] = [];
   const neu = a.erfahrung === 'neu' || a.erfahrung === 'pause' || a.ziel === 'wiedereinstieg';
   if (neu) keys.push('einweisung');
-  a.fokus.forEach((k) => { if (!keys.includes(k)) keys.push(k); });
+  fokusBereinigen(a.fokus, a.erfahrung, a.ziel).forEach((k) => { if (!keys.includes(k)) keys.push(k); });
   if (keys.length < 3) keys.push('start');
   return keys.slice(0, 4).map((k) => ({ key: k, ...BAUSTEIN[k] }));
 }
 
-export function trainerEmpfohlen(erfahrung: string): boolean {
-  return ERFAHRUNGEN.find((e) => e.key === erfahrung)?.trainer ?? true;
+export function trainerEmpfohlen(erfahrung: string, ziel = ''): boolean {
+  return !istErfahren(erfahrung, ziel);
 }
 
 export function rhythmus(zeit: string): string {
