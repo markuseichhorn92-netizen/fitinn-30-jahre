@@ -14,5 +14,5 @@ export default function KonfiguratorLink({ q }: { q: string }) {
     window.addEventListener('fi:book', onBook);
     return () => window.removeEventListener('fi:book', onBook);
   }, [q]);
-  return null;
+  return <span hidden data-konfigurator-link={q} />;
 }
