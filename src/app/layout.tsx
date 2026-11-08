@@ -37,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <FunnelView />
         {/* Magicline-Chatbot (Mitglieder-/Interessenten-Chat) auf allen Seiten */}
         <Script id="ml-member-chatbot-widget-script" src="https://fit-inn-trier.web.magicline.com/chatbot/widget/widget.js?uuid=a48084fc-8418-4bb1-b987-4bf4d852398f&studioId=1210005460&studioName=Fit-Inn%20Trier" strategy="afterInteractive" />
+        <Script id="ml-chat-groesser" strategy="afterInteractive">{`(function(){var S=1.25,ID='ml-member-chatbot-widget-iframe',o;function a(){var e=document.getElementById(ID);if(!e)return;var h=parseInt(e.style.height,10)||0,t=(h&&h<300)?'scale('+S+')':'';if(e.style.transform!==t){e.style.transformOrigin='100% 100%';e.style.transform=t}if(!e.__mlObs){e.__mlObs=1;new MutationObserver(a).observe(e,{attributes:true,attributeFilter:['style']})}}o=new MutationObserver(a);o.observe(document.documentElement,{childList:true,subtree:true});a()})();`}</Script>
         {/* /start (Studio-QR „Apps & WLAN“): bewusst ohne Cookie-Banner und Meta Pixel */}
         <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']}>
           <MetaPixel />
