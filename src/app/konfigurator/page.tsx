@@ -4,9 +4,8 @@ import Konfigurator from '@/components/konfigurator/Konfigurator';
 import { whatsappHref } from '@/lib/whatsapp';
 import wizard from '@/content/11-wizard.json';
 
-// /konfigurator – ENTWURF (08.11.2026): Probetraining-Konfigurator im Look C. Nicht im Index, nicht im Menü.
-// dryRun: es wird NICHTS in Magicline gebucht (Termine sind echt). Vor Livegang: dryRun entfernen und
-// Einbindung auf den Seiten entscheiden (siehe outbox/probetraining-konfigurator/BEREIT.md).
+// /konfigurator – Probetraining-Konfigurator im Look C (echte Magicline-Buchung). Nicht im Index, nicht im Menü.
+// Einstieg von /freunde und /black-week über ?q=… (nur diese Werte): bestimmt Quelle (Trichter) und Hinweis-Text in Magicline.
 const outfit = localFont({ src: '../../fonts/outfit.woff', weight: '100 900', display: 'swap' });
 
 export const metadata: Metadata = {
@@ -15,8 +14,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function Page() {
+const QUELLEN: Record<string, { source: string; note: string }> = {
+  freunde: { source: 'freunde', note: 'Gebucht über Konfigurator (Freunde werben)' },
+  'black-week': { source: 'black-week', note: 'Gebucht über Konfigurator (Black Week 2026)' },
+};
+
+export default async function Page({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
   const w = wizard as any;
+  const q = (await searchParams).q;
+  const quelle = QUELLEN[String(Array.isArray(q) ? q[0] : q || '')];
   return (
     <main style={{ background: 'linear-gradient(180deg,#eaf4f6 0%,#f7fbfc 30%,#f4fafb 100%)', minHeight: '100vh', ['--fc-outfit' as any]: outfit.style.fontFamily }}>
       <header style={{ maxWidth: 720, margin: '0 auto', padding: '22px 16px 6px', fontFamily: `${outfit.style.fontFamily}, system-ui, sans-serif`, color: '#14252D' }}>
@@ -25,7 +31,6 @@ export default function Page() {
         <p style={{ margin: 0, fontSize: 17, lineHeight: 1.4, color: '#475467' }}>In einer Minute zu deinem Plan, mit Termin in Trier. Kostenlos und unverbindlich.</p>
       </header>
       <Konfigurator
-        dryRun
         apiBaseUrl={w.apiBaseUrl}
         studioId={w.studioId}
         consentText={w.consentText}
@@ -35,7 +40,8 @@ export default function Page() {
         phoneDisplay={w.phoneDisplay}
         phoneHref={w.phoneHref}
         whatsappHref={whatsappHref(w.whatsappBase)}
-        noteSource="Gebucht über Konfigurator"
+        source={quelle?.source}
+        noteSource={quelle?.note || 'Gebucht über Konfigurator'}
         confirmHref={w.confirmHref}
       />
     </main>

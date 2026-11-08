@@ -1,6 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { funnel } from '@/lib/funnel';
+import * as interest from '@/lib/interest';
 import {
   ZIELE, ERFAHRUNGEN, ZEITEN, SCHWERPUNKTE, VORSCHLAG,
   baueBausteine, trainerEmpfohlen, istErfahren, schwerpunkteFuer, fokusBereinigen, rhythmus, planTitel, type Auswahl,
@@ -8,7 +9,8 @@ import {
 import './konfigurator.css';
 
 // Probetraining-Konfigurator: Ziel → Erfahrung → Zeit → Schwerpunkte → Dein Plan → Termin → Daten → Fertig.
-// Slots live aus Magicline (GET /trialsession). Mit dryRun wird nichts gebucht (Entwurf/Vorschau).
+// Slots live aus Magicline (GET /trialsession), Buchung über POST /trialsession/book (wie der bisherige Wizard).
+// Mit dryRun wird nichts gebucht (nur für Vorschauen). Meta-Lead und Analytics nur nach Einwilligung (interest.reportBooking).
 // Lena-Weitergabe: gleicher sessionStorage-Schlüssel wie der bisherige Wizard (fi_booking), damit /bestaetigung greift.
 
 type Slot = { startDateTime: string; endDateTime?: string };
@@ -203,7 +205,10 @@ export default function Konfigurator(props: Props) {
             privacyConfiguration: { email: f.marketing, phone: f.marketing, letter: false, textMessage: f.marketing, mySportsMessage: false } } }) });
         if (!r.ok) throw new Error(String(r.status));
       } else { await new Promise((res) => setTimeout(res, 700)); }
-      funnel('ok', source);
+      if (!dryRun) {
+        interest.reportBooking('success', source);
+        window.dispatchEvent(new CustomEvent('fi:booked', { detail: { startDateTime: slot.startDateTime, source } }));
+      } else funnel('ok', source);
       try {
         window.sessionStorage.removeItem(KEY);
         window.sessionStorage.setItem('fi_booking', JSON.stringify({ v: 1, vorname: f.vorname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '', trainer, ziel: zielLabel || '', erfahrung: erfLabel || '', zeit: zeitLabel || '', fokus: fokusLabels.join(', '), goalKey: ziel, expKey: erfahrung, focusKeys: fokus, plan: bausteine.map((b) => b.titel), planTrainer: trainer, at: Date.now() }));

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
-import Wizard from '@/sections/11-wizard';
+import KonfiguratorLink from '@/components/KonfiguratorLink';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Trail from '@/components/freunde-c/Trail';
 import Bewegung from '@/components/freunde-c/Bewegung';
@@ -13,7 +13,6 @@ import './black-week.css';
 import hero from '@/content/01-hero.json';
 import booking from '@/content/09-booking.json';
 import footer from '@/content/10-footer.json';
-import wizard from '@/content/11-wizard.json';
 import bw from '@/content/17-blackweek.json';
 
 const outfit = localFont({ src: '../../fonts/outfit.woff', weight: '100 900', display: 'swap' });
@@ -32,8 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const note = { ...(wizard as any).noteSource };
-  Object.keys(note).forEach((k) => { note[k] = 'Gebucht über Black-Week-Seite (Black Week 2026)'; });
   const bookingBw = {
     ...booking,
     subheadline: 'Rund 90 Minuten, mit oder ohne Trainer. Kostenlos und unverbindlich – den Black-Week-Vertrag schließt du nach dem Probetraining vor Ort ab.',
@@ -61,7 +58,7 @@ export default function Page() {
       <BwKleingedrucktes text={bw.pflichttext} />
       <Footer {...footer} />
       <BwGate>
-        <Wizard {...wizard} noteSource={note} />
+        <KonfiguratorLink q="black-week" />
         <WhatsAppFloat base={(footer as any).whatsappBase} text="Hallo Lena, ich habe eine Frage zur Black Week im Fit-Inn" place="black-week-float" />
         <Trail />
         <Bewegung />

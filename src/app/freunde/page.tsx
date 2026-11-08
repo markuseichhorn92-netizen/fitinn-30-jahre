@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
-import Wizard from '@/sections/11-wizard';
+import KonfiguratorLink from '@/components/KonfiguratorLink';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Trail from '@/components/freunde-c/Trail';
 import Bewegung from '@/components/freunde-c/Bewegung';
@@ -12,7 +12,6 @@ import './theme-c.css';
 import hero from '@/content/01-hero.json';
 import booking from '@/content/09-booking.json';
 import footer from '@/content/10-footer.json';
-import wizard from '@/content/11-wizard.json';
 import freunde from '@/content/15-freunde.json';
 
 // Schriften wie Website-Entwurf Prototyp C (Outfit, Handschrift Caveat) – nur auf dieser Seite geladen.
@@ -32,8 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const note = { ...(wizard as any).noteSource };
-  Object.keys(note).forEach((k) => { note[k] = 'Gebucht über Freunde-werben-Seite'; });
   const bookingFriends = {
     ...booking,
     subheadline: 'Rund 90 Minuten, mit oder ohne Trainer. Kostenlos und unverbindlich – such dir einen Termin aus.',
@@ -58,7 +55,7 @@ export default function Page() {
       </div>
       <FreundeInfo {...freunde} />
       <Footer {...footer} />
-      <Wizard {...wizard} noteSource={note} />
+      <KonfiguratorLink q="freunde" />
       <WhatsAppFloat base={(footer as any).whatsappBase} text="Hallo Lena, ich wurde von einem Freund eingeladen und habe eine Frage zum Probetraining" place="freunde-float" />
       <Trail />
       <Bewegung />
