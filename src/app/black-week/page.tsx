@@ -3,7 +3,6 @@ import localFont from 'next/font/local';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
 import KonfiguratorLink from '@/components/KonfiguratorLink';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Trail from '@/components/freunde-c/Trail';
 import Bewegung from '@/components/freunde-c/Bewegung';
 import { BwHero, BwGate, BwInfo, BwKleingedrucktes } from '@/sections/17-blackweek';
@@ -59,7 +58,6 @@ export default function Page() {
       <Footer {...footer} />
       <BwGate>
         <KonfiguratorLink q="black-week" />
-        <WhatsAppFloat base={(footer as any).whatsappBase} text="Hallo Lena, ich habe eine Frage zur Black Week im Fit-Inn" place="black-week-float" />
         <Trail />
         <Bewegung />
       </BwGate>

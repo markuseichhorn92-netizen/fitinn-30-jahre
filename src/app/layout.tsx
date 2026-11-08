@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Barlow_Condensed, Inter, Space_Grotesk } from 'next/font/google';
 import ConsentBanner from '@/components/ConsentBanner';
 import FunnelView from '@/components/FunnelView';
@@ -34,6 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <FunnelView />
+        {/* Magicline-Chatbot (Mitglieder-/Interessenten-Chat) auf allen Seiten */}
+        <Script id="ml-member-chatbot-widget-script" src="https://fit-inn-trier.web.magicline.com/chatbot/widget/widget.js?uuid=a48084fc-8418-4bb1-b987-4bf4d852398f&studioId=1210005460&studioName=Fit-Inn%20Trier" strategy="afterInteractive" />
         {/* /start (Studio-QR „Apps & WLAN“): bewusst ohne Cookie-Banner und Meta Pixel */}
         <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']}>
           <MetaPixel />

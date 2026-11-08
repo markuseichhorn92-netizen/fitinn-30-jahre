@@ -3,7 +3,6 @@ import localFont from 'next/font/local';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
 import KonfiguratorLink from '@/components/KonfiguratorLink';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Trail from '@/components/freunde-c/Trail';
 import Bewegung from '@/components/freunde-c/Bewegung';
 import { FreundeHero, FreundeInfo } from '@/sections/15-freunde';
@@ -56,7 +55,6 @@ export default function Page() {
       <FreundeInfo {...freunde} />
       <Footer {...footer} />
       <KonfiguratorLink q="freunde" />
-      <WhatsAppFloat base={(footer as any).whatsappBase} text="Hallo Lena, ich wurde von einem Freund eingeladen und habe eine Frage zum Probetraining" place="freunde-float" />
       <Trail />
       <Bewegung />
     </main>
