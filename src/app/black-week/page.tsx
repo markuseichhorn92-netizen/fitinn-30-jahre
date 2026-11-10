@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
 import KonfiguratorLink from '@/components/KonfiguratorLink';
+import AbsprungMessung from '@/components/AbsprungMessung';
 import Bewegung from '@/components/freunde-c/Bewegung';
 import { BwHero, BwGate, BwInfo, BwKleingedrucktes, BwSticky } from '@/sections/17-blackweek';
 import '../freunde/theme-c.css';
@@ -60,6 +61,7 @@ export default function Page() {
       <Footer {...footer} />
       <BwGate>
         <KonfiguratorLink q="black-week" />
+        <AbsprungMessung />
         <BwSticky {...bw.sticky} />
         <Bewegung />
       </BwGate>

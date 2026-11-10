@@ -10,8 +10,11 @@
 // start-ios / start-android / start-wlan (Klick auf /start: Store-Knopf bzw. WLAN-Anmeldeseite; Einstieg = technogym, fitinn, wlan) ·
 // kf_<schritt> (Probetraining-Konfigurator: ziel, erfahrung, zeit, fokus, plan, termin, daten, fertig) ·
 // consent_shown (Cookie-Banner eingeblendet) · consent_accept (Einstieg all = „Akzeptieren“, custom = eigene Auswahl) · consent_necessary (Einstieg all = „Nur notwendige“, custom = eigene Auswahl ohne Häkchen).
+// Absprung-Messung (Black Week, src/lib/absprung.ts): quelle (Herkunft) · from · from_open · from_kf · from_ok (Anzeigen-Motiv je Stufe) · sec · exit · depth · dwell · toggle · faq ·
+// kf_exit (Abbruch im Konfigurator je Schritt/Feld) · kf_err (Fehlermeldung je Feld). Erlaubt sind nur feste Kombinationen aus Schritt, Seite und Kurzbezeichnung.
 import { NextResponse } from 'next/server';
 import { kvEnabled, kvPipeline } from '@/lib/kv';
+import { ABSPRUNG_SCHRITTE, absprungErlaubt } from '@/lib/absprung';
 
 export const runtime = 'nodejs';
 const STEPS = /^(view|start-(ios|android|wlan)|open|submit|ok|fail|whatsapp|cta_seen|consent_shown|consent_accept|consent_necessary|s_(slot|goal|experience|focus|name|contact|address|confirm|hint)|kf_(ziel|erfahrung|zeit|fokus|plan|termin|daten|fertig))$/;
@@ -29,7 +32,8 @@ export async function POST(req: Request) {
   const step = String(b?.step || '');
   const page = String(b?.page || '/');
   const src = String(b?.src || '');
-  if (!STEPS.test(step) || !PAGE.test(page) || !SRC.test(src)) return new NextResponse(null, { status: 400 });
+  const absprung = ABSPRUNG_SCHRITTE.includes(step);
+  if (!(absprung ? absprungErlaubt(step, page, src) : STEPS.test(step)) || !PAGE.test(page) || !SRC.test(src)) return new NextResponse(null, { status: 400 });
   const field = `${step} ${page} ${src || '-'}`;
   console.log(`[funnel] ${field}`);
   if (kvEnabled) {
