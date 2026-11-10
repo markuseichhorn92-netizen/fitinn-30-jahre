@@ -1,6 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { funnel } from '@/lib/funnel';
+import { motivAusUrl } from '@/lib/absprung';
 import * as interest from '@/lib/interest';
 import {
   ZIELE, ERFAHRUNGEN, ZEITEN, SCHWERPUNKTE, VORSCHLAG,
@@ -179,6 +180,26 @@ export default function Konfigurator(props: Props) {
   const formValid = Object.keys(err).length === 0 && (!f.hint.trim() || f.hintOk);
   const touch = (k: string) => setTouched((t) => ({ ...t, [k]: true }));
   const show = (k: string) => (touched[k] || touched._all) && err[k];
+  // Absprung-Messung (anonyme Zähler, siehe src/lib/absprung.ts): Motiv der Anzeige, Fehlermeldung je Feld, Abbruch je Schritt/Feld.
+  const abgeschlossen = useRef(false);
+  const letztesFeld = useRef('');
+  const stepRef = useRef<Step>(step);
+  stepRef.current = step;
+  useEffect(() => { funnel('from_kf', motivAusUrl('c')); }, []);
+  useEffect(() => { for (const k of ['vorname', 'nachname', 'email', 'dob', 'zip', 'consent']) if (show(k)) funnel('kf_err', k); });
+  useEffect(() => {
+    const onFocus = (e: FocusEvent) => { const m = /^kf-(vorname|nachname|email|dob|zip|consent)$/.exec((e.target as HTMLElement | null)?.id || ''); if (m) letztesFeld.current = m[1]; };
+    const root = rootRef.current;
+    root?.addEventListener('focusin', onFocus);
+    const raus = () => {
+      if (abgeschlossen.current || stepRef.current === 'fertig') return;
+      funnel('kf_exit', stepRef.current === 'daten' && letztesFeld.current ? `daten-${letztesFeld.current}` : stepRef.current);
+    };
+    const onVis = () => { if (document.visibilityState === 'hidden') raus(); };
+    document.addEventListener('visibilitychange', onVis);
+    window.addEventListener('pagehide', raus);
+    return () => { root?.removeEventListener('focusin', onFocus); document.removeEventListener('visibilitychange', onVis); window.removeEventListener('pagehide', raus); };
+  }, []);
 
   const ics = () => {
     if (!slot) return;
@@ -207,6 +228,7 @@ export default function Konfigurator(props: Props) {
       } else { await new Promise((res) => setTimeout(res, 700)); }
       if (!dryRun) {
         interest.reportBooking('success', source);
+        abgeschlossen.current = true; funnel('from_ok', motivAusUrl('c'));
         window.dispatchEvent(new CustomEvent('fi:booked', { detail: { startDateTime: slot.startDateTime, source } }));
       } else funnel('ok', source);
       try {
