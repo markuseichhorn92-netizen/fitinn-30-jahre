@@ -120,7 +120,7 @@ export function BwGate({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-// Preisübersicht (Entwurf B): Zeitstrahl, Umschalter 104/52 Wochen, dunkle Karte, Vergleichstabelle.
+// Preisübersicht (Entwurf B): Zeitstrahl, Umschalter 104/52 Wochen, dunkle Karte (Vergleichstabelle am 10.11.2026 entfernt).
 // Umschalter nur mit CSS (Radio-Buttons, :checked): ohne JavaScript bedienbar, Pfeiltasten wechseln den Tarif, 104 Wochen ist Standard.
 function Preise({ p, primaryLabel }: { p: any; primaryLabel: string }) {
   const tarife: any[] = p.tarife || [];
@@ -164,15 +164,6 @@ function Preise({ p, primaryLabel }: { p: any; primaryLabel: string }) {
           ))}
         </div>
       </div>
-      <h3 className="bwp-th">{p.tabelleTitel}</h3>
-      <table className="bwp-cmp">
-        <thead><tr><th scope="col"><span className="bwp-sr">Merkmal</span></th>{(p.tabelleKopf || []).map((k: string) => <th key={k} scope="col">{k}</th>)}</tr></thead>
-        <tbody>
-          {(p.tabelleZeilen || []).map((r: string[]) => (
-            <tr key={r[0]}><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td></tr>
-          ))}
-        </tbody>
-      </table>
       <p className="bw-fuss">{p.fuss}</p>
     </div>
   );
