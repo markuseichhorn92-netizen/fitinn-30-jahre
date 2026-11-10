@@ -3,31 +3,21 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { funnel } from '@/lib/funnel';
 import * as interest from '@/lib/interest';
 import {
-  ZIELE, ERFAHRUNGEN, ZEITEN, SCHWERPUNKTE, VORSCHLAG,
-  baueBausteine, trainerEmpfohlen, istErfahren, schwerpunkteFuer, fokusBereinigen, rhythmus, planTitel, type Auswahl,
+  ZIELE, ERFAHRUNGEN, SCHWERPUNKTE, VORSCHLAG,
+  baueBausteine, trainerEmpfohlen, istErfahren, fokusBereinigen, type Auswahl,
 } from './plan';
 import './konfigurator.css';
 
-// Probetraining-Konfigurator: Ziel → Erfahrung → Zeit → Schwerpunkte → Dein Plan → Termin → Daten → Fertig.
+// Probetraining-Konfigurator (kurz): Termin → Daten → Fertig. Ziel und Erfahrung sind optional im Daten-Schritt (nur für die Vorbereitung des Trainers).
 // Slots live aus Magicline (GET /trialsession), Buchung über POST /trialsession/book (wie der bisherige Wizard).
 // Mit dryRun wird nichts gebucht (nur für Vorschauen). Meta-Lead und Analytics nur nach Einwilligung (interest.reportBooking).
 // Lena-Weitergabe: gleicher sessionStorage-Schlüssel wie der bisherige Wizard (fi_booking), damit /bestaetigung greift.
 
 type Slot = { startDateTime: string; endDateTime?: string };
-type Step = 'ziel' | 'erfahrung' | 'zeit' | 'fokus' | 'plan' | 'termin' | 'daten' | 'fertig';
-const STEPS: Step[] = ['ziel', 'erfahrung', 'zeit', 'fokus', 'plan', 'termin', 'daten'];
-const TITEL: Record<Step, string> = {
-  ziel: 'Was ist dein Ziel?', erfahrung: 'Wie viel Erfahrung hast du?', zeit: 'Wie viel Zeit hast du pro Woche?',
-  fokus: 'Was soll dein Probetraining enthalten?', plan: 'Dein Fit-Inn-Plan', termin: 'Wann passt es dir?',
-  daten: 'Fast geschafft', fertig: 'Dein Termin steht',
-};
-const SUB: Partial<Record<Step, string>> = {
-  ziel: 'Tipp auf das, was am ehesten passt. Dein Trainer bereitet sich darauf vor.',
-  erfahrung: 'Jede Antwort ist die richtige.',
-  zeit: 'Daraus machen wir einen Rhythmus, der in deinen Alltag passt.',
-  fokus: 'Wir haben etwas vorgewählt. Du entscheidest, bis zu drei Bausteine.',
-};
-const KEY = 'fi-kf-v1';
+type Step = 'termin' | 'daten' | 'fertig';
+const STEPS: Step[] = ['termin', 'daten'];
+const TITEL: Record<Step, string> = { termin: 'Wann passt es dir?', daten: 'Fast geschafft', fertig: 'Dein Termin steht' };
+const SUB: Partial<Record<Step, string>> = {};
 
 type Props = {
   apiBaseUrl?: string; studioId?: number | string; bookingWindowDays?: number; dryRun?: boolean; source?: string;
@@ -87,11 +77,9 @@ export default function Konfigurator(props: Props) {
     phoneDisplay, phoneHref, whatsappHref, noteSource = 'Gebucht über Konfigurator', confirmHref,
   } = props;
 
-  const [step, setStep] = useState<Step>('ziel');
+  const [step, setStep] = useState<Step>('termin');
   const [ziel, setZiel] = useState('');
-  const [erfahrung, setErfahrung] = useState('');
-  const [zeit, setZeit] = useState('');
-  const [fokus, setFokus] = useState<string[]>([]);
+  const [regelmaessig, setRegelmaessig] = useState(false);
   const [trainer, setTrainer] = useState(true);
   const [slots, setSlots] = useState<Slot[]>([]);
   const [slotState, setSlotState] = useState<'loading' | 'ok' | 'empty' | 'error'>('loading');
@@ -106,22 +94,6 @@ export default function Konfigurator(props: Props) {
   const headRef = useRef<HTMLHeadingElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const restored = useRef(false);
-
-  // Auswahl (ohne persönliche Daten) bei Neuladen wiederherstellen
-  useEffect(() => {
-    try {
-      const raw = window.sessionStorage.getItem(KEY);
-      if (raw) {
-        const s = JSON.parse(raw);
-        if (s && s.v === 1) { setZiel(s.ziel || ''); setErfahrung(s.erfahrung || ''); setZeit(s.zeit || ''); setFokus(fokusBereinigen(Array.isArray(s.fokus) ? s.fokus : [], s.erfahrung || '', s.ziel || '')); setTrainer(istErfahren(s.erfahrung || '', s.ziel || '') ? s.trainer !== false : true); if (STEPS.includes(s.step) && s.step !== 'termin' && s.step !== 'daten') setStep(s.step); }
-      }
-    } catch { /* privater Modus */ }
-    restored.current = true;
-  }, []);
-  useEffect(() => {
-    if (!restored.current || step === 'fertig') return;
-    try { window.sessionStorage.setItem(KEY, JSON.stringify({ v: 1, step, ziel, erfahrung, zeit, fokus, trainer })); } catch { /* egal */ }
-  }, [step, ziel, erfahrung, zeit, fokus, trainer]);
 
   // Echte freie Termine aus Magicline
   useEffect(() => {
@@ -145,26 +117,23 @@ export default function Konfigurator(props: Props) {
   const times = day ? slots.filter((s) => dayKey(s.startDateTime) === day) : [];
   const groups = ['Vormittag', 'Nachmittag', 'Abend'].map((l) => ({ l, items: times.filter((s) => daypart(s.startDateTime) === l) })).filter((g) => g.items.length);
 
+  const erfahrung = regelmaessig ? 'regelmaessig' : '';
   const erfahren = istErfahren(erfahrung, ziel);
-  const auswahl: Auswahl = { ziel, erfahrung, zeit, fokus };
-  const bausteine = useMemo(() => baueBausteine(auswahl), [ziel, erfahrung, zeit, fokus]); // eslint-disable-line react-hooks/exhaustive-deps
+  const fokus = useMemo(() => fokusBereinigen(VORSCHLAG[ziel] || [], erfahrung, ziel), [ziel, erfahrung]);
+  const auswahl: Auswahl = { ziel, erfahrung, zeit: '', fokus };
+  const bausteine = useMemo(() => baueBausteine(auswahl), [ziel, erfahrung, fokus]); // eslint-disable-line react-hooks/exhaustive-deps
   const idx = STEPS.indexOf(step);
   const zielLabel = ZIELE.find((z) => z.key === ziel)?.label;
   const erfLabel = ERFAHRUNGEN.find((z) => z.key === erfahrung)?.label;
-  const zeitLabel = ZEITEN.find((z) => z.key === zeit)?.label;
   const fokusLabels = fokus.map((k) => SCHWERPUNKTE.find((s) => s.key === k)?.label).filter(Boolean) as string[];
 
-  // Trichter zählt den Schritt, Fokus springt auf die Überschrift
-  useEffect(() => { funnel(`kf_${step}`, source); headRef.current?.focus({ preventScroll: true }); }, [step, source]);
+  // Trichter zählt den Schritt (kf_termin, kf_daten), Fokus springt auf die Überschrift (nicht beim ersten Laden)
+  const erster = useRef(true);
+  useEffect(() => { funnel(`kf_${step}`, source); if (erster.current) { erster.current = false; return; } headRef.current?.focus({ preventScroll: true }); }, [step, source]);
   const scrollTop = () => { const r = rootRef.current; if (r) { const top = r.getBoundingClientRect().top + window.scrollY - 12; if (top < window.scrollY) window.scrollTo({ top, behavior: 'smooth' }); } };
   const go = (s: Step) => { setDir(STEPS.indexOf(s) >= idx ? 1 : -1); setStep(s); setFailed(false); scrollTop(); };
   const next = () => go(STEPS[Math.min(idx + 1, STEPS.length - 1)]);
   const back = () => go(STEPS[Math.max(idx - 1, 0)]);
-
-  const waehleZiel = (k: string) => { setZiel(k); setFokus(fokusBereinigen(VORSCHLAG[k] || [], erfahrung, k)); if (!istErfahren(erfahrung, k)) setTrainer(true); setTimeout(() => go('erfahrung'), 200); };
-  const waehleErfahrung = (k: string) => { setErfahrung(k); setTrainer(trainerEmpfohlen(k, ziel)); setFokus((c) => { const vorher = fokusBereinigen(VORSCHLAG[ziel] || [], erfahrung, ziel); const gleich = c.length === vorher.length && c.every((x, i) => x === vorher[i]); return gleich ? fokusBereinigen(VORSCHLAG[ziel] || [], k, ziel) : fokusBereinigen(c, k, ziel); }); setTimeout(() => go('zeit'), 200); };
-  const waehleZeit = (k: string) => { setZeit(k); setTimeout(() => go('fokus'), 200); };
-  const toggleFokus = (k: string) => setFokus((c) => c.includes(k) ? c.filter((x) => x !== k) : c.length >= 3 ? [...c.slice(1), k] : [...c, k]);
 
   // Validierung: nur Magicline-Pflicht (Name, E-Mail, Geburtsdatum ab 18, PLZ)
   const dobIso = dobToIso(f.dob);
@@ -192,8 +161,7 @@ export default function Konfigurator(props: Props) {
     setTouched({ _all: true });
     if (!formValid || !slot || !dobIso) return;
     const note = [
-      noteSource, zielLabel && `Ziel: ${zielLabel}`, erfLabel && `Erfahrung: ${erfLabel}`, zeitLabel && `Zeit pro Woche: ${zeitLabel}`,
-      fokusLabels.length && `Wichtig: ${fokusLabels.join(', ')}`, `Plan: ${bausteine.map((b) => b.titel).join(', ')}`,
+      noteSource, zielLabel && `Ziel: ${zielLabel}`, erfLabel && `Erfahrung: ${erfLabel}`,
       `Begleitung: ${trainer ? 'mit Trainer' : 'ohne Trainer'}`, f.hint.trim() && f.hintOk ? `Hinweis für Trainer: ${f.hint.trim().slice(0, 300)}` : '',
     ].filter(Boolean).join(' · ');
     setSending(true); setFailed(false); funnel('submit', source);
@@ -210,8 +178,7 @@ export default function Konfigurator(props: Props) {
         window.dispatchEvent(new CustomEvent('fi:booked', { detail: { startDateTime: slot.startDateTime, source } }));
       } else funnel('ok', source);
       try {
-        window.sessionStorage.removeItem(KEY);
-        window.sessionStorage.setItem('fi_booking', JSON.stringify({ v: 1, vorname: f.vorname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '', trainer, ziel: zielLabel || '', erfahrung: erfLabel || '', zeit: zeitLabel || '', fokus: fokusLabels.join(', '), goalKey: ziel, expKey: erfahrung, focusKeys: fokus, plan: bausteine.map((b) => b.titel), planTrainer: trainer, at: Date.now() }));
+        window.sessionStorage.setItem('fi_booking', JSON.stringify({ v: 1, vorname: f.vorname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '', trainer, ziel: zielLabel || '', erfahrung: erfLabel || '', zeit: '', fokus: fokusLabels.join(', '), goalKey: ziel, expKey: erfahrung, focusKeys: fokus, focusLabels: fokusLabels, plan: ziel ? bausteine.map((b) => b.titel) : [], planTrainer: trainer, at: Date.now() }));
         if (!dryRun && confirmHref) { window.location.assign(confirmHref); return; }
       } catch { /* privater Modus */ }
       setDir(1); setStep('fertig'); scrollTop();
@@ -233,92 +200,13 @@ export default function Konfigurator(props: Props) {
           <span>{step === 'fertig' ? 'Alles erledigt' : `Schritt ${idx + 1} von ${STEPS.length}`}</span>
           {step !== 'fertig' && idx > 0 ? <button type="button" className="kf-back" onClick={back}>← Zurück</button> : <span />}
         </div>
-        {(zielLabel || erfLabel || zeitLabel || fokusLabels.length) && step !== 'fertig' ? (
-          <ul className="kf-chips" aria-label="Deine bisherigen Antworten">
-            {[zielLabel, erfLabel, zeitLabel, ...fokusLabels].filter(Boolean).map((c, i) => <li key={`${c}${i}`}><Check />{c}</li>)}
-          </ul>
-        ) : null}
       </div>
 
       <section key={step} className="kf-card" aria-labelledby="kf-h">
         <h2 id="kf-h" ref={headRef} tabIndex={-1}>
-          {step === 'plan' && zielLabel ? planTitel(ziel) : step === 'fertig' && vorname ? `${vorname}, dein Termin steht` : TITEL[step]}
+          {step === 'fertig' && vorname ? `${vorname}, dein Termin steht` : TITEL[step]}
         </h2>
         {SUB[step] ? <p className="kf-sub">{SUB[step]}</p> : null}
-
-        {step === 'ziel' ? (
-          <div className="kf-grid">
-            {ZIELE.map((z) => (
-              <button key={z.key} type="button" className={`kf-opt ${ziel === z.key ? 'on' : ''}`} aria-pressed={ziel === z.key} onClick={() => waehleZiel(z.key)}>
-                <span className="kf-ico"><Icon kind={z.icon} /></span>
-                <span className="kf-t"><strong>{z.label}</strong><small>{z.sub}</small></span>
-              </button>
-            ))}
-          </div>
-        ) : null}
-
-        {step === 'erfahrung' ? (
-          <div className="kf-list">
-            {ERFAHRUNGEN.map((z) => (
-              <button key={z.key} type="button" className={`kf-opt ${erfahrung === z.key ? 'on' : ''}`} aria-pressed={erfahrung === z.key} onClick={() => waehleErfahrung(z.key)}>
-                <span className="kf-t"><strong>{z.label}</strong><small>{z.sub}</small></span>
-              </button>
-            ))}
-          </div>
-        ) : null}
-
-        {step === 'zeit' ? (
-          <div className="kf-list">
-            {ZEITEN.map((z) => (
-              <button key={z.key} type="button" className={`kf-opt ${zeit === z.key ? 'on' : ''}`} aria-pressed={zeit === z.key} onClick={() => waehleZeit(z.key)}>
-                <span className="kf-t"><strong>{z.label}</strong><small>{z.sub}</small></span>
-              </button>
-            ))}
-          </div>
-        ) : null}
-
-        {step === 'fokus' ? (
-          <>
-            <div className="kf-grid">
-              {schwerpunkteFuer(erfahrung, ziel).map((z) => {
-                const on = fokus.includes(z.key);
-                return (
-                  <button key={z.key} type="button" className={`kf-opt ${on ? 'on' : ''}`} aria-pressed={on} onClick={() => toggleFokus(z.key)}>
-                    <span className="kf-t"><strong>{z.label}</strong><small>{z.sub}</small></span>
-                    <span className={`kf-tick ${on ? 'on' : ''}`} aria-hidden="true">{on ? <Check /> : null}</span>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="kf-foot"><button type="button" className="kf-cta" disabled={!fokus.length} onClick={next}>Meinen Plan ansehen</button></div>
-          </>
-        ) : null}
-
-        {step === 'plan' ? (
-          <>
-            <p className="kf-sub">Das erwartet dich bei deinem Probetraining.</p>
-            <ol className="kf-plan">
-              {bausteine.map((b, i) => (
-                <li key={b.key}><span className="kf-no" aria-hidden="true">{i + 1}</span><div><strong>{b.titel}</strong><p>{b.text}</p></div></li>
-              ))}
-            </ol>
-            {zeit ? <p className="kf-rhythm"><span>Dein Rhythmus danach</span>{rhythmus(zeit)}</p> : null}
-            {erfahren ? (
-              <fieldset className="kf-seg"><legend>Begleitung beim Probetraining</legend>
-                <button type="button" aria-pressed={trainer} className={trainer ? 'on' : ''} onClick={() => setTrainer(true)}>Mit Trainer (Standard)</button>
-                <button type="button" aria-pressed={!trainer} className={!trainer ? 'on' : ''} onClick={() => setTrainer(false)}>Ohne Trainer</button>
-              </fieldset>
-            ) : (
-              <p className="kf-rhythm"><span>Begleitung</span>Du startest mit einem Trainer an deiner Seite.</p>
-            )}
-            <ul className="kf-facts"><li><Check />Rund 90 Minuten</li><li><Check />Kostenlos</li><li><Check />Unverbindlich</li></ul>
-            <div className="kf-foot">
-              <button type="button" className="kf-cta" onClick={next}>Termin für meinen Plan wählen</button>
-              <button type="button" className="kf-link" onClick={() => go('fokus')}>Plan ändern</button>
-            </div>
-            <p className="kf-trust"><b>4,8 ★ bei Google</b> · über 250 Bewertungen · familiengeführt seit 1996</p>
-          </>
-        ) : null}
 
         {step === 'termin' ? (
           <>
@@ -369,6 +257,19 @@ export default function Konfigurator(props: Props) {
             </div>
             <p className="kf-why">Warum Geburtsdatum und PLZ? Unser Buchungssystem verlangt sie, und das Probetraining ist ab 18.</p>
 
+            <fieldset className="kf-ziel"><legend>Was ist dein Ziel? <i>(optional, dein Trainer bereitet sich darauf vor)</i></legend>
+              <div className="kf-chipsel">
+                {ZIELE.map((z) => <button key={z.key} type="button" className={ziel === z.key ? 'on' : ''} aria-pressed={ziel === z.key} onClick={() => { const neu = ziel === z.key ? '' : z.key; setZiel(neu); if (!istErfahren(regelmaessig ? 'regelmaessig' : '', neu)) setTrainer(true); }}>{z.label}</button>)}
+              </div>
+              <label className="kf-check"><input type="checkbox" checked={regelmaessig} onChange={(e) => { setRegelmaessig(e.target.checked); setTrainer(trainerEmpfohlen(e.target.checked ? 'regelmaessig' : '', ziel)); }} /><span>Ich trainiere schon regelmäßig <i>(dann geht das Probetraining auch ohne Trainer)</i></span></label>
+              {erfahren ? (
+                <div className="kf-seg" role="group" aria-label="Begleitung beim Probetraining">
+                  <button type="button" aria-pressed={trainer} className={trainer ? 'on' : ''} onClick={() => setTrainer(true)}>Mit Trainer (Standard)</button>
+                  <button type="button" aria-pressed={!trainer} className={!trainer ? 'on' : ''} onClick={() => setTrainer(false)}>Ohne Trainer</button>
+                </div>
+              ) : null}
+            </fieldset>
+
             <button type="button" className="kf-link kf-hintbtn" aria-expanded={showHint} onClick={() => setShowHint(!showHint)}>{showHint ? '− Hinweis ausblenden' : '+ Soll dein Trainer etwas wissen? (optional)'}</button>
             {showHint ? (
               <div className="kf-hint">
@@ -398,7 +299,7 @@ export default function Konfigurator(props: Props) {
             <p className="kf-big">{fmtFull(slot.startDateTime)}</p>
             <p className="kf-sub">{trainer ? 'Mit Trainer' : 'Ohne Trainer'} · Auf Hirtenberg 8, 54296 Trier · rund 90 Minuten</p>
             {dryRun ? <p className="kf-vorschau">Vorschau: Es wurde nichts gebucht und nichts gesendet.</p> : <p className="kf-sub">Die Bestätigung kommt per E-Mail.</p>}
-            <div className="kf-recap"><strong>Dein Plan</strong><ul>{bausteine.map((b) => <li key={b.key}><Check />{b.titel}</li>)}</ul></div>
+            {ziel ? <div className="kf-recap"><strong>Dein Plan</strong><ul>{bausteine.map((b) => <li key={b.key}><Check />{b.titel}</li>)}</ul></div> : null}
             <div className="kf-actions">
               <button type="button" className="kf-cta" onClick={ics}>Zum Kalender hinzufügen</button>
               <a className="kf-ghost" href="https://maps.google.com/?q=Fit-Inn+Trier+Auf+Hirtenberg+8+54296+Trier" target="_blank" rel="noopener noreferrer">Anfahrt öffnen</a>
