@@ -23,6 +23,14 @@ test('Motiv aus utm_content: nur bekannte Werte', () => {
   assert.equal(A.motivAusUrl('c', '?c=preis'), 'preis');
 });
 
+test('Herkunft aus utm_source: nur bekannte Werte', () => {
+  assert.equal(A.quelleAusUrl('?utm_source=meta&utm_medium=paid'), 'meta');
+  assert.equal(A.quelleAusUrl('?utm_source=aushang'), 'aushang');
+  assert.equal(A.quelleAusUrl('?utm_source=irgendwer'), 'other');
+  assert.equal(A.quelleAusUrl(''), 'direkt');
+  assert.ok(A.absprungErlaubt('quelle', '/black-week', 'tv') && !A.absprungErlaubt('quelle', '/black-week', 'x'));
+});
+
 test('Zeitbereiche', () => {
   assert.deepEqual([0, 4, 5, 14, 29, 59, 119, 299, 900].map(A.zeitBereich), ['t5', 't5', 't15', 't15', 't30', 't60', 't120', 't300', 't300p']);
   for (const z of ['t5', 't15', 't30', 't60', 't120', 't300', 't300p']) assert.ok(A.absprungErlaubt('dwell', '/black-week', z));
@@ -43,5 +51,5 @@ test('Server-Allowlist: alles andere wird abgelehnt (keine freien Texte, keine f
 
 test('Alle Zähler passen in das 24-Zeichen-Muster von /api/f', () => {
   const re = /^[a-z0-9-]{0,24}$/;
-  for (const l of [A.MOTIVE, A.ABSCHNITTE, A.TIEFEN, A.ZEITEN]) for (const v of l) assert.match(v, re);
+  for (const l of [A.MOTIVE, A.ABSCHNITTE, A.TIEFEN, A.ZEITEN, A.QUELLEN]) for (const v of l) assert.match(v, re);
 });

@@ -10,7 +10,7 @@
 // start-ios / start-android / start-wlan (Klick auf /start: Store-Knopf bzw. WLAN-Anmeldeseite; Einstieg = technogym, fitinn, wlan) ·
 // kf_<schritt> (Probetraining-Konfigurator: ziel, erfahrung, zeit, fokus, plan, termin, daten, fertig) ·
 // consent_shown (Cookie-Banner eingeblendet) · consent_accept (Einstieg all = „Akzeptieren“, custom = eigene Auswahl) · consent_necessary (Einstieg all = „Nur notwendige“, custom = eigene Auswahl ohne Häkchen).
-// Absprung-Messung (Black Week, src/lib/absprung.ts): from · from_open · from_kf · from_ok (Anzeigen-Motiv je Stufe) · sec · exit · depth · dwell · toggle · faq ·
+// Absprung-Messung (Black Week, src/lib/absprung.ts): quelle (Herkunft) · from · from_open · from_kf · from_ok (Anzeigen-Motiv je Stufe) · sec · exit · depth · dwell · toggle · faq ·
 // kf_exit (Abbruch im Konfigurator je Schritt/Feld) · kf_err (Fehlermeldung je Feld). Erlaubt sind nur feste Kombinationen aus Schritt, Seite und Kurzbezeichnung.
 import { NextResponse } from 'next/server';
 import { kvEnabled, kvPipeline } from '@/lib/kv';

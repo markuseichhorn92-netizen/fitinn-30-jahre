@@ -4,6 +4,7 @@
 import { funnel } from './funnel';
 
 export const MOTIVE = ['studio', 'vorsatz', 'plaetze', 'countdown', 'preis', 'silvester', 'karussell-ablauf', 'karussell-drin'] as const;
+export const QUELLEN = ['meta', 'google', 'website', 'tv', 'aushang', 'instagram', 'seals', 'facebook'] as const;
 export const ABSCHNITTE = ['hero', 'saeulen', 'buchung', 'preise', 'ablauf', 'app', 'faq', 'fuss'] as const;
 export const TIEFEN = ['d25', 'd50', 'd75', 'd100'] as const;
 export const ZEITEN = ['t5', 't15', 't30', 't60', 't120', 't300', 't300p'] as const;
@@ -15,6 +16,16 @@ export function motivAusUrl(param = 'utm_content', search?: string): string {
     const v = (new URLSearchParams(q).get(param) || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24);
     if (!v) return 'direkt';
     return (MOTIVE as readonly string[]).includes(v) ? v : 'other';
+  } catch { return 'direkt'; }
+}
+
+// Herkunft aus utm_source (nur bekannte Werte, sonst „other“; ohne Angabe „direkt“).
+export function quelleAusUrl(search?: string): string {
+  try {
+    const q = search ?? (typeof window === 'undefined' ? '' : window.location.search);
+    const v = (new URLSearchParams(q).get('utm_source') || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24);
+    if (!v) return 'direkt';
+    return (QUELLEN as readonly string[]).includes(v) ? v : 'other';
   } catch { return 'direkt'; }
 }
 
@@ -33,6 +44,7 @@ export function starteAbsprungMessung(): () => void {
   if (typeof window === 'undefined') return () => {};
   const t0 = Date.now();
   funnel('from', motivAusUrl());
+  funnel('quelle', quelleAusUrl());
 
   let zuletzt = '';
   const gesehen = new Set<string>();
@@ -108,6 +120,7 @@ const REGELN: Record<string, { page: string; src: (s: string) => boolean }> = {
   from_open: { page: BW, src: (s) => s === 'direkt' || s === 'other' || (MOTIVE as readonly string[]).includes(s) },
   from_kf: { page: KF, src: (s) => s === 'direkt' || s === 'other' || (MOTIVE as readonly string[]).includes(s) },
   from_ok: { page: KF, src: (s) => s === 'direkt' || s === 'other' || (MOTIVE as readonly string[]).includes(s) },
+  quelle: { page: BW, src: (s) => s === 'direkt' || s === 'other' || (QUELLEN as readonly string[]).includes(s) },
   sec: { page: BW, src: (s) => (ABSCHNITTE as readonly string[]).includes(s) },
   exit: { page: BW, src: (s) => (ABSCHNITTE as readonly string[]).includes(s) },
   depth: { page: BW, src: (s) => (TIEFEN as readonly string[]).includes(s) },
