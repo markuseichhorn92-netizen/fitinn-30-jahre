@@ -3,9 +3,8 @@ import localFont from 'next/font/local';
 import Booking from '@/sections/09-booking';
 import Footer from '@/sections/10-footer';
 import KonfiguratorLink from '@/components/KonfiguratorLink';
-import Trail from '@/components/freunde-c/Trail';
 import Bewegung from '@/components/freunde-c/Bewegung';
-import { BwHero, BwGate, BwInfo, BwKleingedrucktes } from '@/sections/17-blackweek';
+import { BwHero, BwGate, BwInfo, BwKleingedrucktes, BwSticky } from '@/sections/17-blackweek';
 import '../freunde/theme-c.css';
 import './black-week.css';
 
@@ -32,13 +31,16 @@ export const metadata: Metadata = {
 export default function Page() {
   const bookingBw = {
     ...booking,
-    subheadline: 'Rund 90 Minuten, mit oder ohne Trainer. Kostenlos und unverbindlich – den Black-Week-Vertrag schließt du nach dem Probetraining vor Ort ab.',
+    headline: 'Such dir einen Termin aus.',
+    subheadline: 'Rund 90 Minuten, mit oder ohne Trainer. Kostenlos und unverbindlich.',
     crmSource: 'Landingpage-Formular (Black Week 2026)',
   };
   const fonts = `body:has([data-theme="c"]){--fc-outfit:${outfit.style.fontFamily};--fc-caveat:${caveat.style.fontFamily}}`;
   return (
     <main data-theme="c">
       <style dangerouslySetInnerHTML={{ __html: fonts }} />
+      {/* Lena-Begrüßung erst nach 25 s (statt 1,8 s): sie lag sonst beim ersten Eindruck über dem Hauptknopf. Der Chat-Knopf selbst bleibt. */}
+      <script dangerouslySetInnerHTML={{ __html: 'window.FILAUNCH=Object.assign({greetFirst:25000,greetHold:8000},window.FILAUNCH||{})' }} />
       <BwHero
         {...bw}
         bgImage={hero.bgImage}
@@ -48,17 +50,17 @@ export default function Page() {
         phoneHref={hero.topPhoneHref}
       />
       <BwGate>
+        <BwInfo {...bw} />
         <div className="fc-buchung">
-          <img className="fc-glas fc-glas-kal" src="/media/c/glas-kalender.svg" alt="" aria-hidden="true" width={130} height={130} data-trail="3" data-tm="3" />
+          <img className="fc-glas fc-glas-kal" src="/media/c/glas-kalender.svg" alt="" aria-hidden="true" width={130} height={130} loading="lazy" />
           <Booking {...bookingBw} />
         </div>
-        <BwInfo {...bw} />
       </BwGate>
       <BwKleingedrucktes text={bw.pflichttext} />
       <Footer {...footer} />
       <BwGate>
         <KonfiguratorLink q="black-week" />
-        <Trail />
+        <BwSticky {...bw.sticky} />
         <Bewegung />
       </BwGate>
     </main>

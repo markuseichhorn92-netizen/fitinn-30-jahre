@@ -6,72 +6,62 @@
   "badge": "Black Week · bis 30. November",
   "kicker": "Fitnessstudio in Trier-Feyen",
   "headline": "Bis Silvester trainierst du kostenlos.",
-  "subline": "Wer in der Black Week unterschreibt, trainiert ab Unterschrift bis 31.12.2026 kostenlos. Dein Vertrag beginnt erst am 01.01.2027, ohne Aktivierungsgebühr.",
-  "primaryLabel": "Probetraining buchen",
-  "heroNote": "Vertrag vor Ort nach dem Probetraining · ab 18 Jahren · nur die ersten 20",
-  "countdownLabel": "bis Mo 30.11., 23:59 Uhr · nur die ersten 20 Anmeldungen",
+  "subline": "Ab Unterschrift bis 31.12.2026 trainierst du kostenlos. Dein Vertrag beginnt am 01.01.2027: 9 € oder 12 € pro Woche, ohne Aktivierungsgebühr.",
+  "primaryLabel": "Kostenloses Probetraining buchen",
+  "heroNote": "Unverbindlich. Du entscheidest erst nach dem Probetraining im Studio.",
   "pillars": [
     {
-      "title": "Vertragsbeginn 01.01.2027",
-      "text": "Du unterschreibst in der Black Week, dein Vertrag beginnt am 01.01.2027."
+      "title": "Familiengeführt seit 1996",
+      "text": "Kein Franchise. Du findest uns in Trier-Feyen, Auf Hirtenberg 8."
     },
     {
-      "title": "Bis dahin kostenlos trainieren",
-      "text": "Ab Unterschrift bis 31.12.2026 trainierst du ohne Beitrag. Das sind heute noch {gratis}."
+      "title": "4,8 ★ bei Google",
+      "text": "So bewerten uns unsere Mitglieder."
     },
     {
-      "title": "0 € Aktivierung",
-      "text": "Statt 39 € schenken wir dir die Aktivierungsgebühr. Gilt für die ersten 20."
+      "title": "Betreuung inklusive",
+      "text": "Wir zeigen dir die Geräte und stellen dir einen Plan zusammen."
     }
   ],
-  "preisKicker": "Ganz einfach",
-  "preisTitle": "Kein Rabatt-Feuerwerk.",
-  "preisIntro": "Bis 31.12. trainierst du kostenlos. Ab 01.01.2027 läuft dein Vertrag: 52 Wochen mit 12 € pro Woche oder 104 Wochen mit 9 € pro Woche.",
+  "preisKicker": "Der Preis",
+  "preisTitle": "Erst 0 €. Dann 9 € oder 12 € pro Woche.",
   "ablaufKicker": "So läuft es ab",
   "ablaufTitle": "In drei Schritten.",
-  "ablaufIntro": "Erst ausprobieren, dann entscheiden. Unterschrieben wird erst nach dem Probetraining bei uns im Studio.",
+  "ablaufIntro": "Erst ausprobieren, dann entscheiden.",
   "steps": [
     {
       "strong": "Probetraining buchen",
-      "text": "Du suchst dir Tag und Uhrzeit aus. Kostenlos und unverbindlich."
+      "text": "Tag und Uhrzeit aussuchen. Kostenlos und unverbindlich."
     },
     {
-      "strong": "Bei uns vorbeikommen",
-      "text": "Wir zeigen dir die Geräte und stellen dir einen Plan zusammen. Du entscheidest in Ruhe."
+      "strong": "Vorbeikommen",
+      "text": "Rund 90 Minuten. Wir zeigen dir die Geräte und stellen dir einen Plan zusammen."
     },
     {
-      "strong": "Vertrag vor Ort, Beginn 01.01.2027",
-      "text": "Wenn es passt, unterschreibst du bei uns. Du trainierst sofort kostenlos, dein Vertrag und der Beitrag beginnen am 01.01.2027."
+      "strong": "In Ruhe entscheiden",
+      "text": "Wenn es passt, unterschreibst du im Studio und trainierst sofort kostenlos. Vertrag und Beitrag beginnen am 01.01.2027."
     }
   ],
-  "importantTitle": "Wichtig: Erst Probetraining",
-  "importantText": "Die Aktion gilt für Neumitglieder ab 18 nach dem Probetraining vor Ort, solange von den 20 Plätzen noch welche frei sind. Der Vertrag wird vor Ort unterschrieben.",
+  "importantTitle": "Nur für Neumitglieder ab 18",
+  "importantText": "Die Aktion gilt für die ersten 20 Anmeldungen mit Unterschrift bis 30.11.2026. Unterschrieben wird nach dem Probetraining bei uns im Studio.",
   "faqKicker": "Kurz beantwortet",
-  "faqTitle": "Häufige Fragen",
+  "faqTitle": "Gut zu wissen",
   "faq": [
+    {
+      "q": "Muss ich schon beim Probetraining unterschreiben?",
+      "a": "Nein. Du trainierst erst probe, den Vertrag unterschreibst du danach bei uns im Studio."
+    },
+    {
+      "q": "Was kostet es insgesamt?",
+      "a": "52 Wochen à 12 €, Gesamtpreis 624 €, oder 104 Wochen à 9 €, Gesamtpreis 936 €. 0 € Aktivierungsgebühr (regulär 39 €). Der Beitrag beginnt am 01.01.2027."
+    },
     {
       "q": "Wer kann mitmachen?",
       "a": "Alle Neumitglieder ab 18 Jahren. Die Aktion gilt für die ersten 20 Anmeldungen mit Unterschrift bis 30.11.2026, nach dem Probetraining vor Ort."
     },
     {
-      "q": "Wann beginnt mein Vertrag?",
-      "a": "Dein Vertrag beginnt am 01.01.2027. Von der Unterschrift bis 31.12.2026 trainierst du kostenlos, ohne dass der Vertrag schon läuft."
-    },
-    {
-      "q": "Was kostet mich der Tarif?",
-      "a": "52 Wochen à 12 €, Gesamtpreis 624 €, oder 104 Wochen à 9 €, Gesamtpreis 936 €. 0 € Aktivierungsgebühr. Der Beitrag beginnt am 01.01.2027."
-    },
-    {
-      "q": "Wie lange ist die Kündigungsfrist?",
-      "a": "Die Kündigungsfrist beträgt 4 Wochen."
-    },
-    {
       "q": "Gilt das auch für den 4-Wochen-Tarif?",
       "a": "Nein. Die Aktion gilt für den 52- und den 104-Wochen-Tarif, nicht für den 4-Wochen-Tarif."
-    },
-    {
-      "q": "Muss ich schon beim Probetraining unterschreiben?",
-      "a": "Nein. Du trainierst erst probe, den Vertrag unterschreibst du danach bei uns im Studio."
     },
     {
       "q": "Lieber telefonisch buchen?",
@@ -87,34 +77,14 @@
     "href": "https://fit-inn-trier.de"
   },
   "preise": {
-    "zeitstrahl": [
-      {
-        "titel": "Heute: Probetraining",
-        "text": "Kostenlos buchen, Vertrag erst vor Ort."
-      },
-      {
-        "titel": "Bis 31.12.2026: 0 €",
-        "text": "Ab Unterschrift kostenlos trainieren.",
-        "gold": true
-      },
-      {
-        "titel": "Ab 01.01.2027: Vertrag",
-        "text": "Wochenbeitrag und Laufzeit starten."
-      }
-    ],
-    "umschalterLabel": "Tarif wählen",
     "tarife": [
       {
         "id": "104",
         "name": "104 Wochen",
-        "tag": "Niedrigster Wochenbeitrag",
+        "tag": "Niedrigster Beitrag",
         "preis": "9 €",
         "einheit": "pro Woche",
-        "stand": "ab 01.01.2027 · bis 31.12.2026 kostenlos",
-        "gesamt": "936 €",
-        "regulaer": "975 €",
-        "rechnung": "104 × 9 €, 0 € Aktivierungsgebühr (regulär 39 €)",
-        "laufzeit": "Laufzeit 104 Wochen ab 01.01.2027"
+        "stand": "ab 01.01.2027"
       },
       {
         "id": "52",
@@ -122,57 +92,58 @@
         "tag": "Kürzere Laufzeit",
         "preis": "12 €",
         "einheit": "pro Woche",
-        "stand": "ab 01.01.2027 · bis 31.12.2026 kostenlos",
-        "gesamt": "624 €",
-        "regulaer": "663 €",
-        "rechnung": "52 × 12 €, 0 € Aktivierungsgebühr (regulär 39 €)",
-        "laufzeit": "Laufzeit 52 Wochen ab 01.01.2027"
+        "stand": "ab 01.01.2027"
       }
     ],
-    "gesamtLabel": "Gesamtpreis über die Laufzeit",
     "leistungen": [
       "Technogym-Gerätetraining mit Betreuung",
-      "Bis 31.12.2026 kostenlos trainieren",
-      "0 € statt 39 € Aktivierungsgebühr"
+      "Fit-Inn App mit Punkten und Prämien",
+      "0 € statt 39 € Aktivierungsgebühr",
+      "Kündigungsfrist 4 Wochen"
     ],
-    "kuendigung": "Kündigungsfrist: 4 Wochen",
-    "tabelleTitel": "Beide Tarife im Vergleich",
-    "tabelleKopf": [
-      "52 Wochen",
-      "104 Wochen"
-    ],
-    "tabelleZeilen": [
-      [
-        "Wochenbeitrag ab 01.01.2027",
-        "12 €",
-        "9 €"
-      ],
-      [
-        "Gesamtpreis",
-        "624 €",
-        "936 €"
-      ],
-      [
-        "Regulär (inkl. 39 € Aktivierung)",
-        "663 €",
-        "975 €"
-      ],
-      [
-        "Aktivierungsgebühr",
-        "0 €",
-        "0 €"
-      ],
-      [
-        "Kostenlos bis",
-        "31.12.2026",
-        "31.12.2026"
-      ],
-      [
-        "Kündigungsfrist",
-        "4 Wochen",
-        "4 Wochen"
-      ]
-    ],
-    "fuss": "Gesamtpreise (inkl. aller Gebühren): 624 € für 52 Wochen, 936 € für 104 Wochen, jeweils ab Vertragsbeginn 01.01.2027 und mit 0 € Aktivierungsgebühr (regulär 39 €). Bis 31.12.2026 trainierst du ab Unterschrift kostenlos. Der 4-Wochen-Tarif ist nicht Teil der Aktion."
-  }
+    "fuss": "Nur für Neumitglieder ab 18, nur die ersten 20, Unterschrift bis 30.11.2026. Gesamtpreise (inkl. aller Gebühren): 624 € für 52 Wochen, 936 € für 104 Wochen, jeweils ab Vertragsbeginn 01.01.2027 und mit 0 € Aktivierungsgebühr (regulär 39 €). Der 4-Wochen-Tarif ist nicht Teil der Aktion.",
+    "nullZeile": {
+      "stark": "0 €",
+      "text": "ab Unterschrift bis 31.12.2026, in beiden Tarifen"
+    },
+    "leistungenTitel": "In beiden Tarifen",
+    "knopfNote": "Unverbindlich. Vertrag erst nach dem Probetraining im Studio."
+  },
+  "offer": [
+    {
+      "wert": "0 €",
+      "text": "ab Unterschrift bis Silvester",
+      "gold": true
+    },
+    {
+      "wert": "9 € oder 12 €",
+      "text": "pro Woche ab 01.01.2027"
+    }
+  ],
+  "trust": {
+    "stark": "4,8 ★ bei Google",
+    "text": "familiengeführt seit 1996"
+  },
+  "heroFuss": "Aktion bis 30.11.2026 · 9 € pro Woche bei 104 Wochen, 12 € bei 52 Wochen · nur für Neumitglieder ab 18 · nur die ersten 20",
+  "sticky": {
+    "stark": "0 € bis Silvester",
+    "text": "danach ab 9 € pro Woche",
+    "label": "Probetraining buchen"
+  },
+  "pillarsTitle": "Warum Fit-Inn",
+  "einwaende": [
+    {
+      "q": "Was passiert ab dem 01.01.2027?",
+      "a": "Dein Vertrag und dein Wochenbeitrag beginnen: 9 € pro Woche bei 104 Wochen oder 12 € pro Woche bei 52 Wochen. Bis 31.12.2026 trainierst du ab Unterschrift kostenlos."
+    },
+    {
+      "q": "Wie ist die Kündigungsfrist?",
+      "a": "4 Wochen. Die Laufzeit beträgt 52 oder 104 Wochen ab 01.01.2027."
+    },
+    {
+      "q": "Was ist enthalten?",
+      "a": "Technogym-Gerätetraining mit Betreuung und die Fit-Inn App mit Punkten, Prämien und Ernährungsplänen."
+    }
+  ],
+  "faqMehr": "Weitere Fragen"
 }

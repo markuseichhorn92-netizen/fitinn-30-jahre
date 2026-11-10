@@ -28,23 +28,15 @@ const Check = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
 );
 
-function Countdown({ rest, label }: { rest: number | null; label: string }) {
-  const m = rest == null ? null : Math.floor(rest / 60000);
-  const zahl = (n: number | null) => (n == null ? '–' : String(n));
-  return (
-    <div className="bw-cd-box">
-      <div className="bw-cd" role="timer" aria-label={label}>
-        <div><b>{zahl(m == null ? null : Math.floor(m / 1440))}</b><span>Tage</span></div>
-        <div><b>{zahl(m == null ? null : Math.floor((m % 1440) / 60))}</b><span>Std</span></div>
-        <div><b>{zahl(m == null ? null : m % 60)}</b><span>Min</span></div>
-      </div>
-      <p className="bw-cd-label">{label}</p>
-    </div>
-  );
+// Noch verbleibende ganze Tage bis Aktionsende (ohne Stunden-Uhr: ruhiger, kein Neuzeichnen im Halbminutentakt sichtbar).
+function restTage(rest: number | null) {
+  if (rest == null) return '';
+  const t = Math.floor(rest / 86400000);
+  return t >= 1 ? `Noch ${t} ${t === 1 ? 'Tag' : 'Tage'} · ` : 'Nur noch heute · ';
 }
 
 export function BwHero(props: any) {
-  const { bgImage, logoAlt, logoHref, phoneLabel, phoneHref, badge, kicker, headline, subline, primaryLabel, heroNote, countdownLabel, pillars, ende } = props;
+  const { bgImage, logoAlt, logoHref, phoneLabel, phoneHref, badge, kicker, headline, subline, offer, primaryLabel, heroNote, trust, heroFuss, ende } = props;
   const z = useBwZeit();
   const phase = z?.phase ?? 'live';
   const ended = phase === 'ended';
@@ -59,7 +51,7 @@ export function BwHero(props: any) {
         </div>
       </header>
 
-      <section className="fc-hero" aria-labelledby="fc-h1">
+      <section className="fc-hero bw-hero" aria-labelledby="fc-h1">
         <div className="fc-floor" aria-hidden="true" />
         <div className="fc-wrap fc-hero-grid">
           <div className="fc-hero-text">
@@ -68,110 +60,124 @@ export function BwHero(props: any) {
               <span className="fc-kicker">{kicker}</span>
               <span className="fc-headline"><Worte text={ended ? ende.headline : headline} /></span>
             </h1>
-            <p className="fc-lead">{ended ? ende.text : subline}</p>
             {ended ? (
-              <div className="fc-ctas">
-                <a className="fc-btn" href={ende.href}>{ende.label}<span className="fc-dot" aria-hidden="true" /></a>
-              </div>
+              <>
+                <p className="fc-lead">{ende.text}</p>
+                <div className="fc-ctas">
+                  <a className="fc-btn" href={ende.href}>{ende.label}<span className="fc-dot" aria-hidden="true" /></a>
+                </div>
+              </>
             ) : (
               <>
+                <p className="bwp-sr">{subline}</p>
+                <ul className="bw-offer" aria-hidden="true">
+                  {(offer || []).map((o: any) => (
+                    <li key={o.wert} className={o.gold ? 'bw-offer-gold' : undefined}><b>{o.wert}</b><span>{o.text}</span></li>
+                  ))}
+                </ul>
                 <div className="fc-ctas">
                   <a className="fc-btn" href="#anmeldung" onClick={book('black-week-hero')}>
-                    {primaryLabel}<span className="fc-dot" aria-hidden="true" data-trail="1" data-tm="1" data-mode="elbow" />
+                    {primaryLabel}<span className="fc-dot" aria-hidden="true" />
                   </a>
                 </div>
                 <p className="fc-note">{heroNote}</p>
-                <Countdown rest={z ? z.rest : null} label={countdownLabel} />
+                <p className="bw-trust"><b>{trust.stark}</b> · {trust.text}</p>
+                <p className="bw-hero-fuss">{restTage(z ? z.rest : null)}{heroFuss}</p>
               </>
             )}
           </div>
           <div className="fc-photo">
-            <img className="fc-glas fc-glas-hero" src="/media/c/glas-hantel.svg" alt="" aria-hidden="true" width={170} height={170} data-trail="2" data-tm="2" />
+            <img className="fc-glas fc-glas-hero" src="/media/c/glas-hantel.svg" alt="" aria-hidden="true" width={170} height={170} />
             <div className="fc-frame">
               {bgImage?.src ? <NextImage src={mediaUrl(bgImage.src)} alt="" width={1920} height={1440} priority fetchPriority="high" quality={80} sizes="(max-width:760px) 100vw, 46vw" /> : null}
             </div>
           </div>
         </div>
       </section>
-
-      {ended ? null : (
-        <section className="fc-pillars" aria-label="Das gibt es in der Black Week">
-          <div className="fc-wrap">
-            <ul className="fc-rows">
-              {(pillars || []).map((p: any) => (
-                <li key={p.title} className="fc-row">
-                  <span className="fc-ic"><Check /></span>
-                  <strong>{p.title}</strong>
-                  <p>{String(p.text).replace('{gratis}', z ? `${z.tage} Tage` : 'bis zu 56 Tage')}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
     </>
   );
 }
 
-// Alles zwischen Hero und Footer (Preise, Ablauf, Buchung, FAQ): nach Aktionsende ausgeblendet.
+// Feste Leiste unten (nur Handy): erscheint, sobald der Kopf-Button aus dem Bild ist, und verschwindet an der Terminwahl und am Seitenende.
+// Setzt html.bw-st, damit der Chat-Knopf (layout.tsx) über der Leiste sitzt (siehe black-week.css).
+export function BwSticky({ stark, text, label }: { stark: string; text: string; label: string }) {
+  const z = useBwZeit();
+  const ended = z?.phase === 'ended';
+  const [an, setAn] = React.useState(false);
+  React.useEffect(() => {
+    if (ended || typeof IntersectionObserver === 'undefined') { setAn(false); return; }
+    const knopf = document.querySelector('.bw-hero .fc-btn');
+    const enden = Array.from(document.querySelectorAll('#anmeldung, footer'));
+    if (!knopf) return;
+    let vorbei = false;
+    const sichtbar = new Set<Element>();
+    const io = new IntersectionObserver((es) => {
+      for (const e of es) {
+        if (e.target === knopf) vorbei = !e.isIntersecting && e.boundingClientRect.bottom < 0;
+        else if (e.isIntersecting) sichtbar.add(e.target); else sichtbar.delete(e.target);
+      }
+      setAn(vorbei && sichtbar.size === 0);
+    });
+    io.observe(knopf);
+    enden.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ended]);
+  React.useEffect(() => {
+    document.documentElement.classList.toggle('bw-st', an);
+    return () => document.documentElement.classList.remove('bw-st');
+  }, [an]);
+  if (ended) return null;
+  return (
+    <div className={an ? 'bw-sticky an' : 'bw-sticky'} aria-hidden={!an}>
+      <div className="bw-sticky-in">
+        <p><b>{stark}</b><span>{text}</span></p>
+        <a className="bw-sticky-btn" href="#anmeldung" tabIndex={an ? 0 : -1} onClick={book('black-week-sticky')}>{label}</a>
+      </div>
+    </div>
+  );
+}
+
+// Alles zwischen Hero und Footer (Preise, Ablauf, FAQ, Buchung): nach Aktionsende ausgeblendet.
 export function BwGate({ children }: { children: React.ReactNode }) {
   const z = useBwZeit();
   if (z?.phase === 'ended') return null;
   return <>{children}</>;
 }
 
-// Preisübersicht (Entwurf B): Zeitstrahl, Umschalter 104/52 Wochen, dunkle Karte (Vergleichstabelle am 10.11.2026 entfernt).
-// Umschalter nur mit CSS (Radio-Buttons, :checked): ohne JavaScript bedienbar, Pfeiltasten wechseln den Tarif, 104 Wochen ist Standard.
+// Preisübersicht (v4): beide Tarife nebeneinander mit Wochenbeitrag, darüber die 0-€-Zeile. Gesamtpreise stehen in der Fußnote und im Kleingedruckten.
 function Preise({ p, primaryLabel }: { p: any; primaryLabel: string }) {
   const tarife: any[] = p.tarife || [];
   return (
     <div className="bwp">
-      <ol className="bwp-line">
-        {(p.zeitstrahl || []).map((z: any) => (
-          <li key={z.titel} className={z.gold ? 'bwp-st bwp-gold' : 'bwp-st'}><b>{z.titel}</b><span>{z.text}</span></li>
-        ))}
-      </ol>
-      <div className="bwp-umschalter" role="radiogroup" aria-label={p.umschalterLabel}>
+      <p className="bwt-null"><b>{p.nullZeile.stark}</b><span>{p.nullZeile.text}</span></p>
+      <div className="bwt">
         {tarife.map((t, i) => (
-          <input key={t.id} type="radio" name="bwp-tarif" id={`bwp-t${t.id}`} className="bwp-radio" defaultChecked={i === 0} />
+          <div key={t.id} className={i === 0 ? 'bwt-k bwt-dunkel' : 'bwt-k'}>
+            <span className="bwp-tag">{t.tag}</span>
+            <h3>{t.name}</h3>
+            <div className="bwp-w"><b>{t.preis}</b><span>{t.einheit}</span></div>
+            <p className="bwp-stand">{t.stand}</p>
+          </div>
         ))}
-        <div className="bwp-seg">
-          {tarife.map((t) => (
-            <label key={t.id} htmlFor={`bwp-t${t.id}`}>{t.name}<small>{t.preis} {t.einheit}</small></label>
+      </div>
+      <div className="bwt-drin">
+        <h3>{p.leistungenTitel}</h3>
+        <ul className="bwp-check">
+          {(p.leistungen || []).map((l: string) => (
+            <li key={l}><span className="bwp-hk"><Check /></span><span>{l}</span></li>
           ))}
-        </div>
-        <div className="bwp-panes">
-          {tarife.map((t) => (
-            <div key={t.id} className={`bwp-pane bwp-p${t.id}`}>
-              <div className="bwp-big">
-                <span className="bwp-tag">{t.tag}</span>
-                <h3>{t.name}</h3>
-                <div className="bwp-w"><b>{t.preis}</b><span>{t.einheit}</span></div>
-                <p className="bwp-stand">{t.stand}</p>
-                <div className="bwp-tot">
-                  <small>{p.gesamtLabel}</small>
-                  <span className="bwp-sum"><s><span className="bwp-sr">statt </span>{t.regulaer}</s>{t.gesamt}</span>
-                  <div className="bwp-ex">{t.rechnung}</div>
-                </div>
-                <ul className="bwp-check">
-                  {[...(p.leistungen || []), t.laufzeit, p.kuendigung].map((l: string) => (
-                    <li key={l}><span className="bwp-hk"><Check /></span><span>{l}</span></li>
-                  ))}
-                </ul>
-                <a className="bwp-btn" href="#anmeldung" onClick={book('black-week-preise')}>{primaryLabel}<span className="bwp-dot" aria-hidden="true" /></a>
-              </div>
-            </div>
-          ))}
-        </div>
+        </ul>
+        <a className="fc-btn" href="#anmeldung" onClick={book('black-week-preise')}>{primaryLabel}<span className="fc-dot" aria-hidden="true" /></a>
+        <p className="fc-note">{p.knopfNote}</p>
       </div>
       <p className="bw-fuss">{p.fuss}</p>
     </div>
   );
 }
 
+// Reihenfolge nach Kaufentscheidung: Preis → Ablauf → Vertrauen → Einwände → App. Die Terminwahl (Buchung) folgt danach in page.tsx.
 export function BwInfo(props: any) {
-  const { preisKicker, preisTitle, preisIntro, preise, ablaufKicker, ablaufTitle, ablaufIntro, steps, importantTitle, importantText, primaryLabel, faqKicker, faqTitle, faq } = props;
-  const n = (steps || []).length;
+  const { preisKicker, preisTitle, preise, ablaufKicker, ablaufTitle, ablaufIntro, steps, importantTitle, importantText, primaryLabel, pillarsTitle, pillars, faqKicker, faqTitle, einwaende, faqMehr, faq } = props;
   return (
     <>
       <section className="bw-preis" aria-labelledby="bw-preis-h">
@@ -179,7 +185,6 @@ export function BwInfo(props: any) {
           <div className="fc-head">
             <span className="fc-hand">{preisKicker}</span>
             <h2 id="bw-preis-h">{preisTitle}</h2>
-            <p className="fc-intro">{preisIntro}</p>
           </div>
           <Preise p={preise} primaryLabel={primaryLabel} />
         </div>
@@ -196,7 +201,7 @@ export function BwInfo(props: any) {
             <ol className="fc-steps">
               {(steps || []).map((s: any, i: number) => (
                 <li key={s.strong} className="fc-step">
-                  <span className="fc-n" data-trail={4 + i} data-tm={4 + i}>{String(i + 1).padStart(2, '0')}</span>
+                  <span className="fc-n" aria-hidden="true">{i + 1}</span>
                   <strong>{s.strong}</strong>
                   <span className="fc-step-text">{s.text}</span>
                 </li>
@@ -208,9 +213,47 @@ export function BwInfo(props: any) {
             </div>
             <div className="fc-cta fc-auf">
               <a className="fc-btn" href="#anmeldung" onClick={book('black-week-ablauf')}>
-                {primaryLabel}<span className="fc-dot" aria-hidden="true" data-trail={4 + n} data-tm={4 + n} />
+                {primaryLabel}<span className="fc-dot" aria-hidden="true" />
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="fc-pillars" aria-label={pillarsTitle}>
+        <div className="fc-wrap">
+          <ul className="fc-rows">
+            {(pillars || []).map((p: any) => (
+              <li key={p.title} className="fc-row">
+                <span className="fc-ic"><Check /></span>
+                <strong>{p.title}</strong>
+                <p>{p.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="fc-faq" aria-label={faqTitle}>
+        <div className="fc-wrap fc-schmal">
+          <span className="fc-kicker-s">{faqKicker}</span>
+          <h2>{faqTitle}</h2>
+          <dl className="bw-qa">
+            {(einwaende || []).map((f: any) => (
+              <div key={f.q}>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+          <h3 className="bw-mehr">{faqMehr}</h3>
+          <div className="fc-faq-liste">
+            {(faq || []).map((f: any) => (
+              <details key={f.q}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
@@ -225,21 +268,6 @@ export function BwInfo(props: any) {
         note="Punkte und Prämien nur für Mitglieder, Prämienangebot kann sich ändern."
         img={{ src: '/media/app/iphone-2.webp', alt: 'Punkte-Seite der Fit-Inn-App mit Prämien' }}
       />
-
-      <section className="fc-faq" aria-label={faqTitle}>
-        <div className="fc-wrap fc-schmal">
-          <span className="fc-kicker-s">{faqKicker}</span>
-          <h2>{faqTitle}</h2>
-          <div className="fc-faq-liste">
-            {(faq || []).map((f: any) => (
-              <details key={f.q}>
-                <summary>{f.q}</summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }
