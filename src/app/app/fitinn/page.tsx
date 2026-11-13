@@ -6,11 +6,10 @@ import AppShell, { Phone, stepMeta, type Step } from '../AppSteps';
 // Ziel des großen QR-Codes auf dem A4-Aufsteller. URL darf sich nicht ändern (Aufsteller ist gedruckt).
 // Inhalt nur aus Rundmail/App-News (outbox/rundmail-app-update): keine Preise/Tarife, keine neuen Versprechen.
 export const dynamic = 'force-dynamic';
-export const metadata = stepMeta('Neue Fit-Inn-App in wenigen Schritten – Fit-Inn Trier', 'Die neue Fit-Inn-App: warum neu, was sie kann und wie du startest – alte App löschen, neue laden, registrieren, Willkommenspunkte einlösen.', '/app/fitinn');
+export const metadata = stepMeta('Neue Fit-Inn-App in wenigen Schritten – Fit-Inn Trier', 'Die neue Fit-Inn-App: warum neu, was sie kann und wie du startest – App laden, registrieren, Willkommenspunkte einlösen.', '/app/fitinn');
 export { viewport } from '../AppSteps';
 
 const STEPS: Step[] = [
-  { title: 'Alte Fit-Inn-App löschen', text: 'iPhone: App gedrückt halten → „App entfernen“ → „App löschen“. Android: App gedrückt halten → „Deinstallieren“. Die neue App ist komplett neu, ein Update ersetzt die alte nicht.' },
   { title: 'Neue Fit-Inn-App laden', text: 'Kostenlos, direkt im Store:' },
   { title: 'Öffnen und registrieren', text: <>Registriere dich mit der E-Mail-Adresse, die du bei deinem Vertragsabschluss angegeben hast. Klappt das nicht? Schreib uns an <a href="mailto:info@fit-inn-trier.de">info@fit-inn-trier.de</a> – bei sehr langjährigen Mitgliedern richten wir noch etwas für dich ein.</> },
   { title: 'Willkommensgutschein einlösen', text: 'Löse in der App deinen Willkommensgutschein über 5 Extra-Punkte ein.' },
@@ -37,8 +36,8 @@ export default function Page() {
       hero={<div className={extra.heroPhone}><Phone src="/media/app/iphone-3.webp" alt="Startseite der neuen Fit-Inn-App" cut /></div>}
       steps={STEPS}
       stepsKick="So geht’s"
-      stepsTitle="In 6 Schritten startklar"
-      buttonStep={1}
+      stepsTitle="In 5 Schritten startklar"
+      buttonStep={0}
       after={
         <section className={extra.sec} aria-labelledby="faq">
           <div className={extra.secKick}>Fragen</div>
@@ -52,10 +51,6 @@ export default function Page() {
               <summary>Kostet die App etwas?</summary>
               <p>Nein, du kannst sie kostenlos im Store laden.</p>
             </details>
-            <details>
-              <summary>Reicht ein normales Update der alten App?</summary>
-              <p>Nein. Die App ist komplett neu gebaut. Bitte lösche die alte App einmal und lade die neue über die Knöpfe oben.</p>
-            </details>
           </div>
         </section>
       }
@@ -67,10 +62,6 @@ export default function Page() {
           <div className={extra.card}>
             <p className={extra.vp}>Viele von euch haben uns in den letzten Monaten Rückmeldungen zur App geschickt. Wir haben jede ernst genommen und die App daraufhin von Grund auf neu programmiert.</p>
             <p className={extra.hand}>Danke dafür!</p>
-          </div>
-          <div className={extra.callout}>
-            <span className={extra.dot} aria-hidden="true">!</span>
-            <p><b>Alte App bitte löschen.</b> Weil die App komplett neu ist, reicht ein normales Update nicht. Einmal löschen, neue laden – siehe Schritte unten.</p>
           </div>
         </div>
       </section>
