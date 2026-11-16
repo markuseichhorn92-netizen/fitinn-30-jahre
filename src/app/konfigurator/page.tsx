@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Konfigurator from '@/components/konfigurator/Konfigurator';
-import { whatsappHref } from '@/lib/whatsapp';
 import wizard from '@/content/11-wizard.json';
 
 // /konfigurator – Probetraining-Konfigurator im Look C (echte Magicline-Buchung). Nicht im Index, nicht im Menü.
@@ -39,7 +38,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ q
         privacyLabel={w.privacyLabel}
         phoneDisplay={w.phoneDisplay}
         phoneHref={w.phoneHref}
-        whatsappHref={whatsappHref(w.whatsappBase)}
         source={quelle?.source}
         noteSource={quelle?.note || 'Gebucht über Konfigurator'}
         confirmHref={w.confirmHref}

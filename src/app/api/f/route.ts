@@ -5,7 +5,7 @@
 //
 // Schritte: view (Seite geladen) · open (Buchung geöffnet) · s_<schritt> (Formularschritt erreicht:
 // slot, goal, experience, focus, name, contact, address, confirm, hint) · submit (Absenden gedrückt) ·
-// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen) · whatsapp (Klick auf den WhatsApp-Link; Einstieg = Ort: fragen, footer, wizard) ·
+// ok (gebucht) · fail (Magicline-Buchung fehlgeschlagen) ·
 // cta_seen (Hero-Button ≥ 50 % im Sichtfeld; Einstieg free = frei, covered = von Banner/Leiste teilweise verdeckt) ·
 // start-ios / start-android / start-wlan (Klick auf /start: Store-Knopf bzw. WLAN-Anmeldeseite; Einstieg = technogym, fitinn, wlan) ·
 // kf_<schritt> (Probetraining-Konfigurator: ziel, erfahrung, zeit, fokus, plan, termin, daten, fertig) ·
@@ -17,7 +17,7 @@ import { kvEnabled, kvPipeline } from '@/lib/kv';
 import { ABSPRUNG_SCHRITTE, absprungErlaubt } from '@/lib/absprung';
 
 export const runtime = 'nodejs';
-const STEPS = /^(view|start-(ios|android|wlan)|open|submit|ok|fail|whatsapp|cta_seen|consent_shown|consent_accept|consent_necessary|s_(slot|goal|experience|focus|name|contact|address|confirm|hint)|kf_(ziel|erfahrung|zeit|fokus|plan|termin|daten|fertig))$/;
+const STEPS = /^(view|start-(ios|android|wlan)|open|submit|ok|fail|cta_seen|consent_shown|consent_accept|consent_necessary|s_(slot|goal|experience|focus|name|contact|address|confirm|hint)|kf_(ziel|erfahrung|zeit|fokus|plan|termin|daten|fertig))$/;
 const PAGE = /^\/[a-z0-9\-/]{0,60}$/;
 const SRC = /^[a-z0-9-]{0,24}$/;
 const KEEP_SECONDS = 400 * 24 * 3600;

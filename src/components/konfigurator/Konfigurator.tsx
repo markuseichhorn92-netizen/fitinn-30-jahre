@@ -23,7 +23,7 @@ const SUB: Partial<Record<Step, string>> = {};
 type Props = {
   apiBaseUrl?: string; studioId?: number | string; bookingWindowDays?: number; dryRun?: boolean; source?: string;
   consentText: string; marketingText: string; privacyHref: string; privacyLabel?: string;
-  phoneDisplay: string; phoneHref: string; whatsappHref?: string; noteSource?: string; confirmHref?: string;
+  phoneDisplay: string; phoneHref: string; noteSource?: string; confirmHref?: string;
 };
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -75,7 +75,7 @@ export default function Konfigurator(props: Props) {
   const {
     apiBaseUrl = 'https://fit-inn-trier.api.magicline.com/connect/v1', studioId = 1210005460, bookingWindowDays = 14,
     dryRun = false, source = 'konfigurator', consentText, marketingText, privacyHref, privacyLabel = 'Datenschutz',
-    phoneDisplay, phoneHref, whatsappHref, noteSource = 'Gebucht über Konfigurator', confirmHref,
+    phoneDisplay, phoneHref, noteSource = 'Gebucht über Konfigurator', confirmHref,
   } = props;
 
   const [step, setStep] = useState<Step>('termin');
@@ -326,7 +326,6 @@ export default function Konfigurator(props: Props) {
               <button type="button" className="kf-cta" onClick={ics}>Zum Kalender hinzufügen</button>
               <a className="kf-ghost" href="https://maps.google.com/?q=Fit-Inn+Trier+Auf+Hirtenberg+8+54296+Trier" target="_blank" rel="noopener noreferrer">Anfahrt öffnen</a>
               <a className="kf-ghost" href={phoneHref}>Termin verschieben: {phoneDisplay}</a>
-              {whatsappHref ? <a className="kf-ghost" href={whatsappHref} target="_blank" rel="noopener noreferrer">Oder per WhatsApp schreiben</a> : null}
             </div>
           </div>
         ) : null}
