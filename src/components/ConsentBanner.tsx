@@ -56,8 +56,8 @@ export default function ConsentBanner() {
           <div className={`${styles.box} ${details ? styles.boxOpen : ''}`}>
             <p id="fi-consent-title" className={styles.title}>Kurz zu Cookies 🍪</p>
             <p className={styles.text}>
-              <span className={details ? '' : styles.long}>Notwendiges (Buchung, Lena-Chat) läuft immer. Anonyme Statistik, passende Tipps, Maps, YouTube und die Messung unserer Meta-Anzeigen nur mit deinem Okay.{' '}</span>
-              {details ? null : <span className={styles.short}>Notwendiges läuft immer. Statistik, Maps/YouTube und Meta-Messung nur mit deinem Okay.{' '}</span>}
+              <span className={details ? '' : styles.long}>Notwendiges (Buchung, Lena-Chat) läuft immer. Anonyme Statistik, passende Tipps, Maps, YouTube und die Messung unserer Anzeigen (Meta, Google) nur mit deinem Okay.{' '}</span>
+              {details ? null : <span className={styles.short}>Notwendiges läuft immer. Statistik, Maps/YouTube und Anzeigen-Messung (Meta, Google) nur mit deinem Okay.{' '}</span>}
               <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Datenschutz</a>
               <span className={details ? '' : styles.long}> · <a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a></span>
             </p>
@@ -77,7 +77,7 @@ export default function ConsentBanner() {
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} />
-                  <span><strong>Marketing</strong>Meta Pixel: misst, ob unsere Anzeigen auf Facebook und Instagram zu Probetrainings führen. Dabei werden Daten an Meta (auch in die USA) übertragen.</span>
+                  <span><strong>Marketing</strong>Meta Pixel und Google-Tag (Google Analytics/Ads): messen, ob unsere Anzeigen auf Facebook, Instagram und Google zu Probetrainings führen. Dabei werden Daten an Meta und Google (auch in die USA) übertragen und Cookies gesetzt.</span>
                 </label>
               </div>
             ) : null}

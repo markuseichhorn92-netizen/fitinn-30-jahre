@@ -1,7 +1,7 @@
 // Einwilligungen (TTDSG § 25 / DSGVO). Gespeichert wird nur die Entscheidung selbst (technisch notwendig).
 // stats  = Vercel Analytics + Speed Insights, anonyme Seiten-Events, Interessen-Hinweise (Personalisierung)
 // media  = externe Inhalte (Google Maps)
-// marketing = Meta Pixel (Reichweitenmessung der Anzeigen, Ereignis „Lead“ nach erfolgreicher Buchung)
+// marketing = Meta Pixel + Google-Tag (Google Analytics/Ads: Messung der Anzeigen, Ereignis nach erfolgreicher Buchung)
 // Ältere Einwilligungen ohne „marketing“ gelten als „nein“.
 export type Consent = { v: 1; stats: boolean; media: boolean; marketing?: boolean; ts: number };
 const KEY = 'fi_consent';

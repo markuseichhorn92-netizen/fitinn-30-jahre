@@ -4,6 +4,7 @@ import { Barlow_Condensed, Inter, Space_Grotesk } from 'next/font/google';
 import ConsentBanner from '@/components/ConsentBanner';
 import FunnelView from '@/components/FunnelView';
 import HideOn from '@/components/HideOn';
+import GoogleTag from '@/components/GoogleTag';
 import MetaPixel from '@/components/MetaPixel';
 import './globals.css';
 
@@ -257,6 +258,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* /start (Studio-QR „Apps & WLAN“): bewusst ohne Cookie-Banner und Meta Pixel */}
         <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']}>
           <MetaPixel />
+          <GoogleTag />
           <ConsentBanner />
         </HideOn>
       </body>
