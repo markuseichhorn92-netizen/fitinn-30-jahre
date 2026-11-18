@@ -212,7 +212,7 @@ export default function Wizard(props: any) {
           address: { zip: form.zip.trim(), country: 'DE' },
           privacyConfiguration: { email: form.marketing, phone: form.marketing, letter: false, textMessage: form.marketing, mySportsMessage: false } } }) });
       if (!r.ok) throw new Error(String(r.status));
-      interest.reportBooking('success', source);
+      interest.reportBooking('success', source, { email: form.email, phone: form.phone, firstname: form.firstname, lastname: form.lastname, zip: form.zip });
       if (crmFormId) { try { crm.submitForm({ formId: String(crmFormId), data: { name: { firstName: form.firstname.trim(), lastName: form.lastname.trim() }, email: form.email.trim(), phone: form.phone.trim(), termin: fmtFull(slot.startDateTime), trainer: trainer ? 'Mit Trainer' : 'Ohne Trainer', note: [goal?.label, exp?.label].filter(Boolean).join(' / '), marketing: form.marketing, quelle: source } }).catch(() => {}); } catch { /* optional */ } }
       window.dispatchEvent(new CustomEvent('fi:booked', { detail: { startDateTime: slot.startDateTime, source } }));
       // Bestätigungsseite: Daten nur im sessionStorage (nie in der URL), keine Gesundheitsangaben

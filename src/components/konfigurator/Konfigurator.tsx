@@ -195,7 +195,7 @@ export default function Konfigurator(props: Props) {
         if (!r.ok) throw new Error(String(r.status));
       } else { await new Promise((res) => setTimeout(res, 700)); }
       if (!dryRun) {
-        interest.reportBooking('success', source);
+        interest.reportBooking('success', source, { email: f.email, firstname: f.vorname, lastname: f.nachname, zip: f.zip });
         abgeschlossen.current = true; funnel('from_ok', motivAusUrl('c'));
         window.dispatchEvent(new CustomEvent('fi:booked', { detail: { startDateTime: slot.startDateTime, source } }));
       } else funnel('ok', source);

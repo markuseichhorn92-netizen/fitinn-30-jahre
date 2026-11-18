@@ -3,6 +3,7 @@
 import { track } from '@vercel/analytics';
 import { hasConsent } from './consent';
 import { metaLead } from './metaPixel';
+import { newEventId, sendLeadToCapi, type LeadContact } from './metaCapi';
 import { googleLead } from './googleTag';
 import { funnel, funnelReset } from './funnel';
 
@@ -88,8 +89,8 @@ export function interestNote(): string {
 
 export function reportShown(topic: string, source: string) { send('nudge_shown', { topic, source }); }
 export function reportClick(topic: string) { send('nudge_click', { topic }); }
-export function reportBooking(stage: 'start' | 'success', source: string) {
+export function reportBooking(stage: 'start' | 'success', source: string, contact?: LeadContact) {
   // Anonymer Trichter läuft immer (ohne Profil/Thema), das ausführliche Event nur mit Einwilligung.
-  if (stage === 'start') { funnelReset(); funnel('open', source); } else { funnel('ok', source); metaLead(source); googleLead(source); }
+  if (stage === 'start') { funnelReset(); funnel('open', source); } else { funnel('ok', source); const eid = newEventId(); metaLead(source, eid); sendLeadToCapi(eid, source, contact); googleLead(source); }
   send('booking_' + stage, { source, topic: topTopic() });
 }
