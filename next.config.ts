@@ -19,10 +19,12 @@ const nextConfig: NextConfig = {
       { source: '/deal/:path*', destination: ziel, permanent: true },
       { source: '/ziel', destination: ziel, permanent: true },
       { source: '/ziel/:path*', destination: ziel, permanent: true },
-      // 19.11.2026 Markus: „Klar Stapel live auf der black week Seite“ -> /black-week zeigt die neue Seite /klar.
-      // Vorübergehend (307), Query-Parameter (utm, fbclid) bleiben erhalten. Rückweg: Zeile entfernen.
-      { source: '/black-week', destination: '/klar', permanent: false },
     ];
+  },
+  // 19.11.2026 Markus: /black-week soll die neue Seite /klar zeigen, Adresse bleibt /black-week (keine Weiterleitung).
+  // beforeFiles, damit die alte Seite src/app/black-week nicht greift. Rückweg: diesen Block entfernen.
+  async rewrites() {
+    return { beforeFiles: [{ source: '/black-week', destination: '/klar' }], afterFiles: [], fallback: [] };
   },
   async headers() {
     return [
