@@ -265,7 +265,7 @@
 .ku-stapel-an > div {
   position: sticky; top: min(0px, calc(100vh - var(--ku-unten, 0px) - var(--ku-h, 0px)));
   isolation: isolate;
-  transform: scale(calc(1 - .05 * var(--ku-p, 0)));
+  transform: scale(calc(1 - var(--ku-s, .05) * var(--ku-p, 0)));
   transform-origin: 50% calc(max(0px, var(--ku-h, 0px) + var(--ku-unten, 0px) - 100vh) + 50vh);
 }
 @supports (height: 100svh) {
@@ -285,3 +285,97 @@
   .ku-stapel-an > div::after { content: none; }
 }
 @media (prefers-reduced-motion: reduce) { .ku-akk summary::after { transition: none; } }
+
+/* ================= Breite Bildschirme (Entwurf 19.11.2026, Auftrag Markus „auf breiteren Bildschirmen sehr schmal“) =================
+   Erst ab 1024 px – mobil und Tablet bleiben exakt wie vorher. Inhalte wachsen mit (bis ca. 1600 px Breite),
+   Schrift und Abstände per clamp() proportional, Tarife nebeneinander, Stapel schrumpft dezenter (98 % statt 95 %). */
+@media (min-width: 1024px) {
+  .ku { --ku-rand: clamp(32px, 4vw, 112px); --ku-s: .02; }
+  .ku-sek { padding: clamp(104px, 7.5vw, 180px) var(--ku-rand); }
+  .ku-in { max-width: 1600px; }
+  .ku h2 { font-size: clamp(46px, 3.4vw, 84px); margin-bottom: clamp(40px, 3vw, 72px); }
+  .ku .kl-btn { min-height: clamp(56px, 3.3vw, 72px); font-size: clamp(17px, 1.05vw, 21px); }
+  .ku .ku-knopf .kl-btn, .ku .ku-schluss .kl-btn { padding: 0 clamp(40px, 2.8vw, 64px); max-width: none; white-space: nowrap; }
+  .ku-c { --ku-ecke: clamp(40px, 2.4vw, 64px); }
+
+  /* Vorteile-Leiste */
+  .ku-vorteile { gap: clamp(64px, 7vw, 180px); padding: clamp(28px, 2vw, 44px) 24px; }
+  .ku-vorteile li { grid-template-columns: clamp(46px, 3vw, 64px) auto; column-gap: clamp(12px, 1vw, 20px); font-size: clamp(14px, .95vw, 19px); }
+  .ku-vorteile b { font-size: clamp(14px, 1.05vw, 21px); }
+  .ku-vk { width: clamp(46px, 3vw, 64px); height: clamp(46px, 3vw, 64px); }
+  .ku-vk svg { width: 45%; height: auto; }
+
+  /* Schritte: drei breite Spalten, größere Punkte, Linie läuft mit */
+  .ku-c .ku-ablauf { --pk: clamp(52px, 3.6vw, 80px); }
+  .ku-zeit { gap: clamp(40px, 4vw, 96px); }
+  .ku-c .ku-punkt { width: var(--pk); height: var(--pk); }
+  .ku-c .ku-punkt svg { width: 42%; height: auto; }
+  .ku-c .ku-zeit li:not(:last-child)::before { left: calc(var(--pk) + 18px); top: calc(var(--pk) / 2 - 1px); right: calc(-1 * clamp(40px, 4vw, 96px) + 18px); }
+  .ku-schritt { font-size: clamp(13px, .85vw, 17px); }
+  .ku-zeit b { font-size: clamp(20px, 1.55vw, 32px); }
+  .ku-zeit li p:last-child { font-size: clamp(15.5px, 1.05vw, 21px); max-width: 30em; }
+
+  /* Was drin ist: Foto höher, vier Punkte nebeneinander */
+  .ku-b .ku-foto-voll img { height: clamp(560px, 66vh, 920px); }
+  .ku-b .ku-was-text { margin-top: clamp(-260px, -11vw, -160px); }
+  .ku-c .ku-was-text { padding-bottom: calc(clamp(104px, 7.5vw, 180px) + var(--ku-ecke)); }
+  .ku-drin li { grid-template-columns: clamp(46px, 3vw, 64px) 1fr; gap: clamp(14px, 1.1vw, 22px); }
+  .ku-dk { width: clamp(46px, 3vw, 64px); height: clamp(46px, 3vw, 64px); border-radius: clamp(14px, 1vw, 20px); }
+  .ku-dk svg { width: 45%; height: auto; }
+  .ku-drin b { font-size: clamp(17.5px, 1.3vw, 26px); }
+  .ku-drin p { font-size: clamp(15px, 1.02vw, 20px); }
+
+  /* Tarife nebeneinander statt einer schmalen Spalte */
+  .ku-preise .ku-in { max-width: 1360px; }
+  .ku-c .ku-preise { padding-top: calc(clamp(104px, 7.5vw, 180px) + 8px); }
+  .ku-karte { border-radius: clamp(24px, 1.6vw, 36px); }
+  .ku-banner { font-size: clamp(16px, 1.05vw, 21px); padding: clamp(13px, 1vw, 20px) 16px; }
+  .ku-tarife { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .ku-tarife li { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: clamp(18px, 1.4vw, 32px); padding: clamp(32px, 2.6vw, 56px) clamp(28px, 2.6vw, 56px); border-bottom: 0; }
+  .ku-tarife li + li { border-left: 1px solid var(--linie); }
+  .ku-tarife li.hervor { background: linear-gradient(180deg, rgba(255, 181, 79, .16), rgba(255, 181, 79, 0) 75%); }
+  .ku-tarife li.hervor::before { right: 0; bottom: auto; width: auto; height: 5px; }
+  .ku-t-l b { font-size: clamp(22px, 1.6vw, 34px); }
+  .ku-t-gesamt { font-size: clamp(14px, .95vw, 19px); }
+  .ku-badge { font-size: clamp(11.5px, .75vw, 15px); padding: 4px 12px; }
+  .ku-t-r { text-align: left; }
+  .ku-t-r strong { font-size: clamp(56px, 4.4vw, 104px); }
+  .ku-t-r span { margin-left: 0; max-width: none; font-size: clamp(13px, .9vw, 18px); }
+  .ku-inkl { border-top: 1px solid var(--linie); padding: clamp(18px, 1.4vw, 30px) clamp(28px, 2.6vw, 56px); display: flex; align-items: center; gap: 12px 32px; flex-wrap: wrap; }
+  .ku-inkl > p { margin: 0 !important; font-size: clamp(13px, .85vw, 17px); }
+  .ku-inkl ul { gap: 10px clamp(20px, 2vw, 44px); }
+  .ku-inkl li { font-size: clamp(14.5px, 1vw, 19px); }
+  .ku-hinweis { font-size: clamp(13px, .82vw, 16px); text-align: center; max-width: 72em; margin-left: auto; margin-right: auto; }
+
+  /* Zahlen auf dem Foto */
+  .ku-b .ku-zahlen { max-width: 1600px; gap: clamp(32px, 3vw, 72px); }
+  .ku-b .ku-zahlen strong { font-size: clamp(52px, 4.4vw, 108px); }
+  .ku-b .ku-zahlen span { font-size: clamp(15px, 1.1vw, 22px); }
+  .ku-b .ku-vertrauen-in { padding-left: var(--ku-rand); padding-right: var(--ku-rand); }
+  .ku-c .ku-vertrauen-in { padding-bottom: calc(clamp(56px, 4vw, 96px) + var(--ku-ecke)); }
+
+  /* Öffnungszeiten & Anfahrt */
+  .ku-info .ku-in { max-width: 1400px; }
+  .ku-kacheln { gap: clamp(20px, 1.8vw, 40px); }
+  .ku-kachel { padding: clamp(30px, 2.6vw, 56px); border-radius: clamp(24px, 1.6vw, 36px); }
+  .ku-k-kopf { font-size: clamp(19px, 1.35vw, 28px); }
+  .ku-k-ic { width: clamp(42px, 2.8vw, 58px); height: clamp(42px, 2.8vw, 58px); }
+  .ku-zeiten > div { font-size: clamp(15.5px, 1.05vw, 21px); padding: clamp(11px, .8vw, 16px) 0; }
+  .ku-k-note { font-size: clamp(13.5px, .9vw, 18px); }
+  .ku-adresse { font-size: clamp(16.5px, 1.15vw, 23px); }
+  .ku-parken { font-size: clamp(15px, 1vw, 20px); padding: clamp(11px, .8vw, 16px) clamp(12px, 1vw, 20px); }
+  .ku-link-btn { min-height: clamp(48px, 3vw, 62px); font-size: clamp(15px, 1vw, 19px); }
+
+  /* FAQ */
+  .ku-schmal { max-width: clamp(760px, 56vw, 1120px); }
+  .ku-akk summary { font-size: clamp(17px, 1.2vw, 24px); padding: clamp(20px, 1.4vw, 30px) 52px clamp(20px, 1.4vw, 30px) 0; }
+  .ku-akk details p { font-size: clamp(15.5px, 1.05vw, 21px); padding-bottom: clamp(20px, 1.4vw, 30px); max-width: 52em; }
+
+  /* Abschluss */
+  .ku-schluss { padding: clamp(120px, 9vw, 220px) var(--ku-rand); }
+  .ku-b .ku-schluss { min-height: clamp(520px, 56vh, 820px); }
+  .ku-schluss-in { max-width: clamp(520px, 44vw, 1000px); }
+  .ku-schluss h2 { font-size: clamp(52px, 4.4vw, 110px); }
+  .ku-schluss-in > p:first-of-type { font-size: clamp(17px, 1.3vw, 26px); }
+  .ku-anruf { font-size: clamp(15px, 1vw, 20px); }
+}
