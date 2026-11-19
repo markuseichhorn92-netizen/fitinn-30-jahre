@@ -14,7 +14,7 @@ const ROUTE = 'https://www.google.com/maps/dir/?api=1&destination=Fit-Inn+Trier,
 const VORTEILE: Array<{ icon: IconName; stark: string; text: string }> = [
   { icon: 'hantel', stark: 'Technogym-Geräte', text: 'mit Betreuung' },
   { icon: 'parken', stark: 'Kostenlose', text: 'Parkplätze am Studio' },
-  { icon: 'stern', stark: '4,8 ★ bei Google', text: 'über 250 Bewertungen' },
+  { icon: 'stern', stark: '4,8 ★ bei Google', text: 'über 180 Bewertungen' },
 ];
 
 const DRIN: Array<{ icon: IconName; titel: string; text: string }> = [
@@ -124,7 +124,7 @@ function Tarife({ t }: { t: KlarInhalt }) {
 function Zahlen() {
   return (
     <ul className="ku-zahlen">
-      <li><strong>4,8 ★</strong><span>bei Google, über 250 Bewertungen</span></li>
+      <li><strong>4,8 ★</strong><span>bei Google, über 180 Bewertungen</span></li>
       <li><strong>1.200+</strong><span>Kundinnen und Kunden</span></li>
       <li><strong>seit 1996</strong><span>familiengeführt, kein Franchise</span></li>
     </ul>
