@@ -15,7 +15,21 @@ export function klarPhase(d = new Date()): KlarPhase {
   return d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' }) <= BW_LETZTER_TAG ? 'blackweek' : 'standard';
 }
 
-type Tarif = { laufzeit: string; preis: string; zusatz: string; gesamt: string; hervor?: string };
+// Preisliste (Entwurf 19.11.2026, Auftrag Markus „klassische Preisliste mit Bullet Points“): je Karte nur die Unterschiede
+// (punkte), Gemeinsames steht einmal in KlarInhalt.inklusive. extra = hervorgehobene Zusatzzeile (z. B. Schülerpreis).
+type Tarif = { laufzeit: string; preis: string; zusatz: string; gesamt: string; hervor?: string; punkte: string[]; extra?: string };
+
+// Leistungen aus Sanity-plans 325894e7 (Standard) / 3323d0e0 (Black Week), live 19.11.2026, gekürzt und zusammengefasst.
+// Ernährungspläne: kostenlos in der Fit-Inn App (SATISFEAT), Parkplätze: /preise-FAQ.
+const INKLUSIVE_BASIS = [
+  'Komplette Nutzung des Clubs, auch Biostrength und Biocircuit',
+  'Trainingsplan und Betreuung',
+  'Gesundheits-Check-up',
+  'Fit-Inn App mit kostenlosen Ernährungsplänen',
+  'Technogym App',
+  'Mineralgetränke, WLAN, Cardio-Entertainment',
+  'Kostenlose Parkplätze am Studio',
+];
 
 export type KlarInhalt = {
   kicker: string;
@@ -32,6 +46,7 @@ export type KlarInhalt = {
   tarifTitel: string;
   tarifBanner?: string;
   tarife: Tarif[];
+  inklusive: string[];
   tarifHinweis: string;
   abschluss: string;
   faqKosten: string;
@@ -55,9 +70,13 @@ export const INHALT: Record<KlarPhase, KlarInhalt> = {
     tarifTitel: 'Erst 0 €. Dann ab 9 € pro Woche.',
     tarifBanner: '0 € ab Unterschrift bis 31.12.2026',
     tarife: [
-      { laufzeit: '104 Wochen', preis: '9 €', zusatz: 'pro Woche ab 01.01.2027', gesamt: 'Gesamtpreis 936 €', hervor: 'Günstigster Wochenpreis' },
-      { laufzeit: '52 Wochen', preis: '12 €', zusatz: 'pro Woche ab 01.01.2027', gesamt: 'Gesamtpreis 624 €' },
+      { laufzeit: '104 Wochen', preis: '9 €', zusatz: 'pro Woche ab 01.01.2027', gesamt: 'Gesamtpreis 936 €', hervor: 'Günstigster Wochenpreis',
+        punkte: ['Bis 31.12.2026 kostenlos trainieren', 'Keine Aktivierungsgebühr (regulär 39 €)', '4 Wochen Kündigungsfrist zum Laufzeitende'] },
+      { laufzeit: '52 Wochen', preis: '12 €', zusatz: 'pro Woche ab 01.01.2027', gesamt: 'Gesamtpreis 624 €',
+        punkte: ['Bis 31.12.2026 kostenlos trainieren', 'Keine Aktivierungsgebühr (regulär 39 €)', '4 Wochen Kündigungsfrist zum Laufzeitende'] },
     ],
+    // Black-Week-plans (3323d0e0) führen zusätzlich die InBody Körperanalyse
+    inklusive: [...INKLUSIVE_BASIS.slice(0, 3), 'InBody Körperanalyse', ...INKLUSIVE_BASIS.slice(3)],
     tarifHinweis: 'Keine Aktivierungsgebühr (regulär 39 €). Nur für Neumitglieder ab 18, nur die ersten 20, Unterschrift bis 30.11.2026. Der 4-Wochen-Tarif ist nicht Teil der Aktion.',
     abschluss: 'Passt es, unterschreibst du im Studio und trainierst sofort – bis Silvester kostenlos.',
     faqKosten: '104 Wochen à 9 €: Gesamtpreis 936 €. 52 Wochen à 12 €: Gesamtpreis 624 €. Keine Aktivierungsgebühr, der Beitrag beginnt am 01.01.2027.',
@@ -77,10 +96,15 @@ export const INHALT: Record<KlarPhase, KlarInhalt> = {
     stickyText: 'Gesamtpreis 975 € (104 Wochen)',
     tarifTitel: 'Drei Laufzeiten. Ein klarer Wochenpreis.',
     tarife: [
-      { laufzeit: '104 Wochen', preis: '9 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 975 €', hervor: 'Günstigster Wochenpreis' },
-      { laufzeit: '52 Wochen', preis: '12 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 663 €' },
-      { laufzeit: '4 Wochen', preis: '15 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 99 €' },
+      { laufzeit: '104 Wochen', preis: '9 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 975 €', hervor: 'Günstigster Wochenpreis',
+        punkte: ['Inkl. 39 € Aktivierungsgebühr', '4 Wochen Kündigungsfrist zum Laufzeitende'] },
+      { laufzeit: '52 Wochen', preis: '12 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 663 €',
+        punkte: ['Inkl. 39 € Aktivierungsgebühr', '4 Wochen Kündigungsfrist zum Laufzeitende'],
+        extra: 'Schüler, Azubis, Studenten (mit Nachweis): 9\u00a0€ pro Woche, Gesamtpreis 507\u00a0€' },
+      { laufzeit: '4 Wochen', preis: '15 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 99 €',
+        punkte: ['Inkl. 39 € Aktivierungsgebühr', '4 Wochen Kündigungsfrist zum Laufzeitende'] },
     ],
+    inklusive: INKLUSIVE_BASIS,
     tarifHinweis: 'Gesamtpreise für die Erstlaufzeit inkl. 39 € Aktivierungsgebühr. Schüler, Azubis und Studenten (mit Nachweis): 52 Wochen für 9 € pro Woche, Gesamtpreis 507\u00a0€.',
     abschluss: 'Passt es, schließt du im Studio oder online ab. Passt es nicht, ist das auch völlig in Ordnung.',
     faqKosten: '104 Wochen à 9 €: Gesamtpreis 975 €. 52 Wochen à 12 €: 663 €. 4 Wochen à 15 €: 99 €. Die 39 € Aktivierungsgebühr sind jeweils schon eingerechnet.',

@@ -85,36 +85,37 @@ function DrinListe({ kopf }: { kopf?: ReactNode }) {
   );
 }
 
+// Klassische Preisliste (Entwurf 19.11.2026, Auftrag Markus „Preisliste mit Bullet Points, was enthalten ist“):
+// je Tarif eine Karte (Desktop nebeneinander, mobil untereinander – kein zweites Wischen neben dem Karussell),
+// in der Karte nur die Unterschiede; was alle Tarife gemeinsam haben, steht einmal darunter.
 function Tarife({ t }: { t: KlarInhalt }) {
   return (
     <section className="ku-sek ku-preise" aria-labelledby="ku-tarife-h" id="tarife">
       <div className="ku-in">
         <h2 id="ku-tarife-h">{t.tarifTitel}</h2>
-        <div className="ku-karte">
-          {t.tarifBanner ? <p className="ku-banner"><Icon name="kalender" size={20} />{t.tarifBanner}</p> : null}
-          <ul className="ku-tarife">
-            {t.tarife.map((x) => (
-              <li key={x.laufzeit} className={x.hervor ? 'hervor' : undefined}>
-                <div className="ku-t-l">
-                  {x.hervor ? <span className="ku-badge">{x.hervor}</span> : null}
-                  <b>{x.laufzeit}</b>
-                  <span className="ku-t-gesamt">{x.gesamt}</span>
-                </div>
-                <p className="ku-t-r"><strong>{x.preis}</strong><span>{x.zusatz}</span></p>
-              </li>
-            ))}
+        {t.tarifBanner ? <p className="ku-banner"><Icon name="kalender" size={20} />{t.tarifBanner}</p> : null}
+        <ul className={`ku-pl ku-pl-${t.tarife.length}`}>
+          {t.tarife.map((x) => (
+            <li key={x.laufzeit} className={x.hervor ? 'ku-pl-karte hervor' : 'ku-pl-karte'}>
+              {x.hervor ? <span className="ku-badge">{x.hervor}</span> : null}
+              <h3 className="ku-pl-lauf">{x.laufzeit}</h3>
+              <p className="ku-pl-preis"><strong>{x.preis}</strong><span>{x.zusatz}</span></p>
+              <p className="ku-pl-gesamt">{x.gesamt}</p>
+              <ul className="ku-pl-punkte">
+                {x.punkte.map((pkt) => <li key={pkt}><Icon name="haken" size={18} />{pkt}</li>)}
+                {x.extra ? <li className="ku-pl-extra"><Icon name="stern" size={18} />{x.extra}</li> : null}
+              </ul>
+              <BuchenKnopf quelle="tarife" label="Probetraining buchen" klein />
+            </li>
+          ))}
+        </ul>
+        <div className="ku-inkl">
+          <p>In jedem Tarif enthalten</p>
+          <ul>
+            {t.inklusive.map((i) => <li key={i}><Icon name="haken" size={18} />{i}</li>)}
           </ul>
-          <div className="ku-inkl">
-            <p>In jedem Tarif</p>
-            <ul>
-              <li><Icon name="haken" size={18} />Gerätetraining mit Betreuung</li>
-              <li><Icon name="haken" size={18} />Fit-Inn App</li>
-              <li><Icon name="haken" size={18} />Kündigungsfrist 4 Wochen</li>
-            </ul>
-          </div>
         </div>
         <p className="ku-hinweis">{t.tarifHinweis}</p>
-        <div className="ku-knopf"><BuchenKnopf quelle="tarife" /></div>
       </div>
     </section>
   );

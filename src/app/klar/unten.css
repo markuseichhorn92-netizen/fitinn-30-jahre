@@ -39,25 +39,44 @@
 
 /* Tarife: eine Karte, Zeilen statt Kästen */
 .ku-preise .ku-in { max-width: 680px; }
-.ku-karte { background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid var(--linie); box-shadow: 0 30px 60px -36px rgba(6, 50, 60, .45); }
-.ku-banner { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 16px; font-size: 16px; font-weight: 800; text-align: center; }
-.ku-tarife { list-style: none; margin: 0; padding: 0; }
-.ku-tarife li { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 20px 20px; border-bottom: 1px solid var(--linie); position: relative; }
-.ku-tarife li.hervor { background: linear-gradient(90deg, rgba(255, 181, 79, .14), rgba(255, 181, 79, 0) 70%); }
-.ku-tarife li.hervor::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--gold); }
-.ku-t-l { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
-.ku-t-l b { font-size: 20px; letter-spacing: -.01em; }
-.ku-t-gesamt { font-size: 14px; color: var(--grau); margin-top: 2px; }
-.ku-badge { display: inline-block; background: var(--gold); color: #3a2200; font-size: 11.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
-.ku-t-r { text-align: right; flex: none; }
-.ku-t-r strong { display: block; font-size: 40px; line-height: 1; font-weight: 800; letter-spacing: -.03em; color: var(--petrol); }
-.ku-t-r span { display: block; font-size: 12.5px; color: var(--grau); margin-top: 4px; max-width: 120px; line-height: 1.25; margin-left: auto; }
-.ku-inkl { padding: 16px 20px 18px; background: var(--eis); }
-.ku-inkl > p { font-size: 13px; font-weight: 700; color: var(--grau); margin-bottom: 8px !important; }
-.ku-inkl ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
-.ku-inkl li { display: flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 600; }
-.ku-inkl .ku-ic { color: var(--tuerkis); }
-.ku-hinweis { font-size: 13px; line-height: 1.5; color: var(--grau); margin-top: 14px !important; }
+/* Klassische Preisliste (Entwurf 19.11.2026): eine Karte je Tarif, mobil untereinander, ab 900 px nebeneinander.
+   Empfohlener Tarif (günstigster Wochenpreis) mit Gold-Kante, gefülltem Knopf und Etikett; die anderen mit Linien-Knopf. */
+.ku-banner { display: flex; align-items: center; justify-content: center; gap: 8px; width: fit-content; max-width: 100%; margin: 0 auto 30px !important; padding: 11px 18px; border-radius: 999px; font-size: 15.5px; font-weight: 800; text-align: center; }
+.ku-pl { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+.ku-pl-karte { position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--linie); border-radius: 22px; padding: 22px 22px 22px; box-shadow: 0 24px 48px -34px rgba(6, 50, 60, .45); }
+.ku-pl-karte.hervor { border: 2px solid var(--gold); padding: 29px 21px 21px; box-shadow: 0 26px 56px -30px rgba(179, 92, 0, .45); }
+/* Etikett sitzt auf der Gold-Kante → Preise aller Karten bleiben auf einer Linie */
+.ku-badge { position: absolute; top: 0; left: 20px; transform: translateY(-50%); background: var(--gold); color: #3a2200; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 999px; white-space: nowrap; }
+.ku .ku-pl-lauf { margin: 0; font-size: 14px; line-height: 1.2; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--tuerkis-d); }
+.ku-pl-preis { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 8px !important; }
+.ku-pl-preis strong { font-size: 56px; line-height: 1; font-weight: 800; letter-spacing: -.035em; color: var(--petrol); }
+.ku-pl-preis span { font-size: 15px; font-weight: 600; color: var(--grau); }
+.ku-pl-gesamt { font-size: 15.5px; font-weight: 700; color: var(--ink); margin-top: 6px !important; padding-bottom: 16px; border-bottom: 1px solid var(--linie); }
+.ku-pl-punkte { list-style: none; margin: 16px 0 20px; padding: 0; display: grid; gap: 10px; }
+.ku-pl-punkte li { display: flex; align-items: flex-start; gap: 10px; font-size: 15.5px; line-height: 1.4; }
+.ku-pl-punkte .ku-ic { color: var(--tuerkis); margin-top: 1px; }
+.ku-pl-punkte .ku-pl-extra { background: rgba(255, 181, 79, .18); border-radius: 12px; padding: 10px 12px; font-weight: 600; }
+.ku-pl-extra .ku-ic { color: var(--gold-t); }
+.ku-pl-karte .kl-btn { margin-top: auto; width: 100%; }
+.ku-pl-karte:not(.hervor) .kl-btn { background: #fff; color: var(--petrol) !important; box-shadow: inset 0 0 0 2px var(--petrol); }
+.ku-pl-karte:not(.hervor) .kl-btn:hover { background: var(--eis); }
+.ku-inkl { margin-top: 20px; background: #fff; border: 1px solid var(--linie); border-radius: 22px; padding: 20px 22px; }
+.ku-inkl > p { font-size: 17px; font-weight: 800; color: var(--ink); margin-bottom: 12px !important; letter-spacing: -.01em; }
+.ku-inkl ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ku-inkl li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.4; }
+.ku-inkl .ku-ic { color: var(--tuerkis); margin-top: 1px; }
+.ku-hinweis { font-size: 13px; line-height: 1.5; color: var(--grau); margin-top: 16px !important; }
+@media (min-width: 900px) {
+  .ku-preise .ku-in { max-width: 1080px; }
+  .ku-pl { grid-template-columns: repeat(var(--pl-n, 3), minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+  .ku-pl-2 { --pl-n: 2; max-width: 860px; margin: 0 auto; }
+  .ku-pl-2 ~ .ku-inkl { max-width: 860px; margin-left: auto; margin-right: auto; }
+  .ku-pl-karte { padding: 30px 28px 28px; }
+  .ku-pl-karte.hervor { padding: 29px 27px 27px; }
+  .ku-inkl { padding: 24px 28px; }
+  .ku-inkl ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
+  .ku-hinweis { text-align: center; }
+}
 .ku-knopf { margin-top: 24px; }
 
 /* Zahlen */
@@ -328,25 +347,25 @@
 
   /* Tarife nebeneinander statt einer schmalen Spalte */
   .ku-preise .ku-in { max-width: 1360px; }
+  .ku-pl { gap: clamp(20px, 1.6vw, 36px); }
+  .ku-pl-2 { max-width: clamp(860px, 62vw, 1100px); }
+  .ku-pl-2 ~ .ku-inkl { max-width: clamp(860px, 62vw, 1100px); }
   .ku-c .ku-preise { padding-top: calc(clamp(104px, 7.5vw, 180px) + 8px); }
-  .ku-karte { border-radius: clamp(24px, 1.6vw, 36px); }
-  .ku-banner { font-size: clamp(16px, 1.05vw, 21px); padding: clamp(13px, 1vw, 20px) 16px; }
-  .ku-tarife { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .ku-tarife li { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: clamp(18px, 1.4vw, 32px); padding: clamp(32px, 2.6vw, 56px) clamp(28px, 2.6vw, 56px); border-bottom: 0; }
-  .ku-tarife li + li { border-left: 1px solid var(--linie); }
-  .ku-tarife li.hervor { background: linear-gradient(180deg, rgba(255, 181, 79, .16), rgba(255, 181, 79, 0) 75%); }
-  .ku-tarife li.hervor::before { right: 0; bottom: auto; width: auto; height: 5px; }
-  .ku-t-l b { font-size: clamp(22px, 1.6vw, 34px); }
-  .ku-t-gesamt { font-size: clamp(14px, .95vw, 19px); }
-  .ku-badge { font-size: clamp(11.5px, .75vw, 15px); padding: 4px 12px; }
-  .ku-t-r { text-align: left; }
-  .ku-t-r strong { font-size: clamp(56px, 4.4vw, 104px); }
-  .ku-t-r span { margin-left: 0; max-width: none; font-size: clamp(13px, .9vw, 18px); }
-  .ku-inkl { border-top: 1px solid var(--linie); padding: clamp(18px, 1.4vw, 30px) clamp(28px, 2.6vw, 56px); display: flex; align-items: center; gap: 12px 32px; flex-wrap: wrap; }
-  .ku-inkl > p { margin: 0 !important; font-size: clamp(13px, .85vw, 17px); }
-  .ku-inkl ul { gap: 10px clamp(20px, 2vw, 44px); }
-  .ku-inkl li { font-size: clamp(14.5px, 1vw, 19px); }
-  .ku-hinweis { font-size: clamp(13px, .82vw, 16px); text-align: center; max-width: 72em; margin-left: auto; margin-right: auto; }
+  .ku-banner { font-size: clamp(16px, 1.05vw, 21px); padding: clamp(11px, .8vw, 16px) clamp(18px, 1.4vw, 28px); margin-bottom: clamp(22px, 1.8vw, 40px); }
+  .ku-pl-karte { border-radius: clamp(22px, 1.6vw, 34px); padding: clamp(30px, 2.4vw, 52px) clamp(28px, 2.2vw, 48px); }
+  .ku-pl-karte.hervor { padding: calc(clamp(30px, 2.4vw, 52px) - 1px) calc(clamp(28px, 2.2vw, 48px) - 1px); }
+  .ku-badge { font-size: clamp(12px, .8vw, 15px); padding: 5px 14px; left: clamp(26px, 2.1vw, 46px); }
+  .ku .ku-pl-lauf { font-size: clamp(14px, .95vw, 18px); }
+  .ku-pl-preis strong { font-size: clamp(64px, 4.6vw, 104px); }
+  .ku-pl-preis span { font-size: clamp(15px, 1vw, 19px); }
+  .ku-pl-gesamt { font-size: clamp(15.5px, 1.05vw, 20px); padding-bottom: clamp(16px, 1.2vw, 24px); }
+  .ku-pl-punkte { margin: clamp(16px, 1.2vw, 26px) 0 clamp(20px, 1.6vw, 32px); gap: clamp(10px, .8vw, 16px); }
+  .ku-pl-punkte li { font-size: clamp(15.5px, 1.05vw, 20px); }
+  .ku-inkl { border-radius: clamp(22px, 1.6vw, 34px); padding: clamp(24px, 1.8vw, 40px) clamp(28px, 2.2vw, 48px); margin-top: clamp(20px, 1.6vw, 36px); }
+  .ku-inkl > p { font-size: clamp(17px, 1.15vw, 22px); }
+  .ku-inkl ul { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); column-gap: clamp(28px, 2.4vw, 56px); }
+  .ku-inkl li { font-size: clamp(15px, 1vw, 19px); }
+  .ku-hinweis { font-size: clamp(13px, .82vw, 16px); text-align: center; max-width: 72em; margin-left: auto !important; margin-right: auto !important; }
 
   /* Zahlen auf dem Foto */
   .ku-b .ku-zahlen { max-width: 1600px; gap: clamp(32px, 3vw, 72px); }
