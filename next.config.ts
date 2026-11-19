@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
       { source: '/deal/:path*', destination: ziel, permanent: true },
       { source: '/ziel', destination: ziel, permanent: true },
       { source: '/ziel/:path*', destination: ziel, permanent: true },
+      // 19.11.2026 Markus: „Klar Stapel live auf der black week Seite“ -> /black-week zeigt die neue Seite /klar.
+      // Vorübergehend (307), Query-Parameter (utm, fbclid) bleiben erhalten. Rückweg: Zeile entfernen.
+      { source: '/black-week', destination: '/klar', permanent: false },
     ];
   },
   async headers() {
