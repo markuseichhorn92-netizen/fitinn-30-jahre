@@ -36,7 +36,7 @@ const ANDERS: Array<{ icon: IconName; titel: string; text: string }> = [
   { icon: 'betreuung', titel: 'Echte Betreuung', text: 'Wir zeigen dir die Geräte und sind ansprechbar, wenn du Fragen hast.' },
   { icon: 'haken', titel: 'Individueller Trainingsplan', text: 'Auf dich abgestimmt und inklusive, ohne Trainerpauschale.' },
   { icon: 'haus', titel: 'Familiengeführt seit 1996', text: 'Kein Franchise. Wir kennen unsere Mitglieder.' },
-  { icon: 'handschlag', titel: 'Angenehme Atmosphäre', text: 'Ruhig, persönlich und unter Erwachsenen (ab 18).' },
+  { icon: 'handschlag', titel: 'Angenehme Atmosphäre', text: 'Helle Räume mit großen Fenstern, persönlich und entspannt.' },
 ];
 
 type Foto = { hoch: string; hochB: number; hochH: number; breit: string; breitB: number; breitH: number; alt: string };
