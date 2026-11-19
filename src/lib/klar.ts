@@ -101,7 +101,7 @@ export const OEFFNUNGSZEITEN: Array<[string, string]> = [
 // 'c' = Mix: Abschnitte wechseln hell (aus A) und dunkel mit großen Fotos (aus B).
 // Fest im Code wählen; für lokale Vorschauen überschreibt die Umgebungsvariable KLAR_UNTEN (a|b|c).
 export type KlarUnten = 'a' | 'b' | 'c';
-export const KLAR_UNTEN: KlarUnten = 'a';
+export const KLAR_UNTEN: KlarUnten = 'c';
 export function klarUnten(): KlarUnten {
   const env = process.env.KLAR_UNTEN;
   return env === 'a' || env === 'b' || env === 'c' ? env : KLAR_UNTEN;
