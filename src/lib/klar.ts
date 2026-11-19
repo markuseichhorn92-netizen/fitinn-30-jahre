@@ -97,11 +97,12 @@ export const OEFFNUNGSZEITEN: Array<[string, string]> = [
   ['Sonntag', '09:00 – 15:00 Uhr'],
 ];
 
-// Gestaltung unter dem Kopf (Entwurf 19.11.2026): 'a' = hell und ruhig, 'b' = mehr Petrol-Flächen und große Fotos.
-// Fest im Code wählen; für lokale Vorschauen überschreibt die Umgebungsvariable KLAR_UNTEN (a|b).
-export type KlarUnten = 'a' | 'b';
+// Gestaltung unter dem Kopf (Entwurf 19.11.2026): 'a' = hell und ruhig, 'b' = mehr Petrol-Flächen und große Fotos,
+// 'c' = Mix: Abschnitte wechseln hell (aus A) und dunkel mit großen Fotos (aus B).
+// Fest im Code wählen; für lokale Vorschauen überschreibt die Umgebungsvariable KLAR_UNTEN (a|b|c).
+export type KlarUnten = 'a' | 'b' | 'c';
 export const KLAR_UNTEN: KlarUnten = 'a';
 export function klarUnten(): KlarUnten {
   const env = process.env.KLAR_UNTEN;
-  return env === 'a' || env === 'b' ? env : KLAR_UNTEN;
+  return env === 'a' || env === 'b' || env === 'c' ? env : KLAR_UNTEN;
 }

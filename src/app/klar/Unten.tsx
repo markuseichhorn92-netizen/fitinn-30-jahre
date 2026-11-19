@@ -1,6 +1,7 @@
 // /klar – alles unter dem Kopf (Entwurf 19.11.2026, Auftrag Markus „alles unter dem header … schöner machen“).
-// Zwei Stilrichtungen mit denselben Inhalten/Fakten: A = hell und ruhig, B = Petrol-Flächen und große Fotos.
-// Umschalten: KLAR_UNTEN in src/lib/klar.ts (lokal: Umgebungsvariable KLAR_UNTEN=a|b). Nur echte Studiofotos, alle lazy.
+// Drei Stilrichtungen mit denselben Inhalten/Fakten: A = hell und ruhig, B = Petrol-Flächen und große Fotos,
+// C = Mix aus beiden (Auftrag Markus „Mix mal hell und dunkel“): hell → dunkel im Wechsel.
+// Umschalten: KLAR_UNTEN in src/lib/klar.ts (lokal: Umgebungsvariable KLAR_UNTEN=a|b|c). Nur echte Studiofotos, alle lazy.
 import { BuchenKnopf } from './KlarClient';
 import Icon, { type IconName } from './Icon';
 import { OEFFNUNGSZEITEN, type KlarInhalt, type KlarUnten } from '@/lib/klar';
@@ -248,6 +249,51 @@ function UntenB({ t }: { t: KlarInhalt }) {
   );
 }
 
+// C · Mix: helle Abschnitte bekommen die Stile aus A, dunkle die aus B (Hüllen .ku-a/.ku-b).
+// Rhythmus: hell (Vorteile + Ablauf) → dunkel (Foto + was drin ist) → hell (Preise) → dunkel (Zahlen auf Foto)
+// → hell (Öffnungszeiten, FAQ) → dunkel (Abschluss mit Foto). Jeder Wechsel legt sich mit runden Ecken über den vorigen.
+function UntenC({ t }: { t: KlarInhalt }) {
+  return (
+    <div className="ku ku-c">
+      <div className="ku-a ku-c-hell">
+        <Vorteile />
+        <Schritte t={t} />
+      </div>
+      <div className="ku-b ku-c-dunkel">
+        <section className="ku-was" aria-labelledby="ku-drin-h">
+          <Bild f={FOTO_GERAETE} className="ku-foto-voll" />
+          <div className="ku-sek ku-was-text">
+            <div className="ku-in">
+              <h2 id="ku-drin-h">Alles drin, was du brauchst.</h2>
+              <DrinListe />
+            </div>
+          </div>
+        </section>
+      </div>
+      <div className="ku-a ku-c-hell">
+        <Tarife t={t} />
+      </div>
+      <div className="ku-b ku-c-dunkel">
+        <section className="ku-vertrauen" aria-labelledby="ku-vertrauen-h">
+          <Bild f={FOTO_CARDIO} className="ku-foto-voll" deko />
+          <div className="ku-vertrauen-in">
+            <h2 id="ku-vertrauen-h" className="kl-sr">Warum Fit-Inn</h2>
+            <Zahlen />
+          </div>
+        </section>
+      </div>
+      <div className="ku-a ku-c-hell">
+        <Info />
+        <Fragen t={t} />
+      </div>
+      <div className="ku-b ku-c-dunkel">
+        <Schluss foto={FOTO_FENSTER} />
+      </div>
+    </div>
+  );
+}
+
 export default function Unten({ v, t }: { v: KlarUnten; t: KlarInhalt }) {
+  if (v === 'c') return <UntenC t={t} />;
   return v === 'b' ? <UntenB t={t} /> : <UntenA t={t} />;
 }

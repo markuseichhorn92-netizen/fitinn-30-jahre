@@ -1,6 +1,7 @@
 /* /klar – alles unter dem Kopf (Entwurf 19.11.2026). Gemeinsames Gerüst + zwei Stilrichtungen:
    .ku-a = hell und ruhig (Weiß/Eisblau, runde Fotos, Linien statt Kästen)
    .ku-b = Petrol-Flächen und randlose Fotos (dunkler Kopf läuft weiter, Preise als helle Insel)
+   .ku-c = Mix: Hüllen .ku-a (hell) und .ku-b (dunkel) im Wechsel, gestapelt mit runden Ecken
    Mobil zuerst. Bilder haben feste Seitenverhältnisse (kein CLS), keine Animation außer Rückmeldung. */
 
 /* ---------- Gerüst ---------- */
@@ -187,6 +188,23 @@
 .ku-b .ku-schluss .kl-btn::after { background: var(--petrol); }
 .ku-b .ku-schluss .kl-btn:hover { background: #ffc46f; }
 
+/* ================= C · Mix hell/dunkel ================= */
+/* Jeder Abschnitt nach dem ersten schiebt sich mit runden Ecken über den vorigen (Ecken zeigen dessen Farbe).
+   Unter dem Kopf bleibt die Kante gerade, damit der Kopf unverändert bleibt. */
+.ku-c { --ku-ecke: 28px; }
+.ku-c > div { position: relative; }
+.ku-c > div + div { margin-top: calc(-1 * var(--ku-ecke)); border-radius: var(--ku-ecke) var(--ku-ecke) 0 0; overflow: hidden; }
+.ku-c .ku-c-hell { background: #fff; }
+.ku-c .ku-c-dunkel { background: var(--petrol); }
+/* Inhalte am Ende eines Abschnitts dürfen nicht unter der nächsten Ecke verschwinden */
+.ku-c .ku-vertrauen-in { padding-bottom: calc(34px + var(--ku-ecke)); }
+.ku-c .ku-was-text { padding-bottom: calc(60px + var(--ku-ecke)); }
+/* Dunkles Foto oben: Verlauf startet nicht mit Vollfarbe, die runde Kante zeigt das Foto */
+.ku-c .ku-was > .ku-foto-voll::after { background: linear-gradient(180deg, rgba(10, 73, 88, .25) 0%, rgba(10, 73, 88, 0) 22%, rgba(10, 73, 88, 0) 60%, var(--petrol) 100%); }
+.ku-c .ku-preise { padding-top: calc(60px + 8px); }
+.ku-c .ku-preise h2 { text-align: center; }
+.ku-c .ku-schluss { border-radius: 0; }
+
 @media (max-width: 360px) {
   .ku { --ku-rand: 16px; }
   .ku-k-knoepfe { grid-template-columns: 1fr; }
@@ -230,5 +248,10 @@
   .ku-b .ku-zahlen li { flex-direction: column; gap: 4px; }
   .ku-b .ku-zahlen strong { font-size: 52px; }
   .ku-b .ku-schluss { min-height: 520px; }
+
+  .ku-c { --ku-ecke: 40px; }
+  .ku-c .ku-vertrauen-in { padding-bottom: calc(56px + var(--ku-ecke)); }
+  .ku-c .ku-was-text { padding-bottom: calc(104px + var(--ku-ecke)); }
+  .ku-c .ku-preise { padding-top: 112px; }
 }
 @media (prefers-reduced-motion: reduce) { .ku-akk summary::after { transition: none; } }

@@ -58,7 +58,7 @@ export default function Page() {
           <p className="kl-note">Kostenlos und unverbindlich. Du entscheidest erst danach.</p>
         </div>
       </section>
-      {/* 2–8 · Alles unter dem Kopf: Variante A/B (Entwurf 19.11.), siehe Unten.tsx */}
+      {/* 2–8 · Alles unter dem Kopf: Variante A/B/C (Entwurf 19.11.), siehe Unten.tsx */}
       <Unten v={klarUnten()} t={t} />
       <p className="kl-klein">{t.kleingedrucktes}</p>
 
