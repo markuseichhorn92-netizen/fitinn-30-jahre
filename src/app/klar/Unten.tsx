@@ -23,6 +23,20 @@ const DRIN: Array<{ icon: IconName; titel: string; text: string }> = [
   { icon: 'haus', titel: 'Familiengeführt seit 1996', text: 'Kein Franchise. Wir kennen unsere Mitglieder.' },
 ];
 
+// Angebot & was uns abhebt (Entwurf 19.11.2026, Auftrag Markus „was wir an Angebot haben und was uns abhebt“).
+// Nur, was sonst noch nirgends auf /klar steht (Karussell, Preisliste, Zahlen haben den Rest). Quellen: BEREIT.md „Angebot & was uns abhebt“.
+const ANGEBOT: Array<{ icon: IconName; titel: string; text: string }> = [
+  { icon: 'hantel', titel: 'Freihantelbereich', text: 'Freihanteln, Kraftstationen und Kabelzug.' },
+  { icon: 'klima', titel: 'Klimatisiert', text: 'Angenehm trainieren, auch im Sommer.' },
+  { icon: 'betreuung', titel: 'Personal Training', text: 'Auf Wunsch eins zu eins mit Trainer.' },
+  { icon: 'koffer', titel: 'Firmenfitness', text: 'Epassi, Wellhub, EGYM Wellpass und Urban Sports Club.' },
+];
+const ANDERS: Array<{ icon: IconName; titel: string; text: string }> = [
+  { icon: 'app', titel: 'Punkte-App, in Trier einzigartig', text: 'Punkte fürs Training, Prämien in der Fit-Inn App.' },
+  { icon: 'ausweis', titel: 'Mitglieder ab 18', text: 'Du trainierst unter Erwachsenen.' },
+  { icon: 'kameraAus', titel: 'Keine Kameras', text: 'Keine Videoüberwachung, Filmen und Fotografieren nicht erlaubt.' },
+];
+
 type Foto = { hoch: string; hochB: number; hochH: number; breit: string; breitB: number; breitH: number; alt: string };
 const FOTO_GERAETE: Foto = { hoch: '/media/klar/geraeteraum-hoch.webp', hochB: 800, hochH: 1000, breit: '/media/klar/geraeteraum-breit-1600.webp', breitB: 1600, breitH: 933, alt: 'Gerätebereich mit Technogym-Geräten und großen Fenstern im Fit-Inn Trier-Feyen' };
 const FOTO_CARDIO: Foto = { hoch: '/media/klar/cardio-hoch.webp', hochB: 640, hochH: 800, breit: '/media/klar/cardio-breit-1280.webp', breitB: 1280, breitH: 746, alt: 'Cardio-Bereich mit Fahrrädern und Crosstrainern' };
@@ -128,6 +142,27 @@ function Zahlen() {
       <li><strong>1.200+</strong><span>Kundinnen und Kunden</span></li>
       <li><strong>seit 1996</strong><span>familiengeführt, kein Franchise</span></li>
     </ul>
+  );
+}
+
+function Abhebt() {
+  const gruppe = (id: string, kopf: string, liste: typeof ANGEBOT) => (
+    <div className="ku-ab-gruppe" role="group" aria-labelledby={id}>
+      <h3 id={id} className="ku-ab-kopf">{kopf}</h3>
+      <ul className="ku-ab-liste">
+        {liste.map((x) => (
+          <li key={x.titel}><span className="ku-ab-ic"><Icon name={x.icon} size={20} /></span><div><b>{x.titel}</b><span>{x.text}</span></div></li>
+        ))}
+      </ul>
+    </div>
+  );
+  return (
+    <section className="ku-sek ku-abhebt" aria-label="Angebot und was uns abhebt">
+      <div className="ku-in ku-ab-raster">
+        {gruppe('ku-ab-1', 'Das bekommst du außerdem', ANGEBOT)}
+        {gruppe('ku-ab-2', 'Das macht uns anders', ANDERS)}
+      </div>
+    </section>
   );
 }
 
@@ -291,6 +326,7 @@ function UntenC({ t }: { t: KlarInhalt }) {
             <Zahlen />
           </div>
         </section>
+        <Abhebt />
       </div>
       <div className="ku-a ku-c-hell ku-stapel-frei">
         <Info />
