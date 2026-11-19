@@ -470,3 +470,25 @@
   .ku-kar-band { scroll-behavior: auto; }
   .ku-kar-punkt::before { transition: none; }
 }
+
+/* ================= Karussell beim Scrollen (Entwurf 19.11.2026, Schalter KLAR_KARUSSELL_SCROLL in src/lib/klar.ts) =================
+   Nur wenn Karussell.tsx .ku-kar-scroll setzt (< 1024 px, JS an, keine reduzierte Bewegung). .ku-kar-pin (Überschrift + Karten +
+   Punkte) klebt bei --ku-kar-oben; ::after ist die Laufstrecke darunter (je Kartenwechsel 90svh, svh = feste kleinste Höhe →
+   kein Springen, wenn die iOS-/Instagram-Adressleiste ein-/ausfährt). Karten bewegen sich nur per transform (kein CLS).
+   Wischen ist aus (touch-action pan-y), das Band scrollt nicht selbst. .ku-kar-clip: Hüllen mit overflow hidden → clip
+   (gleiche Rundung/Beschnitt, aber kein eigener Scroll-Container – sonst klebt sticky nicht). */
+.ku-kar-clip { overflow: clip !important; }
+.ku-kar-scroll { margin-bottom: 0; }
+.ku-kar-scroll::after { content: ""; display: block; height: calc((var(--ku-kar-n, 3) - 1) * 90vh); }
+@supports (height: 100svh) { .ku-kar-scroll::after { height: calc((var(--ku-kar-n, 3) - 1) * 90svh); } }
+/* stehender Block muss auf einen kleinen Handy-Bildschirm über die feste Leiste passen (iPhone mit Safari-Leisten ≈ 664 px − 67 px):
+   Überschrift-Abstand, Fotos (5:2 statt 16:10) und Innenabstände kompakter – nur in diesem Modus */
+.ku-kar-scroll .ku-kar-pin { position: sticky; top: var(--ku-kar-oben, 0px); padding-bottom: 6px; }
+.ku-kar-scroll .ku-kar-pin > h2 { margin-bottom: 14px; }
+.ku-kar-scroll .ku-kar-band { overflow: hidden; scroll-snap-type: none; touch-action: pan-y; scroll-behavior: auto; padding-bottom: 4px; }
+.ku-kar-scroll .ku-kar-bild { aspect-ratio: 5 / 2; }
+.ku-kar-scroll .ku-kar-text { padding: 14px 16px 6px; }
+.ku-kar-scroll .ku-kar-text ul { margin: 10px 0 8px; gap: 6px; }
+.ku-kar-scroll .ku-kar-nav { margin-top: 6px; }
+.ku-kar-scroll .ku-kar-karte { will-change: transform; }
+.ku-kar-scroll .ku-kar-punkt::before { transition: width .2s ease, background-color .2s ease; }

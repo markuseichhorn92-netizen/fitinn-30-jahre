@@ -113,6 +113,17 @@ export function klarStapel(): boolean {
   if (env === 'aus') return false;
   return KLAR_STAPEL;
 }
+// KARUSSELL BEIM SCROLLEN (Entwurf 19.11.2026, Auftrag Markus „wenn man scrollt das das Karussell zuerst durch scrollt“):
+// true = mobil (< 1024 px) bleibt der Karussell-Bereich beim senkrechten Scrollen stehen und die drei Karten laufen
+// waagerecht durch, erst danach geht die Seite weiter. false = normales wischbares Karussell wie bisher.
+// Ohne JS oder mit „Bewegung reduzieren“ immer wischbar. Lokal überschreibbar mit KLAR_KARUSSELL_SCROLL=an|aus.
+export const KLAR_KARUSSELL_SCROLL = true;
+export function klarKarussellScroll(): boolean {
+  const env = process.env.KLAR_KARUSSELL_SCROLL;
+  if (env === 'an') return true;
+  if (env === 'aus') return false;
+  return KLAR_KARUSSELL_SCROLL;
+}
 export function klarUnten(): KlarUnten {
   const env = process.env.KLAR_UNTEN;
   return env === 'a' || env === 'b' || env === 'c' ? env : KLAR_UNTEN;

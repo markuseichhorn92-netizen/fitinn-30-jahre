@@ -5,8 +5,9 @@
 import { BuchenKnopf, KlarStapel } from './KlarClient';
 import Icon, { type IconName } from './Icon';
 import Karussell from './Karussell';
-import { OEFFNUNGSZEITEN, klarStapel, type KlarInhalt, type KlarUnten } from '@/lib/klar';
+import { OEFFNUNGSZEITEN, klarKarussellScroll, klarStapel, type KlarInhalt, type KlarUnten } from '@/lib/klar';
 import footer from '@/content/10-footer.json';
+import type { ReactNode } from 'react';
 
 const ROUTE = 'https://www.google.com/maps/dir/?api=1&destination=Fit-Inn+Trier,+Auf+Hirtenberg+8,+54296+Trier';
 
@@ -70,10 +71,11 @@ function Schritte({ t }: { t: KlarInhalt }) {
 }
 
 // Erste Zeile „Technogym-Gerätetraining“ ist seit 19.11.2026 das wischbare Karussell (Karussell.tsx) direkt unter der Überschrift.
-function DrinListe() {
+// kopf = Überschrift im Karussell (Variante C): bleibt im Scroll-Modus (KLAR_KARUSSELL_SCROLL) mit den Karten stehen.
+function DrinListe({ kopf }: { kopf?: ReactNode }) {
   return (
     <>
-      <Karussell />
+      <Karussell kopf={kopf} scroll={klarKarussellScroll()} />
       <ul className="ku-drin">
         {DRIN.map((d) => (
           <li key={d.titel}><span className="ku-dk"><Icon name={d.icon} /></span><div><b>{d.titel}</b><p>{d.text}</p></div></li>
@@ -272,8 +274,7 @@ function UntenC({ t }: { t: KlarInhalt }) {
           <Bild f={FOTO_GERAETE} className="ku-foto-voll" />
           <div className="ku-sek ku-was-text">
             <div className="ku-in">
-              <h2 id="ku-drin-h">Alles drin, was du brauchst.</h2>
-              <DrinListe />
+              <DrinListe kopf={<h2 id="ku-drin-h">Alles drin, was du brauchst.</h2>} />
             </div>
           </div>
         </section>
