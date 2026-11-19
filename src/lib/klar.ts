@@ -19,6 +19,10 @@ type Tarif = { laufzeit: string; preis: string; zusatz: string; gesamt: string; 
 
 export type KlarInhalt = {
   kicker: string;
+  // Kopf v2 (Preis-Kachel): Etikett oben, Streichpreis nur wenn echt belegt, Frist-Zeile nur wenn wahr
+  kachelEtikett: string;
+  streich?: { was: string; alt: string; neu: string };
+  frist: string;
   preisGross: string;
   preisEinheit: string;
   preisDanach?: string;
@@ -38,10 +42,14 @@ export type KlarInhalt = {
 export const INHALT: Record<KlarPhase, KlarInhalt> = {
   blackweek: {
     kicker: 'Black Week · bis 30. November',
+    kachelEtikett: 'Black Week',
+    // Beleg: Aktivierungsgebühr regulär 39 € (Standard-Tarife /preise), in der Black Week 0 €
+    streich: { was: 'Aktivierungsgebühr', alt: '39 €', neu: '0 €' },
+    frist: 'Nur bis 30. November · nur die ersten 20',
     preisGross: '0 €',
     preisEinheit: 'bis Silvester',
     preisDanach: 'danach ab 9 € pro Woche',
-    preisKlein: '104 Wochen ab 01.01.2027 · Gesamtpreis 936 € · keine Aktivierungsgebühr',
+    preisKlein: '104 Wochen ab 01.01.2027 · Gesamtpreis 936 €',
     stickyStark: '0 € bis Silvester',
     stickyText: 'danach ab 9 € pro Woche',
     tarifTitel: 'Erst 0 €. Dann ab 9 € pro Woche.',
@@ -59,9 +67,12 @@ export const INHALT: Record<KlarPhase, KlarInhalt> = {
   },
   standard: {
     kicker: 'Fit-Inn Trier · familiengeführt seit 1996',
+    kachelEtikett: 'Familiengeführt seit 1996',
+    frist: 'Betreuung und Trainingsplan inklusive',
     preisGross: '9 €',
     preisEinheit: 'pro Woche',
-    preisKlein: 'bei 104 Wochen · zzgl. 39 € Aktivierungsgebühr · Gesamtpreis 975 €',
+    preisDanach: 'bei 104 Wochen Laufzeit',
+    preisKlein: 'zzgl. 39 € Aktivierungsgebühr · Gesamtpreis 975 €',
     stickyStark: 'ab 9 € pro Woche',
     stickyText: 'Gesamtpreis 975 € (104 Wochen)',
     tarifTitel: 'Drei Laufzeiten. Ein klarer Wochenpreis.',

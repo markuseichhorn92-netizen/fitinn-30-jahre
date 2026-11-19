@@ -26,24 +26,7 @@ body:has(.kl) { background: #F4FAFB; color: #14252D; }
 .kl-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .kl-btn-klein { min-height: 46px; padding: 0 16px; font-size: 15px; box-shadow: none; }
 
-/* 1 · Kopf */
-.kl-hero { background: #fff; }
-.kl-hero-bild { position: relative; height: 178px; overflow: hidden; background: var(--eis2); }
-.kl-hero-bild > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; display: block; }
-.kl-leiste { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; }
-.kl-leiste img { height: 30px; width: auto; background: rgba(255, 255, 255, .94); padding: 6px 10px; border-radius: 12px; box-sizing: content-box; }
-.kl-tel { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border-radius: 999px; background: rgba(255, 255, 255, .94); color: var(--petrol) !important; font-weight: 700; font-size: 14px; text-decoration: none; }
-.kl-hero-text { padding: 18px 16px 22px; display: flex; flex-direction: column; }
-.kl-hero h1 { font-size: clamp(29px, 8vw, 50px); line-height: 1.05; margin-bottom: 14px; text-wrap: balance; }
-.kl-preis { background: var(--eis); border: 1px solid var(--linie); border-radius: 18px; padding: 12px 14px; margin-bottom: 14px; }
-.kl-preis-zeile { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; row-gap: 2px; }
-.kl-preis-zeile strong { font-size: 46px; line-height: 1; font-weight: 800; color: var(--petrol); letter-spacing: -.03em; }
-.kl-preis-zeile span { font-size: 18px; font-weight: 700; color: var(--petrol); }
-.kl-preis-zeile em { font-style: normal; font-size: 16px; font-weight: 700; color: var(--ink); flex-basis: 100%; }
-.kl-preis-klein { font-size: 13px; line-height: 1.35; color: var(--grau); margin-top: 4px !important; }
-.kl-vorteile { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 8px; }
-.kl-vorteile li { display: flex; gap: 10px; font-size: 16px; line-height: 1.3; font-weight: 500; }
-.kl-note { font-size: 13.5px; color: var(--grau); text-align: center; margin-top: 8px !important; }
+/* 1 · Kopf: siehe „Kopf v2“ am Ende */
 
 /* Abschnitte */
 .kl-sek { padding: 44px 16px; max-width: 1080px; margin: 0 auto; box-sizing: border-box; }
@@ -125,19 +108,8 @@ body:has(.kl) { background: #F4FAFB; color: #14252D; }
 }
 @media (max-width: 360px) { .kl-sticky p span { display: none; } }
 
-/* Desktop: Kopf zweispaltig, Foto rechts in voller Höhe */
+/* Desktop (Abschnitte; Kopf siehe „Kopf v2“) */
 @media (min-width: 900px) {
-  .kl-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: min(760px, 92vh); }
-  .kl-hero-bild { order: 2; height: auto; }
-  .kl-hero-bild > img { object-position: 50% 50%; }
-  .kl-leiste { left: auto; right: 0; }
-  .kl-leiste img { display: none; }
-  .kl-hero-text { order: 1; padding: 40px 56px 40px max(32px, calc((100vw - 1080px) / 2)); justify-content: center; max-width: 600px; margin-left: auto; box-sizing: border-box; width: 100%; }
-  .kl-hero-text::before { content: ""; display: block; width: 130px; height: 40px; margin-bottom: 36px; background: url(/media/c/logo-petrol.png) left center / contain no-repeat; }
-  .kl-hero h1 { font-size: 50px; margin-bottom: 20px; }
-  .kl-preis-zeile strong { font-size: 58px; }
-  .kl-hero .kl-btn { align-self: flex-start; padding: 0 32px; }
-  .kl-note { text-align: left; }
   .kl-sek { padding: 72px 32px; }
   .kl-schritte { grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .kl-karten { grid-template-columns: repeat(4, 1fr); }
@@ -152,3 +124,52 @@ body:has(.kl) { background: #F4FAFB; color: #14252D; }
 }
 @media (prefers-reduced-motion: reduce) { .kl-btn, .kl-sticky, .kl-sticky.an { transition: none; } }
 .kl-nw { white-space: nowrap; }
+
+/* 1 · Kopf v2 (19.11.2026) – Aufbau wie GymPod: Logo + Ort oben, vollflächiges Foto, Preis-Kachel, ein Knopf.
+   Eigene Gestaltung in Markenfarben (Petrol-Verlauf, Gold-Akzent). Foto statisch (LCP), Text immer auf dunklem Verlauf (Kontrast). */
+.kl-hero { position: relative; isolation: isolate; overflow: hidden; background: var(--petrol-d); color: #fff; }
+.kl-hero-foto, .kl-hero-foto img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.kl-hero-foto img { object-fit: cover; object-position: 50% 55%; display: block; z-index: -2; }
+.kl-hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(6, 50, 60, .82) 0%, rgba(6, 50, 60, .25) 26%, rgba(6, 50, 60, .2) 40%, rgba(6, 50, 60, .78) 62%, rgba(6, 50, 60, .97) 100%); }
+.kl-hero-in { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 18px 22px; max-width: 560px; margin: 0 auto; box-sizing: border-box; }
+.kl-kopf { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: clamp(120px, 21svh, 230px); }
+.kl-logo { height: 25px; width: auto; filter: brightness(0) invert(1); }
+.kl-hero h1 { color: #fff; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; line-height: 1.1; text-shadow: 0 2px 14px rgba(0, 0, 0, .35); }
+.kl-ort { font-size: 34px; line-height: 1; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+.kl-ort-sub { font-size: 15px; font-weight: 600; letter-spacing: .02em; color: rgba(255, 255, 255, .92); }
+.kl-tel { position: absolute; top: 14px; right: 14px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .35); color: #fff !important; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.kl-kachel { width: 100%; box-sizing: border-box; background: rgba(6, 50, 60, .78); border: 1px solid rgba(255, 255, 255, .16); border-radius: 22px; padding: 16px 18px 0; overflow: hidden; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 20px 40px -18px rgba(0, 0, 0, .6); }
+.kl-etikett { display: inline-block; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px !important; }
+.kl-gross { display: flex; align-items: baseline; justify-content: center; gap: 10px; }
+.kl-gross strong { font-size: 76px; line-height: .95; font-weight: 900; letter-spacing: -.04em; color: #fff; }
+.kl-gross span { font-size: 22px; font-weight: 800; color: #fff; }
+.kl-danach { font-size: 17px; font-weight: 700; color: #fff; margin-top: 4px !important; }
+.kl-streich { font-size: 14.5px; color: rgba(255, 255, 255, .85); margin-top: 6px !important; }
+.kl-streich s { text-decoration-thickness: 2px; text-decoration-color: var(--gold); color: rgba(255, 255, 255, .7); }
+.kl-streich b { color: var(--gold); font-weight: 800; }
+.kl-hero .kl-preis-klein { font-size: 12.5px; line-height: 1.35; color: rgba(255, 255, 255, .78); margin-top: 6px !important; }
+.kl-frist { margin: 14px -18px 0 !important; padding: 9px 12px; background: var(--gold); color: #3a2200; font-size: 14px; font-weight: 800; letter-spacing: .01em; }
+.kl-hero .kl-btn { width: 100%; max-width: 360px; margin-top: 16px; background: var(--gold); color: #2b1a00 !important; box-shadow: 0 12px 28px -10px rgba(255, 181, 79, .55); }
+.kl-hero .kl-btn::after { background: var(--petrol); }
+.kl-hero .kl-btn:hover { background: #ffc46f; }
+.kl-hero .kl-btn:focus-visible { outline-color: #fff; }
+.kl-hero .kl-note { font-size: 13px; color: rgba(255, 255, 255, .82); text-align: center; margin-top: 8px !important; }
+.kl-vorteile { list-style: none; margin: 0; padding: 18px 16px; display: grid; gap: 8px; background: #fff; border-bottom: 1px solid var(--linie); }
+.kl-vorteile li { display: flex; gap: 10px; font-size: 15.5px; line-height: 1.3; font-weight: 500; }
+@media (max-width: 360px) { .kl-gross strong { font-size: 64px; } .kl-ort { font-size: 30px; } }
+@media (min-width: 700px) {
+  .kl-hero { min-height: min(900px, 100vh); display: flex; align-items: center; }
+  .kl-hero-foto img { object-position: 50% 50%; }
+  .kl-hero::before { background: linear-gradient(180deg, rgba(6, 50, 60, .8) 0%, rgba(6, 50, 60, .3) 24%, rgba(6, 50, 60, .45) 55%, rgba(6, 50, 60, .92) 100%), radial-gradient(ellipse at center, transparent 30%, rgba(6, 50, 60, .45) 100%); }
+  .kl-hero-in { width: 100%; padding: 28px 24px 36px; }
+  .kl-kopf { margin-bottom: clamp(48px, 14vh, 150px); }
+  .kl-logo { height: 30px; }
+  .kl-ort { font-size: 44px; }
+  .kl-ort-sub { font-size: 17px; }
+  .kl-kachel { max-width: 460px; }
+  .kl-gross strong { font-size: 92px; }
+  .kl-hero .kl-btn { display: inline-flex; width: auto; padding: 0 36px; }
+  .kl-tel { top: 20px; right: 24px; }
+  .kl-vorteile { grid-template-columns: repeat(3, auto); justify-content: center; gap: 12px 36px; padding: 20px 24px; }
+}

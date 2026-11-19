@@ -40,34 +40,38 @@ export default function Page() {
       {/* Lena-Begrüßung erst nach 25 s, damit beim ersten Eindruck nichts über Preis/Knopf liegt. Der Chat-Knopf selbst bleibt. */}
       <script dangerouslySetInnerHTML={{ __html: 'window.FILAUNCH=Object.assign({greetFirst:25000,greetHold:8000},window.FILAUNCH||{})' }} />
 
-      {/* 1 · Kopf: Ort + Angebot, Preis mit Gesamtpreis, 3 Vorteile, ein Knopf, echtes Foto */}
+      {/* 1 · Kopf v2 (19.11.): Aufbau wie GymPod – Logo + Ort oben, vollflächiges echtes Foto, Preis-Kachel, ein Knopf.
+          Eigene Gestaltung/Texte in Markenfarben. Foto nicht animiert, mit fetchPriority=high (LCP). */}
       <section className="kl-hero" aria-labelledby="kl-h1">
-        <div className="kl-hero-bild">
-          <img src="/media/klar/hero-zirkel-1280.webp" srcSet="/media/klar/hero-zirkel-800.webp 800w, /media/klar/hero-zirkel-1280.webp 1280w" sizes="(min-width: 900px) 50vw, 100vw" alt="Gerätebereich im Fit-Inn Trier-Feyen" width={1280} height={960} fetchPriority="high" />
-          <div className="kl-leiste">
-            <img src="/media/c/logo-petrol.png" alt="Fit-Inn Trier" width={112} height={34} />
-            <a className="kl-tel" href={footer.phoneHref} aria-label={`Anrufen: ${footer.phoneLabel}`}>
-              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z" /></svg>
-              {footer.phoneLabel}
-            </a>
+        <picture className="kl-hero-foto">
+          <source media="(max-width: 699px)" srcSet="/media/klar/hero-zirkel-hoch.webp" width={660} height={1100} />
+          <img src="/media/klar/hero-zirkel-1600.webp" srcSet="/media/klar/hero-zirkel-1280.webp 1280w, /media/klar/hero-zirkel-1600.webp 1600w" sizes="100vw" alt="Zirkel-Bereich mit Technogym-Geräten im Fit-Inn Trier-Feyen" width={1600} height={1200} fetchPriority="high" />
+        </picture>
+        <a className="kl-tel" href={footer.phoneHref} aria-label={`Anrufen: ${footer.phoneLabel}`}>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z" /></svg>
+        </a>
+        <div className="kl-hero-in">
+          <div className="kl-kopf">
+            <img className="kl-logo" src="/media/c/logo-petrol.png" alt="Fit-Inn Trier" width={150} height={25} />
+            <h1 id="kl-h1"><span className="kl-ort">Trier-Feyen</span><span className="kl-ort-sub">Fitnessstudio mit Betreuung</span></h1>
           </div>
-        </div>
-        <div className="kl-hero-text">
-          <p className="kl-kicker">{t.kicker}</p>
-          <h1 id="kl-h1">Fitnessstudio in <span className="kl-nw">Trier-Feyen</span> – mit Betreuung.</h1>
-          <div className="kl-preis">
-            <p className="kl-preis-zeile"><strong>{t.preisGross}</strong><span>{t.preisEinheit}</span>{t.preisDanach ? <em>{t.preisDanach}</em> : null}</p>
+          <div className="kl-kachel">
+            <p className="kl-etikett">{t.kachelEtikett}</p>
+            <p className="kl-gross"><strong>{t.preisGross}</strong><span>{t.preisEinheit}</span></p>
+            {t.preisDanach ? <p className="kl-danach">{t.preisDanach}</p> : null}
+            {t.streich ? <p className="kl-streich">{t.streich.was} <s aria-label={`statt ${t.streich.alt}`}>{t.streich.alt}</s> <b>{t.streich.neu}</b></p> : null}
             <p className="kl-preis-klein">{t.preisKlein}</p>
+            <p className="kl-frist">{t.frist}</p>
           </div>
-          <ul className="kl-vorteile">
-            <li><Haken />Technogym-Geräte mit Betreuung und Trainingsplan</li>
-            <li><Haken />Kostenlose Parkplätze direkt am Studio</li>
-            <li><Haken /><span><b>4,8 ★ bei Google</b> · über 250 Bewertungen</span></li>
-          </ul>
           <BuchenKnopf quelle="hero" />
           <p className="kl-note">Kostenlos und unverbindlich. Du entscheidest erst danach.</p>
         </div>
       </section>
+      <ul className="kl-vorteile">
+        <li><Haken />Technogym-Geräte mit Betreuung und Trainingsplan</li>
+        <li><Haken />Kostenlose Parkplätze direkt am Studio</li>
+        <li><Haken /><span><b>4,8 ★ bei Google</b> · über 250 Bewertungen</span></li>
+      </ul>
 
       {/* 2 · So läuft's */}
       <section className="kl-sek" aria-labelledby="kl-ablauf">
