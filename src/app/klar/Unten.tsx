@@ -2,9 +2,9 @@
 // Drei Stilrichtungen mit denselben Inhalten/Fakten: A = hell und ruhig, B = Petrol-Flächen und große Fotos,
 // C = Mix aus beiden (Auftrag Markus „Mix mal hell und dunkel“): hell → dunkel im Wechsel.
 // Umschalten: KLAR_UNTEN in src/lib/klar.ts (lokal: Umgebungsvariable KLAR_UNTEN=a|b|c). Nur echte Studiofotos, alle lazy.
-import { BuchenKnopf } from './KlarClient';
+import { BuchenKnopf, KlarStapel } from './KlarClient';
 import Icon, { type IconName } from './Icon';
-import { OEFFNUNGSZEITEN, type KlarInhalt, type KlarUnten } from '@/lib/klar';
+import { OEFFNUNGSZEITEN, klarStapel, type KlarInhalt, type KlarUnten } from '@/lib/klar';
 import footer from '@/content/10-footer.json';
 
 const ROUTE = 'https://www.google.com/maps/dir/?api=1&destination=Fit-Inn+Trier,+Auf+Hirtenberg+8,+54296+Trier';
@@ -252,9 +252,13 @@ function UntenB({ t }: { t: KlarInhalt }) {
 // C · Mix: helle Abschnitte bekommen die Stile aus A, dunkle die aus B (Hüllen .ku-a/.ku-b).
 // Rhythmus: hell (Vorteile + Ablauf) → dunkel (Foto + was drin ist) → hell (Preise) → dunkel (Zahlen auf Foto)
 // → hell (Öffnungszeiten, FAQ) → dunkel (Abschluss mit Foto). Jeder Wechsel legt sich mit runden Ecken über den vorigen.
+// Stapel-Animation (KLAR_STAPEL): Hüllen kleben oben fest, die nächste schiebt sich darüber. Info + FAQ (ku-stapel-frei)
+// klebt nicht, weil das Akkordeon beim Aufklappen wächst – sie läuft normal, schiebt sich aber selbst noch über die Zahlen.
 function UntenC({ t }: { t: KlarInhalt }) {
+  const stapel = klarStapel();
   return (
-    <div className="ku ku-c">
+    <div className={stapel ? 'ku ku-c ku-stapel' : 'ku ku-c'}>
+      {stapel ? <KlarStapel /> : null}
       <div className="ku-a ku-c-hell">
         <Vorteile />
         <Schritte t={t} />
@@ -282,7 +286,7 @@ function UntenC({ t }: { t: KlarInhalt }) {
           </div>
         </section>
       </div>
-      <div className="ku-a ku-c-hell">
+      <div className="ku-a ku-c-hell ku-stapel-frei">
         <Info />
         <Fragen t={t} />
       </div>

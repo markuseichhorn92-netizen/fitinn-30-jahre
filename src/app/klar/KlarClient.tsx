@@ -49,3 +49,61 @@ export function KlarSticky({ stark, text }: { stark: string; text: string }) {
     </div>
   );
 }
+
+// Stapel-Animation (Entwurf 19.11.2026): schaltet erst per Skript ein (ohne JS oder mit „Bewegung reduzieren“ = normales Scrollen).
+// Setzt je Hülle --ku-h (Höhe → Klebe-Kante, damit hohe Abschnitte bis zum Ende lesbar bleiben) und --ku-p (0…1: wie weit die
+// nächste Hülle schon darüber liegt → Verkleinern/Abdunkeln in unten.css). Ein rAF pro Scroll-Bild, keine Bibliothek.
+export function KlarStapel() {
+  useEffect(() => {
+    const box = document.querySelector<HTMLElement>('.ku-stapel');
+    if (!box || !window.matchMedia || typeof ResizeObserver === 'undefined') return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const teile = Array.from(box.children).filter((e): e is HTMLElement => e instanceof HTMLElement && e.tagName === 'DIV');
+    let raf = 0, an = false;
+    const leiste = document.querySelector<HTMLElement>('.kl-sticky');
+    const messen = () => {
+      for (const e of teile) e.style.setProperty('--ku-h', `${e.offsetHeight}px`);
+      // feste Leiste unten (nur mobil sichtbar): Hüllen kleben darüber, nicht dahinter
+      const unten = leiste && getComputedStyle(leiste).display !== 'none' ? leiste.offsetHeight : 0;
+      box.style.setProperty('--ku-unten', `${unten}px`);
+    };
+    const ro = new ResizeObserver(messen);
+    const rechnen = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      for (let i = 0; i < teile.length - 1; i++) {
+        const e = teile[i];
+        if (e.classList.contains('ku-stapel-frei')) continue;
+        const p = Math.min(1, Math.max(0, (vh - teile[i + 1].getBoundingClientRect().top) / vh));
+        const alt = e.style.getPropertyValue('--ku-p');
+        const neu = p.toFixed(3);
+        if (alt !== neu) e.style.setProperty('--ku-p', neu);
+      }
+    };
+    const beimScrollen = () => { if (!raf) raf = requestAnimationFrame(rechnen); };
+    const ein = () => {
+      if (an) return; an = true;
+      messen(); for (const e of teile) ro.observe(e);
+      if (leiste) ro.observe(leiste);
+      box.classList.add('ku-stapel-an');
+      window.addEventListener('scroll', beimScrollen, { passive: true });
+      window.addEventListener('resize', beimScrollen);
+      rechnen();
+    };
+    const aus = () => {
+      if (!an) return; an = false;
+      ro.disconnect();
+      window.removeEventListener('scroll', beimScrollen);
+      window.removeEventListener('resize', beimScrollen);
+      if (raf) cancelAnimationFrame(raf), (raf = 0);
+      box.classList.remove('ku-stapel-an');
+      for (const e of teile) { e.style.removeProperty('--ku-h'); e.style.removeProperty('--ku-p'); }
+      box.style.removeProperty('--ku-unten');
+    };
+    const pruefen = () => (mq.matches ? aus() : ein());
+    pruefen();
+    mq.addEventListener?.('change', pruefen);
+    return () => { mq.removeEventListener?.('change', pruefen); aus(); };
+  }, []);
+  return null;
+}

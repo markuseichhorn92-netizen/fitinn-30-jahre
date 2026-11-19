@@ -254,4 +254,34 @@
   .ku-c .ku-was-text { padding-bottom: calc(104px + var(--ku-ecke)); }
   .ku-c .ku-preise { padding-top: 112px; }
 }
+
+/* ================= C · Stapel-Animation (Entwurf 19.11.2026, Schalter KLAR_STAPEL in src/lib/klar.ts) =================
+   Erst aktiv, wenn KlarStapel (KlarClient.tsx) .ku-stapel-an setzt. Jede Hülle klebt oben fest; ist sie höher als der
+   Bildschirm, klebt sie erst an ihrem Ende (top = Bildschirmhöhe − Hüllenhöhe), damit nichts abgeschnitten wird.
+   svh = kleinste Bildschirmhöhe (iOS-Adressleiste sichtbar) → kein Springen, wenn die Leiste ein-/ausfährt.
+   --ku-unten = Höhe der festen Leiste unten (nur mobil), damit das Ende einer Hülle nicht dahinter klebt.
+   Die darunterliegende Hülle wird mit --ku-p (0…1) bis 95 % kleiner und abgedunkelt. Nur transform/opacity (kein Layout, kein CLS). */
+.ku-stapel-an { background: var(--petrol-d); }
+.ku-stapel-an > div {
+  position: sticky; top: min(0px, calc(100vh - var(--ku-unten, 0px) - var(--ku-h, 0px)));
+  isolation: isolate;
+  transform: scale(calc(1 - .05 * var(--ku-p, 0)));
+  transform-origin: 50% calc(max(0px, var(--ku-h, 0px) + var(--ku-unten, 0px) - 100vh) + 50vh);
+}
+@supports (height: 100svh) {
+  .ku-stapel-an > div {
+    top: min(0px, calc(100svh - var(--ku-unten, 0px) - var(--ku-h, 0px)));
+    transform-origin: 50% calc(max(0px, var(--ku-h, 0px) + var(--ku-unten, 0px) - 100svh) + 50svh);
+  }
+}
+.ku-stapel-an > div + div { box-shadow: 0 -16px 36px -14px rgba(0, 0, 0, .35); }
+.ku-stapel-an > div::after {
+  content: ""; position: absolute; inset: 0; z-index: 20; pointer-events: none;
+  background: #021a20; opacity: calc(.5 * var(--ku-p, 0));
+}
+.ku-stapel-an > .ku-stapel-frei { position: relative; top: auto; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ku-stapel-an > div { position: relative; top: auto; transform: none; }
+  .ku-stapel-an > div::after { content: none; }
+}
 @media (prefers-reduced-motion: reduce) { .ku-akk summary::after { transition: none; } }

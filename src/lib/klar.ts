@@ -102,6 +102,17 @@ export const OEFFNUNGSZEITEN: Array<[string, string]> = [
 // Fest im Code wählen; für lokale Vorschauen überschreibt die Umgebungsvariable KLAR_UNTEN (a|b|c).
 export type KlarUnten = 'a' | 'b' | 'c';
 export const KLAR_UNTEN: KlarUnten = 'c';
+// STAPEL-ANIMATION (Entwurf 19.11.2026, Auftrag Markus „Sektionen fixieren und aufschieben“, nur Variante C):
+// true = jeder Abschnitt unter dem Kopf bleibt beim Scrollen stehen, der nächste schiebt sich als Karte darüber,
+// der untere wird dabei leicht kleiner und dunkler. false = normales Scrollen wie bisher.
+// Lokal überschreibbar mit der Umgebungsvariable KLAR_STAPEL=an|aus.
+export const KLAR_STAPEL = true;
+export function klarStapel(): boolean {
+  const env = process.env.KLAR_STAPEL;
+  if (env === 'an') return true;
+  if (env === 'aus') return false;
+  return KLAR_STAPEL;
+}
 export function klarUnten(): KlarUnten {
   const env = process.env.KLAR_UNTEN;
   return env === 'a' || env === 'b' || env === 'c' ? env : KLAR_UNTEN;
