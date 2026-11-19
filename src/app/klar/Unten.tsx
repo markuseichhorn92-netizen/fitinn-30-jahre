@@ -4,6 +4,7 @@
 // Umschalten: KLAR_UNTEN in src/lib/klar.ts (lokal: Umgebungsvariable KLAR_UNTEN=a|b|c). Nur echte Studiofotos, alle lazy.
 import { BuchenKnopf, KlarStapel } from './KlarClient';
 import Icon, { type IconName } from './Icon';
+import Karussell from './Karussell';
 import { OEFFNUNGSZEITEN, klarStapel, type KlarInhalt, type KlarUnten } from '@/lib/klar';
 import footer from '@/content/10-footer.json';
 
@@ -16,7 +17,6 @@ const VORTEILE: Array<{ icon: IconName; stark: string; text: string }> = [
 ];
 
 const DRIN: Array<{ icon: IconName; titel: string; text: string }> = [
-  { icon: 'hantel', titel: 'Technogym-Gerätetraining', text: 'Biostrength, Biocircuit, Kraft- und Cardiogeräte.' },
   { icon: 'betreuung', titel: 'Betreuung inklusive', text: 'Wir zeigen dir die Geräte und stellen deinen Plan zusammen.' },
   { icon: 'app', titel: 'Fit-Inn App', text: 'Punkte für jeden Check-in, Prämien, kostenlose Ernährungspläne.' },
   { icon: 'haus', titel: 'Familiengeführt seit 1996', text: 'Kein Franchise. Wir kennen unsere Mitglieder.' },
@@ -69,13 +69,17 @@ function Schritte({ t }: { t: KlarInhalt }) {
   );
 }
 
+// Erste Zeile „Technogym-Gerätetraining“ ist seit 19.11.2026 das wischbare Karussell (Karussell.tsx) direkt unter der Überschrift.
 function DrinListe() {
   return (
-    <ul className="ku-drin">
-      {DRIN.map((d) => (
-        <li key={d.titel}><span className="ku-dk"><Icon name={d.icon} /></span><div><b>{d.titel}</b><p>{d.text}</p></div></li>
-      ))}
-    </ul>
+    <>
+      <Karussell />
+      <ul className="ku-drin">
+        {DRIN.map((d) => (
+          <li key={d.titel}><span className="ku-dk"><Icon name={d.icon} /></span><div><b>{d.titel}</b><p>{d.text}</p></div></li>
+        ))}
+      </ul>
+    </>
   );
 }
 

@@ -241,8 +241,9 @@
 
   .ku-b .ku-foto-voll img { aspect-ratio: auto; height: min(68vh, 640px); }
   .ku-b .ku-was-text { margin-top: -160px; }
-  .ku-b .ku-drin { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
-  .ku-b .ku-drin li:nth-child(2) { border-top: 0; }
+  /* drei Punkte (Gerätetraining steckt seit 19.11. im Karussell darüber) → drei Spalten */
+  .ku-b .ku-drin { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 40px; }
+  .ku-b .ku-drin li + li { border-top: 0; }
   .ku-b .ku-vertrauen-in { padding-bottom: 56px; }
   .ku-b .ku-zahlen { grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .ku-b .ku-zahlen li { flex-direction: column; gap: 4px; }
@@ -378,4 +379,94 @@
   .ku-schluss h2 { font-size: clamp(52px, 4.4vw, 110px); }
   .ku-schluss-in > p:first-of-type { font-size: clamp(17px, 1.3vw, 26px); }
   .ku-anruf { font-size: clamp(15px, 1vw, 20px); }
+}
+
+/* ================= Karussell Biostrength / Biocircuit / Stoffwechsel-Coaching (Entwurf 19.11.2026, Karussell.tsx) =================
+   Mobil: Band läuft bis an den Bildschirmrand, Karten rasten ein (scroll-snap x mandatory), die nächste Karte ragt ~45 px ins Bild.
+   touch-action pan-x pan-y: waagerecht wischt das Band, senkrecht scrollt die Seite (Stapel-Animation läuft weiter).
+   overscroll-behavior-x contain: am Ende des Bands keine Zurück-Geste des Browsers. Bilder mit festen Maßen → kein CLS.
+   Ab 640 px Pfeile, ab 1024 px alle drei Karten nebeneinander ohne Scrollen. */
+.ku-kar { margin: 4px 0 18px; }
+.ku-kar-band {
+  position: relative; list-style: none; display: flex; gap: 12px;
+  margin: 0 calc(-1 * var(--ku-rand)); padding: 4px var(--ku-rand) 8px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding: 0 var(--ku-rand);
+  touch-action: pan-x pan-y; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth;
+}
+.ku-kar-band::-webkit-scrollbar { display: none; }
+.ku-kar-band:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; border-radius: 22px; }
+.ku-kar-karte {
+  flex: 0 0 min(80vw, 360px); scroll-snap-align: start; scroll-snap-stop: always;
+  display: flex; flex-direction: column; border-radius: 20px; overflow: hidden;
+}
+.ku-kar-bild { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.ku-kar-grafik { position: relative; display: grid; place-items: center; background: radial-gradient(120% 90% at 20% 0%, var(--tuerkis) 0%, var(--petrol-d) 75%); color: var(--gold); }
+.ku-kar-grafik svg { width: 78%; height: auto; opacity: .95; }
+.ku-kar-grafik span { position: absolute; left: 18px; bottom: 14px; font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
+.ku-kar-text { display: flex; flex-direction: column; flex: 1; padding: 18px 18px 20px; }
+.ku-kar-zusatz { align-self: flex-start; font-size: 11.5px; font-weight: 800; letter-spacing: .04em; padding: 3px 9px; border-radius: 999px; margin-bottom: 8px !important; }
+.ku-kar-text h3 { margin: 0; font-family: inherit; font-size: 21px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em; }
+.ku-kar-unter { font-size: 15px; line-height: 1.4; margin-top: 4px !important; }
+.ku-kar-text ul { list-style: none; margin: 14px 0 16px; padding: 0; display: grid; gap: 9px; }
+.ku-kar-text li { display: grid; grid-template-columns: 18px 1fr; gap: 9px; font-size: 14.5px; line-height: 1.4; }
+.ku-kar-text li .ku-ic { margin-top: 1px; }
+.ku-kar-link { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 15px; font-weight: 800; text-decoration: none; }
+.ku-kar-link:hover { text-decoration: underline; }
+.ku-kar-link:focus-visible, .ku-kar-pfeil:focus-visible, .ku-kar-punkt:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
+.ku-kar-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 10px; }
+.ku-kar-punkte { display: flex; gap: 2px; }
+/* Treffer-Fläche 28 px, sichtbarer Punkt 8 px (aktiv: 22 px breit) */
+.ku-kar-punkt { position: relative; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+.ku-kar-punkt::before { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; border-radius: 999px; transform: translate(-50%, -50%); transition: width .2s ease, background-color .2s ease; }
+.ku-kar-punkt[aria-current]::before { width: 22px; }
+.ku-kar-pfeil { display: none; width: 44px; height: 44px; border-radius: 50%; place-items: center; cursor: pointer; background: none; padding: 0; }
+.ku-kar-pfeil:disabled { opacity: .35; cursor: default; }
+.ku-kar-zurueck .ku-ic { transform: scaleX(-1); }
+
+/* dunkle Fläche (Variante B/C) */
+.ku-b .ku-kar-karte { background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); }
+.ku-b .ku-kar-text { color: #fff; }
+.ku-b .ku-kar-unter { color: rgba(255, 255, 255, .78); }
+.ku-b .ku-kar-text li { color: rgba(255, 255, 255, .9); }
+.ku-b .ku-kar-text li .ku-ic { color: var(--gold); }
+.ku-b .ku-kar-zusatz { border: 1px solid rgba(255, 181, 79, .6); color: var(--gold); }
+.ku-b .ku-kar-link { color: var(--gold) !important; }
+.ku-b .ku-kar-punkt::before { background: rgba(255, 255, 255, .35); }
+.ku-b .ku-kar-punkt[aria-current]::before { background: var(--gold); }
+.ku-b .ku-kar-pfeil { border: 1.5px solid rgba(255, 255, 255, .5); color: #fff; }
+/* helle Fläche (Variante A) */
+.ku-a .ku-kar-karte { background: #fff; border: 1px solid var(--linie); }
+.ku-a .ku-kar-unter, .ku-a .ku-kar-text li { color: var(--grau); }
+.ku-a .ku-kar-text li .ku-ic { color: var(--tuerkis); }
+.ku-a .ku-kar-zusatz { background: var(--eis); color: var(--petrol); }
+.ku-a .ku-kar-link { color: var(--tuerkis-d) !important; }
+.ku-a .ku-kar-punkt::before { background: var(--linie); }
+.ku-a .ku-kar-punkt[aria-current]::before { background: var(--petrol); }
+.ku-a .ku-kar-pfeil { border: 1.5px solid var(--petrol); color: var(--petrol); }
+/* Variante A Desktop: Liste steht in der schmalen rechten Spalte → Karten dort wischbar lassen, nicht ausbluten */
+@media (min-width: 900px) { .ku-a .ku-split .ku-kar-band { margin: 0; padding-left: 0; padding-right: 0; scroll-padding: 0; } }
+
+@media (min-width: 640px) {
+  .ku-kar-karte { flex-basis: min(46vw, 380px); }
+  .ku-kar-pfeil { display: grid; }
+}
+@media (min-width: 1024px) {
+  .ku-kar { margin: 0 0 clamp(24px, 2vw, 48px); }
+  .ku-c .ku-kar-band, .ku-b .ku-kar-band {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 32px);
+    margin: 0; padding: 0; overflow: visible; scroll-snap-type: none; touch-action: auto;
+  }
+  .ku-c .ku-kar-nav, .ku-b .ku-kar-nav { display: none; }
+  .ku-kar-karte { border-radius: clamp(20px, 1.4vw, 30px); }
+  .ku-kar-bild { aspect-ratio: 4 / 3; }
+  .ku-kar-text { padding: clamp(20px, 1.6vw, 34px); }
+  .ku-kar-text h3 { font-size: clamp(22px, 1.6vw, 32px); }
+  .ku-kar-unter { font-size: clamp(15px, 1.05vw, 20px); }
+  .ku-kar-text li { font-size: clamp(14.5px, 1vw, 19px); grid-template-columns: 20px 1fr; }
+  .ku-kar-link { font-size: clamp(15px, 1vw, 19px); }
+  .ku-kar-grafik span { font-size: clamp(12.5px, .8vw, 15px); left: clamp(18px, 1.6vw, 34px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ku-kar-band { scroll-behavior: auto; }
+  .ku-kar-punkt::before { transition: none; }
 }

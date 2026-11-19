@@ -13,6 +13,7 @@ const PFADE = {
   route: 'M4 11.5L20 4l-7.5 16-2-6.5z',
   telefon: 'M6.6 3.5h2.6l1.4 4-2 1.4a11.5 11.5 0 0 0 6.5 6.5l1.4-2 4 1.4v2.6a1.6 1.6 0 0 1-1.7 1.6A16.5 16.5 0 0 1 5 5.2a1.6 1.6 0 0 1 1.6-1.7z',
   haken: 'M5 12.5l4.2 4.2L19 7',
+  pfeil: 'M9 5.5l6.5 6.5L9 18.5',
 } as const;
 
 export type IconName = keyof typeof PFADE;
