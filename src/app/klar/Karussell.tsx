@@ -2,7 +2,7 @@
 // /klar – wischbare Karten Biostrength, Biocircuit, Stoffwechsel-Coaching (Entwurf 19.11.2026, Auftrag Markus
 // „horizontales scrollen … für die Erklärung der Biostrength, biocircuit sowie Stoffwechselcoaching“).
 // Texte nur aus den Sanity-Seiten /biostrength-fit-inn-trier, /biocircuit, /stoffwechsel-coaching (fit-inn-trier.de).
-// Fotos: echte Studiofotos aus Sanity. Fürs Coaching gibt es nur Stockfotos → ruhige Grafik statt Foto. Keine Preise.
+// Fotos: echte Studiofotos aus Sanity. Coaching-Foto von Markus (19.11.). Keine Preise.
 // Mobil: CSS scroll-snap, nächste Karte ragt ins Bild, Punkte; ab 640 px Pfeile; ab 1024 px alle drei nebeneinander.
 // Ohne JS bleibt das Band wischbar (Punkte/Pfeile sind dann nur Zierde).
 import { useEffect, useRef, useState } from 'react';
@@ -45,6 +45,8 @@ const KARTEN: Karte[] = [
       'Daraus entsteht dein Ernährungs- und Trainingsplan.',
     ],
     link: 'https://fit-inn-trier.de/stoffwechsel-coaching',
+    // 19.11.2026 Foto von Markus per Telegram (Atemgasanalyse mit Auswertung)
+    foto: { src: '/media/klar/karte-stoffwechsel.webp', alt: 'Atemgasanalyse mit Maske, Trainer zeigt die Auswertung auf dem Tablet' },
     zusatz: 'Zusatzangebot',
   },
 ];
