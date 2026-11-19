@@ -1,0 +1,253 @@
+// /klar – alles unter dem Kopf (Entwurf 19.11.2026, Auftrag Markus „alles unter dem header … schöner machen“).
+// Zwei Stilrichtungen mit denselben Inhalten/Fakten: A = hell und ruhig, B = Petrol-Flächen und große Fotos.
+// Umschalten: KLAR_UNTEN in src/lib/klar.ts (lokal: Umgebungsvariable KLAR_UNTEN=a|b). Nur echte Studiofotos, alle lazy.
+import { BuchenKnopf } from './KlarClient';
+import Icon, { type IconName } from './Icon';
+import { OEFFNUNGSZEITEN, type KlarInhalt, type KlarUnten } from '@/lib/klar';
+import footer from '@/content/10-footer.json';
+
+const ROUTE = 'https://www.google.com/maps/dir/?api=1&destination=Fit-Inn+Trier,+Auf+Hirtenberg+8,+54296+Trier';
+
+const VORTEILE: Array<{ icon: IconName; stark: string; text: string }> = [
+  { icon: 'hantel', stark: 'Technogym-Geräte', text: 'mit Betreuung' },
+  { icon: 'parken', stark: 'Kostenlose', text: 'Parkplätze am Studio' },
+  { icon: 'stern', stark: '4,8 ★ bei Google', text: 'über 250 Bewertungen' },
+];
+
+const DRIN: Array<{ icon: IconName; titel: string; text: string }> = [
+  { icon: 'hantel', titel: 'Technogym-Gerätetraining', text: 'Biostrength, Biocircuit, Kraft- und Cardiogeräte.' },
+  { icon: 'betreuung', titel: 'Betreuung inklusive', text: 'Wir zeigen dir die Geräte und stellen deinen Plan zusammen.' },
+  { icon: 'app', titel: 'Fit-Inn App', text: 'Punkte für jeden Check-in, Prämien, kostenlose Ernährungspläne.' },
+  { icon: 'haus', titel: 'Familiengeführt seit 1996', text: 'Kein Franchise. Wir kennen unsere Mitglieder.' },
+];
+
+type Foto = { hoch: string; hochB: number; hochH: number; breit: string; breitB: number; breitH: number; alt: string };
+const FOTO_GERAETE: Foto = { hoch: '/media/klar/geraeteraum-hoch.webp', hochB: 800, hochH: 1000, breit: '/media/klar/geraeteraum-breit-1600.webp', breitB: 1600, breitH: 933, alt: 'Gerätebereich mit Technogym-Geräten und großen Fenstern im Fit-Inn Trier-Feyen' };
+const FOTO_CARDIO: Foto = { hoch: '/media/klar/cardio-hoch.webp', hochB: 640, hochH: 800, breit: '/media/klar/cardio-breit-1280.webp', breitB: 1280, breitH: 746, alt: 'Cardio-Bereich mit Fahrrädern und Crosstrainern' };
+const FOTO_FENSTER: Foto = { hoch: '/media/klar/geraeteraum-fenster-hoch.webp', hochB: 720, hochH: 812, breit: '/media/klar/geraeteraum-breit-1000.webp', breitB: 1000, breitH: 583, alt: '' };
+
+function Bild({ f, className, deko = false }: { f: Foto; className?: string; deko?: boolean }) {
+  return (
+    <picture className={className}>
+      <source media="(min-width: 900px)" srcSet={f.breit} width={f.breitB} height={f.breitH} />
+      <img src={f.hoch} width={f.hochB} height={f.hochH} alt={deko ? '' : f.alt} loading="lazy" decoding="async" />
+    </picture>
+  );
+}
+
+function Vorteile() {
+  return (
+    <ul className="ku-vorteile" aria-label="Das Wichtigste in Kürze">
+      {VORTEILE.map((v) => (
+        <li key={v.icon}><span className="ku-vk"><Icon name={v.icon} /></span><b>{v.stark}</b><span>{v.text}</span></li>
+      ))}
+    </ul>
+  );
+}
+
+function Schritte({ t }: { t: KlarInhalt }) {
+  const s: Array<{ icon: IconName; titel: string; text: string }> = [
+    { icon: 'kalender', titel: 'Termin wählen', text: 'Tag und Uhrzeit online aussuchen. Kostenlos.' },
+    { icon: 'hantel', titel: 'Probetraining', text: 'Rund 90 Minuten. Wir zeigen dir die Geräte und stellen dir einen Plan zusammen.' },
+    { icon: 'handschlag', titel: 'In Ruhe entscheiden', text: t.abschluss },
+  ];
+  return (
+    <section className="ku-sek ku-ablauf" aria-labelledby="ku-ablauf-h">
+      <div className="ku-in">
+        <h2 id="ku-ablauf-h">So einfach geht’s.</h2>
+        <ol className="ku-zeit">
+          {s.map((x, i) => (
+            <li key={x.titel}>
+              <span className="ku-punkt"><Icon name={x.icon} /></span>
+              <div><p className="ku-schritt">Schritt {i + 1}</p><b>{x.titel}</b><p>{x.text}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function DrinListe() {
+  return (
+    <ul className="ku-drin">
+      {DRIN.map((d) => (
+        <li key={d.titel}><span className="ku-dk"><Icon name={d.icon} /></span><div><b>{d.titel}</b><p>{d.text}</p></div></li>
+      ))}
+    </ul>
+  );
+}
+
+function Tarife({ t }: { t: KlarInhalt }) {
+  return (
+    <section className="ku-sek ku-preise" aria-labelledby="ku-tarife-h" id="tarife">
+      <div className="ku-in">
+        <h2 id="ku-tarife-h">{t.tarifTitel}</h2>
+        <div className="ku-karte">
+          {t.tarifBanner ? <p className="ku-banner"><Icon name="kalender" size={20} />{t.tarifBanner}</p> : null}
+          <ul className="ku-tarife">
+            {t.tarife.map((x) => (
+              <li key={x.laufzeit} className={x.hervor ? 'hervor' : undefined}>
+                <div className="ku-t-l">
+                  {x.hervor ? <span className="ku-badge">{x.hervor}</span> : null}
+                  <b>{x.laufzeit}</b>
+                  <span className="ku-t-gesamt">{x.gesamt}</span>
+                </div>
+                <p className="ku-t-r"><strong>{x.preis}</strong><span>{x.zusatz}</span></p>
+              </li>
+            ))}
+          </ul>
+          <div className="ku-inkl">
+            <p>In jedem Tarif</p>
+            <ul>
+              <li><Icon name="haken" size={18} />Gerätetraining mit Betreuung</li>
+              <li><Icon name="haken" size={18} />Fit-Inn App</li>
+              <li><Icon name="haken" size={18} />Kündigungsfrist 4 Wochen</li>
+            </ul>
+          </div>
+        </div>
+        <p className="ku-hinweis">{t.tarifHinweis}</p>
+        <div className="ku-knopf"><BuchenKnopf quelle="tarife" /></div>
+      </div>
+    </section>
+  );
+}
+
+function Zahlen() {
+  return (
+    <ul className="ku-zahlen">
+      <li><strong>4,8 ★</strong><span>bei Google, über 250 Bewertungen</span></li>
+      <li><strong>1.200+</strong><span>Kundinnen und Kunden</span></li>
+      <li><strong>seit 1996</strong><span>familiengeführt, kein Franchise</span></li>
+    </ul>
+  );
+}
+
+function Info() {
+  return (
+    <section className="ku-sek ku-info" aria-labelledby="ku-info-h">
+      <div className="ku-in">
+        <h2 id="ku-info-h">Öffnungszeiten &amp; Anfahrt</h2>
+        <div className="ku-kacheln">
+          <div className="ku-kachel">
+            <p className="ku-k-kopf"><span className="ku-k-ic"><Icon name="uhr" /></span>Öffnungszeiten</p>
+            <dl className="ku-zeiten">
+              {OEFFNUNGSZEITEN.map(([tag, zeit]) => (
+                <div key={tag}><dt>{tag}</dt><dd>{zeit.split(' und ').map((z) => <span key={z}>{z}</span>)}</dd></div>
+              ))}
+            </dl>
+            <p className="ku-k-note">Werktags Mittagspause von 13 bis 15 Uhr.</p>
+          </div>
+          <div className="ku-kachel">
+            <p className="ku-k-kopf"><span className="ku-k-ic"><Icon name="ort" /></span>Anfahrt</p>
+            <address className="ku-adresse">Fit-Inn Trier<br />Auf Hirtenberg 8<br />54296 Trier-Feyen</address>
+            <p className="ku-parken"><Icon name="parken" size={22} />Kostenlose Parkplätze direkt am Studio</p>
+            <div className="ku-k-knoepfe">
+              <a className="ku-link-btn" href={ROUTE} rel="noopener" target="_blank"><Icon name="route" size={18} />Route planen</a>
+              <a className="ku-link-btn" href={footer.phoneHref}><Icon name="telefon" size={18} />{footer.phoneLabel}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Fragen({ t }: { t: KlarInhalt }) {
+  const f: Array<[string, string]> = [
+    ['Was kostet das Probetraining?', 'Nichts. Es ist kostenlos und unverbindlich.'],
+    ['Muss ich direkt einen Vertrag abschließen?', t.faqUnterschrift],
+    ['Was kostet die Mitgliedschaft insgesamt?', t.faqKosten],
+    ['Wie kündige ich?', 'Mit 4 Wochen Frist zum Ende der Laufzeit, danach jederzeit mit 4 Wochen Frist.'],
+    ['Ab welchem Alter kann ich Mitglied werden?', 'Neumitglieder ab 18 Jahren.'],
+  ];
+  return (
+    <section className="ku-sek ku-faq" aria-labelledby="ku-faq-h">
+      <div className="ku-in ku-schmal">
+        <h2 id="ku-faq-h">Häufige Fragen</h2>
+        <div className="ku-akk">
+          {f.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Klasse kl-schluss bleibt: daran blendet KlarSticky die feste Leiste aus.
+function Schluss({ foto }: { foto?: Foto }) {
+  return (
+    <section className="kl-schluss ku-schluss" aria-labelledby="kl-schluss-h">
+      {foto ? <Bild f={foto} className="ku-schluss-foto" deko /> : null}
+      <div className="ku-schluss-in">
+        <h2 id="kl-schluss-h">Probier es einfach aus.</h2>
+        <p>Rund 90 Minuten, kostenlos und unverbindlich.</p>
+        <BuchenKnopf quelle="schluss" />
+        <p className="ku-anruf">Lieber anrufen? <a href={footer.phoneHref}>{footer.phoneLabel}</a></p>
+      </div>
+    </section>
+  );
+}
+
+// A · hell und ruhig: viel Weiß, große Fotos mit runden Ecken, Kacheln und Linien statt Kästen.
+function UntenA({ t }: { t: KlarInhalt }) {
+  return (
+    <div className="ku ku-a">
+      <Vorteile />
+      <Schritte t={t} />
+      <section className="ku-sek ku-was" aria-labelledby="ku-drin-h">
+        <div className="ku-in ku-split">
+          <Bild f={FOTO_GERAETE} className="ku-foto-rund" />
+          <div>
+            <h2 id="ku-drin-h">Alles drin, was du brauchst.</h2>
+            <DrinListe />
+          </div>
+        </div>
+      </section>
+      <Tarife t={t} />
+      <section className="ku-sek ku-vertrauen" aria-labelledby="ku-vertrauen-h">
+        <div className="ku-in">
+          <h2 id="ku-vertrauen-h" className="kl-sr">Warum Fit-Inn</h2>
+          <Zahlen />
+          <Bild f={FOTO_CARDIO} className="ku-foto-rund ku-foto-cardio" />
+        </div>
+      </section>
+      <Info />
+      <Fragen t={t} />
+      <Schluss />
+    </div>
+  );
+}
+
+// B · Petrol-Flächen und große Fotos: der dunkle Kopf läuft weiter, Fotos randlos, helle Fläche nur für die Preise.
+function UntenB({ t }: { t: KlarInhalt }) {
+  return (
+    <div className="ku ku-b">
+      <Vorteile />
+      <Schritte t={t} />
+      <section className="ku-was" aria-labelledby="ku-drin-h">
+        <Bild f={FOTO_GERAETE} className="ku-foto-voll" />
+        <div className="ku-sek ku-was-text">
+          <div className="ku-in">
+            <h2 id="ku-drin-h">Alles drin, was du brauchst.</h2>
+            <DrinListe />
+          </div>
+        </div>
+      </section>
+      <Tarife t={t} />
+      <section className="ku-vertrauen" aria-labelledby="ku-vertrauen-h">
+        <Bild f={FOTO_CARDIO} className="ku-foto-voll" deko />
+        <div className="ku-vertrauen-in">
+          <h2 id="ku-vertrauen-h" className="kl-sr">Warum Fit-Inn</h2>
+          <Zahlen />
+        </div>
+      </section>
+      <Info />
+      <Fragen t={t} />
+      <Schluss foto={FOTO_FENSTER} />
+    </div>
+  );
+}
+
+export default function Unten({ v, t }: { v: KlarUnten; t: KlarInhalt }) {
+  return v === 'b' ? <UntenB t={t} /> : <UntenA t={t} />;
+}

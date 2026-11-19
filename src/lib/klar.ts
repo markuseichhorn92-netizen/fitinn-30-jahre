@@ -81,7 +81,7 @@ export const INHALT: Record<KlarPhase, KlarInhalt> = {
       { laufzeit: '52 Wochen', preis: '12 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 663 €' },
       { laufzeit: '4 Wochen', preis: '15 €', zusatz: 'pro Woche', gesamt: 'Gesamtpreis 99 €' },
     ],
-    tarifHinweis: 'Gesamtpreise für die Erstlaufzeit inkl. 39 € Aktivierungsgebühr. Schüler, Azubis und Studenten (mit Nachweis): 52 Wochen für 9 € pro Woche, Gesamtpreis 507 €.',
+    tarifHinweis: 'Gesamtpreise für die Erstlaufzeit inkl. 39 € Aktivierungsgebühr. Schüler, Azubis und Studenten (mit Nachweis): 52 Wochen für 9 € pro Woche, Gesamtpreis 507\u00a0€.',
     abschluss: 'Passt es, schließt du im Studio oder online ab. Passt es nicht, ist das auch völlig in Ordnung.',
     faqKosten: '104 Wochen à 9 €: Gesamtpreis 975 €. 52 Wochen à 12 €: 663 €. 4 Wochen à 15 €: 99 €. Die 39 € Aktivierungsgebühr sind jeweils schon eingerechnet.',
     faqUnterschrift: 'Nein. Erst trainierst du probe, dann entscheidest du in Ruhe – im Studio oder online.',
@@ -96,3 +96,12 @@ export const OEFFNUNGSZEITEN: Array<[string, string]> = [
   ['Samstag', '13:00 – 18:00 Uhr'],
   ['Sonntag', '09:00 – 15:00 Uhr'],
 ];
+
+// Gestaltung unter dem Kopf (Entwurf 19.11.2026): 'a' = hell und ruhig, 'b' = mehr Petrol-Flächen und große Fotos.
+// Fest im Code wählen; für lokale Vorschauen überschreibt die Umgebungsvariable KLAR_UNTEN (a|b).
+export type KlarUnten = 'a' | 'b';
+export const KLAR_UNTEN: KlarUnten = 'a';
+export function klarUnten(): KlarUnten {
+  const env = process.env.KLAR_UNTEN;
+  return env === 'a' || env === 'b' ? env : KLAR_UNTEN;
+}

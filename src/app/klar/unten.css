@@ -1,0 +1,234 @@
+/* /klar – alles unter dem Kopf (Entwurf 19.11.2026). Gemeinsames Gerüst + zwei Stilrichtungen:
+   .ku-a = hell und ruhig (Weiß/Eisblau, runde Fotos, Linien statt Kästen)
+   .ku-b = Petrol-Flächen und randlose Fotos (dunkler Kopf läuft weiter, Preise als helle Insel)
+   Mobil zuerst. Bilder haben feste Seitenverhältnisse (kein CLS), keine Animation außer Rückmeldung. */
+
+/* ---------- Gerüst ---------- */
+.ku { --ku-rand: 20px; }
+.ku-ic { display: block; flex: none; }
+.ku-sek { padding: 60px var(--ku-rand); }
+.ku-in { max-width: 1080px; margin: 0 auto; }
+.ku-schmal { max-width: 760px; }
+.ku h2 { font-size: clamp(30px, 8vw, 46px); line-height: 1.04; letter-spacing: -.03em; font-weight: 800; margin: 0 0 28px; text-wrap: balance; }
+.ku picture { display: block; }
+.ku picture img { display: block; width: 100%; height: auto; object-fit: cover; }
+
+/* Vorteile direkt unter dem Kopf: drei Icons statt Häkchen-Liste */
+.ku-vorteile { list-style: none; margin: 0; padding: 22px 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; }
+.ku-vorteile li { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 12.5px; line-height: 1.3; }
+.ku-vorteile b { font-size: 14px; font-weight: 700; }
+.ku-vk { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; margin-bottom: 8px; }
+
+/* Ablauf als Zeitstrahl */
+.ku-zeit { list-style: none; margin: 0; padding: 0; }
+.ku-zeit li { position: relative; display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding-bottom: 30px; }
+.ku-zeit li:last-child { padding-bottom: 0; }
+.ku-zeit li:not(:last-child)::before { content: ""; position: absolute; left: 25px; top: 58px; bottom: 6px; width: 2px; border-radius: 2px; }
+.ku-punkt { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; }
+.ku-schritt { font-size: 13px; font-weight: 600; margin-bottom: 2px !important; }
+.ku-zeit b { display: block; font-size: 20px; line-height: 1.2; letter-spacing: -.01em; }
+.ku-zeit li p:last-child { font-size: 15.5px; line-height: 1.45; margin-top: 4px !important; }
+
+/* Was drin ist */
+.ku-drin { list-style: none; margin: 0; padding: 0; }
+.ku-drin li { display: grid; grid-template-columns: 46px 1fr; gap: 14px; align-items: start; padding: 16px 0; }
+.ku-dk { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; }
+.ku-drin b { display: block; font-size: 17.5px; line-height: 1.25; }
+.ku-drin p { font-size: 15px; line-height: 1.45; margin-top: 3px !important; }
+
+/* Tarife: eine Karte, Zeilen statt Kästen */
+.ku-preise .ku-in { max-width: 680px; }
+.ku-karte { background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid var(--linie); box-shadow: 0 30px 60px -36px rgba(6, 50, 60, .45); }
+.ku-banner { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 16px; font-size: 16px; font-weight: 800; text-align: center; }
+.ku-tarife { list-style: none; margin: 0; padding: 0; }
+.ku-tarife li { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 20px 20px; border-bottom: 1px solid var(--linie); position: relative; }
+.ku-tarife li.hervor { background: linear-gradient(90deg, rgba(255, 181, 79, .14), rgba(255, 181, 79, 0) 70%); }
+.ku-tarife li.hervor::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--gold); }
+.ku-t-l { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.ku-t-l b { font-size: 20px; letter-spacing: -.01em; }
+.ku-t-gesamt { font-size: 14px; color: var(--grau); margin-top: 2px; }
+.ku-badge { display: inline-block; background: var(--gold); color: #3a2200; font-size: 11.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+.ku-t-r { text-align: right; flex: none; }
+.ku-t-r strong { display: block; font-size: 40px; line-height: 1; font-weight: 800; letter-spacing: -.03em; color: var(--petrol); }
+.ku-t-r span { display: block; font-size: 12.5px; color: var(--grau); margin-top: 4px; max-width: 120px; line-height: 1.25; margin-left: auto; }
+.ku-inkl { padding: 16px 20px 18px; background: var(--eis); }
+.ku-inkl > p { font-size: 13px; font-weight: 700; color: var(--grau); margin-bottom: 8px !important; }
+.ku-inkl ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.ku-inkl li { display: flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 600; }
+.ku-inkl .ku-ic { color: var(--tuerkis); }
+.ku-hinweis { font-size: 13px; line-height: 1.5; color: var(--grau); margin-top: 14px !important; }
+.ku-knopf { margin-top: 24px; }
+
+/* Zahlen */
+.ku-zahlen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+.ku-zahlen li { padding: 0 4px; }
+.ku-zahlen strong { display: block; font-size: clamp(22px, 6vw, 44px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; white-space: nowrap; }
+.ku-zahlen span { display: block; font-size: 12.5px; line-height: 1.3; margin-top: 4px; }
+
+/* Öffnungszeiten & Anfahrt als zwei Kacheln */
+.ku-kacheln { display: grid; gap: 14px; }
+.ku-kachel { border-radius: 24px; padding: 22px 20px; }
+.ku-k-kopf { display: flex; align-items: center; gap: 12px; font-size: 19px; font-weight: 800; margin-bottom: 14px !important; }
+.ku-k-ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; }
+.ku-zeiten { margin: 0; }
+.ku-zeiten > div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--linie); font-size: 15.5px; }
+.ku-zeiten > div:last-child { border-bottom: 0; }
+.ku-zeiten dt { font-weight: 700; }
+.ku-zeiten dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.ku-zeiten dd span { display: block; }
+.ku-k-note { font-size: 13.5px; margin-top: 10px !important; }
+.ku-adresse { font-style: normal; font-size: 16.5px; line-height: 1.5; }
+.ku-parken { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; border-radius: 14px; padding: 11px 12px; margin: 14px 0 !important; }
+.ku-k-knoepfe { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ku-link-btn { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 48px; padding: 0 10px; border-radius: 999px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+
+/* FAQ als Akkordeon */
+.ku-akk details { border-bottom: 1px solid var(--linie); }
+.ku-akk summary { cursor: pointer; list-style: none; position: relative; padding: 20px 44px 20px 0; font-size: 17px; font-weight: 700; line-height: 1.3; }
+.ku-akk summary::-webkit-details-marker { display: none; }
+.ku-akk summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 9px; height: 9px; border-right: 2px solid var(--tuerkis); border-bottom: 2px solid var(--tuerkis); transform: translateY(-70%) rotate(45deg); transition: transform .2s ease; }
+.ku-akk details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.ku-akk summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
+.ku-akk details p { padding: 0 0 20px; color: var(--grau); font-size: 15.5px; line-height: 1.5; }
+
+/* Abschluss */
+.ku-schluss { position: relative; isolation: isolate; overflow: hidden; text-align: center; padding: 72px var(--ku-rand); }
+.ku-schluss-in { max-width: 520px; margin: 0 auto; }
+.ku-schluss h2 { font-size: clamp(32px, 9vw, 52px); margin-bottom: 10px; }
+.ku-schluss-in > p:first-of-type { font-size: 17px; line-height: 1.4; margin-bottom: 26px !important; }
+.ku-schluss .kl-btn { max-width: 400px; margin: 0 auto; }
+.ku-anruf { font-size: 15px; margin-top: 16px !important; }
+.ku-anruf a { font-weight: 700; }
+
+/* ================= A · hell und ruhig ================= */
+.ku-a .ku-vorteile { background: #fff; border-bottom: 1px solid var(--linie); }
+.ku-a .ku-vorteile span:not(.ku-vk) { color: var(--grau); }
+.ku-a .ku-vk { background: var(--eis); color: var(--petrol); }
+.ku-a .ku-ablauf { background: var(--eis); }
+.ku-a .ku-zeit li::before { background: var(--linie); }
+.ku-a .ku-punkt { background: var(--petrol); color: #fff; }
+.ku-a .ku-schritt { color: var(--tuerkis-d); }
+.ku-a .ku-zeit li p:last-child { color: var(--grau); }
+.ku-a .ku-was { background: #fff; }
+.ku-a .ku-foto-rund img { border-radius: 24px; aspect-ratio: 4 / 5; }
+.ku-a .ku-split > picture { margin-bottom: 32px; }
+.ku-a .ku-drin li + li { border-top: 1px solid var(--linie); }
+.ku-a .ku-dk { background: var(--eis); color: var(--petrol); }
+.ku-a .ku-drin p { color: var(--grau); }
+.ku-a .ku-preise { background: var(--eis); }
+.ku-a .ku-banner { background: var(--petrol); color: #fff; }
+.ku-a .ku-vertrauen { background: #fff; }
+.ku-a .ku-zahlen li + li { border-left: 1px solid var(--linie); }
+.ku-a .ku-zahlen strong { color: var(--petrol); }
+.ku-a .ku-zahlen span { color: var(--grau); }
+.ku-a .ku-foto-cardio { margin-top: 36px; }
+.ku-a .ku-foto-cardio img { aspect-ratio: 1 / 1; }
+.ku-a .ku-info { background: var(--eis); }
+.ku-a .ku-kachel { background: #fff; border: 1px solid var(--linie); }
+.ku-a .ku-k-ic { background: var(--eis); color: var(--petrol); }
+.ku-a .ku-k-note { color: var(--grau); }
+.ku-a .ku-parken { background: var(--eis); color: var(--petrol); }
+.ku-a .ku-parken .ku-ic { color: var(--tuerkis); }
+.ku-a .ku-link-btn { border: 1.5px solid var(--petrol); color: var(--petrol) !important; }
+.ku-a .ku-link-btn:hover { background: var(--eis); }
+.ku-a .ku-faq { background: #fff; }
+.ku-a .ku-akk details:first-child { border-top: 1px solid var(--linie); }
+.ku-a .ku-schluss { background: linear-gradient(180deg, var(--eis), #DDEDF1); }
+.ku-a .ku-schluss h2 { color: var(--petrol); }
+.ku-a .ku-schluss-in > p:first-of-type, .ku-a .ku-anruf { color: var(--grau); }
+
+/* ================= B · Petrol und große Fotos ================= */
+.ku-b .ku-vorteile { background: var(--petrol-d); color: #fff; padding-top: 6px; }
+.ku-b .ku-vorteile span:not(.ku-vk) { color: rgba(255, 255, 255, .72); }
+.ku-b .ku-vk { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: var(--gold); }
+.ku-b .ku-ablauf { background: linear-gradient(180deg, var(--petrol-d), var(--petrol)); color: #fff; padding-top: 48px; }
+.ku-b .ku-ablauf h2 { color: #fff; }
+.ku-b .ku-zeit li::before { background: rgba(255, 181, 79, .45); }
+.ku-b .ku-punkt { background: var(--gold); color: var(--petrol-d); }
+.ku-b .ku-schritt { color: var(--gold); }
+.ku-b .ku-zeit li p:last-child { color: rgba(255, 255, 255, .78); }
+.ku-b .ku-was { background: var(--petrol); position: relative; }
+.ku-b .ku-foto-voll { position: relative; }
+.ku-b .ku-foto-voll img { aspect-ratio: 4 / 5; }
+.ku-b .ku-was > .ku-foto-voll::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--petrol) 0%, rgba(10, 73, 88, 0) 18%, rgba(10, 73, 88, 0) 62%, var(--petrol) 100%); }
+.ku-b .ku-was-text { color: #fff; margin-top: -90px; position: relative; padding-top: 0; }
+.ku-b .ku-was-text h2 { color: #fff; }
+.ku-b .ku-drin li + li { border-top: 1px solid rgba(255, 255, 255, .14); }
+.ku-b .ku-dk { background: rgba(255, 181, 79, .14); color: var(--gold); }
+.ku-b .ku-drin p { color: rgba(255, 255, 255, .78); }
+.ku-b .ku-preise { background: var(--eis); }
+.ku-b .ku-preise h2 { text-align: center; }
+.ku-b .ku-banner { background: var(--gold); color: #3a2200; }
+.ku-b .ku-vertrauen { position: relative; isolation: isolate; color: #fff; background: var(--petrol-d); }
+.ku-b .ku-vertrauen .ku-foto-voll::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 50, 60, .15) 0%, rgba(6, 50, 60, .6) 42%, rgba(6, 50, 60, .96) 100%); }
+.ku-b .ku-vertrauen-in { position: absolute; left: 0; right: 0; bottom: 0; padding: 0 var(--ku-rand) 34px; }
+.ku-b .ku-zahlen { grid-template-columns: 1fr; text-align: left; max-width: 1080px; margin: 0 auto; }
+.ku-b .ku-zahlen li { display: flex; align-items: baseline; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, .2); }
+.ku-b .ku-zahlen strong { color: var(--gold); font-size: 36px; min-width: 150px; }
+.ku-b .ku-zahlen span { font-size: 15px; color: rgba(255, 255, 255, .9); margin: 0; }
+.ku-b .ku-info { background: #fff; }
+.ku-b .ku-kachel { background: var(--petrol); color: #fff; }
+.ku-b .ku-k-ic { background: rgba(255, 181, 79, .16); color: var(--gold); }
+.ku-b .ku-zeiten > div { border-bottom-color: rgba(255, 255, 255, .16); }
+.ku-b .ku-k-note { color: rgba(255, 255, 255, .75); }
+.ku-b .ku-parken { background: rgba(255, 255, 255, .08); }
+.ku-b .ku-parken .ku-ic { color: var(--gold); }
+.ku-b .ku-link-btn { border: 1.5px solid rgba(255, 255, 255, .7); color: #fff !important; }
+.ku-b .ku-link-btn:hover { background: rgba(255, 255, 255, .1); }
+.ku-b .ku-faq { background: var(--eis); }
+.ku-b .ku-akk details { background: #fff; border: 1px solid var(--linie); border-radius: 16px; margin-bottom: 10px; padding: 0 18px; }
+.ku-b .ku-schluss { color: #fff; background: var(--petrol-d); min-height: 440px; display: flex; align-items: center; justify-content: center; }
+.ku-b .ku-schluss-foto, .ku-b .ku-schluss-foto img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.ku-b .ku-schluss::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(6, 50, 60, .72), rgba(6, 50, 60, .9)); }
+.ku-b .ku-schluss h2 { color: #fff; }
+.ku-b .ku-schluss-in > p:first-of-type, .ku-b .ku-anruf { color: rgba(255, 255, 255, .88); }
+.ku-b .ku-anruf a { color: #fff; }
+.ku-b .ku-schluss .kl-btn { background: var(--gold); color: #2b1a00 !important; box-shadow: 0 12px 28px -10px rgba(255, 181, 79, .55); }
+.ku-b .ku-schluss .kl-btn::after { background: var(--petrol); }
+.ku-b .ku-schluss .kl-btn:hover { background: #ffc46f; }
+
+@media (max-width: 360px) {
+  .ku { --ku-rand: 16px; }
+  .ku-k-knoepfe { grid-template-columns: 1fr; }
+  .ku-b .ku-zahlen strong { min-width: 128px; font-size: 32px; }
+}
+
+/* ================= Desktop ================= */
+@media (min-width: 900px) {
+  .ku { --ku-rand: 32px; }
+  .ku-sek { padding: 104px var(--ku-rand); }
+  .ku h2 { margin-bottom: 40px; }
+  .ku-vorteile { grid-template-columns: repeat(3, auto); justify-content: center; gap: 64px; padding: 28px 24px; }
+  .ku-vorteile li { display: grid; grid-template-columns: 46px auto; column-gap: 12px; row-gap: 0; align-items: center; text-align: left; font-size: 14px; }
+  .ku-vorteile li .ku-vk { grid-row: 1 / span 2; margin-bottom: 0; }
+  .ku-ablauf h2 { text-align: center; }
+  .ku-zeit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .ku-zeit li { display: block; padding: 0; }
+  .ku-zeit li:not(:last-child)::before { left: 70px; right: -24px; top: 25px; bottom: auto; width: auto; height: 2px; }
+  .ku-punkt { margin-bottom: 18px; }
+  .ku-knopf { text-align: center; }
+  .ku-knopf .kl-btn { display: inline-flex; padding: 0 40px; }
+  .ku-preise h2 { text-align: center; }
+  .ku-kacheln { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .ku-kachel { padding: 30px; }
+  .ku-info h2, .ku-faq h2 { text-align: center; }
+  .ku-schluss { padding: 120px var(--ku-rand); }
+  .ku-schluss .kl-btn { display: inline-flex; padding: 0 44px; }
+
+  .ku-a .ku-split { display: grid; grid-template-columns: 1.15fr 1fr; gap: 72px; align-items: center; }
+  .ku-a .ku-split > picture { margin: 0; }
+  .ku-a .ku-split .ku-foto-rund img { aspect-ratio: 1 / 1; }
+  .ku-a .ku-foto-cardio { margin-top: 56px; }
+  .ku-a .ku-foto-cardio img { aspect-ratio: 1280 / 560; }
+
+  .ku-b .ku-foto-voll img { aspect-ratio: auto; height: min(68vh, 640px); }
+  .ku-b .ku-was-text { margin-top: -160px; }
+  .ku-b .ku-drin { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+  .ku-b .ku-drin li:nth-child(2) { border-top: 0; }
+  .ku-b .ku-vertrauen-in { padding-bottom: 56px; }
+  .ku-b .ku-zahlen { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .ku-b .ku-zahlen li { flex-direction: column; gap: 4px; }
+  .ku-b .ku-zahlen strong { font-size: 52px; }
+  .ku-b .ku-schluss { min-height: 520px; }
+}
+@media (prefers-reduced-motion: reduce) { .ku-akk summary::after { transition: none; } }
