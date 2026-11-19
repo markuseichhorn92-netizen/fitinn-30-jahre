@@ -31,10 +31,12 @@ const ANGEBOT: Array<{ icon: IconName; titel: string; text: string }> = [
   { icon: 'betreuung', titel: 'Personal Training', text: 'Auf Wunsch eins zu eins mit Trainer.' },
   { icon: 'koffer', titel: 'Firmenfitness', text: 'Epassi, Wellhub, EGYM Wellpass und Urban Sports Club.' },
 ];
+// 19.11.2026 Markus: „eher Betreuung, familiengeführt seit 1996, angenehme Atmosphäre, individuelle Trainingspläne ohne Trainerpauschalen“.
 const ANDERS: Array<{ icon: IconName; titel: string; text: string }> = [
-  { icon: 'app', titel: 'Punkte-App, in Trier einzigartig', text: 'Punkte fürs Training, Prämien in der Fit-Inn App.' },
-  { icon: 'ausweis', titel: 'Mitglieder ab 18', text: 'Du trainierst unter Erwachsenen.' },
-  { icon: 'kameraAus', titel: 'Keine Kameras', text: 'Keine Videoüberwachung, Filmen und Fotografieren nicht erlaubt.' },
+  { icon: 'betreuung', titel: 'Echte Betreuung', text: 'Wir zeigen dir die Geräte und sind ansprechbar, wenn du Fragen hast.' },
+  { icon: 'haken', titel: 'Individueller Trainingsplan', text: 'Auf dich abgestimmt und inklusive, ohne Trainerpauschale.' },
+  { icon: 'haus', titel: 'Familiengeführt seit 1996', text: 'Kein Franchise. Wir kennen unsere Mitglieder.' },
+  { icon: 'handschlag', titel: 'Angenehme Atmosphäre', text: 'Ruhig, persönlich und unter Erwachsenen (ab 18).' },
 ];
 
 type Foto = { hoch: string; hochB: number; hochH: number; breit: string; breitB: number; breitH: number; alt: string };
