@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 const QUELLEN: Record<string, { source: string; note: string }> = {
   freunde: { source: 'freunde', note: 'Gebucht über Konfigurator (Freunde werben)' },
   'black-week': { source: 'black-week', note: 'Gebucht über Konfigurator (Black Week 2026)' },
+  klar: { source: 'klar', note: 'Gebucht über Konfigurator (Angebotsseite klar)' },
 };
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {

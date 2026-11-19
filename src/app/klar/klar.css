@@ -1,0 +1,154 @@
+/* /klar – aufgeräumte Angebotsseite (Entwurf). Fit-Inn-Markenfarben: Petrol #0A4958, Türkis #107E97, Gold #FFB54F, Eisblau.
+   Ruhig, viel Weißraum, eine Schrift (Outfit), keine Animation außer Rückmeldung am Knopf. Hero-Foto wird nie animiert (LCP). */
+body:has(.kl) { background: #F4FAFB; color: #14252D; }
+.kl {
+  --petrol: #0A4958; --petrol-d: #06323C; --tuerkis: #107E97; --tuerkis-d: #0C6478; --gold: #FFB54F; --gold-t: #B35C00;
+  --eis: #F4FAFB; --eis2: #DCEAEE; --ink: #14252D; --grau: #475467; --linie: #CFE5EA;
+  font-family: var(--kl-font), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--ink); background: var(--eis); overflow-x: clip;
+}
+.kl h1, .kl h2 { font-family: inherit; font-weight: 800; letter-spacing: -.025em; color: var(--ink); margin: 0; }
+.kl p { margin: 0; }
+.kl a { color: var(--tuerkis-d); }
+.kl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.kl-kicker { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tuerkis-d); margin-bottom: 6px !important; }
+.kl-haken { flex: none; width: 20px; height: 20px; margin-top: 1px; }
+
+/* Knopf: eine Farbe, ein Ziel */
+.kl-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 22px; border-radius: 999px;
+  background: var(--petrol); color: #fff !important; font-size: 17px; font-weight: 800; text-decoration: none; text-align: center;
+  box-shadow: 0 10px 24px -10px rgba(10, 73, 88, .7); transition: transform .12s ease, background .2s ease;
+}
+.kl-btn::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); flex: none; }
+.kl-btn:hover { background: var(--petrol-d); }
+.kl-btn:active { transform: scale(.98); }
+.kl-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.kl-btn-klein { min-height: 46px; padding: 0 16px; font-size: 15px; box-shadow: none; }
+
+/* 1 · Kopf */
+.kl-hero { background: #fff; }
+.kl-hero-bild { position: relative; height: 178px; overflow: hidden; background: var(--eis2); }
+.kl-hero-bild > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; display: block; }
+.kl-leiste { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; }
+.kl-leiste img { height: 30px; width: auto; background: rgba(255, 255, 255, .94); padding: 6px 10px; border-radius: 12px; box-sizing: content-box; }
+.kl-tel { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border-radius: 999px; background: rgba(255, 255, 255, .94); color: var(--petrol) !important; font-weight: 700; font-size: 14px; text-decoration: none; }
+.kl-hero-text { padding: 18px 16px 22px; display: flex; flex-direction: column; }
+.kl-hero h1 { font-size: clamp(29px, 8vw, 50px); line-height: 1.05; margin-bottom: 14px; text-wrap: balance; }
+.kl-preis { background: var(--eis); border: 1px solid var(--linie); border-radius: 18px; padding: 12px 14px; margin-bottom: 14px; }
+.kl-preis-zeile { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; row-gap: 2px; }
+.kl-preis-zeile strong { font-size: 46px; line-height: 1; font-weight: 800; color: var(--petrol); letter-spacing: -.03em; }
+.kl-preis-zeile span { font-size: 18px; font-weight: 700; color: var(--petrol); }
+.kl-preis-zeile em { font-style: normal; font-size: 16px; font-weight: 700; color: var(--ink); flex-basis: 100%; }
+.kl-preis-klein { font-size: 13px; line-height: 1.35; color: var(--grau); margin-top: 4px !important; }
+.kl-vorteile { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 8px; }
+.kl-vorteile li { display: flex; gap: 10px; font-size: 16px; line-height: 1.3; font-weight: 500; }
+.kl-note { font-size: 13.5px; color: var(--grau); text-align: center; margin-top: 8px !important; }
+
+/* Abschnitte */
+.kl-sek { padding: 44px 16px; max-width: 1080px; margin: 0 auto; box-sizing: border-box; }
+.kl-hell { max-width: none; background: #fff; }
+.kl-hell > * { max-width: 1048px; margin-left: auto; margin-right: auto; }
+.kl-sek h2 { font-size: clamp(26px, 6.6vw, 40px); line-height: 1.08; margin-bottom: 20px; text-wrap: balance; }
+.kl-sek > .kl-btn { margin-top: 22px; }
+
+.kl-schritte { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.kl-schritte li { display: flex; gap: 14px; align-items: flex-start; }
+.kl-schritte span { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--petrol); color: #fff; font-weight: 800; display: grid; place-items: center; }
+.kl-schritte b { font-size: 18px; }
+.kl-schritte p { color: var(--grau); font-size: 15.5px; line-height: 1.4; margin-top: 2px !important; }
+
+.kl-karten { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.kl-karten li { background: var(--eis); border-radius: 16px; padding: 14px; }
+.kl-karten b { display: block; font-size: 15.5px; line-height: 1.2; margin-bottom: 4px; color: var(--petrol); }
+.kl-karten p { font-size: 14px; line-height: 1.35; color: var(--grau); }
+.kl-fotos { display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin-top: 18px; padding-bottom: 4px; scrollbar-width: none; }
+.kl-fotos::-webkit-scrollbar { display: none; }
+.kl-fotos figure { margin: 0; scroll-snap-align: start; position: relative; }
+.kl-fotos img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; display: block; }
+.kl-fotos figcaption { position: absolute; left: 10px; bottom: 10px; background: rgba(255, 255, 255, .92); color: var(--petrol); font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+
+.kl-banner { background: var(--petrol); color: #fff; font-weight: 800; font-size: 17px; text-align: center; padding: 12px 14px; border-radius: 14px; margin-bottom: 12px !important; }
+.kl-tarife { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.kl-tarife li { position: relative; background: #fff; border: 1px solid var(--linie); border-radius: 18px; padding: 14px 16px; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 12px; }
+.kl-tarife li.hervor { border: 2px solid var(--tuerkis); }
+.kl-tarife b { font-size: 18px; }
+.kl-t-preis { grid-column: 2; grid-row: 1 / span 2; text-align: right; font-size: 13px; color: var(--grau); max-width: 130px; line-height: 1.25; }
+.kl-t-preis strong { display: block; font-size: 32px; line-height: 1; color: var(--petrol); letter-spacing: -.02em; }
+.kl-t-gesamt { font-size: 14px; color: var(--grau); }
+.kl-badge { position: absolute; top: -10px; left: 14px; background: var(--gold); color: #3a2200; font-size: 11.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; letter-spacing: .02em; }
+.kl-inklusive { display: flex; gap: 10px; font-size: 15px; line-height: 1.35; margin-top: 14px !important; font-weight: 500; }
+.kl-hinweis { font-size: 13px; line-height: 1.4; color: var(--grau); margin-top: 10px !important; }
+
+.kl-dunkel { max-width: none; background: var(--petrol); padding-top: 30px; padding-bottom: 30px; }
+.kl-zahlen { list-style: none; margin: 0 auto; padding: 0; max-width: 1048px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; color: #fff; }
+.kl-zahlen strong { display: block; font-size: clamp(22px, 6vw, 38px); font-weight: 800; color: var(--gold); line-height: 1.1; white-space: nowrap; }
+.kl-zahlen span { display: block; font-size: 12.5px; line-height: 1.3; opacity: .9; margin-top: 4px; }
+
+.kl-zeiten-grid { display: grid; gap: 16px; }
+.kl-zeiten { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+.kl-zeiten th, .kl-zeiten td { text-align: left; padding: 9px 0; border-bottom: 1px solid var(--linie); vertical-align: top; }
+.kl-zeiten th { font-weight: 700; padding-right: 12px; white-space: nowrap; }
+.kl-ort { display: grid; gap: 10px; font-size: 15.5px; line-height: 1.4; }
+.kl-ort p:nth-child(2) { display: flex; gap: 10px; font-weight: 600; }
+.kl-links a { font-weight: 700; }
+
+.kl-faq details { background: #fff; border: 1px solid var(--linie); border-radius: 16px; margin-bottom: 8px; }
+.kl-faq summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 16px; font-weight: 700; font-size: 16px; position: relative; }
+.kl-faq summary::-webkit-details-marker { display: none; }
+.kl-faq summary::after { content: "+"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--tuerkis); font-weight: 600; }
+.kl-faq details[open] summary::after { content: "–"; }
+.kl-faq details p { padding: 0 16px 14px; color: var(--grau); font-size: 15px; line-height: 1.45; }
+
+.kl-schluss { background: linear-gradient(160deg, var(--petrol), var(--tuerkis)); color: #fff; text-align: center; padding: 44px 16px; }
+.kl-schluss h2 { color: #fff; font-size: clamp(28px, 7vw, 42px); margin-bottom: 8px; }
+.kl-schluss p { opacity: .92; font-size: 16px; line-height: 1.4; margin-bottom: 20px !important; }
+.kl-schluss p a { color: #fff; font-weight: 700; }
+.kl-schluss .kl-btn { background: #fff; color: var(--petrol) !important; max-width: 420px; margin: 0 auto; }
+.kl-klein { max-width: 1048px; margin: 0 auto; padding: 20px 16px 6px; font-size: 12px; line-height: 1.5; color: var(--grau); }
+.kl-fuss { max-width: 1048px; margin: 0 auto; padding: 8px 16px 28px; font-size: 13px; color: var(--grau); line-height: 1.7; }
+.kl-fuss a { color: var(--grau) !important; }
+
+/* Feste Leiste unten (nur mobil) – über dem Cookie-Hinweis, falls dieser offen ist */
+.kl-sticky { display: none; }
+@media (max-width: 899px) {
+  .kl-sticky { display: block; position: fixed; left: 0; right: 0; bottom: var(--fi-consent-h, 0px); z-index: 1500; background: rgba(255, 255, 255, .97); border-top: 1px solid var(--linie); box-shadow: 0 -10px 30px rgba(6, 50, 60, .14); padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); transform: translateY(110%); visibility: hidden; transition: transform .28s ease, visibility 0s linear .28s; }
+  .kl-sticky.an { transform: none; visibility: visible; transition: transform .28s ease; }
+  .kl-sticky-in { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .kl-sticky p { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+  .kl-sticky p b { font-size: 16px; font-weight: 800; white-space: nowrap; }
+  .kl-sticky p span { font-size: 12.5px; color: var(--grau); font-weight: 600; }
+  .kl-sticky .kl-btn::after { display: none; }
+  html.kl-st #fi-lw { bottom: calc(80px + var(--fi-consent-h, 0px)) !important; }
+  html.kl-st #fi-gb { bottom: calc(156px + var(--fi-consent-h, 0px)) !important; }
+  html.kl-st .kl-fuss { padding-bottom: 96px; }
+}
+@media (max-width: 360px) { .kl-sticky p span { display: none; } }
+
+/* Desktop: Kopf zweispaltig, Foto rechts in voller Höhe */
+@media (min-width: 900px) {
+  .kl-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: min(760px, 92vh); }
+  .kl-hero-bild { order: 2; height: auto; }
+  .kl-hero-bild > img { object-position: 50% 50%; }
+  .kl-leiste { left: auto; right: 0; }
+  .kl-leiste img { display: none; }
+  .kl-hero-text { order: 1; padding: 40px 56px 40px max(32px, calc((100vw - 1080px) / 2)); justify-content: center; max-width: 600px; margin-left: auto; box-sizing: border-box; width: 100%; }
+  .kl-hero-text::before { content: ""; display: block; width: 130px; height: 40px; margin-bottom: 36px; background: url(/media/c/logo-petrol.png) left center / contain no-repeat; }
+  .kl-hero h1 { font-size: 50px; margin-bottom: 20px; }
+  .kl-preis-zeile strong { font-size: 58px; }
+  .kl-hero .kl-btn { align-self: flex-start; padding: 0 32px; }
+  .kl-note { text-align: left; }
+  .kl-sek { padding: 72px 32px; }
+  .kl-schritte { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .kl-karten { grid-template-columns: repeat(4, 1fr); }
+  .kl-fotos { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; }
+  .kl-tarife { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .kl-tarife li { grid-template-columns: 1fr; row-gap: 6px; padding: 22px; }
+  .kl-t-preis { grid-column: 1; grid-row: auto; text-align: left; max-width: none; }
+  .kl-sek > .kl-btn { display: inline-flex; }
+  .kl-zeiten-grid { grid-template-columns: 1.3fr 1fr; gap: 40px; }
+  .kl-dunkel { padding: 44px 32px; }
+  .kl-schluss { padding: 72px 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .kl-btn, .kl-sticky, .kl-sticky.an { transition: none; } }
+.kl-nw { white-space: nowrap; }
