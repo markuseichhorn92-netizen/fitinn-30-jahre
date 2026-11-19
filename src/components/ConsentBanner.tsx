@@ -2,6 +2,7 @@
 // Cookie-/Einwilligungs-Banner. "Alle akzeptieren" und "Nur notwendige" gleichwertig (DSK-Leitlinie).
 // Analytics + Speed Insights und der Meta Pixel werden erst nach Einwilligung geladen.
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { readConsent, saveConsent, CONSENT_EVENT, CONSENT_OPEN_EVENT } from '@/lib/consent';
@@ -29,6 +30,26 @@ export default function ConsentBanner() {
     return () => { window.removeEventListener(CONSENT_EVENT, onChange); window.removeEventListener(CONSENT_OPEN_EVENT, onOpen); };
   }, []);
 
+  // Solange der Banner offen ist: Chat-Pille, Begrüßungsblase und feste Buchungsleisten ausblenden (lagen mit höherem z-index darüber),
+  // In-App-Browser (Facebook/Instagram) erkennen → Banner höher, weg von der Werkzeugleiste unten.
+  const [iab, setIab] = useState(false);
+  useEffect(() => { setIab(/FBAN|FBAV|FB_IAB|FBIOS|Instagram/i.test(navigator.userAgent || '')); }, []);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('fi-consent-open', open);
+    return () => root.classList.remove('fi-consent-open');
+  }, [open]);
+  // Sichtbarer Bereich kleiner als das Layout (Werkzeugleiste/Tastatur legt sich darüber): Abstand nach unten nachziehen
+  useEffect(() => {
+    const vv = window.visualViewport;
+    const root = document.documentElement;
+    if (!open || !vv) return;
+    const set = () => root.style.setProperty('--fi-consent-vv', `${Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop))}px`);
+    set();
+    vv.addEventListener('resize', set); vv.addEventListener('scroll', set);
+    return () => { vv.removeEventListener('resize', set); vv.removeEventListener('scroll', set); root.style.removeProperty('--fi-consent-vv'); };
+  }, [open]);
+
   // Höhe des kompakten Banners (Handy) für die Sticky-Leiste: --fi-consent-h; im Einstellungs-Modus 0 (Leiste liegt dann dahinter)
   const wrapRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -51,8 +72,8 @@ export default function ConsentBanner() {
   return (
     <>
       {statsOn ? <><Analytics /><SpeedInsights /></> : null}
-      {open ? (
-        <div ref={wrapRef} className={styles.wrap} role="dialog" aria-modal="false" aria-labelledby="fi-consent-title">
+      {open ? createPortal(
+        <div ref={wrapRef} className={`${styles.wrap} ${iab ? styles.iab : ''}`} role="dialog" aria-modal="false" aria-labelledby="fi-consent-title">
           <div className={`${styles.box} ${details ? styles.boxOpen : ''}`}>
             <p id="fi-consent-title" className={styles.title}>Kurz zu Cookies 🍪</p>
             <p className={styles.text}>
@@ -91,7 +112,8 @@ export default function ConsentBanner() {
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </>
   );

@@ -44,3 +44,6 @@ body:has([data-theme="hell"]) {
   background: var(--h-bg);
   color: var(--h-ink);
 }
+
+/* Cookie-Banner offen (Klasse setzt ConsentBanner): Chat-Pille, Begrüßungsblase und feste Buchungsleisten ausblenden, damit nichts über den Knöpfen liegt */
+html.fi-consent-open #fi-lw, html.fi-consent-open #fi-gb, html.fi-consent-open .kl-sticky, html.fi-consent-open .bw-sticky { visibility: hidden !important; pointer-events: none !important; }

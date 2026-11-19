@@ -1,6 +1,11 @@
-.wrap { position: fixed; left: 0; right: 0; bottom: 0; z-index: 2000; padding: 0 10px calc(10px + env(safe-area-inset-bottom)); pointer-events: none; }
+/* Eigene oberste Ebene (Portal an <body>): über Chat-Pille (2147483000), festen Leisten und Stapel-Abschnitten.
+   --fi-consent-vv = Teil des Layouts, den Werkzeugleiste/Tastatur verdecken (visualViewport) */
+.wrap { position: fixed; left: 0; right: 0; bottom: var(--fi-consent-vv, 0px); z-index: 2147483600; isolation: isolate; transform: translateZ(0); padding: 0 10px calc(16px + env(safe-area-inset-bottom)); pointer-events: none; }
+/* In-App-Browser von Facebook/Instagram: Werkzeugleiste unten legt sich teils über die Seite → Banner deutlich höher */
+.wrap.iab { padding-bottom: max(76px, calc(24px + env(safe-area-inset-bottom))); }
 .box {
-  pointer-events: auto; max-width: 560px; margin: 0 auto; max-height: 82vh; overflow-y: auto;
+  pointer-events: auto; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  max-width: 560px; margin: 0 auto; max-height: 82vh; max-height: 78dvh; overflow-y: auto; overscroll-behavior: contain;
   padding: 16px 16px 12px; border-radius: 22px;
   background: #0C161A; color: #F4FAFB; font-family: var(--font-kit-text-font);
   box-shadow: 0 -10px 60px -10px #000c, inset 0 0 0 1px #3BC9E033;
@@ -25,18 +30,19 @@
 }
 .btn:first-child { background: #F4FAFB; }
 .btn:focus-visible, .link:focus-visible { outline: 3px solid #3BC9E0; outline-offset: 2px; }
-.link { display: block; margin: 0 auto; min-height: 40px; padding: 8px 12px; background: none; border: 0; color: #F4FAFB; opacity: 0.8; text-decoration: underline; font: 600 14px var(--font-kit-text-font); cursor: pointer; }
+.link { display: block; margin: 0 auto; min-height: 44px; padding: 8px 12px; background: none; border: 0; color: #F4FAFB; opacity: 0.8; text-decoration: underline; font: 600 14px var(--font-kit-text-font); cursor: pointer; }
 
 /* Handy: kompakte Leiste (≈ 90 px), „Nur notwendige“ und „Akzeptieren“ gleich groß. Einstellungen öffnen die volle Ansicht. */
 @media (max-width: 767px) {
-  .wrap { padding: 0 8px calc(8px + env(safe-area-inset-bottom)); }
+  .wrap { padding: 0 8px calc(16px + env(safe-area-inset-bottom)); }
+  .wrap.iab { padding-bottom: max(76px, calc(24px + env(safe-area-inset-bottom))); }
   .box:not(.boxOpen) { max-height: none; overflow: visible; padding: 8px 10px; border-radius: 16px; }
   .box:not(.boxOpen) .title, .box:not(.boxOpen) .long { display: none; }
   .box:not(.boxOpen) .short { display: inline; }
   .box:not(.boxOpen) .text { font-size: 12px; line-height: 1.3; }
   .box:not(.boxOpen) .btns { grid-template-columns: 1fr 1fr auto; gap: 6px; margin-top: 6px; }
-  .box:not(.boxOpen) .btn { min-height: 38px; padding: 6px 4px; border-radius: 12px; font-size: 13px; white-space: nowrap; }
-  .box:not(.boxOpen) .btns .link { grid-column: auto; margin: 0; min-height: 38px; padding: 6px 4px; font-size: 13px; white-space: nowrap; }
+  .box:not(.boxOpen) .btn { min-height: 48px; padding: 8px 4px; border-radius: 12px; font-size: 13px; white-space: nowrap; }
+  .box:not(.boxOpen) .btns .link { grid-column: auto; margin: 0; min-height: 48px; padding: 6px 4px; font-size: 13px; white-space: nowrap; }
 }
 
 /* Look „hell & warm“ (nur Startseite) */
@@ -60,3 +66,6 @@
 :global(body:has([data-theme="c"])) .btn:first-child { background: #fff; color: #14252D; box-shadow: inset 0 0 0 1.5px #14252D; }
 :global(body:has([data-theme="c"])) .btn:focus-visible, :global(body:has([data-theme="c"])) .link:focus-visible { outline-color: #14252D; }
 :global(body:has([data-theme="c"])) .link { color: #14252D; opacity: 1; }
+
+/* Einstellungen (lange Liste): Knöpfe bleiben unten im Kasten sichtbar */
+.boxOpen .btns { position: sticky; bottom: -12px; margin-bottom: -12px; padding: 10px 0 12px; background: inherit; }
