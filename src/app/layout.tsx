@@ -16,13 +16,13 @@ const barlow = Barlow_Condensed({ subsets: ['latin'], weight: ['700', '800'], va
 export const metadata: Metadata = {
   metadataBase: new URL('https://angebot.fit-inn-trier.de'),
   alternates: { canonical: '/' },
-  title: '5 € pro Woche bis Silvester – nur für die ersten 25 | Fit-Inn Trier',
+  title: 'Fitnessstudio in Trier-Feyen mit Betreuung | Fit-Inn Trier',
   description:
-    'Fit-Inn Trier: Bis 31.12.2026 nur 5 € pro Woche – je früher du startest, desto mehr sparst du. Nur für die ersten 25 Neuanmeldungen. Familiengeführt seit 1996, TechnoGym-Geräte. Probetraining kostenlos buchen.',
+    'Fit-Inn Trier-Feyen: Technogym-Gerätetraining mit Betreuung, familiengeführt seit 1996, kostenlose Parkplätze. Probetraining kostenlos buchen.',
   openGraph: {
-    title: '5 € pro Woche bis Silvester | Fit-Inn Trier',
-    description: 'Je früher du startest, desto mehr sparst du. Nur für die ersten 25 Neuanmeldungen.',
-    images: ['/media/833da1bc-191f-4c62-a865-5783d332fd28.avif'],
+    title: 'Fitnessstudio in Trier-Feyen mit Betreuung | Fit-Inn Trier',
+    description: 'Technogym-Gerätetraining mit Betreuung, familiengeführt seit 1996. Probetraining kostenlos buchen.',
+    images: ['/media/833da1bc-191f-4c62-a865-5783d332fd28.jpg'],
     locale: 'de_DE',
     type: 'website',
   },

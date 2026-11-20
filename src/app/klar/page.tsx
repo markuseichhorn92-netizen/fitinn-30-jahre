@@ -16,12 +16,30 @@ export const revalidate = 3600;
 
 const outfit = localFont({ src: '../../fonts/outfit.woff', weight: '100 900', display: 'swap' });
 
-export const metadata: Metadata = {
-  title: 'Fitnessstudio in Trier-Feyen mit Betreuung | Fit-Inn Trier',
-  description: 'Fit-Inn Trier-Feyen: Technogym-Gerätetraining mit Betreuung, familiengeführt seit 1996, kostenlose Parkplätze. Probetraining kostenlos buchen.',
-  alternates: { canonical: '/klar' },
-  robots: { index: false, follow: false },
-};
+// 20.11.2026: Link-Vorschau (WhatsApp/Facebook/Instagram) je Phase, JPG statt AVIF; Hauptadresse = /black-week (Rewrite auf /klar).
+const VORSCHAU = {
+  blackweek: {
+    title: 'Black Week: bis Silvester 0 € trainieren | Fit-Inn Trier',
+    description: 'Jetzt unterschreiben, bis 31.12. kostenlos trainieren, dann 9 € oder 12 € pro Woche. 0 € Aktivierung. Nur die ersten 20, bis 30.11.',
+  },
+  standard: {
+    title: 'Fitnessstudio in Trier-Feyen mit Betreuung | Fit-Inn Trier',
+    description: 'Technogym-Gerätetraining mit Betreuung, familiengeführt seit 1996, kostenlose Parkplätze. Probetraining kostenlos buchen.',
+  },
+} as const;
+
+export function generateMetadata(): Metadata {
+  const v = VORSCHAU[klarPhase()];
+  const bild = { url: '/media/klar/og-klar.jpg', width: 1200, height: 630, alt: 'Technogym-Geräte im Fit-Inn Trier-Feyen' };
+  return {
+    title: 'Fitnessstudio in Trier-Feyen mit Betreuung | Fit-Inn Trier',
+    description: 'Fit-Inn Trier-Feyen: Technogym-Gerätetraining mit Betreuung, familiengeführt seit 1996, kostenlose Parkplätze. Probetraining kostenlos buchen.',
+    alternates: { canonical: '/black-week' },
+    robots: { index: false, follow: false },
+    openGraph: { title: v.title, description: v.description, url: '/black-week', images: [bild], locale: 'de_DE', type: 'website' },
+    twitter: { card: 'summary_large_image', title: v.title, description: v.description, images: [bild.url] },
+  };
+}
 
 export default function Page() {
   const phase = klarPhase();
