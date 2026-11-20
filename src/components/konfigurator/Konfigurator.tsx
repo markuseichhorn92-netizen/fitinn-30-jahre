@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { funnel } from '@/lib/funnel';
 import { motivAusUrl } from '@/lib/absprung';
 import * as interest from '@/lib/interest';
+import { herkunftNotiz } from '@/lib/klickIds';
+import { hasConsent } from '@/lib/consent';
 import {
   ZIELE, ERFAHRUNGEN, SCHWERPUNKTE, VORSCHLAG,
   baueBausteine, trainerEmpfohlen, istErfahren, fokusBereinigen, type Auswahl,
@@ -182,7 +184,7 @@ export default function Konfigurator(props: Props) {
     setTouched({ _all: true });
     if (!formValid || !slot || !dobIso) return;
     const note = [
-      noteSource, zielLabel && `Ziel: ${zielLabel}`, erfLabel && `Erfahrung: ${erfLabel}`,
+      noteSource, herkunftNotiz(), zielLabel && `Ziel: ${zielLabel}`, erfLabel && `Erfahrung: ${erfLabel}`,
       `Begleitung: ${trainer ? 'mit Trainer' : 'ohne Trainer'}`, f.hint.trim() && f.hintOk ? `Hinweis für Trainer: ${f.hint.trim().slice(0, 300)}` : '',
     ].filter(Boolean).join(' · ');
     setSending(true); setFailed(false); funnel('submit', source);
@@ -201,7 +203,11 @@ export default function Konfigurator(props: Props) {
       } else funnel('ok', source);
       try {
         window.sessionStorage.setItem('fi_booking', JSON.stringify({ v: 1, vorname: f.vorname.trim().slice(0, 40), start: slot.startDateTime, end: slot.endDateTime || '', trainer, ziel: zielLabel || '', erfahrung: erfLabel || '', zeit: '', fokus: fokusLabels.join(', '), goalKey: ziel, expKey: erfahrung, focusKeys: fokus, focusLabels: fokusLabels, plan: ziel ? bausteine.map((b) => b.titel) : [], planTrainer: trainer, at: Date.now() }));
-        if (!dryRun && confirmHref) { window.location.assign(confirmHref); return; }
+        if (!dryRun && confirmHref) {
+          // Mit Marketing-Einwilligung kurz warten, damit Meta-Pixel und Google-Tag die Buchung vor dem Seitenwechsel absenden.
+          if (hasConsent('marketing')) await new Promise((res) => setTimeout(res, 800));
+          window.location.assign(confirmHref); return;
+        }
       } catch { /* privater Modus */ }
       setDir(1); setStep('fertig'); scrollTop();
     } catch { funnel('fail', source); setFailed(true); } finally { setSending(false); }

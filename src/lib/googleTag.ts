@@ -7,6 +7,10 @@ import { hasConsent } from './consent';
 export const GA4_ID = 'G-Z8ZGP4RK08';
 // Bestehende GA4-Ereignisse, die in Google Ads schon als Conversion-Aktion „Probetraining buchen“ hängen.
 export const GA4_BOOKING_EVENT = 'ads_conversion_Termin_vereinbaren_2';
+// Google-Ads-Konto 790-843-3809: eigene Conversion-Aktion „Probetraining gebucht“ (Website, Lead, primär; angelegt 20.11.2026).
+// Die GA4-Import-Aktion „Probetraining buchen“ ist seitdem sekundär, damit nichts doppelt zählt.
+export const ADS_ID = 'AW-16623457481';
+export const ADS_BOOKING_SEND_TO = 'AW-16623457481/lMzBCJndrbwdEMmp1_Y9';
 let loaded = false;
 
 function gtag(..._args: unknown[]) {
@@ -24,6 +28,7 @@ export function loadGoogleTag() {
   gtag('js', new Date());
   gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
   gtag('config', GA4_ID, { send_page_view: false });
+  gtag('config', ADS_ID); // Conversion-Linker: übernimmt gclid/gbraid/wbraid aus der Adresse (wird bis /konfigurator weitergereicht)
   const s = document.createElement('script');
   s.async = true; s.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
   document.head.appendChild(s);
@@ -41,10 +46,11 @@ export function googlePageView() {
 }
 
 // Erfolgreich gebuchtes Probetraining. Keine Personendaten, nur Seite und Einstieg.
-export function googleLead(source: string) {
+export function googleLead(source: string, eventId?: string) {
   if (!hasConsent('marketing')) return;
   loadGoogleTag();
   const p = { content_name: 'Probetraining', page_path: window.location.pathname, source: String(source).slice(0, 24) };
   gtag('event', GA4_BOOKING_EVENT, p);
   gtag('event', 'probetraining_gebucht', p);
+  gtag('event', 'conversion', { send_to: ADS_BOOKING_SEND_TO, ...(eventId ? { transaction_id: eventId } : {}) });
 }

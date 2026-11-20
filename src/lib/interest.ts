@@ -91,6 +91,6 @@ export function reportShown(topic: string, source: string) { send('nudge_shown',
 export function reportClick(topic: string) { send('nudge_click', { topic }); }
 export function reportBooking(stage: 'start' | 'success', source: string, contact?: LeadContact) {
   // Anonymer Trichter läuft immer (ohne Profil/Thema), das ausführliche Event nur mit Einwilligung.
-  if (stage === 'start') { funnelReset(); funnel('open', source); } else { funnel('ok', source); const eid = newEventId(); metaLead(source, eid); sendLeadToCapi(eid, source, contact); googleLead(source); }
+  if (stage === 'start') { funnelReset(); funnel('open', source); } else { funnel('ok', source); const eid = newEventId(); metaLead(source, eid); sendLeadToCapi(eid, source, contact); googleLead(source, eid); }
   send('booking_' + stage, { source, topic: topTopic() });
 }

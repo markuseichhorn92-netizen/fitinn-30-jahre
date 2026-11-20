@@ -1,5 +1,6 @@
 // Gegenstück zum Browser-Pixel: gleiche event_id → Meta dedupliziert. Fire-and-forget, stört die Buchung nie.
 import { hasConsent } from './consent';
+import { fbcAusUrl } from './klickIds';
 
 export type LeadContact = { email?: string; phone?: string; firstname?: string; lastname?: string; zip?: string };
 
@@ -18,7 +19,7 @@ export function sendLeadToCapi(eventId: string, source: string, contact?: LeadCo
     const consent = hasConsent('marketing');
     const body = JSON.stringify({
       event_id: eventId, source, consent, url: window.location.href.split('#')[0],
-      ...(consent ? { contact, fbp: cookie('_fbp'), fbc: cookie('_fbc') } : {}),
+      ...(consent ? { contact, fbp: cookie('_fbp'), fbc: cookie('_fbc') || fbcAusUrl() } : {}),
     });
     fetch('/api/meta-capi', { method: 'POST', headers: { 'content-type': 'application/json' }, body, keepalive: true }).catch(() => {});
   } catch { /* egal */ }

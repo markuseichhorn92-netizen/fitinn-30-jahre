@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import * as interest from '@/lib/interest';
 import { motivAusUrl } from '@/lib/absprung';
 import { funnel } from '@/lib/funnel';
+import { klickIdsAlsQuery } from '@/lib/klickIds';
 
 export default function KonfiguratorLink({ q }: { q: string }) {
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function KonfiguratorLink({ q }: { q: string }) {
       // Anzeigen-Motiv (nur bekannte Werte) wird in der Adresse mitgegeben, damit der Konfigurator es je Schritt zählen kann – ohne Speichern.
       const c = motivAusUrl();
       funnel('from_open', c);
-      window.location.assign(`/konfigurator?q=${encodeURIComponent(q)}${c === 'direkt' ? '' : `&c=${encodeURIComponent(c)}`}`);
+      window.location.assign(`/konfigurator?q=${encodeURIComponent(q)}${c === 'direkt' ? '' : `&c=${encodeURIComponent(c)}`}${klickIdsAlsQuery()}`); // gclid/fbclid/UTM mitnehmen (sonst keine Zuordnung zur Anzeige)
     };
     window.addEventListener('fi:book', onBook);
     return () => window.removeEventListener('fi:book', onBook);
