@@ -28,7 +28,6 @@ const SHOTS = [
 ];
 
 const FITINN_STEPS = [
-  { title: 'Alte Fit-Inn-App löschen', text: 'Die neue App ist komplett neu, ein Update ersetzt die alte nicht. iPhone: App gedrückt halten → „App entfernen“ → „App löschen“. Android: App gedrückt halten → „Deinstallieren“.' },
   { title: 'Neue Fit-Inn-App laden', text: <>Kostenlos über die Knöpfe oben bei der <a href="#fitinn">Fit-Inn App</a>.</> },
   { title: 'Mit der Vertrags-E-Mail registrieren', text: <>Nimm die E-Mail-Adresse, die du bei deinem Vertragsabschluss angegeben hast. Klappt das nicht? Schreib an <a href="mailto:info@fit-inn-trier.de">info@fit-inn-trier.de</a>.</> },
   { title: 'Willkommensgutschein einlösen', text: 'Löse in der App deinen Willkommensgutschein über 5 Extra-Punkte ein.' },
@@ -80,21 +79,10 @@ export default function Page() {
               <summary>Brauche ich beide Apps?</summary>
               <p>Für dein Training bleibt alles wie gewohnt in der Technogym App. Für Punkte, Prämien, Check-in und deine Mitgliedschaft nutzt du die Fit-Inn App.</p>
             </details>
-            <details>
-              <summary>Reicht ein normales Update der alten Fit-Inn-App?</summary>
-              <p>Nein. Die App ist komplett neu gebaut. Bitte lösche die alte App einmal und lade die neue.</p>
-            </details>
           </div>
         </section>
       }
     >
-      <section className={extra.sec}>
-        <div className={extra.callout}>
-          <span className={extra.dot} aria-hidden="true">!</span>
-          <p><b>Alte Fit-Inn-App noch auf dem Handy?</b> Bitte einmal löschen und die neue Fit-Inn-App laden. Die neue App ist komplett neu – ein normales Update ersetzt die alte nicht.</p>
-        </div>
-      </section>
-
       <section className={extra.sec} aria-labelledby="apps">
         <div className={extra.secKick}>Deine zwei Apps</div>
         <h2 className={extra.h2} id="apps">Laden, was du brauchst</h2>
