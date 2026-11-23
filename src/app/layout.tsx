@@ -255,8 +255,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     });
   } catch (e) { /* nichts kaputt machen */ }
 })();`}</Script>
-        {/* /start (Studio-QR „Apps & WLAN“): bewusst ohne Cookie-Banner und Meta Pixel */}
-        <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']}>
+        {/* /start (Studio-QR „Apps & WLAN“) und /rezepte (Terminal-QR): bewusst ohne Cookie-Banner und Meta Pixel */}
+        <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']} prefixes={['/rezepte']}>
           <MetaPixel />
           <GoogleTag />
           <ConsentBanner />

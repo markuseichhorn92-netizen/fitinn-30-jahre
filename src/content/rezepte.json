@@ -1,0 +1,760 @@
+{
+ "hinweis": "Allgemeine Ernährungstipps, keine individuelle Beratung und kein Ersatz für ärztlichen Rat. Nährwerte sind Näherungswerte (ca.). Bei Allergien oder Vorerkrankungen bitte Zutaten und Mengen mit Fachpersonal abstimmen.",
+ "kategorien": [
+  {
+   "id": "abnehmen",
+   "titel": "Abnehmen",
+   "text": "Sättigend und leicht – viel Eiweiß und Gemüse, wenig Energie je Portion."
+  },
+  {
+   "id": "muskelaufbau",
+   "titel": "Muskelaufbau",
+   "text": "Eiweißreich für Training und Regeneration."
+  },
+  {
+   "id": "gesund",
+   "titel": "Gesundheit & Alltag",
+   "text": "Ausgewogen, satt und gut vorzukochen."
+  },
+  {
+   "id": "entzuendungsarm",
+   "titel": "Entzündungsarm",
+   "text": "Viel Gemüse, Omega-3-Quellen, Nüsse und Gewürze – eine Ernährungsweise, kein Heilmittel."
+  },
+  {
+   "id": "schnell",
+   "titel": "Schnell (bis 20 Min.)",
+   "text": "Auf dem Teller in 20 Minuten oder weniger."
+  },
+  {
+   "id": "vegetarisch",
+   "titel": "Vegetarisch",
+   "text": "Ohne Fleisch und Fisch – einige Rezepte sogar vegan."
+  }
+ ],
+ "tipps": [
+  {
+   "titel": "Eiweiß über den Tag verteilen",
+   "text": "Baue zu jeder Hauptmahlzeit eine Eiweißquelle ein – Ei, Quark, Skyr, Fisch, Geflügel, Hülsenfrüchte oder Tofu. So bekommst du genug zusammen, ohne alles auf eine Mahlzeit zu packen.",
+   "kat": "muskelaufbau"
+  },
+  {
+   "titel": "Wie viel Eiweiß beim Krafttraining?",
+   "text": "Als Richtwert für Menschen mit regelmäßigem Krafttraining gelten etwa 1,4 bis 2,0 Gramm Eiweiß pro Kilogramm Körpergewicht und Tag. Bei Nierenerkrankungen sprich vorher mit deiner Ärztin oder deinem Arzt.",
+   "kat": "muskelaufbau"
+  },
+  {
+   "titel": "Moderat abnehmen statt hungern",
+   "text": "Ein kleines, dauerhaftes Energiedefizit ist alltagstauglicher als Crash-Diäten. Wer satt bleibt, hält länger durch – dabei helfen Eiweiß, Gemüse und Ballaststoffe.",
+   "kat": "abnehmen"
+  },
+  {
+   "titel": "Die Hälfte des Tellers: Gemüse",
+   "text": "Gemüse sättigt mit wenig Kalorien und liefert Vitamine, Mineralstoffe und Ballaststoffe. Faustregel: etwa die Hälfte des Tellers, dazu eine Eiweißquelle und eine Beilage.",
+   "kat": "abnehmen"
+  },
+  {
+   "titel": "Ballaststoffe nicht vergessen",
+   "text": "Fachgesellschaften empfehlen mindestens 30 Gramm Ballaststoffe am Tag. Gute Quellen sind Vollkornprodukte, Hülsenfrüchte, Gemüse, Obst und Haferflocken.",
+   "kat": "gesund"
+  },
+  {
+   "titel": "Trinken mitdenken",
+   "text": "Als Richtwert gelten etwa 1,5 Liter am Tag, bei Training und Hitze mehr. Wasser und ungesüßter Tee sind die beste Wahl – Softdrinks und Säfte summieren sich schnell.",
+   "kat": "gesund"
+  },
+  {
+   "titel": "Fisch ein- bis zweimal pro Woche",
+   "text": "Die Deutsche Gesellschaft für Ernährung empfiehlt ein bis zwei Portionen Fisch pro Woche, davon eine mit fettreichem Fisch wie Lachs oder Hering. Der liefert Omega-3-Fettsäuren.",
+   "kat": "entzuendungsarm"
+  },
+  {
+   "titel": "Entzündungsarm essen heißt: bunt und unverarbeitet",
+   "text": "Viel Gemüse, Obst, Vollkorn, Hülsenfrüchte, Nüsse, Olivenöl und Fisch – dafür weniger Wurst, Süßes und stark verarbeitete Produkte. Das ist eine Ernährungsweise, kein Heilmittel; bei Beschwerden gehört die Abklärung zur Ärztin oder zum Arzt.",
+   "kat": "entzuendungsarm"
+  },
+  {
+   "titel": "Einmal kochen, mehrmals essen",
+   "text": "Suppen, Chili und Curry lassen sich gut in der doppelten Menge kochen und portionsweise einfrieren. So hast du auch an stressigen Tagen etwas Ordentliches im Haus.",
+   "kat": "schnell"
+  },
+  {
+   "titel": "Einkaufsliste statt Spontankauf",
+   "text": "Plane drei bis vier Gerichte für die Woche und schreibe die Zutaten auf. Wer satt einkaufen geht und eine Liste hat, greift seltener zu Fertigprodukten.",
+   "kat": "gesund"
+  },
+  {
+   "titel": "Nach dem Training: Normal essen reicht",
+   "text": "Eine ausgewogene Mahlzeit mit Eiweiß und Kohlenhydraten innerhalb einiger Stunden nach dem Training deckt den Bedarf – Pulver und Riegel sind kein Muss.",
+   "kat": "muskelaufbau"
+  }
+ ],
+ "rezepte": [
+  {
+   "slug": "protein-overnight-oats",
+   "titel": "Protein-Overnight-Oats mit Beeren",
+   "kurz": "Abends 5 Minuten vorbereiten, morgens aus dem Glas löffeln – cremig und eiweißreich.",
+   "kat": [
+    "muskelaufbau",
+    "schnell",
+    "vegetarisch",
+    "gesund"
+   ],
+   "zeit": 5,
+   "zeitNotiz": "+ über Nacht quellen",
+   "portionen": 1,
+   "veg": "vegetarisch",
+   "naehr": {
+    "kcal": 435,
+    "eiweiss": 29,
+    "kh": 52,
+    "fett": 9
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "50 g Haferflocken (zart)",
+    "150 g Skyr natur",
+    "100 ml Milch 1,5 %",
+    "100 g Beeren (frisch oder TK)",
+    "1 EL geschroteter Leinsamen",
+    "1 TL Honig (optional)"
+   ],
+   "schritte": [
+    "Haferflocken, Skyr, Milch und Leinsamen in einem Glas verrühren.",
+    "Über Nacht (mind. 4 Stunden) zugedeckt in den Kühlschrank stellen.",
+    "Morgens umrühren, bei Bedarf einen Schuss Milch ergänzen und die Beeren darauf geben.",
+    "Nach Geschmack mit Honig süßen."
+   ],
+   "tipp": "Mit TK-Beeren: einfach direkt ins Glas geben, sie tauen über Nacht auf und färben die Oats rosa.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/9cd043c756d786888e2e27ff2543aaef03346964-1200x806.jpg",
+    "alt": "Protein-Overnight-Oats mit Beeren im Glas (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "ruehrei-gemuese-pfanne",
+   "titel": "Rührei-Gemüse-Pfanne",
+   "kurz": "Warmes Frühstück mit viel Eiweiß und einer Portion Gemüse.",
+   "kat": [
+    "schnell",
+    "muskelaufbau",
+    "abnehmen",
+    "vegetarisch"
+   ],
+   "zeit": 15,
+   "zeitNotiz": "",
+   "portionen": 1,
+   "veg": "vegetarisch",
+   "naehr": {
+    "kcal": 410,
+    "eiweiss": 27,
+    "kh": 25,
+    "fett": 22
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "3 Eier",
+    "80 g Paprika",
+    "60 g junger Spinat",
+    "1 TL Olivenöl",
+    "1 Scheibe Vollkornbrot (50 g)"
+   ],
+   "schritte": [
+    "Paprika in kleine Würfel schneiden und im Öl 3 Minuten anbraten.",
+    "Spinat dazugeben und zusammenfallen lassen.",
+    "Eier verquirlen, mit Salz und Pfeffer würzen und über das Gemüse gießen.",
+    "Bei mittlerer Hitze unter Rühren stocken lassen und mit dem Brot servieren."
+   ],
+   "tipp": "Eine Prise Kurkuma oder Paprikapulver ins Ei rühren – bringt Farbe und Geschmack ohne Kalorien.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/a6ab5a6c818b310971e0a8476c77139838a13736-1200x806.jpg",
+    "alt": "Rührei-Gemüse-Pfanne mit Paprika und Spinat (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "skyr-beeren-bowl",
+   "titel": "Skyr-Beeren-Bowl mit Walnüssen",
+   "kurz": "Frisch, fruchtig und lange sättigend – in fünf Minuten fertig.",
+   "kat": [
+    "abnehmen",
+    "schnell",
+    "vegetarisch",
+    "entzuendungsarm"
+   ],
+   "zeit": 5,
+   "zeitNotiz": "",
+   "portionen": 1,
+   "veg": "vegetarisch",
+   "naehr": {
+    "kcal": 380,
+    "eiweiss": 33,
+    "kh": 31,
+    "fett": 12
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "250 g Skyr natur",
+    "100 g Blaubeeren oder Beerenmix",
+    "15 g Walnüsse, grob gehackt",
+    "20 g Haferflocken (zart)"
+   ],
+   "schritte": [
+    "Skyr in eine Schüssel geben und glatt rühren.",
+    "Beeren darauf verteilen.",
+    "Walnüsse und Haferflocken darüber streuen – fertig."
+   ],
+   "tipp": "Haferflocken kurz in der trockenen Pfanne anrösten: das gibt Biss und Nussaroma.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/9d1cd65a73e79987854d8eab74417fdcea5b5aa3-1200x806.jpg",
+    "alt": "Skyr-Beeren-Bowl mit Walnüssen (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "protein-pfannkuchen",
+   "titel": "Haferflocken-Protein-Pfannkuchen",
+   "kurz": "Kleine, fluffige Pfannkuchen ohne Mehl – mit Banane und Quark.",
+   "kat": [
+    "muskelaufbau",
+    "schnell",
+    "vegetarisch"
+   ],
+   "zeit": 15,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": "vegetarisch",
+   "naehr": {
+    "kcal": 535,
+    "eiweiss": 34,
+    "kh": 54,
+    "fett": 19
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "100 g Haferflocken (zart)",
+    "2 reife Bananen",
+    "4 Eier",
+    "200 g Magerquark",
+    "2 TL Rapsöl zum Braten"
+   ],
+   "schritte": [
+    "Haferflocken, Bananen, Eier und die Hälfte des Quarks mit dem Stabmixer zu einem glatten Teig pürieren.",
+    "Pfanne leicht einfetten und erhitzen.",
+    "Teig esslöffelweise in die Pfanne geben und je Seite 2 bis 3 Minuten goldbraun backen.",
+    "Mit dem restlichen Quark als Dip servieren."
+   ],
+   "tipp": "Wenig Hitze, Deckel drauf: So werden die Pfannkuchen innen gar, ohne außen zu verbrennen.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/24e321cbac898bd31d303ead8d6c58dec58c1170-1200x806.jpg",
+    "alt": "Haferflocken-Protein-Pfannkuchen mit Banane und Quark (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "rote-linsensuppe",
+   "titel": "Rote-Linsen-Suppe mit Möhren",
+   "kurz": "Sämige Suppe aus wenigen Zutaten – günstig, sättigend und ideal zum Vorkochen.",
+   "kat": [
+    "abnehmen",
+    "gesund",
+    "entzuendungsarm",
+    "vegetarisch"
+   ],
+   "zeit": 30,
+   "zeitNotiz": "",
+   "portionen": 4,
+   "veg": "vegan",
+   "naehr": {
+    "kcal": 280,
+    "eiweiss": 15,
+    "kh": 38,
+    "fett": 5
+   },
+   "vielEiweiss": false,
+   "zutaten": [
+    "200 g rote Linsen",
+    "300 g Möhren",
+    "150 g Zwiebeln",
+    "2 Knoblauchzehen",
+    "1 Dose gehackte Tomaten (400 g)",
+    "1 EL Olivenöl",
+    "1 l Gemüsebrühe",
+    "Saft von 1/2 Zitrone"
+   ],
+   "schritte": [
+    "Zwiebeln, Möhren und Knoblauch würfeln und im Öl 5 Minuten andünsten.",
+    "1 TL Kurkuma und 1 TL Kreuzkümmel kurz mitrösten.",
+    "Linsen, Tomaten und Brühe dazugeben und 15 bis 20 Minuten köcheln lassen.",
+    "Mit dem Stabmixer cremig pürieren, mit Zitronensaft, Salz und Pfeffer abschmecken."
+   ],
+   "tipp": "Hält sich 3 Tage im Kühlschrank und lässt sich portionsweise einfrieren.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/475be5c346935645ed8f36457492a7fefa145e38-1200x806.jpg",
+    "alt": "Rote-Linsen-Suppe mit Möhren (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "haehnchen-gemuese-pfanne",
+   "titel": "Hähnchen-Gemüse-Pfanne mit Reis",
+   "kurz": "Klassiker für zwischendurch: viel Eiweiß, viel Gemüse, wenig Fett.",
+   "kat": [
+    "abnehmen",
+    "muskelaufbau",
+    "schnell"
+   ],
+   "zeit": 20,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": null,
+   "naehr": {
+    "kcal": 515,
+    "eiweiss": 46,
+    "kh": 55,
+    "fett": 11
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "300 g Hähnchenbrust",
+    "300 g Brokkoli",
+    "150 g Paprika",
+    "1 EL Rapsöl",
+    "2 EL Sojasauce",
+    "1 daumengroßes Stück Ingwer",
+    "120 g Basmatireis (Rohgewicht)"
+   ],
+   "schritte": [
+    "Reis nach Packungsangabe kochen.",
+    "Hähnchen in Streifen schneiden und im heißen Öl rundum 4 Minuten anbraten.",
+    "Brokkoliröschen, Paprikastreifen und geriebenen Ingwer zugeben und 6 bis 8 Minuten braten.",
+    "Mit Sojasauce und etwas Wasser ablöschen und mit dem Reis servieren."
+   ],
+   "tipp": "Brokkoli vorher 2 Minuten in Salzwasser blanchieren – er bleibt knackig und gart schneller.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/ae37d4f9a907df1c57182757885c2e43ff77876f-1200x806.jpg",
+    "alt": "Hähnchen-Gemüse-Pfanne mit Reis (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "ofengemuese-feta",
+   "titel": "Ofengemüse mit Feta",
+   "kurz": "Alles auf ein Blech, Ofen an, fertig – mit cremigem Feta und Kichererbsen.",
+   "kat": [
+    "abnehmen",
+    "gesund",
+    "vegetarisch"
+   ],
+   "zeit": 35,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": "vegetarisch",
+   "naehr": {
+    "kcal": 370,
+    "eiweiss": 21,
+    "kh": 26,
+    "fett": 19
+   },
+   "vielEiweiss": false,
+   "zutaten": [
+    "300 g Zucchini",
+    "200 g Paprika",
+    "200 g Kirschtomaten",
+    "200 g Kichererbsen (Dose, abgetropft)",
+    "100 g Feta",
+    "2 TL Olivenöl"
+   ],
+   "schritte": [
+    "Ofen auf 200 °C Ober-/Unterhitze vorheizen.",
+    "Gemüse in Stücke schneiden, mit Kichererbsen, Öl, Salz, Pfeffer und Oregano mischen und auf einem Blech verteilen.",
+    "20 Minuten backen, dann den Feta in Stücken dazulegen und weitere 10 Minuten backen."
+   ],
+   "tipp": "Feta ist salzig – beim Würzen des Gemüses deshalb mit Salz sparsam sein.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/495325ef0ca93db0607e698230c31b2937904d4c-1200x806.jpg",
+    "alt": "Ofengemüse mit Feta auf dem Backblech (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "thunfisch-bohnen-salat",
+   "titel": "Thunfisch-Bohnen-Salat",
+   "kurz": "Ohne Kochen: Dosenzutaten, frisches Gemüse und ein einfaches Zitronendressing.",
+   "kat": [
+    "abnehmen",
+    "muskelaufbau",
+    "schnell",
+    "gesund"
+   ],
+   "zeit": 10,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": null,
+   "naehr": {
+    "kcal": 400,
+    "eiweiss": 46,
+    "kh": 21,
+    "fett": 12
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "2 Dosen Thunfisch im eigenen Saft (je 150 g abgetropft)",
+    "1 Dose Kidneybohnen (240 g abgetropft)",
+    "200 g Kirschtomaten",
+    "100 g Gurke",
+    "1 kleine rote Zwiebel",
+    "2 EL Olivenöl",
+    "Saft von 1/2 Zitrone"
+   ],
+   "schritte": [
+    "Bohnen abspülen und abtropfen lassen, Tomaten halbieren, Gurke würfeln, Zwiebel in feine Ringe schneiden.",
+    "Öl, Zitronensaft, Salz und Pfeffer zu einem Dressing verrühren.",
+    "Alles mit dem abgetropften Thunfisch vermengen und 5 Minuten ziehen lassen."
+   ],
+   "tipp": "Schmeckt am nächsten Tag noch besser – ideal fürs Büro oder als Meal-Prep.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/a2b087328527a9dc9c71f7de60191ebf5c5a841f-1200x806.jpg",
+    "alt": "Thunfisch-Bohnen-Salat (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "chili-con-carne-mager",
+   "titel": "Chili con Carne – mager",
+   "kurz": "Ein Topf, vier Portionen, viel Eiweiß – perfekt zum Vorkochen nach dem Training.",
+   "kat": [
+    "muskelaufbau",
+    "gesund"
+   ],
+   "zeit": 40,
+   "zeitNotiz": "",
+   "portionen": 4,
+   "veg": null,
+   "naehr": {
+    "kcal": 510,
+    "eiweiss": 39,
+    "kh": 56,
+    "fett": 11
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "500 g Rinderhack, mager",
+    "1 große Dose Kidneybohnen (400 g abgetropft)",
+    "1 Dose gehackte Tomaten (400 g)",
+    "200 g Paprika",
+    "150 g Zwiebeln",
+    "100 g Mais (Dose)",
+    "2 TL Rapsöl",
+    "160 g Basmatireis (Rohgewicht, 40 g je Portion)"
+   ],
+   "schritte": [
+    "Zwiebeln würfeln und im Öl glasig anbraten, Hack zugeben und krümelig braten.",
+    "Paprikawürfel, Tomaten, Bohnen und Mais dazugeben, mit Chili, Paprikapulver, Kreuzkümmel, Salz würzen.",
+    "Zugedeckt 25 Minuten leise köcheln lassen, dabei gelegentlich umrühren.",
+    "Reis nach Packungsangabe kochen und mit dem Chili servieren."
+   ],
+   "tipp": "Ein Stück dunkle Schokolade (ab 70 %) am Ende macht das Chili runder – dann aber mitzählen.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/e10effae1d57ea7c6fd4d4dbcaf1ca356ae4851d-1200x806.jpg",
+    "alt": "Mageres Chili con Carne mit Reis (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "lachs-suesskartoffel-brokkoli",
+   "titel": "Ofenlachs mit Süßkartoffel und Brokkoli",
+   "kurz": "Fettreicher Fisch liefert Omega-3 – dazu Ofengemüse, alles auf einem Blech.",
+   "kat": [
+    "muskelaufbau",
+    "entzuendungsarm",
+    "gesund"
+   ],
+   "zeit": 35,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": null,
+   "naehr": {
+    "kcal": 570,
+    "eiweiss": 38,
+    "kh": 44,
+    "fett": 25
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "2 Lachsfilets (zusammen 300 g)",
+    "400 g Süßkartoffeln",
+    "300 g Brokkoli",
+    "2 TL Olivenöl",
+    "Saft von 1/2 Zitrone"
+   ],
+   "schritte": [
+    "Ofen auf 200 °C vorheizen. Süßkartoffeln in Spalten schneiden, mit der Hälfte des Öls mischen und 15 Minuten backen.",
+    "Brokkoliröschen dazugeben und weitere 10 Minuten backen.",
+    "Lachs mit Zitronensaft, Salz und Pfeffer würzen, auf das Blech legen und 10 bis 12 Minuten garen.",
+    "Mit Dill oder Petersilie bestreuen."
+   ],
+   "tipp": "Lachs ist gar, sobald er in der Mitte nicht mehr glasig, aber noch saftig ist – lieber zu früh als zu spät aus dem Ofen.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/38c22a115a0098732801249732eccc4135945a79-1200x806.jpg",
+    "alt": "Ofenlachs mit Süßkartoffel und Brokkoli (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "quinoa-kichererbsen-bowl",
+   "titel": "Quinoa-Kichererbsen-Bowl",
+   "kurz": "Pflanzliches Eiweiß in der Schüssel – mit knackigem Gemüse und Sesamdressing.",
+   "kat": [
+    "muskelaufbau",
+    "vegetarisch",
+    "gesund",
+    "schnell"
+   ],
+   "zeit": 20,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": "vegan",
+   "naehr": {
+    "kcal": 470,
+    "eiweiss": 20,
+    "kh": 55,
+    "fett": 17
+   },
+   "vielEiweiss": false,
+   "zutaten": [
+    "100 g Quinoa (Rohgewicht)",
+    "250 g Kichererbsen (Dose, abgetropft)",
+    "100 g Gurke",
+    "150 g Tomaten",
+    "60 g Rucola",
+    "1 EL Tahin (Sesammus)",
+    "Saft von 1/2 Zitrone",
+    "2 TL Olivenöl"
+   ],
+   "schritte": [
+    "Quinoa heiß abspülen und in doppelter Menge Wasser 12 bis 15 Minuten köcheln, dann ausquellen lassen.",
+    "Tahin, Zitronensaft, Öl, 2 EL Wasser, Salz und Pfeffer zu einem Dressing verrühren.",
+    "Gurke und Tomaten würfeln, alles mit Quinoa, Kichererbsen und Rucola in Schalen anrichten und mit dem Dressing beträufeln."
+   ],
+   "tipp": "Quinoa vorher gründlich abspülen, sonst schmeckt sie leicht bitter.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/69bd9246bf5188f1aec6b15aec120473340721ac-1200x806.jpg",
+    "alt": "Quinoa-Kichererbsen-Bowl (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "kurkuma-kichererbsen-curry",
+   "titel": "Kurkuma-Kichererbsen-Curry",
+   "kurz": "Cremiges Gemüsecurry mit Kurkuma, Ingwer und Spinat – wärmend und sättigend.",
+   "kat": [
+    "entzuendungsarm",
+    "gesund",
+    "vegetarisch"
+   ],
+   "zeit": 35,
+   "zeitNotiz": "",
+   "portionen": 3,
+   "veg": "vegan",
+   "naehr": {
+    "kcal": 485,
+    "eiweiss": 19,
+    "kh": 57,
+    "fett": 18
+   },
+   "vielEiweiss": false,
+   "zutaten": [
+    "300 g Kichererbsen (Dose, abgetropft)",
+    "300 g Blumenkohl",
+    "200 g Blattspinat",
+    "1 Dose gehackte Tomaten (400 g)",
+    "200 ml Kokosmilch",
+    "1 daumengroßes Stück Ingwer",
+    "2 Knoblauchzehen",
+    "1 TL Rapsöl",
+    "120 g Basmatireis (Rohgewicht)"
+   ],
+   "schritte": [
+    "Ingwer und Knoblauch fein hacken und im Öl 1 Minute anbraten, 2 TL Kurkuma und 1 TL Kreuzkümmel kurz mitrösten.",
+    "Tomaten, Kokosmilch und Blumenkohlröschen zugeben, 15 Minuten köcheln.",
+    "Kichererbsen und Spinat unterheben und 5 Minuten ziehen lassen.",
+    "Mit Salz, Pfeffer und Zitronensaft abschmecken, mit dem gekochten Reis servieren."
+   ],
+   "tipp": "Eine Prise schwarzer Pfeffer sorgt dafür, dass das Curry runder schmeckt – und gehört klassisch zu Kurkuma.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/8a23b077efdb53d4415e8d4737c6fc05cea2ea25-1200x806.jpg",
+    "alt": "Kurkuma-Kichererbsen-Curry mit Reis (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "beeren-walnuss-haferbrei",
+   "titel": "Beeren-Walnuss-Haferbrei",
+   "kurz": "Warmes Frühstück mit Beeren, Walnüssen und Leinsamen – für kalte Morgen.",
+   "kat": [
+    "entzuendungsarm",
+    "schnell",
+    "vegetarisch",
+    "gesund"
+   ],
+   "zeit": 10,
+   "zeitNotiz": "",
+   "portionen": 1,
+   "veg": "vegetarisch",
+   "naehr": {
+    "kcal": 540,
+    "eiweiss": 21,
+    "kh": 57,
+    "fett": 22
+   },
+   "vielEiweiss": false,
+   "zutaten": [
+    "60 g Haferflocken",
+    "250 ml Milch 1,5 %",
+    "100 g Beeren (frisch oder TK)",
+    "15 g Walnüsse",
+    "1 EL geschroteter Leinsamen"
+   ],
+   "schritte": [
+    "Haferflocken mit der Milch unter Rühren 3 bis 4 Minuten aufkochen, bis der Brei cremig ist.",
+    "Leinsamen unterrühren.",
+    "Beeren (TK-Beeren vorher kurz mit erhitzen) und gehackte Walnüsse darauf geben, mit Zimt bestreuen."
+   ],
+   "tipp": "Statt Milch gehen auch ungesüßte Haferdrinks – dann ändern sich die Nährwerte leicht.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/83935c5d2aa7929fabc759d93e4f636573a33bdc-1200x806.jpg",
+    "alt": "Beeren-Walnuss-Haferbrei (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "garnelen-tomaten-nudeln",
+   "titel": "Garnelen-Tomaten-Nudeln mit Zucchini",
+   "kurz": "Vollkornnudeln, Garnelen und eine frische Tomatensauce – leicht und eiweißreich.",
+   "kat": [
+    "muskelaufbau",
+    "abnehmen",
+    "schnell"
+   ],
+   "zeit": 20,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": null,
+   "naehr": {
+    "kcal": 495,
+    "eiweiss": 37,
+    "kh": 62,
+    "fett": 9
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "250 g Garnelen (küchenfertig)",
+    "160 g Vollkornnudeln (Rohgewicht)",
+    "400 g gehackte Tomaten",
+    "200 g Zucchini",
+    "2 Knoblauchzehen",
+    "2 TL Olivenöl"
+   ],
+   "schritte": [
+    "Nudeln in Salzwasser bissfest kochen.",
+    "Knoblauch und Zucchiniwürfel im Öl 3 Minuten anbraten, Tomaten zugeben und 8 Minuten köcheln.",
+    "Garnelen in die Sauce geben und 3 bis 4 Minuten ziehen lassen, bis sie durch sind.",
+    "Mit den Nudeln mischen, mit Salz, Pfeffer und Basilikum abschmecken."
+   ],
+   "tipp": "TK-Garnelen vorher im Kühlschrank auftauen und gut trocken tupfen – sonst verwässert die Sauce.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/6572d07b66186bb3432d5198febaf2426d292175-1200x806.jpg",
+    "alt": "Garnelen-Tomaten-Nudeln mit Zucchini (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "kuerbis-ingwer-suppe",
+   "titel": "Kürbis-Ingwer-Suppe",
+   "kurz": "Samtige Suppe aus Hokkaido, Möhren und Ingwer – mit einem Löffel Kokosmilch.",
+   "kat": [
+    "gesund",
+    "entzuendungsarm",
+    "abnehmen",
+    "vegetarisch"
+   ],
+   "zeit": 35,
+   "zeitNotiz": "",
+   "portionen": 4,
+   "veg": "vegan",
+   "naehr": {
+    "kcal": 175,
+    "eiweiss": 4,
+    "kh": 17,
+    "fett": 9
+   },
+   "vielEiweiss": false,
+   "zutaten": [
+    "800 g Hokkaido-Kürbis (Schale kann mitgegessen werden)",
+    "200 g Möhren",
+    "100 g Zwiebel",
+    "1 großes Stück Ingwer",
+    "100 ml Kokosmilch",
+    "1 EL Olivenöl",
+    "800 ml Gemüsebrühe"
+   ],
+   "schritte": [
+    "Kürbis, Möhren, Zwiebel und Ingwer klein schneiden und im Öl 5 Minuten andünsten.",
+    "Mit der Brühe aufgießen und 20 Minuten weich kochen.",
+    "Kokosmilch zugeben, fein pürieren und mit Salz, Pfeffer und etwas Muskat abschmecken.",
+    "Mit Kürbiskernen bestreuen, wenn du magst."
+   ],
+   "tipp": "Mit Hokkaido musst du nicht schälen – das spart Zeit.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/b94c0ce01369429133aca9dadcd92acc05d5a4c5-1200x806.jpg",
+    "alt": "Kürbis-Ingwer-Suppe (KI-generiertes Bild)",
+    "ki": true
+   }
+  },
+  {
+   "slug": "tofu-gemuese-pfanne",
+   "titel": "Knusprige Tofu-Gemüse-Pfanne",
+   "kurz": "Pflanzliches Eiweiß mit Champignons, Paprika und Zucchini – würzig mit Sojasauce.",
+   "kat": [
+    "vegetarisch",
+    "muskelaufbau",
+    "abnehmen",
+    "schnell"
+   ],
+   "zeit": 20,
+   "zeitNotiz": "",
+   "portionen": 2,
+   "veg": "vegan",
+   "naehr": {
+    "kcal": 485,
+    "eiweiss": 29,
+    "kh": 46,
+    "fett": 19
+   },
+   "vielEiweiss": true,
+   "zutaten": [
+    "300 g Tofu natur",
+    "200 g Champignons",
+    "150 g Paprika",
+    "150 g Zucchini",
+    "1 EL Rapsöl",
+    "2 EL Sojasauce",
+    "100 g Basmatireis (Rohgewicht)"
+   ],
+   "schritte": [
+    "Reis nach Packungsangabe kochen. Tofu mit Küchenpapier trocken pressen und in Würfel schneiden.",
+    "Tofu im Öl 6 bis 8 Minuten rundum goldbraun braten, herausnehmen.",
+    "Gemüse in der gleichen Pfanne 6 Minuten braten, Tofu zurückgeben und mit Sojasauce ablöschen.",
+    "Mit dem Reis servieren."
+   ],
+   "tipp": "Je trockener der Tofu vor dem Braten, desto knuspriger wird er.",
+   "bild": {
+    "url": "https://cdn.sanity.io/images/6qiktmvm/production/e1ccef9c541e9dcc9bd9ccdb20f1eb905b07db4e-1200x806.jpg",
+    "alt": "Knusprige Tofu-Gemüse-Pfanne mit Reis (KI-generiertes Bild)",
+    "ki": true
+   }
+  }
+ ]
+}
