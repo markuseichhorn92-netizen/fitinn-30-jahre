@@ -29,10 +29,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: '/media/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
-      // A-0085: Rezeptseite nur über die Terminal-QR-Codes – nicht in Suchmaschinen (zusätzlich zum Meta-Tag).
-      // Bewusst KEIN Disallow in robots.txt: sonst liest Google die Seite nicht und sieht das noindex nie.
-      { source: '/rezepte', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/rezepte/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
     ];
   },
 };
