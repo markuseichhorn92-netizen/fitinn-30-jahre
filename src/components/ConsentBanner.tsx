@@ -1,18 +1,20 @@
 'use client';
 // Cookie-/Einwilligungs-Banner. "Alle akzeptieren" und "Nur notwendige" gleichwertig (DSK-Leitlinie).
 // Analytics + Speed Insights und der Meta Pixel werden erst nach Einwilligung geladen.
+// passive (Seiten ohne Banner: /start, /app, /rezepte): öffnet sich nie von selbst, nur über „Cookie-Einstellungen“ (Widerruf überall möglich).
+// Texte geändert? BANNER_VERSION in src/lib/consent.ts hochsetzen (steht im Nachweis).
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { readConsent, saveConsent, CONSENT_EVENT, CONSENT_OPEN_EVENT } from '@/lib/consent';
+import { readConsent, saveConsent, enforceNoTracking, CONSENT_EVENT, CONSENT_OPEN_EVENT } from '@/lib/consent';
 import { funnel } from '@/lib/funnel';
 import styles from './ConsentBanner.module.css';
 
 const PRIVACY = 'https://fit-inn-trier.de/datenschutz-fit-inn-trier';
 const IMPRINT = 'https://fit-inn-trier.de/impressum-fit-inn-trier';
 
-export default function ConsentBanner() {
+export default function ConsentBanner({ passive = false }: { passive?: boolean }) {
   const [open, setOpen] = useState(false);
   const [details, setDetails] = useState(false);
   const [stats, setStats] = useState(false);
@@ -22,13 +24,14 @@ export default function ConsentBanner() {
 
   useEffect(() => {
     const c = readConsent();
-    if (c) { setStats(c.stats); setMedia(c.media); setMarketing(!!c.marketing); setStatsOn(c.stats); } else { setOpen(true); funnel('consent_shown'); }
-    const onChange = (e: any) => setStatsOn(!!(e.detail && e.detail.stats));
+    enforceNoTracking();
+    if (c) { setStats(c.stats); setMedia(c.media); setMarketing(!!c.marketing); setStatsOn(c.stats && !passive); } else if (!passive) { setOpen(true); funnel('consent_shown'); }
+    const onChange = (e: any) => setStatsOn(!passive && !!(e.detail && e.detail.stats));
     const onOpen = () => { const cur = readConsent(); setStats(!!cur?.stats); setMedia(!!cur?.media); setMarketing(!!cur?.marketing); setDetails(true); setOpen(true); };
     window.addEventListener(CONSENT_EVENT, onChange);
     window.addEventListener(CONSENT_OPEN_EVENT, onOpen);
     return () => { window.removeEventListener(CONSENT_EVENT, onChange); window.removeEventListener(CONSENT_OPEN_EVENT, onOpen); };
-  }, []);
+  }, [passive]);
 
   // Solange der Banner offen ist: Chat-Pille, Begrüßungsblase und feste Buchungsleisten ausblenden (lagen mit höherem z-index darüber),
   // In-App-Browser (Facebook/Instagram) erkennen → Banner höher, weg von der Werkzeugleiste unten.
@@ -66,7 +69,7 @@ export default function ConsentBanner() {
   // Messung (anonym, ohne Kennung): all = ein Klick auf „Akzeptieren“/„Nur notwendige“, custom = Auswahl in den Einstellungen
   const decide = (s: boolean, m: boolean, k: boolean, how: 'all' | 'custom') => {
     funnel(s || m || k ? 'consent_accept' : 'consent_necessary', how);
-    saveConsent(s, m, k); setOpen(false); setDetails(false);
+    saveConsent(s, m, k, how); setOpen(false); setDetails(false);
   };
 
   return (
@@ -77,28 +80,28 @@ export default function ConsentBanner() {
           <div className={`${styles.box} ${details ? styles.boxOpen : ''}`}>
             <p id="fi-consent-title" className={styles.title}>Kurz zu Cookies 🍪</p>
             <p className={styles.text}>
-              <span className={details ? '' : styles.long}>Notwendiges (Buchung, Lena-Chat) läuft immer. Anonyme Statistik, passende Tipps, Maps, YouTube und die Messung unserer Anzeigen (Meta, Google) nur mit deinem Okay.{' '}</span>
-              {details ? null : <span className={styles.short}>Notwendiges läuft immer. Statistik, Maps/YouTube und Anzeigen-Messung (Meta, Google) nur mit deinem Okay.{' '}</span>}
+              <span className={details ? '' : styles.long}>Notwendiges (Buchung, deine Auswahl hier) läuft immer. Anonyme Statistik, passende Tipps, Maps, YouTube und die Messung unserer Anzeigen (Meta, Google) nur mit deinem Okay. Ändern oder widerrufen kannst du das jederzeit unten auf jeder Seite unter „Cookie-Einstellungen“.{' '}</span>
+              {details ? null : <span className={styles.short}>Notwendiges läuft immer. Statistik, Maps/YouTube und Anzeigen-Messung (Meta, Google) nur mit deinem Okay, jederzeit widerrufbar.{' '}</span>}
               <a href={PRIVACY} target="_blank" rel="noopener noreferrer">Datenschutz</a>
-              <span className={details ? '' : styles.long}> · <a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a></span>
+              {' · '}<a href={IMPRINT} target="_blank" rel="noopener noreferrer">Impressum</a>
             </p>
             {details ? (
               <div className={styles.opts}>
                 <label className={styles.opt}>
                   <input type="checkbox" checked disabled />
-                  <span><strong>Notwendig</strong>Buchung, Lena-Chat, deine Auswahl hier. Immer aktiv.</span>
+                  <span><strong>Notwendig</strong>Buchung und deine Auswahl hier (Cookie fi_consent, 12 Monate). Der Lena-Chat (Magicline/Sportalliance) lädt erst, wenn du ihn antippst, und setzt dann ein Sicherheits-Cookie gegen Bots (aws-waf-token, ca. 4 Tage). Immer aktiv.</span>
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={stats} onChange={(e) => setStats(e.target.checked)} />
-                  <span><strong>Statistik & passende Hinweise</strong>Vercel Analytics und Speed Insights (ohne Cookies, anonym), Auswertung der besuchten Bereiche für passende Tipps von Lena.</span>
+                  <span><strong>Statistik & passende Hinweise</strong>Vercel Analytics und Speed Insights (ohne Cookies, anonym), Auswertung der besuchten Bereiche für passende Tipps von Lena. Empfänger: Vercel Inc. (USA).</span>
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={media} onChange={(e) => setMedia(e.target.checked)} />
-                  <span><strong>Externe Medien</strong>Google Maps und das YouTube-Rundgangsvideo. Dabei werden Daten an Google übertragen.</span>
+                  <span><strong>Externe Medien</strong>Google Maps und das YouTube-Rundgangsvideo. Dabei werden Daten an Google (Google Ireland, auch in die USA) übertragen.</span>
                 </label>
                 <label className={styles.opt}>
                   <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} />
-                  <span><strong>Marketing</strong>Meta Pixel und Google-Tag (Google Analytics/Ads): messen, ob unsere Anzeigen auf Facebook, Instagram und Google zu Probetrainings führen. Dabei werden Daten an Meta und Google (auch in die USA) übertragen und Cookies gesetzt.</span>
+                  <span><strong>Marketing</strong>Meta Pixel und Google-Tag (Google Analytics/Ads): messen, ob unsere Anzeigen auf Facebook, Instagram und Google zu Probetrainings führen. Empfänger: Meta Platforms Ireland und Google Ireland, auch in die USA. Cookies: _fbp und _gcl_au (90 Tage), _ga (bis 2 Jahre).</span>
                 </label>
               </div>
             ) : null}

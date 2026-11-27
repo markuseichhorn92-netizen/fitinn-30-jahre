@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Konfigurator from '@/components/konfigurator/Konfigurator';
 import wizard from '@/content/11-wizard.json';
+import ConsentLink from '@/components/ConsentLink';
 
 // /konfigurator – Probetraining-Konfigurator im Look C (echte Magicline-Buchung). Nicht im Index, nicht im Menü.
 // Einstieg von /freunde und /black-week über ?q=… (nur diese Werte): bestimmt Quelle (Trichter) und Hinweis-Text in Magicline.
@@ -43,6 +44,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ q
         noteSource={quelle?.note || 'Gebucht über Konfigurator'}
         confirmHref={w.confirmHref}
       />
+      <footer style={{ maxWidth: 720, margin: '0 auto', padding: '8px 16px 32px', textAlign: 'center', fontSize: 14, color: '#475467', fontFamily: `${outfit.style.fontFamily}, system-ui, sans-serif` }}>
+        <a href="https://fit-inn-trier.de/impressum-fit-inn-trier" style={{ color: '#475467', padding: '12px 6px', display: 'inline-block' }}>Impressum</a>
+        <a href="https://fit-inn-trier.de/datenschutz-fit-inn-trier" style={{ color: '#475467', padding: '12px 6px', display: 'inline-block' }}>Datenschutz</a>
+        <ConsentLink style={{ padding: '12px 6px', minHeight: 44 }} />
+      </footer>
     </main>
   );
 }

@@ -5,6 +5,7 @@ import type { StoreApp } from '@/lib/start-config';
 import localFont from 'next/font/local';
 import extra from './app.module.css';
 import '../freunde/theme-c.css';
+import ConsentLink from '@/components/ConsentLink';
 
 // Gemeinsame Schritt-für-Schritt-Seite hinter den Aufsteller-QR-Codes (/app/fitinn, /app/technogym).
 // Serverseitig per User-Agent: passender Store-Knopf wird hervorgehoben, beide bleiben immer sichtbar. Kein Cookie, nicht im Index.
@@ -106,7 +107,7 @@ export default async function AppShell({ app, id, badge, title, lead, hero, hero
       </div>
       <footer className={extra.foot}>
         <p>Fit-Inn Trier · Auf Hirtenberg 8, 54296 Trier</p>
-        <p className={extra.links}><a href={IMPRINT}>Impressum</a><a href={PRIVACY}>Datenschutz</a></p>
+        <p className={extra.links}><a href={IMPRINT}>Impressum</a><a href={PRIVACY}>Datenschutz</a><ConsentLink className={extra.consent} /></p>
       </footer>
     </main>
   );

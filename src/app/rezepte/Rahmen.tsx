@@ -4,6 +4,7 @@ import Link from 'next/link';
 import s from './rezepte.module.css';
 import '../freunde/theme-c.css';
 import { APP_URL, HINWEIS, STOFF_URL } from './daten';
+import ConsentLink from '@/components/ConsentLink';
 
 // Seitenrahmen der Rezeptseiten im Look C (wie /app, /freunde): Inhalt, Ernährungs-Hinweis, Footer.
 const outfit = localFont({ src: '../../fonts/outfit.woff', weight: '100 900', display: 'swap' });
@@ -45,7 +46,7 @@ export default function Rahmen({ children }: { children: React.ReactNode }) {
       <p className={s.recht}>{HINWEIS}</p>
       <footer className={s.foot}>
         <p>Fit-Inn Trier · Auf Hirtenberg 8, 54296 Trier</p>
-        <p className={s.links}><a href={IMPRINT}>Impressum</a><a href={PRIVACY}>Datenschutz</a></p>
+        <p className={s.links}><a href={IMPRINT}>Impressum</a><a href={PRIVACY}>Datenschutz</a><ConsentLink className={s.consent} /></p>
       </footer>
     </main>
   );

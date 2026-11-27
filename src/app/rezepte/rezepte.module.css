@@ -121,3 +121,5 @@
   .chips { flex-wrap: wrap; overflow: visible; margin: 0; padding: 2px 0 6px; }
 }
 @media (prefers-reduced-motion: reduce) { .karte { transition: none; } }
+.consent { color: #0C6478 !important; font-weight: 700 !important; }
+.foot { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }

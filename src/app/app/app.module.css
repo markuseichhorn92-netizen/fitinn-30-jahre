@@ -122,3 +122,6 @@
   .dark { padding: 40px; }
 }
 @media (prefers-reduced-motion: no-preference) { .store { transition: transform .15s; } }
+.consent { color: #475467 !important; display: inline-block; padding: 12px 4px !important; }
+/* Platz für den Chat-Knopf unten rechts, damit „Cookie-Einstellungen“ antippbar bleibt */
+.foot { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }

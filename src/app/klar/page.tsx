@@ -7,6 +7,7 @@ import Unten from './Unten';
 import footer from '@/content/10-footer.json';
 import './klar.css';
 import './unten.css';
+import ConsentLink from '@/components/ConsentLink';
 
 // /klar – ENTWURF 19.11.2026: aufgeräumte Angebotsseite (Maßstab Übersichtlichkeit: GymPod-Kampagnenseite, eigene Gestaltung/Texte).
 // Ein Ziel (Probetraining → /konfigurator?q=klar), kein Menü, ~7 Bildschirme mobil. Nicht im Index.
@@ -82,7 +83,7 @@ export default function Page() {
 
       <footer className="kl-fuss">
         <p>{footer.brand} · {footer.address} · <a href={footer.phoneHref}>{footer.phoneLabel}</a></p>
-        <p>{footer.links.map((l, i) => <span key={l.href}>{i ? ' · ' : ''}<a href={l.href}>{l.label}</a></span>)}</p>
+        <p>{footer.links.map((l, i) => <span key={l.href}>{i ? ' · ' : ''}<a href={l.href}>{l.label}</a></span>)} · <ConsentLink style={{ color: 'var(--grau)', minHeight: 24 }} /></p>
       </footer>
 
       <KonfiguratorLink q="klar" />

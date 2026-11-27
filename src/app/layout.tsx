@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   },
 };
 
+const NO_BANNER = ['/start', '/app', '/app/fitinn', '/app/technogym'];
+const NO_BANNER_PREFIX = ['/rezepte'];
+
 export const viewport: Viewport = { themeColor: '#05090B', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -42,7 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
    Feder-Animation von der Knopf-Ecke aus (nur transform/opacity). Text = Magicline-Teaser, wenn das Widget schon geladen ist
    (sonst Fallback; in sessionStorage gemerkt). X schliesst fuer die Sitzung, Tipp auf die Blase oeffnet den Chat.
    Statt der Pille in dieser Sitzung; die Pille "Fragen? Frag Lena" laeuft nur noch bei greet:false (max. 3x pro Besuch).
-   Das Magicline-Widget (~1,9 MB) lädt erst bei Tipp/Hover oder im Leerlauf (~5 s nach Load); sein eigener Knopf und seine
+   Das Magicline-Widget (~1,9 MB) lädt NUR nach Antippen des Knopfs bzw. der Blase (A-0165: kein Vorladen bei Hover/Leerlauf,
+   weil es Magicline/Sportalliance/AWS WAF aufruft und das Cookie aws-waf-token setzt, § 25 TDDDG); sein eigener Knopf und seine
    Begruessung bleiben unsichtbar. Fällt etwas aus, führt der Knopf zur Kontaktseite. Konfig optional über window.FILAUNCH. */
 (function () {
   try {
@@ -53,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     var TEXT = C.text || 'Fragen? Frag Lena 👋', FAIL = C.fail || 'Chat nicht erreichbar – zum Kontakt';
     var CONTACT = C.contact || 'https://hilfe.fit-inn-trier.de/kontakt';
     var FIRST = C.first != null ? C.first : 1200, HOLD = C.hold != null ? C.hold : 4000;
-    var GAP = C.gap != null ? C.gap : 25000, MAX = C.max != null ? C.max : 3, IDLE = C.idle != null ? C.idle : 5000;
+    var GAP = C.gap != null ? C.gap : 25000, MAX = C.max != null ? C.max : 3;
     var GREET = C.greet !== false, GTEXT = C.greetText || 'Hallo, ich bin Lena, wie kann ich dir helfen?', GNAME = C.greetName || 'Lena';
     var GFIRST = C.greetFirst != null ? C.greetFirst : 1800, GTYPE = C.greetTyping != null ? C.greetTyping : 800, GHOLD = C.greetHold != null ? C.greetHold : 14000;
     var GKEY = 'fiGreetDone', TKEY = 'fiGreetText';
@@ -231,17 +235,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       clearTimeout(timer); expand(FAIL);
     }
 
-    // Leerlauf: 5 s nach Load, dann wenn der Browser frei ist
-    function idleLoad() {
-      setTimeout(function () {
-        if (window.requestIdleCallback) requestIdleCallback(loadWidget, { timeout: 3000 }); else loadWidget();
-      }, IDLE);
-    }
-    if (document.readyState === 'complete') idleLoad(); else window.addEventListener('load', idleLoad);
-
-    ln.addEventListener('pointerenter', loadWidget);
-    ln.addEventListener('touchstart', loadWidget, { passive: true });
-    ln.addEventListener('focus', loadWidget);
     function go() {
       clearTimeout(timer); collapse(); greetClose();
       if (ready) { openChat(); return; }
@@ -255,11 +248,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     });
   } catch (e) { /* nichts kaputt machen */ }
 })();`}</Script>
-        {/* /start (Studio-QR „Apps & WLAN“) und /rezepte (Terminal-QR): bewusst ohne Cookie-Banner und Meta Pixel */}
-        <HideOn paths={['/start', '/app', '/app/fitinn', '/app/technogym']} prefixes={['/rezepte']}>
+        {/* /start (Studio-QR „Apps & WLAN“) und /rezepte (Terminal-QR): bewusst ohne Cookie-Banner und Meta Pixel;
+            dort nur „Cookie-Einstellungen“ im Fuß (Banner öffnet sich nicht von selbst), damit ein Widerruf überall geht */}
+        <HideOn paths={NO_BANNER} prefixes={NO_BANNER_PREFIX}>
           <MetaPixel />
           <GoogleTag />
           <ConsentBanner />
+        </HideOn>
+        <HideOn paths={NO_BANNER} prefixes={NO_BANNER_PREFIX} only>
+          <ConsentBanner passive />
         </HideOn>
       </body>
     </html>

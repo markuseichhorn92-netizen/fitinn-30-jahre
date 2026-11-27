@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import NextImage from 'next/image';
 import { fitInnApp, technogymApp, wlan, type StoreApp } from '@/lib/start-config';
 import styles from './start.module.css';
+import ConsentLink from '@/components/ConsentLink';
 
 // /start – Ziel des QR „Apps laden“ am Studio-TV: Store-Links + WLAN-Anleitung.
 // Statisch, ohne Cookie-Banner/Pixel (siehe HideOn im Root-Layout), nicht im Index.
@@ -143,6 +144,7 @@ export default function StartPage() {
         <p className={styles.links}>
           <a href={IMPRINT}>Impressum</a>
           <a href={PRIVACY}>Datenschutz</a>
+          <ConsentLink className={styles.consent} />
         </p>
       </footer>
     </main>
